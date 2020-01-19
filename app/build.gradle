@@ -20,6 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding{
+        enabled = true
+    }
 }
 
 dependencies {
@@ -31,4 +34,25 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    def retrofitVersion = "2.5.0"
+    def rxjava_version = '2.2.7'
+    def rxandroid_version = '2.1.1'
+    def lifecycle_version = "2.0.0"
+
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:2.2.7"
+    //RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    //Retrofit2
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    // RxJava Call Adapter
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
+    // Convert Observable to LiveData
+    implementation "android.arch.lifecycle:reactivestreams:1.1.1"
+
 }
