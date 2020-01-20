@@ -4,16 +4,31 @@
 package com.example.mnt_android.viewmodel
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.mnt_android.service.model.KakaoUser
+import com.example.mnt_android.service.repository.SessionCallback
+import com.kakao.auth.Session
 
 class LoginViewModel(application: Application) : AndroidViewModel(application)
 {
+    val app = application
+    lateinit var user : KakaoUser
+    lateinit var callback : SessionCallback
 
-    var nickname : MutableLiveData<String> = MutableLiveData()
+   init {
+       callback = SessionCallback(app)
+       Session.getCurrentSession().addCallback(callback)
+       Session.getCurrentSession().checkAndImplicitOpen()
+       user = callback.user
+
+   }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        Session.getCurrentSession().removeCallback(callback)
+    }
 
 
 

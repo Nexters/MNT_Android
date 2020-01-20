@@ -15,9 +15,10 @@
         android:theme="@style/AppTheme">
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="3b42f346807d614a183a9fd8bfb0a582"/>
 
-        <activity android:name=".view.ui.MainActivity">
+        <activity android:name=".view.ui.LoginActivity2"/>
+        <activity android:name=".view.ui.CreateRoomActivity"/>
+        <activity android:name=".view.ui.MainActivity"/>
 
-        </activity>
         <activity android:name=".view.ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

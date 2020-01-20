@@ -9,41 +9,31 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.ActivityLogin2Binding
 import com.example.mnt_android.databinding.ActivityMainBinding
-import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.LoginViewModel
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity2 : AppCompatActivity() {
 
-    val TAG = "MainActivity.kt"
-
-    lateinit var backPressViewModel : BackPressViewModel
+    val TAG = "LoginActivity2.kt"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = DataBindingUtil
-            .setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+            .setContentView<ActivityLogin2Binding>(this, R.layout.activity_login2)
         binding.lifecycleOwner = this
 
-        val loginViewModel =  ViewModelProviders.of(this@MainActivity)[LoginViewModel::class.java]
+        val loginViewModel =  ViewModelProviders.of(this)[LoginViewModel::class.java]
         binding.loginViewModel = loginViewModel//layout의 binding 객체의 name = viewModel 에 viewModel을 초기화
+        binding.loginActivity2 = this
+        Log.d("fhrmdls",loginViewModel.user.nickname.value.toString())
 
-       backPressViewModel=  ViewModelProviders.of(this@MainActivity)[BackPressViewModel::class.java]
-        binding.mainActivity=this@MainActivity
 
 
 
     }
-
-    fun createroom()
+    fun check_login()
     {
-        val intent = Intent(this@MainActivity,CreateRoomActivity::class.java)
+        val intent = Intent(this@LoginActivity2, MainActivity::class.java)
         startActivity(intent)
-    }
-
-    override fun onBackPressed() {
-
-        backPressViewModel.onBackPressed(this@MainActivity)
-
     }
 }

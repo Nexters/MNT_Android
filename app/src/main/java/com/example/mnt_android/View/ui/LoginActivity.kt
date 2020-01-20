@@ -6,7 +6,12 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.mnt_android.R
+import com.example.mnt_android.databinding.ActivityLoginBinding
+import com.example.mnt_android.databinding.ActivityMainBinding
 import com.example.mnt_android.viewmodel.LoginViewModel
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
@@ -21,7 +26,6 @@ import com.kakao.util.exception.KakaoException
 class LoginActivity : AppCompatActivity()
 {
     val TAG = "LoginActivity.kt"
-    lateinit var callback : SessionCallback
 
     //여기서는 ViewModel을 사용하지 않는 이유 :
     // 어차피 finish()하기 떄문에 -> Activity가 onDestroy되면 생성한 ViewModel도 clear된다
@@ -29,25 +33,25 @@ class LoginActivity : AppCompatActivity()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(com.example.mnt_android.R.layout.activity_login)
+    super.onCreate(savedInstanceState)
+
+    val binding = DataBindingUtil
+        .setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
+    binding.lifecycleOwner = this // LiveData를 사용하기 위해서 없으면 Observe할때마다 refresh안딤
+
+    val viewModel = ViewModelProviders.of(this)[LoginViewModel::class.java]
+
+    viewModel.user.nickname.observe(this,object : Observer<String?> {
+        override fun onChanged(t: String?) {
+            Log.d("fhrmdls",viewModel.user.nickname.value.toString())
+            val intent = Intent(this@LoginActivity, LoginActivity2::class.java)
+            startActivity(intent)
+
+        }
+    })
 
 
-
-        callback = SessionCallback()
-        Session.getCurrentSession().addCallback(callback)
-        Session.getCurrentSession().checkAndImplicitOpen()
-
-        sf = getSharedPreferences("login",0)
-        editor = sf?.edit()
-
-
-
-
-
-
-
-    }
+}
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(Session.getCurrentSession().handleActivityResult(requestCode,resultCode,data))
@@ -62,57 +66,10 @@ class LoginActivity : AppCompatActivity()
 
     override fun onDestroy() {
         super.onDestroy()
-        Session.getCurrentSession().removeCallback(callback)
     }
 
 
-    inner class SessionCallback() : ISessionCallback {
 
-        val TAG = "SessionCallback"
-        lateinit var id : String
-
-        //카카오 로그인 Callback함수
-
-        override fun onSessionOpenFailed(exception: KakaoException?) {
-
-        }
-
-        override fun onSessionOpened() {
-            UserManagement.getInstance().me(object : MeV2ResponseCallback() {
-
-
-                override fun onFailure(errorResult: ErrorResult?) {
-                    Log.e(TAG,"Fail")
-                }
-
-                override fun onSessionClosed(errorResult: ErrorResult?) {
-                    Log.d(TAG,"closed")
-                }
-
-                override fun onSuccess(result: MeV2Response?) {
-
-                    Log.d(TAG,"name : ${result?.nickname} ")
-                    Log.d(TAG,sf!!.getString("kakao","null"))
-
-
-                    if(!sf!!.contains("kakao"))
-                    {
-                        editor?.putString("kakao",result?.id.toString())
-                        editor?.commit()
-                    }
-
-
-                    val intent = Intent(this@LoginActivity,MainActivity::class.java)
-                    intent.putExtra("nickname",result?.nickname)
-                    startActivity(intent)
-                    finish()
-
-                }
-
-            })
-
-        }
-    }
 
     companion object
     {
