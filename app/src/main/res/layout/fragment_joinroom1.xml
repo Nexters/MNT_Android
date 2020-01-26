@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="joinRoomViewModel"
+            type="com.example.mnt_android.viewmodel.JoinRoomViewModel" />
+        <variable
+            name="joinRoomActivity"
+            type="com.example.mnt_android.view.ui.JoinRoomActivity" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <EditText
+        android:id="@+id/et_roomnum_joinroom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="@={joinRoomViewModel.roomInfo.num}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bu_join_joinroom1"/>
+
+    <Button
+        android:id="@+id/bu_join_joinroom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="방 참가하기"
+        android:onClick="@{()->joinRoomActivity.joinRoom(joinRoomViewModel.roomInfo.num.toString())}"
+        app:layout_constraintTop_toBottomOf="@id/et_roomnum_joinroom1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

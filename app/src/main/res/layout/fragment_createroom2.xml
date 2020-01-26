@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/et_"
+            android:id="@+id/et_roomnumber_createroom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="146dp"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/et_startdate_createroom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -42,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/et_enddate_createroom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="200dp"
@@ -50,12 +50,12 @@
             android:inputType="textPersonName"
             android:text="@={createRoomViewModel.roomInfo.endDate}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/editText2"
+            app:layout_constraintEnd_toEndOf="@+id/et_startdate_createroom2"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/editText2" />
+            app:layout_constraintStart_toStartOf="@+id/et_startdate_createroom2" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/bu_next_createroom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="84dp"
@@ -64,6 +64,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+            app:layout_constraintTop_toBottomOf="@+id/et_enddate_createroom2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

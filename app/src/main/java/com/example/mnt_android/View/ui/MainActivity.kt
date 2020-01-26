@@ -40,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity,CreateRoomActivity::class.java)
         startActivity(intent)
     }
+    fun joinroom()
+    {
+        val intent = Intent(this@MainActivity,JoinRoomActivity::class.java)
+        startActivity(intent)
+    }
 
     override fun onBackPressed() {
 

@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/frag1"
+            android:id="@+id/frag_createroom"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

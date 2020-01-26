@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="joinRoomViewModel"
+            type="com.example.mnt_android.viewmodel.JoinRoomViewModel" />
+        <variable
+            name="joinRoomActivity"
+            type="com.example.mnt_android.view.ui.JoinRoomActivity" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tv_roomname_joinroom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{joinRoomViewModel.roomInfo.name}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_description_joinroom2"/>
+
+        <TextView
+            android:id="@+id/tv_description_joinroom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{joinRoomViewModel.roomInfo.description}"
+            app:layout_constraintTop_toBottomOf="@id/tv_roomname_joinroom2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_startdate_joinroom2"/>
+
+        <TextView
+            android:id="@+id/tv_startdate_joinroom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{joinRoomViewModel.roomInfo.startDate}"
+            app:layout_constraintTop_toBottomOf="@id/tv_description_joinroom2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_enddate_joinroom2"/>
+
+        <TextView
+            android:id="@+id/tv_enddate_joinroom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{joinRoomViewModel.roomInfo.endDate}"
+            app:layout_constraintTop_toBottomOf="@id/tv_startdate_joinroom2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bu_lookparticipant_joinroom2"/>
+
+        <Button
+            android:id="@+id/bu_lookparticipant_joinroom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="참가자 보기"
+            app:layout_constraintBottom_toTopOf="@id/bu_ready_joinroom2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_enddate_joinroom2" />
+
+        <Button
+            android:id="@+id/bu_ready_joinroom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{joinRoomViewModel.str}"
+            android:onClick="@{()->joinRoomViewModel.ready()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bu_lookparticipant_joinroom2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
