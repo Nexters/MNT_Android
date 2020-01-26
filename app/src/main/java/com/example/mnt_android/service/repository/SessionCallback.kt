@@ -22,6 +22,10 @@ class SessionCallback(application : Application) : ISessionCallback {
         LoginActivity.editor = LoginActivity.sf?.edit()
         if(LoginActivity.sf!!.contains("kakao_nickname"))
             user = KakaoUser(LoginActivity.sf!!.getString("kakao_id","null"),LoginActivity.sf!!.getString("kakao_nickname","null"))
+        else
+        {
+            user = KakaoUser("null","null")
+        }
     }
 
 
@@ -49,7 +53,8 @@ class SessionCallback(application : Application) : ISessionCallback {
                     LoginActivity.editor?.putString("kakao_id",result?.id.toString())
                     LoginActivity.editor?.putString("kakao_nickname",result?.nickname)
                     LoginActivity.editor?.commit()
-                    user = KakaoUser(result?.id.toString(),result?.nickname!!)
+                    user.id = result?.id.toString()
+                    user.nickname.value=result?.nickname
                 }
 
 /*

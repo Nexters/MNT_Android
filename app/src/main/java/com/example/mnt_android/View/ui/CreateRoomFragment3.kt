@@ -11,6 +11,13 @@ import com.example.mnt_android.R
 import com.example.mnt_android.databinding.FragmentCreateroom2Binding
 import com.example.mnt_android.databinding.FragmentCreateroom3Binding
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
+import com.kakao.kakaolink.v2.KakaoLinkResponse
+import com.kakao.kakaolink.v2.KakaoLinkService
+import com.kakao.message.template.LinkObject
+import com.kakao.message.template.TextTemplate
+import com.kakao.network.ErrorResult
+import com.kakao.network.callback.ResponseCallback
+import java.util.HashMap
 
 class CreateRoomFragment3 : Fragment()
 {
@@ -27,11 +34,13 @@ class CreateRoomFragment3 : Fragment()
 
 
         binding.createRoomViewModel=createRoomViewModel
-
+        binding.createRoomActivity = (activity as CreateRoomActivity)
 
 
         return binding.root
     }
+
+
 
 
 

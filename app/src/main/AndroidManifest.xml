@@ -13,10 +13,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="3b42f346807d614a183a9fd8bfb0a582"/>
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key"/>
+
 
         <activity android:name=".view.ui.LoginActivity2"/>
-        <activity android:name=".view.ui.CreateRoomActivity"/>
+        <activity android:name=".view.ui.JoinRoomActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/kakao_scheme"
+                    android:host="@string/kakaolink_host" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.ui.CreateRoomActivity">
+
+        </activity>
         <activity android:name=".view.ui.MainActivity"/>
 
         <activity android:name=".view.ui.LoginActivity">

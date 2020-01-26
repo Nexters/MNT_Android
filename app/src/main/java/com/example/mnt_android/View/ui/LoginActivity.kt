@@ -39,13 +39,18 @@ class LoginActivity : AppCompatActivity()
         .setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
     binding.lifecycleOwner = this // LiveData를 사용하기 위해서 없으면 Observe할때마다 refresh안딤
 
-    val viewModel = ViewModelProviders.of(this)[LoginViewModel::class.java]
+    val viewModel = ViewModelProviders.of(this)[LoginViewModel(application)::class.java]
 
     viewModel.user.nickname.observe(this,object : Observer<String?> {
         override fun onChanged(t: String?) {
-            Log.d("fhrmdls",viewModel.user.nickname.value.toString())
-            val intent = Intent(this@LoginActivity, LoginActivity2::class.java)
-            startActivity(intent)
+            Log.d(TAG,t)
+            if(t!= sf?.getString("kakao_id","null"))
+            {
+                val intent = Intent(this@LoginActivity, LoginActivity2::class.java)
+                startActivity(intent)
+
+            }
+
 
         }
     })

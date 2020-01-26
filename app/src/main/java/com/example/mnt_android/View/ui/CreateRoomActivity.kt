@@ -1,21 +1,21 @@
 package com.example.mnt_android.view.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
-import com.example.mnt_android.databinding.ActivityCreateroomBinding
-import com.example.mnt_android.databinding.ActivityLoginBinding
 import com.example.mnt_android.databinding.ActivityMainBinding
+import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
-import com.example.mnt_android.viewmodel.LoginViewModel
+import com.kakao.kakaolink.v2.KakaoLinkResponse
+import com.kakao.kakaolink.v2.KakaoLinkService
+import com.kakao.message.template.*
+import com.kakao.network.ErrorResult
+import com.kakao.network.callback.ResponseCallback
 import java.util.*
 
 class CreateRoomActivity :FragmentActivity()
@@ -26,7 +26,7 @@ class CreateRoomActivity :FragmentActivity()
     lateinit var createRoomFragment3 : CreateRoomFragment3
     lateinit var fragmentTransaction: FragmentTransaction
     lateinit var fragmentManager: FragmentManager
-    lateinit var binding : ActivityMainBinding
+    lateinit var backPressViewModel : BackPressViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +35,7 @@ class CreateRoomActivity :FragmentActivity()
 
 
         createRoomViewModel = ViewModelProviders.of(this)[CreateRoomViewModel::class.java]
+        backPressViewModel=  ViewModelProviders.of(this)[BackPressViewModel::class.java]
 
         fragmentManager =supportFragmentManager
         fragmentTransaction = fragmentManager.beginTransaction()
@@ -44,14 +45,46 @@ class CreateRoomActivity :FragmentActivity()
 
         setFrag(0)
 
+        val intent = intent
+        val str = intent.data
+        if(str!=null)
+            Toast.makeText(this@CreateRoomActivity,intent.data.getQueryParameter("roomnum").toString(),Toast.LENGTH_LONG).show()
+
 
     }
 
     fun setRoomInfo()
     {
-        createRoomViewModel.roomInfo.num.value= Random(10000).nextInt()
+        createRoomViewModel.setRoomInfo()
         Log.d("wlgusdnzzz",createRoomViewModel.roomInfo.num.value.toString()+createRoomViewModel.roomInfo.name.value.toString())
         setFrag(1)
+    }
+
+    fun sendKakaoLink(roomnum : String)
+    {
+        var params = TextTemplate
+            .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
+            .addButton(ButtonObject("앱에서 보기",LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
+                .setAndroidExecutionParams("roomnum=$roomnum").build())).build()
+
+        var serverCallbackArgs  = HashMap<String, String>();
+        var aa : Map<Any,Any> = HashMap<Any,Any>()
+
+
+        var aaa  = object : ResponseCallback<KakaoLinkResponse>(){
+            override fun onSuccess(result: KakaoLinkResponse?) {
+
+
+            }
+
+            override fun onFailure(errorResult: ErrorResult?) {
+
+            }
+
+        }
+
+        KakaoLinkService.getInstance().sendDefault( this, params, serverCallbackArgs,aaa)
+
     }
 
     fun setFrag(n : Int)
@@ -62,20 +95,20 @@ class CreateRoomActivity :FragmentActivity()
         {
             0 ->
             {
-                fragmentTransaction.replace(R.id.frag1,createRoomFragment)
+                fragmentTransaction.replace(R.id.frag_createroom,createRoomFragment)
                 createRoomViewModel.fragmentNum=0
                 fragmentTransaction.commit()
 
             }
             1->
             {
-                fragmentTransaction.replace(R.id.frag1,createRoomFragment2)
+                fragmentTransaction.replace(R.id.frag_createroom,createRoomFragment2)
                 createRoomViewModel.fragmentNum=1
                 fragmentTransaction.commit()
             }
             2->
             {
-                fragmentTransaction.replace(R.id.frag1,createRoomFragment3)
+                fragmentTransaction.replace(R.id.frag_createroom,createRoomFragment3)
                 createRoomViewModel.fragmentNum=2
                 fragmentTransaction.commit()
             }
@@ -86,6 +119,10 @@ class CreateRoomActivity :FragmentActivity()
 
         when(createRoomViewModel.fragmentNum)
         {
+            0->
+            {
+                backPressViewModel.onBackPressed(this)
+            }
             1->
             {
                 setFrag(0)
