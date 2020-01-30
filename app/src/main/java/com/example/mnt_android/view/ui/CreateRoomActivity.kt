@@ -1,7 +1,6 @@
-package com.example.mnt_android.View.ui
+package com.example.mnt_android.view.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager

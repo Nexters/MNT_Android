@@ -6,7 +6,7 @@
     <data>
         <variable
             name="createRoomActivity"
-            type="com.example.mnt_android.View.ui.CreateRoomActivity" />
+            type="com.example.mnt_android.view.ui.CreateRoomActivity" />
         <variable
             name="createRoomViewModel"
             type="com.example.mnt_android.viewmodel.CreateRoomViewModel" />
