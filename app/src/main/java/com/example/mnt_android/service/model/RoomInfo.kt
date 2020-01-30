@@ -10,7 +10,7 @@ class RoomInfo
     var startDate : MutableLiveData<String> = MutableLiveData()
     var endDate : MutableLiveData<String> = MutableLiveData()
     var description : MutableLiveData<String> = MutableLiveData()
-    var ready : Boolean = false
+    var isStarted : Boolean = false
 
 
 
