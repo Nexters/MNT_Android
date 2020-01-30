@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+
         <variable
             name="joinRoomViewModel"
             type="com.example.mnt_android.viewmodel.JoinRoomViewModel" />
@@ -53,27 +54,29 @@
             app:layout_constraintTop_toBottomOf="@id/tv_startdate_joinroom2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bu_lookparticipant_joinroom2"/>
+            app:layout_constraintBottom_toTopOf="@id/bu_kakaolink_joinroom2"/>
+
+        <Button
+            android:id="@+id/bu_kakaolink_joinroom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카카오 링크"
+            android:onClick="@{()->joinRoomActivity.sendKakaoLink(joinRoomViewModel.roomInfo.num.toString())}"
+            app:layout_constraintTop_toBottomOf="@id/tv_enddate_joinroom2"
+            app:layout_constraintBottom_toTopOf="@id/bu_lookparticipant_joinroom2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
 
         <Button
             android:id="@+id/bu_lookparticipant_joinroom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="참가자 보기"
-            app:layout_constraintBottom_toTopOf="@id/bu_ready_joinroom2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_enddate_joinroom2" />
-
-        <Button
-            android:id="@+id/bu_ready_joinroom2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{joinRoomViewModel.str}"
-            android:onClick="@{()->joinRoomViewModel.ready()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bu_lookparticipant_joinroom2" />
+            app:layout_constraintTop_toBottomOf="@id/bu_kakaolink_joinroom2" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

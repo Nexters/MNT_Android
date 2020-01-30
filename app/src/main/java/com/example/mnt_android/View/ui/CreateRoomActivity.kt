@@ -55,7 +55,6 @@ class CreateRoomActivity :FragmentActivity()
     fun setRoomInfo()
     {
         createRoomViewModel.setRoomInfo()
-        Log.d("wlgusdnzzz",createRoomViewModel.roomInfo.num.value.toString()+createRoomViewModel.roomInfo.name.value.toString())
         setFrag(1)
     }
 

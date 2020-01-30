@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 
-class BackPressViewModel() : ViewModel()
+class BackPressViewModel : ViewModel()
 {
     private var backKeyPressedTime: Long = 0    // '뒤로' 버튼을 클릭했을 때의 시간
     private val TIME_INTERVAL: Long = 2000      // 첫번째 버튼 클릭과 두번째 버튼 클릭 사이의 종료를 위한 시간차를 정의

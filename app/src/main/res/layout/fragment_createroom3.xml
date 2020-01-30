@@ -92,7 +92,7 @@
             android:id="@+id/bu_createroom_createroom3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:text="시작하기"
             app:layout_constraintTop_toBottomOf="@+id/bu_lookparticipant_createroom3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

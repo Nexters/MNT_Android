@@ -1,20 +1,26 @@
 package com.example.mnt_android.viewmodel
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mnt_android.service.model.KakaoUser
 import com.example.mnt_android.service.model.RoomInfo
+import com.example.mnt_android.view.ui.LoginActivity
 import kotlin.random.Random
 
-class JoinRoomViewModel : ViewModel()
+class JoinRoomViewModel(application: Application) : AndroidViewModel(application)
 {
-
+    val app = application
     var roomInfo : RoomInfo = RoomInfo()
+   var checkNitto : MutableLiveData<Boolean> = MutableLiveData()
     var fragmentNum = 0
-    var str : String = "준비하기"
 
+    init {
+        checkNitto.value=false
+    }
 
     fun findRoom(roomNum : String)
     {
@@ -29,18 +35,21 @@ class JoinRoomViewModel : ViewModel()
 
 
     }
-    fun ready()
+
+
+
+    fun checkNitto()
     {
-       if(roomInfo.ready==false)
-       {
-           roomInfo.ready=true
-           str = "준비완료"
-       }
-        else
-       {
-           roomInfo.ready=false
-           str="준비하기"
-       }
+
+       val sf=app.getSharedPreferences("login",0)
+        sf.edit().putBoolean("checkNitto",true)
+        checkNitto.value=true
+
+    }
+
+    fun findParticipants()
+    {
+        //api로 참가자들 정보 받아오기
     }
 
 }
