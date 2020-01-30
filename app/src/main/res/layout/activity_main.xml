@@ -10,13 +10,13 @@
             type="com.example.mnt_android.viewmodel.LoginViewModel" />
         <variable
             name="mainActivity"
-            type="com.example.mnt_android.view.ui.MainActivity" />
+            type="com.example.mnt_android.View.ui.MainActivity" />
 
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.MainActivity">
+    tools:context=".View.ui.MainActivity">
 
     <TextView
         android:id="@+id/tv_MNT_main"

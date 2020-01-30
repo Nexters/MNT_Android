@@ -1,6 +1,5 @@
-package com.example.mnt_android.view.ui
+package com.example.mnt_android.View.ui
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,17 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.ActivityLoginBinding
-import com.example.mnt_android.databinding.ActivityMainBinding
 import com.example.mnt_android.viewmodel.LoginViewModel
-import com.kakao.auth.AuthType
-import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.StringSet.name
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.MeV2ResponseCallback
-import com.kakao.usermgmt.response.MeV2Response
-import com.kakao.util.exception.KakaoException
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity()
 {
@@ -49,6 +40,11 @@ class LoginActivity : AppCompatActivity()
             }
         }
     })
+
+        applicant_btn.setOnClickListener {
+            val intent = Intent(this, ApplicantListActivity::class.java)
+            startActivity(intent)
+        }
 
 
 }

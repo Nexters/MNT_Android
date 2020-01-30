@@ -1,4 +1,4 @@
-package com.example.mnt_android.view.ui
+package com.example.mnt_android.View.ui
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -10,8 +10,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
-import com.example.mnt_android.view.ui.CreateRoomFragment
-import com.example.mnt_android.view.ui.CreateRoomFragment2
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
 import com.kakao.kakaolink.v2.KakaoLinkResponse

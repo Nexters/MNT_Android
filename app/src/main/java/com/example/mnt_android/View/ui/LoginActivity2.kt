@@ -1,4 +1,4 @@
-package com.example.mnt_android.view.ui
+package com.example.mnt_android.View.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.ActivityLogin2Binding
-import com.example.mnt_android.databinding.ActivityMainBinding
 import com.example.mnt_android.viewmodel.LoginViewModel
 
 class LoginActivity2 : AppCompatActivity() {

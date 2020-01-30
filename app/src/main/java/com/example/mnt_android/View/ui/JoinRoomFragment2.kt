@@ -1,4 +1,4 @@
-package com.example.mnt_android.view.ui
+package com.example.mnt_android.View.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
