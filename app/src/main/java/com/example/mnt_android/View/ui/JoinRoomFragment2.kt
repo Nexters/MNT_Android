@@ -1,4 +1,4 @@
-package com.example.mnt_android.view.ui
+package com.example.mnt_android.View.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,22 +7,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.mnt_android.R
+import com.example.mnt_android.databinding.FragmentJoinroom2Binding
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
-import com.example.mnt_android.databinding.FragmentCreateroom1Binding
-import com.example.mnt_android.databinding.FragmentJoinroom1Binding
-import com.example.mnt_android.view.ui.CreateRoomActivity
-import com.example.mnt_android.viewmodel.CreateRoomViewModel
 
-class JoinRoomFragment : Fragment()
+class JoinRoomFragment2 : Fragment()
 {
     lateinit var joinRoomViewModel: JoinRoomViewModel
-    lateinit var binding: FragmentJoinroom1Binding
+    lateinit var binding: FragmentJoinroom2Binding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_joinroom1,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_joinroom2,container,false)
 
         joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
 

@@ -8,7 +8,7 @@
             type="com.example.mnt_android.viewmodel.JoinRoomViewModel" />
         <variable
             name="joinRoomActivity"
-            type="com.example.mnt_android.view.ui.JoinRoomActivity" />
+            type="com.example.mnt_android.View.ui.JoinRoomActivity" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical" android:layout_width="match_parent"

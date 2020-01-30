@@ -9,7 +9,7 @@
             type="com.example.mnt_android.viewmodel.CreateRoomViewModel" />
         <variable
             name="createRoomActivity"
-            type="com.example.mnt_android.view.ui.CreateRoomActivity" />
+            type="com.example.mnt_android.View.ui.CreateRoomActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

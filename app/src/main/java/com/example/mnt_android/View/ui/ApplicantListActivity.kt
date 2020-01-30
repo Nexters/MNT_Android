@@ -1,8 +1,8 @@
-package com.example.mnt_android.view.ui
+package com.example.mnt_android.View.ui
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mnt_android.R
-import com.example.mnt_android.view.adapter.ApplicantListAdapter
+import com.example.mnt_android.View.adapter.ApplicantListAdapter
 import com.example.mnt_android.base.BaseActivity
 import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.databinding.ActivityApplicantListBinding

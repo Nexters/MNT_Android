@@ -1,4 +1,4 @@
-package com.example.mnt_android.view.ui
+package com.example.mnt_android.View.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
-import com.example.mnt_android.databinding.ActivityMainBinding
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
 import com.kakao.kakaolink.v2.KakaoLinkResponse

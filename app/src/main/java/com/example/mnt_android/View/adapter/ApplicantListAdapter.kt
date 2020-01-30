@@ -1,8 +1,8 @@
-package com.example.mnt_android.view.adapter
+package com.example.mnt_android.View.adapter
 
 import android.view.View
 import com.example.mnt_android.R
-import com.example.mnt_android.view.viewholder.ApplicantListViewHolder
+import com.example.mnt_android.View.viewholder.ApplicantListViewHolder
 import com.example.mnt_android.base.BaseAdapter
 
 private val applicantList = arrayListOf("김대경", "김소영", "구예희", "최민섭", "한지혜", "지현우", "박지혜", "진유진")
