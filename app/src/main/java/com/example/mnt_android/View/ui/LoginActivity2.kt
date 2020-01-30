@@ -25,10 +25,6 @@ class LoginActivity2 : AppCompatActivity() {
         val loginViewModel =  ViewModelProviders.of(this)[LoginViewModel(application)::class.java]
         binding.loginViewModel = loginViewModel//layout의 binding 객체의 name = viewModel 에 viewModel을 초기화
         binding.loginActivity2 = this
-        Log.d("fhrmdls",loginViewModel.user.nickname.value.toString())
-
-
-
 
     }
     fun check_login()

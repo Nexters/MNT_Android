@@ -27,6 +27,10 @@ class CreateRoomViewModel : ViewModel()
 
   }
 
+  fun findParticipants()
+  {
+    //api로 참가자들 정보 받아오기
+  }
 
 
 

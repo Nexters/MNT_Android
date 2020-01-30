@@ -27,9 +27,6 @@ class LoginActivity : AppCompatActivity()
 {
     val TAG = "LoginActivity.kt"
 
-    //여기서는 ViewModel을 사용하지 않는 이유 :
-    // 어차피 finish()하기 떄문에 -> Activity가 onDestroy되면 생성한 ViewModel도 clear된다
-    // 따라서 다음 Activity인 MainActivity에서 같은 ViewModel을 사용하지 못한다
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,8 +47,6 @@ class LoginActivity : AppCompatActivity()
                 startActivity(intent)
 
             }
-
-
         }
     })
 
