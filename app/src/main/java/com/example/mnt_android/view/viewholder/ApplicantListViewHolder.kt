@@ -1,9 +1,9 @@
-package com.example.mnt_android.View.viewholder
+package com.example.mnt_android.view.viewholder
 
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.example.mnt_android.base.BaseViewHolder
-import com.example.mnt_android.View.dialog.CustomDialog
+import com.example.mnt_android.view.dialog.CustomDialog
 import kotlinx.android.synthetic.main.item_applicant.view.*
 
 class ApplicantListViewHolder(view: View) : BaseViewHolder(view) {

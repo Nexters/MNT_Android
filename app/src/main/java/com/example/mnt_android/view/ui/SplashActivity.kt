@@ -1,13 +1,11 @@
-package com.example.mnt_android.View.ui
+package com.example.mnt_android.view.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
-import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import com.example.mnt_android.viewmodel.SplashViewModel
 
 class SplashActivity : AppCompatActivity()

@@ -3,7 +3,7 @@ package com.example.mnt_android.service.repository
 import android.app.Application
 import android.util.Log
 import com.example.mnt_android.service.model.KakaoUser
-import com.example.mnt_android.View.ui.LoginActivity
+import com.example.mnt_android.view.ui.LoginActivity
 import com.kakao.auth.ISessionCallback
 import com.kakao.network.ErrorResult
 import com.kakao.usermgmt.UserManagement

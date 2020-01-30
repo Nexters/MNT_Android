@@ -9,12 +9,12 @@
             type="com.example.mnt_android.viewmodel.LoginViewModel" />
         <variable
             name="loginActivity2"
-            type="com.example.mnt_android.View.ui.LoginActivity2" />
+            type="com.example.mnt_android.view.ui.LoginActivity2" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".View.ui.LoginActivity2">
+        tools:context=".view.ui.LoginActivity2">
 
         <TextView
             android:id="@+id/tv_nickname_login2"
