@@ -22,6 +22,7 @@ import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity()
 {
@@ -54,6 +55,11 @@ class LoginActivity : AppCompatActivity()
 
         }
     })
+
+        applicant_btn.setOnClickListener {
+            val intent = Intent(this, ApplicantListActivity::class.java)
+            startActivity(intent)
+        }
 
 
 }

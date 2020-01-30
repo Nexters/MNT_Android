@@ -2,36 +2,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mnt_android">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".service.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".service.GlobalApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key"/>
+        <activity android:name=".view.ui.ApplicantListActivity"></activity>
 
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
 
-        <activity android:name=".view.ui.LoginActivity2"/>
+        <activity android:name=".view.ui.LoginActivity2" />
         <activity android:name=".view.ui.JoinRoomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="@string/kakao_scheme"
-                    android:host="@string/kakaolink_host" />
+                <data
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ui.CreateRoomActivity">
-
-        </activity>
-        <activity android:name=".view.ui.MainActivity"/>
-
+        <activity android:name=".view.ui.CreateRoomActivity"></activity>
+        <activity android:name=".view.ui.MainActivity" />
         <activity android:name=".view.ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
