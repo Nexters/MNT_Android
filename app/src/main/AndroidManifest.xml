@@ -12,7 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ui.ApplicantListActivity"></activity>
+        <activity android:name=".view.ui.GameActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.ui.ApplicantListActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -31,17 +39,10 @@
                     android:scheme="@string/kakao_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ui.CreateRoomActivity"></activity>
+        <activity android:name=".view.ui.CreateRoomActivity" />
         <activity android:name=".view.ui.MainActivity" />
-        <activity android:name=".view.ui.LoginActivity"/>
-        <activity android:name=".view.ui.SplashActivity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".view.ui.LoginActivity" />
+        <activity android:name=".view.ui.SplashActivity"/>
     </application>
 
 </manifest>
