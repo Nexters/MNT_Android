@@ -15,4 +15,5 @@ import com.example.mnt_android.databinding.FragmentTimeLineBinding
 class TimeLineFragment : BaseFragment<FragmentTimeLineBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_time_line
+
 }
