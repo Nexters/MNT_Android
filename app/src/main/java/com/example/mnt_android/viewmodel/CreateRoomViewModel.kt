@@ -14,7 +14,7 @@ class CreateRoomViewModel : ViewModel()
   fun setRoomInfo()
   {
     roomInfo.num.value = Random(100000).nextInt().toString()//이후에 API로 방번호 설정
-    Log.d("wlgusdnzz",roomInfo.num.value.toString())
+
 
   }
 

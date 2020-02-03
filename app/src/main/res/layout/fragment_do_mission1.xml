@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="doMissionViewModel"
+            type="com.example.mnt_android.viewmodel.DoMissionViewModel" />
+        <variable
+            name="doMissionActivity"
+            type="com.example.mnt_android.view.ui.DoMissionActivity" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <Button
+        android:id="@+id/bu_back_do_mission1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:onClick="@{()->doMissionActivity.onBackPressed()}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/bu_next_do_mission1"
+        app:layout_constraintBaseline_toBaselineOf="@id/bu_next_do_mission1"/>
+
+    <Button
+        android:id="@+id/bu_next_do_mission1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다음"
+        android:onClick="@{()->doMissionActivity.setFrag(1)}"
+        app:layout_constraintBottom_toTopOf="@id/tv_missionname_do_mision1"
+        app:layout_constraintHorizontal_bias="0.987"
+        app:layout_constraintLeft_toLeftOf="@id/bu_back_do_mission1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tv_missionname_do_mision1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{doMissionViewModel.doMission.name}"
+        app:layout_constraintTop_toBottomOf="@id/bu_next_do_mission1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_missiondescription_do_mision1"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <TextView
+        android:id="@+id/tv_missiondescription_do_mision1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{doMissionViewModel.doMission.description}"
+
+        app:layout_constraintTop_toBottomOf="@id/tv_missionname_do_mision1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_writetext_do_mision1"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="134dp" />
+
+    <EditText
+        android:id="@+id/et_writetext_do_mision1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@={doMissionViewModel.str}"
+        app:layout_constraintTop_toBottomOf="@id/tv_missiondescription_do_mision1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_uploadimage_do_mision1"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="210dp" />
+
+    <TextView
+        android:id="@+id/tv_uploadimage_do_mision1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이미지 업로드"
+        android:onClick="@{()->doMissionActivity.setImage()}"
+        app:layout_constraintTop_toBottomOf="@id/et_writetext_do_mision1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="393dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
