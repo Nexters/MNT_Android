@@ -1,4 +1,4 @@
-package com.example.mnt_android.view.dialog
+package com.example.mnt_android.service.model.dialog
 
 import android.app.Dialog
 import android.os.Bundle

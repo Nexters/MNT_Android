@@ -6,10 +6,10 @@ import com.example.mnt_android.base.BaseViewHolder
 import com.example.mnt_android.service.model.dialog.CustomDialog
 import kotlinx.android.synthetic.main.item_applicant.view.*
 
-class ApplicantListViewHolder(view: View) : BaseViewHolder(view) {
+class MissionListViewHolder(view: View) : BaseViewHolder(view) {
 
     companion object {
-        private val TAG = "ApplicantList Dialog"
+        private val TAG = "Mission Dialog"
     }
 
     override fun onBind(data: Any) {

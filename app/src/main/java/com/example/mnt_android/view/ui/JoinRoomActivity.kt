@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
@@ -58,6 +59,11 @@ class JoinRoomActivity : AppCompatActivity()
             setFrag(2)
         }
 
+        joinRoomViewModel.checkNitto.observe(this, Observer {
+            if(it==true)
+                checkNitto()
+        })
+
 
         val intent = intent
         val str = intent.data
@@ -72,7 +78,7 @@ class JoinRoomActivity : AppCompatActivity()
 
     fun checkNitto()
     {
-        val intent = Intent(this@JoinRoomActivity,ManittoActivity::class.java)
+        val intent = Intent(this@JoinRoomActivity,GameActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
         finish()
