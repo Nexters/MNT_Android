@@ -19,12 +19,12 @@
         android:layout_centerInParent="true"
         tools:text="지뉴진"/>
 
-    <ImageView
-        android:id="@+id/exit_iv"
+    <ImageButton
+        android:id="@+id/exit_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/sample_btn"
         android:layout_alignParentEnd="true"
+        android:background="@drawable/sample_btn"
         android:visibility="visible"
         />
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package com.example.mnt_android.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +8,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment<fragmentDataBinding: ViewDataBinding> : Fragment() {
-    abstract val layoutId: Int
+abstract class BaseFragment : Fragment() {
+    abstract fun initializeUI()
 
-    lateinit var dataBinding: fragmentDataBinding
+    protected inline fun<reified T : ViewDataBinding> bind(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        layoutId: Int
+    ): T =
+        DataBindingUtil.inflate(inflater, layoutId, container, false)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        dataBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        return dataBinding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initializeUI()
     }
 }

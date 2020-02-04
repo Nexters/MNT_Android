@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingHorizontal="45dp"
+    android:paddingVertical="15dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/naeto_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/sample_btn"
+            />
+
+        <TextView
+            android:id="@+id/naeto_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="누군가"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true">
+        <ImageView
+            android:id="@+id/nito_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/sample_btn"
+            />
+        <TextView
+            android:id="@+id/nito_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="누군가"/>
+    </LinearLayout>
+</RelativeLayout>

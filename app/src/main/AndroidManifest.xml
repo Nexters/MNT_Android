@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ui.GameActivity"/>
-        <activity android:name=".view.ui.DoMissionActivity"/>
+        <activity android:name=".view.ui.TimeLineFilterActivity" />
+        <activity android:name=".view.ui.ManitoActivity" />
+        <activity android:name=".view.ui.GameActivity" />
+        <activity android:name=".view.ui.DoMissionActivity" />
         <activity android:name=".view.ui.ApplicantListActivity" />
 
         <meta-data
