@@ -14,12 +14,13 @@
         android:theme="@style/AppTheme">
         <activity android:name=".view.ui.GameActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+        <activity android:name=".view.ui.DoMissionActivity">
+
+        </activity>
+
         <activity android:name=".view.ui.ApplicantListActivity" />
 
         <meta-data
@@ -42,7 +43,13 @@
         <activity android:name=".view.ui.CreateRoomActivity" />
         <activity android:name=".view.ui.MainActivity" />
         <activity android:name=".view.ui.LoginActivity" />
-        <activity android:name=".view.ui.SplashActivity"/>
+        <activity android:name=".view.ui.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
