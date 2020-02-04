@@ -20,6 +20,9 @@
         <activity android:name=".view.ui.DoMissionActivity">
 
         </activity>
+        <activity android:name=".view.ui.CreateMissionActivity">
+
+        </activity>
 
         <activity android:name=".view.ui.ApplicantListActivity" />
 

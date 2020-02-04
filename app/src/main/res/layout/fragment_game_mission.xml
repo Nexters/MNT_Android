@@ -22,6 +22,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="76dp"
             android:text="미션생성"
+            android:onClick="@{()->gameActivity.createMission()}"
             app:layout_constraintStart_toStartOf="@+id/bu_clickmission_mission"
             app:layout_constraintTop_toBottomOf="@+id/bu_clickmission_mission" />
 
