@@ -1,9 +1,7 @@
 package com.example.mnt_android.viewmodel
 
 import android.app.Activity
-import android.app.Application
 import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 
 class BackPressViewModel : ViewModel()

@@ -1,6 +1,5 @@
 package com.example.mnt_android.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.mnt_android.service.model.RoomInfo
 import kotlin.random.Random
