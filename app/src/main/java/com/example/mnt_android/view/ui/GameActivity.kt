@@ -13,22 +13,29 @@ import com.example.mnt_android.service.model.DoMission
 import kotlinx.android.synthetic.main.activity_game.*
 
 class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.OnClickListener {
+
+    companion object {
+        const val TAG_IS_MANAGER = "isManager"
+    }
+
     lateinit var fragmentManager: FragmentManager
     lateinit var fragmentTransaction : FragmentTransaction
     lateinit var timeLineFragment: TimeLineFragment
     lateinit var missionFragment: GameMissionFragment
-
 
     override var viewModel = BaseViewModel()
     override val layoutId: Int
         get() = R.layout.activity_game
 
     override fun initSetting() {
+        val isManager = intent.getBooleanExtra(TAG_IS_MANAGER, false)
+
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager.beginTransaction()
         timeLineFragment = TimeLineFragment()
         missionFragment = GameMissionFragment()
-        dataBinding.gameActivity=this
+
+        dataBinding.gameActivity = this
 
 
         Toast.makeText(this,"Game",Toast.LENGTH_SHORT).show()
