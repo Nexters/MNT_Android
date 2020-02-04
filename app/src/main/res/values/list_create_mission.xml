@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string-array name="create_mission">
+
+
+    <item>미션 선택하기</item>
+    <item>이름 3행시</item>
+    <item>닮은꼴 찾기</item>
+    <item>응원하기</item>
+    <item>직접입력</item>
+
+
+</string-array></resources>
