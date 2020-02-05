@@ -22,7 +22,6 @@ class ApplicantListActivity : BaseActivity<ActivityApplicantListBinding, BaseVie
 
         close_btn.setOnClickListener {
             finish()
-            //asdasd
         }
     }
 }

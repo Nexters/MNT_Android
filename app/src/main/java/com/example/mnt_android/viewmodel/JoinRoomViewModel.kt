@@ -1,15 +1,9 @@
 package com.example.mnt_android.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.mnt_android.service.model.KakaoUser
 import com.example.mnt_android.service.model.RoomInfo
-import com.example.mnt_android.view.ui.LoginActivity
-import kotlin.random.Random
 
 class JoinRoomViewModel(application: Application) : AndroidViewModel(application)
 {

@@ -16,7 +16,7 @@ class MissionListViewHolder(view: View) : BaseViewHolder(view) {
         val applicant = data as String
         itemView.run {
             applicant_name_tv.text = applicant
-            exit_iv.setOnClickListener {
+            exit_btn.setOnClickListener {
                 val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
                 CustomDialog(applicant).show(supportFragmentManager, TAG)
             }

@@ -5,7 +5,6 @@ package com.example.mnt_android.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import com.example.mnt_android.service.model.KakaoUser
 import com.example.mnt_android.service.repository.SessionCallback
 import com.kakao.auth.Session
@@ -13,8 +12,8 @@ import com.kakao.auth.Session
 class LoginViewModel(application: Application) : AndroidViewModel(application)
 {
     val app = application
-    lateinit var user : KakaoUser
-    lateinit var callback : SessionCallback
+    var user : KakaoUser
+    var callback : SessionCallback
 
    init {
        callback = SessionCallback(app)
