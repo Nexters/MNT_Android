@@ -3,6 +3,7 @@ package com.example.mnt_android.view.ui
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.mnt_android.R
@@ -13,83 +14,55 @@ import com.example.mnt_android.service.model.DoMission
 import kotlinx.android.synthetic.main.activity_game.*
 
 class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.OnClickListener {
-    lateinit var fragmentManager: FragmentManager
-    lateinit var fragmentTransaction : FragmentTransaction
-    lateinit var timeLineFragment: TimeLineFragment
-    lateinit var missionFragment: GameMissionFragment
 
+    companion object {
+        const val TAG_IS_MANAGER = "isManager"
+    }
+
+    private lateinit var fragmentManager: FragmentManager
+    private lateinit var fragmentTransaction: FragmentTransaction
+
+    private lateinit var timeLineFragment: TimeLineFragment
+    private lateinit var missionFragment: GameMissionFragment
+    private lateinit var dashBoardFragment: DashBoardFragment
 
     override var viewModel = BaseViewModel()
     override val layoutId: Int
         get() = R.layout.activity_game
 
     override fun initSetting() {
-        fragmentManager = supportFragmentManager
-        fragmentTransaction = fragmentManager.beginTransaction()
-        timeLineFragment = TimeLineFragment()
+        val isManager = intent.getBooleanExtra(TAG_IS_MANAGER, false)
+
+        timeLineFragment = TimeLineFragment(isManager)
         missionFragment = GameMissionFragment()
-        dataBinding.gameActivity=this
+        dashBoardFragment = DashBoardFragment(isManager)
 
+        fragmentManager = supportFragmentManager
 
-        Toast.makeText(this,"Game",Toast.LENGTH_SHORT).show()
+        changeFragment(timeLineFragment)
 
-        setFrag(2)
-
-    }
-
-    fun setFrag(n : Int)
-    {
-        fragmentTransaction = fragmentManager.beginTransaction()
-
-        when(n)
-        {
-            0 ->
-            {
-               //대시보드
-
-            }
-            1->
-            {
-                fragmentTransaction.replace(R.id.frag_game,timeLineFragment)
-
-                fragmentTransaction.commit()
-            }
-            2->
-            {
-                fragmentTransaction.replace(R.id.frag_game,missionFragment)
-
-                fragmentTransaction.commit()
-            }
-        }
+        Toast.makeText(this, "Game", Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View?) {
-        // 각 버튼별 onclick 구현은 여기서 해주세요!
-
-        Toast.makeText(this,"미션클릭",Toast.LENGTH_SHORT).show()
         when (v) {
-            dashboard_tv -> {
-
-            }
-
-            show_all_tv -> {
-
-                setFrag(1)
-            }
-
-           mission_tv -> {
-                setFrag(2)
-
-            }
+            dashboard_tv -> changeFragment(dashBoardFragment)
+            show_all_tv -> changeFragment(timeLineFragment)
+            mission_tv -> changeFragment(missionFragment)
         }
     }
 
-    fun startMission()
-    {
-        val mission = DoMission("미션이름","미션설명","")
-        Toast.makeText(this,"미션수행",Toast.LENGTH_SHORT).show()
-        val intent = Intent(this@GameActivity,DoMissionActivity::class.java)
-        intent.putExtra("mission",mission)
+    private fun changeFragment(fragment: Fragment) {
+        fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frag_game, fragment)
+        fragmentTransaction.commit()
+    }
+
+    fun startMission() {
+        val mission = DoMission("미션이름", "미션설명", "")
+        Toast.makeText(this, "미션수행", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@GameActivity, DoMissionActivity::class.java)
+        intent.putExtra("mission", mission)
         startActivity(intent)
     }
     fun createMission()

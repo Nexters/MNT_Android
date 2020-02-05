@@ -18,6 +18,7 @@ import com.kakao.message.template.LinkObject
 import com.kakao.message.template.TextTemplate
 import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
+import kotlinx.android.synthetic.main.fragment_joinroom3.*
 import java.util.HashMap
 
 class JoinRoomActivity : AppCompatActivity()
@@ -60,7 +61,7 @@ class JoinRoomActivity : AppCompatActivity()
         }
 
         joinRoomViewModel.checkNitto.observe(this, Observer {
-            if(it==true)
+            if(it)
                 checkNitto()
         })
 
@@ -80,6 +81,7 @@ class JoinRoomActivity : AppCompatActivity()
     {
         val intent = Intent(this@JoinRoomActivity,GameActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.putExtra(GameActivity.TAG_IS_MANAGER, isManager_cb.isChecked)
         startActivity(intent)
         finish()
     }

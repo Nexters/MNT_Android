@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,12 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
         <TextView
+            android:id="@+id/naeto_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:textSize="35sp"
             android:text="누군가"/>
         <TextView
+            android:id="@+id/nito_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -25,8 +28,24 @@
     </RelativeLayout>
 
     <ImageView
+        android:id="@+id/image_iv"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
         android:src="@drawable/sample_btn"/>
+
+    <TextView
+        android:id="@+id/content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textSize="20sp"
+        tools:text="하이루"/>
+
+    <TextView
+        android:id="@+id/mission_type_tv"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="닮은꼴 찾기"/>
 </LinearLayout>

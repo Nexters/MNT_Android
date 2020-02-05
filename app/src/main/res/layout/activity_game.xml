@@ -2,11 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="gameActivity"
-            type="com.example.mnt_android.view.ui.GameActivity" />
-    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,6 +26,7 @@
                 android:id="@+id/dashboard_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="onClick"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/show_all_tv"
@@ -40,7 +36,7 @@
                 android:id="@+id/show_all_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->gameActivity.setFrag(1)}"
+                android:onClick="onClick"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/dashboard_tv"
                 app:layout_constraintEnd_toStartOf="@id/mission_tv"
@@ -50,7 +46,7 @@
                 android:id="@+id/mission_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->gameActivity.setFrag(2)}"
+                android:onClick="onClick"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/show_all_tv"
                 app:layout_constraintEnd_toEndOf="parent"

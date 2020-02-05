@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.mnt_android.R
-import com.example.mnt_android.databinding.FragmentJoinroom2Binding
 import com.example.mnt_android.databinding.FragmentJoinroom3Binding
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
 
