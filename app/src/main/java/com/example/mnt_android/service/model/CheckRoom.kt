@@ -9,6 +9,3 @@ class CheckRoom(
 )
 
 
-class User(val id : String,
-           val name : String,
-           val profilePic : String)
