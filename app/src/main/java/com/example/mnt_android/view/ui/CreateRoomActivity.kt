@@ -55,34 +55,34 @@ class CreateRoomActivity :FragmentActivity()
     {
         createRoomViewModel.setRoomInfo()
         setFrag(1)
-    }
+    } fun sendKakaoLink(roomnum : String)
+{
+    var params = TextTemplate
+        .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
+        .addButton(ButtonObject("앱에서 보기",LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
+            .setAndroidExecutionParams("roomnum=$roomnum").build())).build()
 
-    fun sendKakaoLink(roomnum : String)
-    {
-        var params = TextTemplate
-            .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
-            .addButton(ButtonObject("앱에서 보기",LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
-                .setAndroidExecutionParams("roomnum=$roomnum").build())).build()
-
-        var serverCallbackArgs  = HashMap<String, String>();
-        var aa : Map<Any,Any> = HashMap<Any,Any>()
+    var serverCallbackArgs  = HashMap<String, String>();
+    var aa : Map<Any,Any> = HashMap<Any,Any>()
 
 
-        var aaa  = object : ResponseCallback<KakaoLinkResponse>(){
-            override fun onSuccess(result: KakaoLinkResponse?) {
+    var aaa  = object : ResponseCallback<KakaoLinkResponse>(){
+        override fun onSuccess(result: KakaoLinkResponse?) {
 
-
-            }
-
-            override fun onFailure(errorResult: ErrorResult?) {
-
-            }
 
         }
 
-        KakaoLinkService.getInstance().sendDefault( this, params, serverCallbackArgs,aaa)
+        override fun onFailure(errorResult: ErrorResult?) {
+
+        }
 
     }
+
+    KakaoLinkService.getInstance().sendDefault( this, params, serverCallbackArgs,aaa)
+
+}
+
+
 
     fun setFrag(n : Int)
     {

@@ -14,6 +14,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application)
     val app = application
     var user : KakaoUser
     var callback : SessionCallback
+    var fragmentNum = 0
 
    init {
        callback = SessionCallback(app)

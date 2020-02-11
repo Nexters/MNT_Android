@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "794438639222",
+    "firebase_url": "https://manito-1650f.firebaseio.com",
+    "project_id": "manito-1650f",
+    "storage_bucket": "manito-1650f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794438639222:android:b728917d62cd4d64b40957",
+        "android_client_info": {
+          "package_name": "com.example.mnt_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794438639222-3s9g4o77nnc6if2l0npcmdajar3afupm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMLGd0WLDTob2UBGJ1-YmywYAfM8qLyqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794438639222-3s9g4o77nnc6if2l0npcmdajar3afupm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "794438639222-guqp9qlcm7mu20b5uls7uccbmpov4u13.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "nexters.MNT-iOS"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
