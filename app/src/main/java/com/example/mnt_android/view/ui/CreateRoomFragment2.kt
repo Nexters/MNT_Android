@@ -1,6 +1,7 @@
 package com.example.mnt_android.view.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.FragmentCreateroom2Binding
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
@@ -29,9 +31,18 @@ class CreateRoomFragment2 : Fragment()
         createRoomViewModel = (activity as CreateRoomActivity).createRoomViewModel
 
 
-        binding.createRoomViewModel=createRoomViewModel
+        binding.createRoomViewModel=(activity as CreateRoomActivity).createRoomViewModel
         binding.createRoomActivity=(activity as CreateRoomActivity)
 
+        createRoomViewModel.startDay.observe((activity as CreateRoomActivity), Observer {
+
+            tv_startDay_createroom2.text=it
+        })
+
+        createRoomViewModel.endDay.observe((activity as CreateRoomActivity), Observer {
+
+            tv_endDay_createroom2.text=it
+        })
 
         return binding.root
         // return inflater.inflate(R.layout.activity_createroom2,container,false)
