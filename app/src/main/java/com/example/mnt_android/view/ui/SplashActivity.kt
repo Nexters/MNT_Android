@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
@@ -25,6 +26,7 @@ class SplashActivity : AppCompatActivity()
             if(sf.getString("kakao_token","null")!="null")
             {
                 //이미 로그인을 했었다
+                Log.d("wlgusdnzzz",sf.getString("kakao_token","null"))
 
                 var intent = Intent(this,MainActivity::class.java)
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
