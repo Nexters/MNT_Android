@@ -15,18 +15,8 @@ import com.kakao.kakaolink.v2.KakaoLinkResponse
 import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
 import com.kakao.kakaolink.v2.KakaoLinkService
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.R
 import java.util.HashMap
-import com.kakao.network.storage.ImageUploadResponse
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.util.Log
-import com.kakao.kakaolink.v2.network.KakaoLinkImageService
 import com.kakao.message.template.*
-import java.io.File
-
 
 class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.OnClickListener {
 

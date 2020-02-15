@@ -20,7 +20,7 @@ private val manitoList = arrayListOf(
     )
 )
 
-class ManitoListAdapter(private val isManager: Boolean) : BaseAdapter() {
+class ManitoListAdapter(private val isManager: Boolean) : BaseAdapter<Array<String>>() {
     override val layoutId: Int
         get() = R.layout.item_manito
 
