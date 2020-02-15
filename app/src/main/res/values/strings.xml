@@ -14,4 +14,5 @@
     <string name="tv_send_kakaolink"> 카카오톡 초대장 보내기 🤝</string>
     <string name="tv_start">시작하기 🙋️</string>
     <string name="tv_look_participant">참여자 보기 👫</string>
+    <string name="tv_invitecode">초대코드를 입력해주세요 💌</string>
 </resources>

@@ -47,54 +47,52 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
     {
         //참가한 방이 존재하는지 확인
         progressBar.set(View.VISIBLE)
-        repository.checkRoom(sf.getString("kakao_token","null"))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ t: CheckRoomList? ->
-                if(t?.checkRoomList!=null)
-                {
-                    checkRoom.value = t!!.checkRoomList[0]
+        if(sf.getString("kakao_token","null")!="null")
+        {
+            repository.checkRoom(sf.getString("kakao_token", "null"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ t: CheckRoomList? ->
+                    if (t?.checkRoomList != null) {
+                        checkRoom.value = t!!.checkRoomList[0]
 
-                    if(checkRoom.value!!.isCreater==1)
-                    {
-                        //내가 방장임
-                        Log.d("wlgusdnzzz","내가방장")
-                        isManager.value=true
+                        if (checkRoom.value!!.isCreater == 1) {
+                            //내가 방장임
+                            Log.d("wlgusdnzzz", "내가방장")
+                            isManager.value = true
 
-                        if (checkRoom.value!!.room.isStart == 0) {
-                            //내가 아직 방을시작하지 않음
-                            Log.d("wlgusdnzzz","방시작X")
-                            isStarted.value = false
+                            if (checkRoom.value!!.room.isStart == 0) {
+                                //내가 아직 방을시작하지 않음
+                                Log.d("wlgusdnzzz", "방시작X")
+                                isStarted.value = false
+                            } else {
+                                //내가 이미 방을 시작함
+                                Log.d("wlgusdnzzz", "방시작O")
+                                isStarted.value = true
+                            }
                         } else {
-                            //내가 이미 방을 시작함
-                            Log.d("wlgusdnzzz","방시작O")
-                            isStarted.value = true
+
+                            if (checkRoom.value!!.room.isStart == 0) {
+                                //방이 아직 시작하지 않음
+                                isStarted.value = true
+                                //임시
+                            } else {
+                                //방이 이미 시작됨
+                                isStarted.value = true
+                            }
+
                         }
+                        isJoined.value = true
+                        //MainActivity에서 변수 Observing함
+
+                        progressBar.set(View.INVISIBLE)
+                    } else {
+                        progressBar.set(View.INVISIBLE)
+                        //참가하는 방이 존재하지 않음
+                        isJoined.value = false
                     }
-                    else
-                    {
-
-                        if (checkRoom.value!!.room.isStart == 0) {
-                            //방이 아직 시작하지 않음
-                            isStarted.value = false
-                        } else {
-                            //방이 이미 시작됨
-                            isStarted.value = true
-                        }
-
-                    }
-                    isJoined.value = true
-                    //MainActivity에서 변수 Observing함
-
-                    progressBar.set(View.INVISIBLE)
-                }
-                else
-                {
-                    progressBar.set(View.INVISIBLE)
-                    //참가하는 방이 존재하지 않음
-                    isJoined.value=false
-                }
-            })
+                })
+        }
     }
 
     fun attendRoom(roomNum : String)

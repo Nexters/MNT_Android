@@ -66,7 +66,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     fun startMission() {
 
        var params = FeedTemplate
-            .newBuilder(ContentObject.newBuilder("타이틀","https://lh3.googleusercontent.com/proxy/nzDAOkpvo9qjn2ZniqWhUrK7cv1g_Y5sZgCUt4hOZelp4jhMn3S0VMAxI9h2WQ9zavJYMWrISfKxAWPNBPa-HKPo6k8yVvZkG7n3cjfsUeG99EDsQ3XDRwuMK8e7znE",
+            .newBuilder(ContentObject.newBuilder("타이틀","https://images.mypetlife.co.kr/wp-content/uploads/2018/03/06153453/KakaoTalk_20180228_153728551.jpg",
                 LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build()).build())
             .addButton(ButtonObject("앱에서 보기",LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
                 .setAndroidExecutionParams("234").build())).build()
