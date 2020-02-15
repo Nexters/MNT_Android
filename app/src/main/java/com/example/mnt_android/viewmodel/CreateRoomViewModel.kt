@@ -25,7 +25,7 @@ class CreateRoomViewModel : ViewModel()
   private val repository = DBRepository()
   var name : String=""
   var startDay : MutableLiveData<String> = MutableLiveData()
-    var endDay :MutableLiveData<String> = MutableLiveData()
+    var endDay : MutableLiveData<String> = MutableLiveData()
   var maxPeople : String = ""
  var id : String = ""
  var isCreated : MutableLiveData<Boolean> = MutableLiveData()
@@ -66,6 +66,7 @@ class CreateRoomViewModel : ViewModel()
 
   fun createRoom()
   {
+
    room.value = Room( endDay.value!!,0,0,0,maxPeople.toInt(),name,startDay.value!!)
     repository.createRoom(SendRoom(format.parse(room.value!!.endDay),0,0,0,maxPeople.toInt(),name,format.parse(room.value!!.startDay)),MainActivity.userId)
      .subscribeOn(Schedulers.io())

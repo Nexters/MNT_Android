@@ -154,7 +154,7 @@ class JoinRoomActivity : AppCompatActivity()
             .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
             .addButton(
                 ButtonObject("앱에서 보기", LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
-                    .setAndroidExecutionParams("roomnum=$roomnum").build())
+                    .setAndroidExecutionParams("roomnum=$roomnum").setIosExecutionParams("roomnum=$roomnum").build())
             ).build()
 
         var serverCallbackArgs  = HashMap<String, String>()

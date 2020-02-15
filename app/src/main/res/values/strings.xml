@@ -11,4 +11,7 @@
     <string name="tc_createroom1">프루또 방 이름을 만들어 주세요 🍇</string>
     <string name="tv_createroom2">몇명이서 하실건가요? 👭</string>
     <string name="tv_createroom2_2">얼마동안 하실건가요? 🕔</string>
+    <string name="tv_send_kakaolink"> 카카오톡 초대장 보내기 🤝</string>
+    <string name="tv_start">시작하기 🙋️</string>
+    <string name="tv_look_participant">참여자 보기 👫</string>
 </resources>
