@@ -1,9 +1,6 @@
 package com.example.mnt_android.service
 
-import com.example.mnt_android.service.model.CheckRoom
-import com.example.mnt_android.service.model.CheckRoomList
-import com.example.mnt_android.service.model.Room
-import com.example.mnt_android.service.model.User
+import com.example.mnt_android.service.model.*
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import io.reactivex.Completable
@@ -30,14 +27,9 @@ interface DBApi {
     //방 생성
     @POST("api/room/make")
     fun createRoom(
-        @Path("endDay") endDay: String,
-        @Path("id") id: Int,
-        @Path("isDone") isDone : Int,
-        @Path("isStart") isStart : Int,
-        @Path("maxPeople") maxPeople : Int,
-        @Path("name") name : String,
-        @Path("startDay") startDay : String
-    ): Completable
+        @Body room : SendRoom,
+        @Query("userId") userId : String
+    ):  Flowable<RoomId>
 
 
     //방 참가

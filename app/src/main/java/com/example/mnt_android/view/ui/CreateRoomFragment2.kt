@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.FragmentCreateroom2Binding
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
+import kotlinx.android.synthetic.main.fragment_createroom2.*
 
 class CreateRoomFragment2 : Fragment()
 {
@@ -28,12 +32,32 @@ class CreateRoomFragment2 : Fragment()
         binding.createRoomViewModel=createRoomViewModel
         binding.createRoomActivity=(activity as CreateRoomActivity)
 
-        Toast.makeText(container?.context,"${createRoomViewModel.roomInfo.num.value} / ${createRoomViewModel.roomInfo.name.value}",Toast.LENGTH_LONG).show()
 
         return binding.root
         // return inflater.inflate(R.layout.activity_createroom2,container,false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var maxpeoplespinadapter = ArrayAdapter.createFromResource(context,R.array.max_people,R.layout.spinner_item)
+        maxpeoplespinadapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        spinner_maxpeople.adapter=maxpeoplespinadapter
+
+        spinner_maxpeople.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                createRoomViewModel.maxPeople= (position+1).toString()
+            }
+        }
+
+    }
 
 
 

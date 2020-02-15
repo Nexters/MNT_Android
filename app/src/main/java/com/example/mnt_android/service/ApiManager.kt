@@ -11,6 +11,7 @@ object ApiManager
 {
     val gson =
         GsonBuilder()
+            .setDateFormat("yyyy-MM-dd")
             .setLenient()
             .create()
 

@@ -86,6 +86,7 @@ class JoinRoomActivity : AppCompatActivity()
         val intent = intent
         val str = intent.data
         val checkRoom:CheckRoom? = intent.getParcelableExtra("checkRoom")
+        val roomId : Int?=intent.getIntExtra("roomId",0)
         val fragNum = intent.getIntExtra("fragNum",0)
         if(checkRoom!=null)
         {
@@ -95,10 +96,15 @@ class JoinRoomActivity : AppCompatActivity()
             setFrag(fragNum)
 
         }
+        if(roomId!=0)
+        {
+            joinRoomViewModel.fragmentNum=fragNum
+            joinRoomViewModel.roomInfo.num.value=intent.getIntExtra("roomNum",0).toString()
+        }
        if(str!=null)
         {
             //카카오 링크를 통해 들어옴
-            joinRoomViewModel.roomInfo.num.value=intent.data.getQueryParameter("roomnum")
+           // joinRoomViewModel.roomInfo.num.value=intent.data.getQueryParameter("roomnum")
             //만약 내가 내 마니또 보는 화면을 봤으면 바로 타임라인 Actviity로 이동
         }
 

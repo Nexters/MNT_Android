@@ -21,7 +21,7 @@
             android:id="@+id/tv_roomname_createroom3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{createRoomViewModel.roomInfo.name}"
+            android:text="@{createRoomViewModel.room.name}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tv_roomnum_createroom3"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -31,49 +31,21 @@
             android:id="@+id/tv_roomnum_createroom3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{createRoomViewModel.roomInfo.num.toString()}"
+            android:text="@{createRoomViewModel.id}"
             app:layout_constraintTop_toBottomOf="@+id/tv_roomname_createroom3"
-            app:layout_constraintBottom_toTopOf="@+id/tv_description_createroom3"
+            app:layout_constraintBottom_toTopOf="@+id/bu_kakaolink_createroom3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_description_createroom3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{createRoomViewModel.roomInfo.maxPersonNum}"
-            app:layout_constraintTop_toBottomOf="@+id/tv_roomnum_createroom3"
-            app:layout_constraintBottom_toTopOf="@+id/tv_startdate_createroom3"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"  />
 
-        <TextView
-            android:id="@+id/tv_startdate_createroom3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{createRoomViewModel.roomInfo.startDate}"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description_createroom3"
-            app:layout_constraintBottom_toTopOf="@+id/tv_enddate_createroom3"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"  />
-
-        <TextView
-            android:id="@+id/tv_enddate_createroom3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{createRoomViewModel.roomInfo.endDate}"
-            app:layout_constraintTop_toBottomOf="@+id/tv_startdate_createroom3"
-            app:layout_constraintBottom_toTopOf="@+id/bu_kakaolink_createroom3"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"  />
 
         <Button
             android:id="@+id/bu_kakaolink_createroom3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="카카오 링크"
-            android:onClick="@{()->createRoomActivity.sendKakaoLink(createRoomViewModel.roomInfo.num.toString())}"
-            app:layout_constraintTop_toBottomOf="@+id/tv_enddate_createroom3"
+            android:onClick="@{()->createRoomActivity.sendKakaoLink(createRoomViewModel.id)}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_roomnum_createroom3"
             app:layout_constraintBottom_toTopOf="@+id/bu_lookparticipant_createroom3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
@@ -93,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시작하기"
+            android:onClick="@{()->createRoomViewModel.startRoom()}"
             app:layout_constraintTop_toBottomOf="@+id/bu_lookparticipant_createroom3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
