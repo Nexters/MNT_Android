@@ -4,32 +4,48 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.EventLogTags
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 class Room(
+
     @SerializedName("endDay")
-    val endDay : String,
+    var endDay : String,
     @SerializedName("id")
-    val id : Int,
+    var id : Int,
     @SerializedName("isDone")
-    val isDone :Int,
+    var isDone :Int,
     @SerializedName("isStart")
-    val isStart : Int,
+    var isStart : Int,
     @SerializedName("maxPeople")
-    val maxPeople : Int,
+    var maxPeople : Int,
     @SerializedName("name")
-    val name :String,
+    var name :String,
     @SerializedName("startDay")
-    val startDay : String) : Parcelable {
+    var startDay : String
+) : Parcelable {
+
+
     constructor(parcel: Parcel) : this(
         parcel.readString(),
+        //여기서 String to Date
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readString(),
         parcel.readString()
+        //여기서 String to Date
+    /*
+    * String from = "2013-04-08 10:10:10";
+
+SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+Date to = transFormat.parse(from);
+*/
     ) {
     }
+
+
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(endDay)

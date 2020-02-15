@@ -28,6 +28,10 @@
             android:value="@string/kakao_app_key" />
 
         <activity android:name=".view.ui.JoinRoomActivity">
+
+        </activity>
+        <activity android:name=".view.ui.CreateRoomActivity" android:windowSoftInputMode="stateAlwaysVisible"></activity>
+        <activity android:name=".view.ui.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -39,8 +43,6 @@
                     android:scheme="@string/kakao_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ui.CreateRoomActivity" />
-        <activity android:name=".view.ui.MainActivity" />
         <activity android:name=".view.ui.LoginActivity" />
         <activity android:name=".view.ui.SplashActivity">
             <intent-filter>

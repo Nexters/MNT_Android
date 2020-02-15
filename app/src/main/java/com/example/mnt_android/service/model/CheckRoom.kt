@@ -11,7 +11,6 @@ class CheckRoom(
     val isCreater: Int,
     @SerializedName("manittoId")
     val manittoId: String?,
-
     @SerializedName("room")
     val room : Room,
 
