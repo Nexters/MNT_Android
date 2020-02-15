@@ -15,6 +15,7 @@ import com.example.mnt_android.R
 import com.example.mnt_android.databinding.ActivityJoinroomBinding
 import com.example.mnt_android.databinding.ActivityMainBinding
 import com.example.mnt_android.service.model.CheckRoom
+import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.kakao.kakaolink.v2.KakaoLinkResponse
@@ -114,7 +115,7 @@ class JoinRoomActivity : AppCompatActivity()
     {
         val intent = Intent(this@JoinRoomActivity,GameActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        intent.putExtra(GameActivity.TAG_IS_MANAGER, isManager_cb.isChecked)
+        intent.putExtra(TAG_IS_MANAGER, isManager_cb.isChecked)
         startActivity(intent)
         finish()
     }

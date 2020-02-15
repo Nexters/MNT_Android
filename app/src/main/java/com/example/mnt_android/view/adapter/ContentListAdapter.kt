@@ -21,7 +21,7 @@ val itemList = arrayListOf(
     )
 )
 
-class ContentListAdapter(private val isManager: Boolean) : BaseAdapter() {
+class ContentListAdapter(private val isManager: Boolean) : BaseAdapter<Array<String>>() {
     override val layoutId: Int
         get() = R.layout.item_content
 

@@ -3,9 +3,9 @@ package com.example.mnt_android.service
 import com.example.mnt_android.service.model.*
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
-import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Maybe
+
+import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.http.*
 
@@ -40,5 +40,11 @@ interface DBApi {
     ): Completable
 
 
+
+    // 참여자 리스트
+    @GET("/api/room/user-list/{roomId}")
+    fun userList(
+        @Path("roomId") roomId: Int
+    ) : Single<ApplicantResponse>
 
 }
