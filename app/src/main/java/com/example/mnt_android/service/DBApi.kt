@@ -31,7 +31,6 @@ interface DBApi {
         @Query("userId") userId : String
     ):  Flowable<RoomId>
 
-
     //방 참가
     @GET("api/room/attend/{roomId}")
     fun attendRoom(
@@ -39,7 +38,11 @@ interface DBApi {
         @Query("userId") userId: String
     ): Completable
 
-
+    // 마니또 방 시작
+    @GET("/api/room/start/{roomId}")
+    fun startRoom(
+        @Path("roomId") roomId: Int
+    ) : Completable
 
     // 참여자 리스트
     @GET("/api/room/user-list/{roomId}")

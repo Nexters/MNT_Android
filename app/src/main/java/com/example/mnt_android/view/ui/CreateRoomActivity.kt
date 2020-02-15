@@ -1,27 +1,23 @@
 package com.example.mnt_android.view.ui
 
 import android.app.DatePickerDialog
-import android.content.Context
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
-import com.example.mnt_android.databinding.ActivityCreateMissionBinding
 import com.example.mnt_android.databinding.ActivityCreateroomBinding
 import com.example.mnt_android.service.model.CheckRoom
-import com.example.mnt_android.service.model.Room
+import com.example.mnt_android.util.TAG_IS_MANAGER
+import com.example.mnt_android.util.TAG_ROOM_ID
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
 import com.google.firebase.iid.FirebaseInstanceId
@@ -30,7 +26,7 @@ import com.kakao.kakaolink.v2.KakaoLinkService
 import com.kakao.message.template.*
 import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
-import kotlinx.android.synthetic.main.fragment_createroom2.*
+import kotlinx.android.synthetic.main.fragment_createroom3.*
 import java.util.*
 
 class CreateRoomActivity :FragmentActivity()
@@ -42,6 +38,10 @@ class CreateRoomActivity :FragmentActivity()
     lateinit var fragmentTransaction: FragmentTransaction
     lateinit var fragmentManager: FragmentManager
     lateinit var backPressViewModel : BackPressViewModel
+
+    companion object {
+        private const val IS_MANAGER = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +80,7 @@ class CreateRoomActivity :FragmentActivity()
             //MainActivity에서 방이 존재한다고 판단하여 방정보를 넘김
             createRoomViewModel.fragmentNum=fragNum
             createRoomViewModel.room.value=checkRoom.room
-            createRoomViewModel.id=checkRoom.room.id.toString()
+            createRoomViewModel.id=checkRoom.room.id
             setFrag(fragNum)
 
         }
@@ -132,7 +132,7 @@ class CreateRoomActivity :FragmentActivity()
 
     }
 
-    fun sendKakaoLink(roomnum : String)
+    fun sendKakaoLink(roomnum : Int)
     {
     var params = TextTemplate
         .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
@@ -208,6 +208,29 @@ class CreateRoomActivity :FragmentActivity()
             }
         }
 
+    }
+
+
+    fun onClick(v: View) {
+        when(v) {
+            bu_createroom_createroom3 -> {
+                createRoomViewModel.startRoom {
+                    Toast.makeText(this, "마니또를 시작합니다 !", Toast.LENGTH_SHORT).show()
+                    changeActivity(GameActivity::class.java)
+                }
+            }
+
+            bu_lookparticipant_createroom3 -> {
+                changeActivity(ApplicantListActivity::class.java)
+            }
+        }
+    }
+
+    private fun <T> changeActivity(cls : Class<T>){
+        val intent = Intent(this, cls)
+        intent.putExtra(TAG_IS_MANAGER, IS_MANAGER)
+        intent.putExtra(TAG_ROOM_ID, createRoomViewModel.id)
+        startActivity(intent)
     }
 
 }

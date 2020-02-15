@@ -31,6 +31,12 @@ class DBRepository {
                    userId : String) : Completable =
         api.attendRoom(roomId,userId)
 
+    fun userList(roomId : Int) : Single<ApplicantResponse> =
+        api.userList(roomId)
+
+    fun startRoom(roomId : Int) : Completable =
+        api.startRoom(roomId)
+
 
 
 

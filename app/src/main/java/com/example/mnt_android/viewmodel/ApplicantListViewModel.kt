@@ -19,7 +19,7 @@ class ApplicantListViewModel(private val dbApi: DBApi) : BaseViewModel() {
 
     fun setApplicantList() {
         addDisposable(
-            dbApi.userList(56370)
+            dbApi.userList(roomId.value ?: -1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
