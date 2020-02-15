@@ -1,19 +1,36 @@
 package com.example.mnt_android.view.ui
 
+import android.app.DatePickerDialog
+import android.content.Context
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
+import com.example.mnt_android.databinding.ActivityCreateMissionBinding
+import com.example.mnt_android.databinding.ActivityCreateroomBinding
+import com.example.mnt_android.service.model.CheckRoom
+import com.example.mnt_android.service.model.Room
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
+import com.google.firebase.iid.FirebaseInstanceId
 import com.kakao.kakaolink.v2.KakaoLinkResponse
 import com.kakao.kakaolink.v2.KakaoLinkService
 import com.kakao.message.template.*
 import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
+import kotlinx.android.synthetic.main.fragment_createroom2.*
 import java.util.*
 
 class CreateRoomActivity :FragmentActivity()
@@ -28,9 +45,12 @@ class CreateRoomActivity :FragmentActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_createroom)
+        val binding = DataBindingUtil
+            .setContentView<ActivityCreateroomBinding>(this, R.layout.activity_createroom)
+        binding.lifecycleOwner = this // LiveData를 사용하기 위해서 없으면 Observe할때마다 refresh안딤
 
 
+        Log.d("wlgusdnzzz",FirebaseInstanceId.getInstance().token!!)
 
         createRoomViewModel = ViewModelProviders.of(this)[CreateRoomViewModel::class.java]
         backPressViewModel=  ViewModelProviders.of(this)[BackPressViewModel::class.java]
@@ -43,19 +63,72 @@ class CreateRoomActivity :FragmentActivity()
 
         setFrag(0)
 
+
+
+
+
         val intent = intent
         val str = intent.data
         if(str!=null)
             Toast.makeText(this@CreateRoomActivity,intent.data.getQueryParameter("roomnum").toString(),Toast.LENGTH_LONG).show()
 
+        //내가 참여하고 있는 Room정보
+        val checkRoom: CheckRoom? = intent.getParcelableExtra("checkRoom")
+        val fragNum = intent.getIntExtra("fragNum",0)
+        if(checkRoom!=null)
+        {
+            //MainActivity에서 방이 존재한다고 판단하여 방정보를 넘김
+            createRoomViewModel.fragmentNum=fragNum
+            createRoomViewModel.room.value=checkRoom.room
+            createRoomViewModel.id=checkRoom.room.id.toString()
+            setFrag(fragNum)
+
+        }
+
+        createRoomViewModel.isCreated.observe(this,androidx.lifecycle.Observer {
+            if(it==true)
+                setFrag(2)
+        })
+
 
     }
 
-    fun setRoomInfo()
+    fun setDate(index : Int)
     {
-        createRoomViewModel.setRoomInfo()
-        setFrag(1)
+        val today = Date()
+        var strdate: String? = null
+
+        var format1 = SimpleDateFormat()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            format1 = SimpleDateFormat("yyyy-MM-dd")
+            strdate = format1.format(today)
+        }
+
+        val dialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+
+            if(index==1)
+            {
+                createRoomViewModel.startDay.value=year.toString()+"-"+month.toString()+"-"+dayOfMonth.toString()
+                Log.d("wlgusdnzzz",createRoomViewModel.startDay.value)
+            }
+            else
+            {
+                createRoomViewModel.endDay.value=year.toString()+"-"+month.toString()+"-"+dayOfMonth.toString()
+                Log.d("wlgusdnzzz", createRoomViewModel.endDay.value)
+            }
+
+
+        },  strdate!!.split("-")[0].toInt(),strdate!!.split("-")[1].toInt()-1,strdate!!.split("-")[2].toInt())
+
+
+        dialog.show()
+
+
+
+
     }
+
     fun sendKakaoLink(roomnum : String)
     {
     var params = TextTemplate
@@ -128,7 +201,7 @@ class CreateRoomActivity :FragmentActivity()
             }
             2->
             {
-                setFrag(1)
+                backPressViewModel.onBackPressed(this)
             }
         }
 

@@ -33,10 +33,11 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
     var isSearched : MutableLiveData<Boolean> = MutableLiveData()
     var isStarted : MutableLiveData<Boolean> = MutableLiveData()
     var isLogined : MutableLiveData<Boolean> = MutableLiveData()
+    var isManager : MutableLiveData<Boolean> = MutableLiveData()
     lateinit var progressBar : ObservableInt
     init {
         checkNitto.value=false
-        isJoined.value=false
+        //isJoined.value=false
         //isSearched.value=false
         isStarted.value=false
         progressBar = ObservableInt(View.GONE)
@@ -54,16 +55,33 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                 {
                     checkRoom.value = t!!.checkRoomList[0]
 
-
-                    if(checkRoom.value!!.room.isStart==0)
+                    if(checkRoom.value!!.isCreater==1)
                     {
-                       //방이 아직 시작하지 않음
-                        isStarted.value=false
+                        //내가 방장임
+                        Log.d("wlgusdnzzz","내가방장")
+                        isManager.value=true
+
+                        if (checkRoom.value!!.room.isStart == 0) {
+                            //내가 아직 방을시작하지 않음
+                            Log.d("wlgusdnzzz","방시작X")
+                            isStarted.value = false
+                        } else {
+                            //내가 이미 방을 시작함
+                            Log.d("wlgusdnzzz","방시작O")
+                            isStarted.value = true
+                        }
                     }
                     else
                     {
-                        //방이 이미 시작됨
-                        isStarted.value=true
+
+                        if (checkRoom.value!!.room.isStart == 0) {
+                            //방이 아직 시작하지 않음
+                            isStarted.value = false
+                        } else {
+                            //방이 이미 시작됨
+                            isStarted.value = true
+                        }
+
                     }
                     isJoined.value = true
                     //MainActivity에서 변수 Observing함
@@ -74,6 +92,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                 {
                     progressBar.set(View.INVISIBLE)
                     //참가하는 방이 존재하지 않음
+                    isJoined.value=false
                 }
             })
     }

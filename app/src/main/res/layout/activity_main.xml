@@ -18,40 +18,75 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.MainActivity">
 
-    <TextView
+    <ImageView
         android:id="@+id/tv_MNT_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MNT"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toTopOf="@id/bu_create_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintVertical_bias="0.37"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:background="@drawable/group"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bu_create_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="방 만들기"
-        android:onClick="@{()->mainActivity.createroom()}"
-        app:layout_constraintBottom_toTopOf="@id/bu_enter_main"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_MNT_main" />
-
-    <Button
-        android:id="@+id/bu_enter_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="참여하기"
-        android:onClick="@{()->mainActivity.joinroom()}"
+    <TextView
+        android:id="@+id/tv_main1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="참여코드를 받았다면 참여하기로 입장해주세요."
+        android:textColor="#808080"
+        android:textSize="10sp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.02"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bu_create_main" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7"/>
+
+
+    <TextView
+        android:id="@+id/bu_enter_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_hot_pink"
+        android:gravity="center"
+        android:onClick="@{()->mainActivity.joinroom()}"
+        android:text="@string/bu_join_main"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.074"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <TextView
+        android:id="@+id/bu_create_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_login"
+        android:gravity="center"
+        android:onClick="@{()->mainActivity.createroom()}"
+        android:text="@string/bu_create_main"
+        android:textColor="#ff2928"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.074"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintWidth_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

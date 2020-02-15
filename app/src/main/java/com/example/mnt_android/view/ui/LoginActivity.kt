@@ -113,6 +113,7 @@ class LoginActivity : AppCompatActivity()
             }
             2->
             {
+                loginViewModel.top_login2=loginViewModel.kuser.nickname.value+"님, 반가워요"
                 fragmentTransaction.replace(R.id.frag_login,loginFragment3)
                 loginViewModel.fragmentNum=2
                 fragmentTransaction.commit()
