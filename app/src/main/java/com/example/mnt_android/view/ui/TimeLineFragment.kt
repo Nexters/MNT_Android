@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseFragment
 import com.example.mnt_android.databinding.FragmentTimeLineBinding
+import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.view.adapter.ContentListAdapter
 import kotlinx.android.synthetic.main.fragment_time_line.*
 
@@ -38,7 +39,7 @@ class TimeLineFragment(private val isManager: Boolean = false) :
     private fun setEventListener(){
         manito_list_btn.setOnClickListener {
             val intent = Intent(context, ManitoActivity::class.java)
-            intent.putExtra(GameActivity.TAG_IS_MANAGER, isManager)
+            intent.putExtra(TAG_IS_MANAGER, isManager)
             startActivity(intent)
         }
         filter_btn.setOnClickListener {

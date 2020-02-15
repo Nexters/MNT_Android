@@ -8,7 +8,7 @@ import com.example.mnt_android.view.viewholder.MissionListViewHolder
 
 private val applicantList = arrayListOf("칭찬하기","응원하기","3행시","닮은꼴찍어보내기")
 
-class MissionListAdapter : BaseAdapter() {
+class MissionListAdapter : BaseAdapter<String>() {
     override val layoutId: Int
         get() = R.layout.item_applicant
 
