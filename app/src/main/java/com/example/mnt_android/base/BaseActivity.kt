@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 
 abstract class BaseActivity<viewDataBinding : ViewDataBinding, baseViewModel : BaseViewModel> : AppCompatActivity(){
     lateinit var dataBinding: viewDataBinding
-    abstract var viewModel: baseViewModel
+    abstract val viewModel: baseViewModel
     abstract val layoutId: Int
 
     abstract fun initSetting()

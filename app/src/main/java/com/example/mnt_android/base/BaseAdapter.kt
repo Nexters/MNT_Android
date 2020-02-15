@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseAdapter<listType : Any> : RecyclerView.Adapter<BaseViewHolder>() {
     abstract val layoutId: Int
     abstract fun viewHolder(@LayoutRes layout: Int, view: View): BaseViewHolder
 
-    private var itemList = ArrayList<Any>()
+    private var itemList = ArrayList<listType>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -28,11 +28,13 @@ abstract class BaseAdapter : RecyclerView.Adapter<BaseViewHolder>() {
         }
     }
 
-    protected fun <T> setList(_itemList: ArrayList<T>) {
-        itemList = ArrayList<Any>(_itemList)
+    fun setList(_itemList: ArrayList<listType>) {
+        itemList = ArrayList(_itemList)
+        notifyDataSetChanged()
     }
 
-    protected fun <T> addList(_itemList: ArrayList<T>) {
-        itemList.add(_itemList)
+    fun addList(_itemList: ArrayList<listType>) {
+        itemList.addAll(_itemList)
+        notifyDataSetChanged()
     }
 }
