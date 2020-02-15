@@ -21,7 +21,7 @@ object ApiManager
 
     private val dbAdapter by lazy {
         Retrofit.Builder()
-            .baseUrl("")//기본적으로 통신할 API주소
+            .baseUrl("http://ec2-15-164-216-156.ap-northeast-2.compute.amazonaws.com:8888/")//기본적으로 통신할 API주소
             .client(okHttpClientBuilder)//통신을 할 주체?(Ok HTTP)
             .addConverterFactory(GsonConverterFactory.create(gson))//받은 응답을 Observable로 반환가능
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//Json 형식으로 Data를 보내고 이를 파싱가능

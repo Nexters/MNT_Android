@@ -11,8 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-      
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+      >
+
+
         <activity android:name=".view.ui.TimeLineFilterActivity" />
         <activity android:name=".view.ui.ManitoActivity" />
         <activity android:name=".view.ui.GameActivity" />
@@ -24,7 +27,6 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".view.ui.LoginActivity2" />
         <activity android:name=".view.ui.JoinRoomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

@@ -4,7 +4,11 @@ import android.app.Application
 import android.util.Log
 import com.example.mnt_android.service.model.KakaoUser
 import com.example.mnt_android.view.ui.LoginActivity
+import com.kakao.auth.ApiResponseCallback
+import com.kakao.auth.AuthService
 import com.kakao.auth.ISessionCallback
+import com.kakao.auth.Session
+import com.kakao.auth.network.response.AccessTokenInfoResponse
 import com.kakao.network.ErrorResult
 import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.MeV2ResponseCallback
@@ -21,10 +25,10 @@ class SessionCallback(application : Application) : ISessionCallback {
         LoginActivity.sf = app.getSharedPreferences("login",0)
         LoginActivity.editor = LoginActivity.sf?.edit()
         if(LoginActivity.sf!!.contains("kakao_nickname"))
-            user = KakaoUser(LoginActivity.sf!!.getString("kakao_id","null"),LoginActivity.sf!!.getString("kakao_nickname","null"))
+            user = KakaoUser(LoginActivity.sf!!.getString("kakao_id","null"),LoginActivity.sf!!.getString("kakao_nickname","null"),LoginActivity.sf!!.getString("kakao_token","null"))
         else
         {
-            user = KakaoUser("null","null")
+            user = KakaoUser("null","null","null")
         }
     }
 
@@ -33,7 +37,7 @@ class SessionCallback(application : Application) : ISessionCallback {
 
     }
 
-    override fun onSessionOpened() {
+        override fun onSessionOpened() {
         UserManagement.getInstance().me(object : MeV2ResponseCallback() {
 
 
@@ -50,11 +54,14 @@ class SessionCallback(application : Application) : ISessionCallback {
 
                 if(!LoginActivity.sf!!.contains("kakao_id"))
                 {
-                    LoginActivity.editor?.putString("kakao_id",result?.id.toString())
+                   /* LoginActivity.editor?.putString("kakao_id",result?.id.toString())
                     LoginActivity.editor?.putString("kakao_nickname",result?.nickname)
-                    LoginActivity.editor?.commit()
+                    LoginActivity.editor?.putString("kakao_token",Session.getCurrentSession().tokenInfo.accessToken)
+
+                    LoginActivity.editor?.commit()*/
                     user.id = result?.id.toString()
                     user.nickname.value=result?.nickname
+                    user.token=Session.getCurrentSession().tokenInfo.accessToken
                 }
 
 /*
@@ -63,6 +70,13 @@ class SessionCallback(application : Application) : ISessionCallback {
             }
 
         })
+           Log.d("kakaotoken",Session.getCurrentSession().tokenInfo.accessToken)
+            Log.d("kakaotoken",Session.getCurrentSession().tokenInfo.refreshToken)
+
 
     }
+
+
+
+
 }

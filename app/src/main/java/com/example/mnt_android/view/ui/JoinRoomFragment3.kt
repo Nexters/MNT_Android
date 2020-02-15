@@ -24,7 +24,7 @@ class JoinRoomFragment3 : Fragment()
 
         joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
 
-        binding.joinRoomViewModel = (activity as JoinRoomActivity).joinRoomViewModel
+        binding.joinRoomViewModel = joinRoomViewModel
 
 
 
