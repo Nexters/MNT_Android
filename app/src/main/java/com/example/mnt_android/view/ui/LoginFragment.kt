@@ -1,6 +1,7 @@
 package com.example.mnt_android.view.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class LoginFragment : Fragment()
         binding.loginActivity=(activity as LoginActivity)
 
 
+        //Log.d("wlgusdnzzz",loginViewModel.kuser.nickname.value)
 
         return binding.root
 

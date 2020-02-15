@@ -55,8 +55,9 @@ class CreateRoomActivity :FragmentActivity()
     {
         createRoomViewModel.setRoomInfo()
         setFrag(1)
-    } fun sendKakaoLink(roomnum : String)
-{
+    }
+    fun sendKakaoLink(roomnum : String)
+    {
     var params = TextTemplate
         .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
         .addButton(ButtonObject("앱에서 보기",LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
@@ -118,7 +119,8 @@ class CreateRoomActivity :FragmentActivity()
         {
             0->
             {
-                backPressViewModel.onBackPressed(this)
+                //backPressViewModel.onBackPressed(this)
+                finish()
             }
             1->
             {

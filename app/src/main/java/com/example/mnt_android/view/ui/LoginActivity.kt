@@ -13,9 +13,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.ActivityLoginBinding
+import com.example.mnt_android.service.model.KakaoUser
+import com.example.mnt_android.service.repository.SessionCallback
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.DoMissionViewModel
 import com.example.mnt_android.viewmodel.LoginViewModel
+import com.kakao.auth.AuthType
 import com.kakao.auth.Session
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -46,7 +49,7 @@ class LoginActivity : AppCompatActivity()
 
        loginViewModel = ViewModelProviders.of(this)[LoginViewModel(application)::class.java]
 
-        loginViewModel.user.nickname.observe(this,object : Observer<String?> {
+       loginViewModel.kuser.nickname.observe(this,object : Observer<String?> {
             override fun onChanged(t: String?) {
                 Log.d(TAG,t)
                 if(t!= sf?.getString("kakao_id","null"))
@@ -57,6 +60,21 @@ class LoginActivity : AppCompatActivity()
             }
         })
 
+        loginViewModel.isLogined.observe(this, Observer {
+            if(it==true)
+            {
+                editor?.putString("kakao_id",loginViewModel.kuser.nickname.value)
+                editor?.putString("kakao_nickname",loginViewModel.kuser.id)
+                editor?.putString("kakao_token",loginViewModel.kuser.token)
+
+                editor?.commit()
+            }
+            else
+            {
+                Toast.makeText(this@LoginActivity,"로그인에 실패하였습니다.",Toast.LENGTH_SHORT).show()
+            }
+        })
+
         setFrag(0)
 
 
@@ -64,7 +82,15 @@ class LoginActivity : AppCompatActivity()
 
     }
 
-
+    fun login()
+    {
+        //눌러서 로그인
+       val callback = SessionCallback(application)
+        Session.getCurrentSession().addCallback(callback)
+        Session.getCurrentSession().checkAndImplicitOpen()
+        Session.getCurrentSession().open(AuthType.KAKAO_LOGIN_ALL,this@LoginActivity)
+        loginViewModel.kuser = callback.user
+    }
 
     fun setFrag(n : Int)
     {
@@ -96,6 +122,13 @@ class LoginActivity : AppCompatActivity()
         }
     }
 
+
+    fun createAccount()
+    {
+        loginViewModel.createAccount()
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+    }
 
     fun setImage()
     {
@@ -147,6 +180,7 @@ class LoginActivity : AppCompatActivity()
     {
         var sf : SharedPreferences?=null
         var editor : SharedPreferences.Editor?=null
+        var kuser : KakaoUser?=null
     }
 
 }

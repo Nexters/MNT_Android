@@ -1,9 +1,11 @@
 package com.example.mnt_android.service
 
 import com.example.mnt_android.service.model.CheckRoom
+import com.example.mnt_android.service.model.CheckRoomList
 import com.example.mnt_android.service.model.Room
+import com.example.mnt_android.service.model.User
 import com.google.gson.JsonElement
-import com.kakao.usermgmt.response.model.User
+import com.google.gson.JsonObject
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -13,19 +15,17 @@ import retrofit2.http.*
 interface DBApi {
 
     //회원가입
-    @PUT("api/user/sign-up")
+
+    @POST("api/user/sign-up")
     fun signUp(
-        @Path("id") id: Int,
-        @Path("name") name: String,
-        @Path("profilePic") profilePic: String,
-        @Path("fcmToken") fcmToken: String
+        @Body user : User
     ): Completable
 
     //방 유무확인
     @GET("api/room/check")
     fun checkRoom(
-        @Query("userId") userId: Int
-    ): Single<CheckRoom>
+        @Header("userId") userId: String
+    ): Flowable<CheckRoomList>
 
     //방 생성
     @POST("api/room/make")
@@ -44,8 +44,8 @@ interface DBApi {
     @GET("api/room/attend/{roomId}")
     fun attendRoom(
         @Path("roomId") roomId : Int ,
-        @Query("userId") userId: Int
-    ): Single<Room>
+        @Query("userId") userId: String
+    ): Completable
 
 
 
