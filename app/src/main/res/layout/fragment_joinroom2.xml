@@ -20,28 +20,20 @@
             android:id="@+id/tv_roomname_joinroom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{joinRoomViewModel.roomInfo.name}"
+            android:text="@{joinRoomViewModel.checkRoom.room.name.toString()}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_description_joinroom2"/>
-
-        <TextView
-            android:id="@+id/tv_description_joinroom2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{joinRoomViewModel.roomInfo.description}"
-            app:layout_constraintTop_toBottomOf="@id/tv_roomname_joinroom2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_startdate_joinroom2"/>
+
+
 
         <TextView
             android:id="@+id/tv_startdate_joinroom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{joinRoomViewModel.roomInfo.startDate}"
-            app:layout_constraintTop_toBottomOf="@id/tv_description_joinroom2"
+            android:text="@{joinRoomViewModel.checkRoom.room.startDay}"
+            app:layout_constraintTop_toBottomOf="@id/tv_roomname_joinroom2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_enddate_joinroom2"/>
@@ -50,7 +42,7 @@
             android:id="@+id/tv_enddate_joinroom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{joinRoomViewModel.roomInfo.endDate}"
+            android:text="@{joinRoomViewModel.checkRoom.room.endDay}"
             app:layout_constraintTop_toBottomOf="@id/tv_startdate_joinroom2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

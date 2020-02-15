@@ -1,32 +1,121 @@
 package com.example.mnt_android.viewmodel
 
 import android.app.Application
+import android.content.Intent
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.mnt_android.service.model.CheckRoom
+import com.example.mnt_android.service.model.CheckRoomList
 import com.example.mnt_android.service.model.RoomInfo
+import com.example.mnt_android.service.repository.DBRepository
+import com.example.mnt_android.view.ui.LoginActivity
+import com.example.mnt_android.view.ui.LoginActivity.Companion.sf
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Action
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 
 class JoinRoomViewModel(application: Application) : AndroidViewModel(application)
 {
     val app = application
     var roomInfo : RoomInfo = RoomInfo()
+    var sf = app.getSharedPreferences("login",0)
    var checkNitto : MutableLiveData<Boolean> = MutableLiveData()
     var fragmentNum = 0
-
+    var checkRoom  : MutableLiveData<CheckRoom> = MutableLiveData()
+    private val repository = DBRepository()
+    var isJoined : MutableLiveData<Boolean> = MutableLiveData()
+    var isSearched : MutableLiveData<Boolean> = MutableLiveData()
+    var isStarted : MutableLiveData<Boolean> = MutableLiveData()
+    var isLogined : MutableLiveData<Boolean> = MutableLiveData()
+    lateinit var progressBar : ObservableInt
     init {
         checkNitto.value=false
+        isJoined.value=false
+        //isSearched.value=false
+        isStarted.value=false
+        progressBar = ObservableInt(View.GONE)
     }
 
-    fun findRoom(roomNum : String)
+    fun checkRoom()
     {
+        //참가한 방이 존재하는지 확인
+        progressBar.set(View.VISIBLE)
+        repository.checkRoom(sf.getString("kakao_token","null"))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ t: CheckRoomList? ->
+                if(t?.checkRoomList!=null)
+                {
+                    checkRoom.value = t!!.checkRoomList[0]
 
-        //서버에서 방 정보 찾기
 
-        roomInfo.num.value=roomNum
-        roomInfo.name.value="방이름123"
-        roomInfo.startDate.value="시작날짜123"
-        roomInfo.endDate.value="종료날짜123"
-        roomInfo.description.value = "방 설명123"
+                    if(checkRoom.value!!.room.isStart==0)
+                    {
+                       //방이 아직 시작하지 않음
+                        isStarted.value=false
+                    }
+                    else
+                    {
+                        //방이 이미 시작됨
+                        isStarted.value=true
+                    }
+                    isJoined.value = true
+                    //MainActivity에서 변수 Observing함
 
+                    progressBar.set(View.INVISIBLE)
+                }
+                else
+                {
+                    progressBar.set(View.INVISIBLE)
+                    //참가하는 방이 존재하지 않음
+                }
+            })
+    }
+
+    fun attendRoom(roomNum : String)
+    {
+    //방에 참가하기
+         if(sf.getString("kakao_token","null")=="null")
+            {
+                //아직 회원가입 및 로그인을 하지 않음
+                //카카오링크를 타고 들어올 때 발생 가능
+                isLogined.value=false
+            }
+        else
+        {
+
+            repository.attendRoom(roomNum.toInt(), sf.getString("kakao_token", "null"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(Action {
+                    repository.checkRoom(sf.getString("kakao_token","null"))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ t: CheckRoomList? ->
+                            if(t?.checkRoomList!=null)
+                            {
+                                checkRoom.value = t!!.checkRoomList[0]
+                                isSearched.value=true
+                                //MainActivity에서 변수 Observing함
+                            }
+                            else
+                            {
+                                isSearched.value=false
+                                //참가하는 방이 존재하지 않음
+                            }
+                        })
+                },
+                    Consumer { Log.d("wlgusdnzzz", "방참가못함") })
+            //내가 참가한 방 정보 가져오기
+            roomInfo.num.value = roomNum
+
+        }
 
     }
 
@@ -34,9 +123,6 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
 
     fun checkNitto()
     {
-
-       val sf=app.getSharedPreferences("login",0)
-        sf.edit().putBoolean("checkNitto",true)
         checkNitto.value=true
 
     }

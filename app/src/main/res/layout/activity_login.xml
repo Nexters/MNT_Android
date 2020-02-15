@@ -9,25 +9,14 @@
     tools:context=".view.ui.LoginActivity"
     >
 
-    <com.kakao.usermgmt.LoginButton
-        android:id="@+id/com_kakao_login"
+    <FrameLayout
+        android:id="@+id/frag_login"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.829" />
-
-    <Button
-        android:id="@+id/applicant_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="참여자 리스트 확인"
-        app:layout_constraintTop_toBottomOf="@id/com_kakao_login"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

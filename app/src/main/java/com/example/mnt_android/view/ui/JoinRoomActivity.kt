@@ -3,12 +3,18 @@ package com.example.mnt_android.view.ui
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
+import com.example.mnt_android.databinding.ActivityJoinroomBinding
+import com.example.mnt_android.databinding.ActivityMainBinding
+import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.kakao.kakaolink.v2.KakaoLinkResponse
@@ -33,8 +39,9 @@ class JoinRoomActivity : AppCompatActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_joinroom)
-
+        val binding = DataBindingUtil
+            .setContentView<ActivityJoinroomBinding>(this, R.layout.activity_joinroom)
+        binding.lifecycleOwner = this
         joinRoomViewModel = ViewModelProviders.of(this)[JoinRoomViewModel::class.java]
         backPressViewModel=  ViewModelProviders.of(this)[BackPressViewModel::class.java]
 
@@ -43,35 +50,55 @@ class JoinRoomActivity : AppCompatActivity()
         joinRoomFragment= JoinRoomFragment()
         joinRoomFragment2= JoinRoomFragment2()
         joinRoomFragment3 = JoinRoomFragment3()
-        val sf : SharedPreferences = getSharedPreferences("login",0)
 
-
-        if(sf.getBoolean("checkNitto",false))
-        {
-            //입장한 방이 있고 내 니또를 확인했다.
-            val intent = Intent(this@JoinRoomActivity,ManittoActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
-            finish()
-        }
-        else
-        {
-            //입장한 방이 있지만 내 니또를 확인하지 못했다.
-            setFrag(2)
-        }
+        setFrag(0)
 
         joinRoomViewModel.checkNitto.observe(this, Observer {
-            if(it)
+            if(it==true)
+            {
+                val sf = getSharedPreferences("login", 0)
+                val editor = sf.edit()
+                editor.putBoolean("check",true)
+               editor.commit()
+
                 checkNitto()
+            }
         })
 
+        joinRoomViewModel.isSearched.observe(this, Observer {
+            if(it==true)
+                setFrag(1)
+            else
+            {
+                Toast.makeText(this@JoinRoomActivity,"참여코드의 방이 존재하지 않습니다.",Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        joinRoomViewModel.isLogined.observe(this, Observer {
+            if(it==false)
+            {
+                val intent = Intent(this,LoginActivity::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(intent)
+            }
+        })
 
         val intent = intent
         val str = intent.data
-        if(str!=null)
+        val checkRoom:CheckRoom? = intent.getParcelableExtra("checkRoom")
+        val fragNum = intent.getIntExtra("fragNum",0)
+        if(checkRoom!=null)
+        {
+            //MainActivity에서 방이 존재한다고 판단하여 방정보를 넘김
+            joinRoomViewModel.fragmentNum=fragNum
+            joinRoomViewModel.checkRoom.value=checkRoom
+            setFrag(fragNum)
+
+        }
+       if(str!=null)
         {
             //카카오 링크를 통해 들어옴
-            joinRoomViewModel.findRoom(intent.data.getQueryParameter("roomnum").toString())
+            joinRoomViewModel.roomInfo.num.value=intent.data.getQueryParameter("roomnum")
             //만약 내가 내 마니또 보는 화면을 봤으면 바로 타임라인 Actviity로 이동
         }
 
@@ -97,7 +124,6 @@ class JoinRoomActivity : AppCompatActivity()
                 fragmentTransaction.replace(R.id.frag_joinroom,joinRoomFragment)
                 joinRoomViewModel.fragmentNum=0
                 fragmentTransaction.commit()
-
             }
             1->
             {
@@ -107,14 +133,6 @@ class JoinRoomActivity : AppCompatActivity()
             }
             2 ->
             {
-                if(true)
-                {
-                    //방이 시작되지 않았으면 Fragment3으로 넘어가지 않는다
-                }
-                else
-                {
-                    //방이 시작되었으므로 Fragment3으로 넘어간다.
-                }
                 fragmentTransaction.replace(R.id.frag_joinroom,joinRoomFragment3)
                 joinRoomViewModel.fragmentNum=2
                 fragmentTransaction.commit()
@@ -132,31 +150,19 @@ class JoinRoomActivity : AppCompatActivity()
                     .setAndroidExecutionParams("roomnum=$roomnum").build())
             ).build()
 
-        var serverCallbackArgs  = HashMap<String, String>();
-
-
+        var serverCallbackArgs  = HashMap<String, String>()
         var aaa  = object : ResponseCallback<KakaoLinkResponse>(){
             override fun onSuccess(result: KakaoLinkResponse?) {
-
-
             }
 
             override fun onFailure(errorResult: ErrorResult?) {
-
             }
-
         }
 
         KakaoLinkService.getInstance().sendDefault( this, params, serverCallbackArgs,aaa)
 
     }
 
-    fun joinRoom(roomnum : String)
-    {
-       joinRoomViewModel.findRoom(roomnum)
-
-        setFrag(1)
-    }
 
     override fun onBackPressed() {
 
@@ -164,15 +170,15 @@ class JoinRoomActivity : AppCompatActivity()
         {
             0->
             {
-                backPressViewModel.onBackPressed(this)
+                finish()
             }
             1->
             {
-                setFrag(0)
+                backPressViewModel.onBackPressed(this)
             }
             2->
             {
-                setFrag(1)
+                backPressViewModel.onBackPressed(this)
             }
         }
 

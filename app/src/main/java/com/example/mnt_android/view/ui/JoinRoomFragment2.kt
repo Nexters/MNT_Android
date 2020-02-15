@@ -23,7 +23,7 @@ class JoinRoomFragment2 : Fragment()
 
         joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
 
-        binding.joinRoomViewModel = (activity as JoinRoomActivity).joinRoomViewModel
+        binding.joinRoomViewModel = joinRoomViewModel
         binding.joinRoomActivity=(activity as JoinRoomActivity)
 
         return binding.root
