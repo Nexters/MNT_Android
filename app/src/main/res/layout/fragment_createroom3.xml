@@ -15,60 +15,158 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:context=".view.ui.CreateRoomActivity">
+
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.208"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintVertical_bias="0.18"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:background="@drawable/fruits"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
 
         <TextView
-            android:id="@+id/tv_roomname_createroom3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.7"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.5"
             android:text="@{createRoomViewModel.room.name}"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textColor="#222b45"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_roomnum_createroom3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="푸르또방이 생성되었습니다. 초대코드를 공유해서 친구들을 초대하세요.  "
+            app:layout_constraintVertical_bias="0.37"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintWidth_percent="0.84"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_createroom3_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.02"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintVertical_bias="0.47"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:text="초대코드"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textColor="#808080"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView
             android:id="@+id/tv_roomnum_createroom3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintHeight_percent="0.07"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.53"
             android:text="@{createRoomViewModel.id}"
-            app:layout_constraintTop_toBottomOf="@+id/tv_roomname_createroom3"
-            app:layout_constraintBottom_toTopOf="@+id/bu_kakaolink_createroom3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-
-
-        <Button
-            android:id="@+id/bu_kakaolink_createroom3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카카오 링크"
-            android:onClick="@{()->createRoomActivity.sendKakaoLink(createRoomViewModel.id)}"
-            app:layout_constraintTop_toBottomOf="@+id/tv_roomnum_createroom3"
-            app:layout_constraintBottom_toTopOf="@+id/bu_lookparticipant_createroom3"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-        <Button
-            android:id="@+id/bu_lookparticipant_createroom3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="참여자 보기"
-            app:layout_constraintTop_toBottomOf="@+id/bu_kakaolink_createroom3"
-            app:layout_constraintBottom_toTopOf="@+id/bu_createroom_createroom3"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-        <Button
-            android:id="@+id/bu_createroom_createroom3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="시작하기"
-            android:onClick="@{()->createRoomViewModel.startRoom()}"
-            app:layout_constraintTop_toBottomOf="@+id/bu_lookparticipant_createroom3"
+        <ImageView
+            android:id="@+id/iv_copy"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:srcCompat="@drawable/copy"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintWidth_percent="0.07"
+            app:layout_constraintVertical_bias="0.53"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/bu_kakaolink_createroom3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintHeight_percent="0.074"
+            app:layout_constraintVertical_bias="0.72"
+            android:text="@string/tv_send_kakaolink"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:background="@drawable/button_hot_pink"
+            android:onClick="@{()->createRoomActivity.sendKakaoLink(createRoomViewModel.id)}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/bu_createroom_createroom3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintHeight_percent="0.074"
+            app:layout_constraintVertical_bias="0.82"
+            android:text="@string/tv_start"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:background="@drawable/button_hot_pink"
+            android:onClick="@{()->createRoomViewModel.startRoom()}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/bu_lookparticipant_createroom3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintHeight_percent="0.074"
+            app:layout_constraintVertical_bias="0.92"
+            android:text="@string/tv_look_participant"
+            android:textSize="18sp"
+            android:textColor="#ff3f3f"
+            android:gravity="center"
+            android:background="#ffffff"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

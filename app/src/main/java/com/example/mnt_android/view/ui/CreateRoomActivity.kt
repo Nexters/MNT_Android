@@ -90,6 +90,9 @@ class CreateRoomActivity :FragmentActivity()
                 setFrag(2)
         })
 
+        createRoomViewModel.startDay.observe(this,androidx.lifecycle.Observer {
+            Toast.makeText(this,it!!,Toast.LENGTH_SHORT).show()
+        })
 
     }
 
@@ -109,12 +112,12 @@ class CreateRoomActivity :FragmentActivity()
 
             if(index==1)
             {
-                createRoomViewModel.startDay.value=year.toString()+"-"+month.toString()+"-"+dayOfMonth.toString()
+                createRoomViewModel.startDay.value="$year-$month-$dayOfMonth"
                 Log.d("wlgusdnzzz",createRoomViewModel.startDay.value)
             }
             else
             {
-                createRoomViewModel.endDay.value=year.toString()+"-"+month.toString()+"-"+dayOfMonth.toString()
+                createRoomViewModel.endDay.value= "$year-$month-$dayOfMonth"
                 Log.d("wlgusdnzzz", createRoomViewModel.endDay.value)
             }
 
@@ -134,7 +137,7 @@ class CreateRoomActivity :FragmentActivity()
     var params = TextTemplate
         .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
         .addButton(ButtonObject("앱에서 보기",LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
-            .setAndroidExecutionParams("roomnum=$roomnum").build())).build()
+            .setAndroidExecutionParams("roomnum=$roomnum").setIosExecutionParams("roomnum=$roomnum").build())).build()
 
     var serverCallbackArgs  = HashMap<String, String>();
     var aa : Map<Any,Any> = HashMap<Any,Any>()
