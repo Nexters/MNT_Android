@@ -47,6 +47,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application)
        Session.getCurrentSession().checkAndImplicitOpen()
        kuser = callback.user
        top_login2 = kuser.nickname.value.toString()+"님, 반가워요!"
+
+
+
     }
     fun createAccount()
     {
