@@ -54,7 +54,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     private fun changeFragment(fragment: Fragment) {
         fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frag_game, fragment)
+        fragmentTransaction.replace(frame_game.id, fragment)
         fragmentTransaction.commit()
     }
 
