@@ -6,10 +6,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
 import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.databinding.ActivityGameBinding
 import com.example.mnt_android.service.model.DoMission
+import com.example.mnt_android.util.TAG_IS_MANAGER
 import kotlinx.android.synthetic.main.activity_game.*
 import com.kakao.kakaolink.v2.KakaoLinkResponse
 import com.kakao.network.ErrorResult
@@ -19,11 +21,6 @@ import java.util.HashMap
 import com.kakao.message.template.*
 
 class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.OnClickListener {
-
-    companion object {
-        const val TAG_IS_MANAGER = "isManager"
-    }
-
     private lateinit var fragmentManager: FragmentManager
     private lateinit var fragmentTransaction: FragmentTransaction
 
@@ -33,7 +30,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     override var viewModel = BaseViewModel()
     override val layoutId: Int
-        get() = com.example.mnt_android.R.layout.activity_game
+        get() = R.layout.activity_game
 
     override fun initSetting() {
         val isManager = intent.getBooleanExtra(TAG_IS_MANAGER, false)
@@ -45,8 +42,6 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         fragmentManager = supportFragmentManager
 
         changeFragment(timeLineFragment)
-
-        Toast.makeText(this, "Game", Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View?) {
@@ -59,7 +54,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     private fun changeFragment(fragment: Fragment) {
         fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(com.example.mnt_android.R.id.frag_game, fragment)
+        fragmentTransaction.replace(R.id.frag_game, fragment)
         fragmentTransaction.commit()
     }
 
