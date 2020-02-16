@@ -36,6 +36,7 @@
             app:layout_constraintTop_toBottomOf="@id/applicant_tv"
             app:layout_constraintBottom_toBottomOf="parent"
             app:adapterApplicantList="@{viewModel.applicantList}"
+            app:isManager="@{viewModel.isManager}"
             tools:listitem="@layout/item_applicant"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

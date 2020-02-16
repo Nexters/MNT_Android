@@ -25,6 +25,6 @@
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:background="@drawable/sample_btn"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 </RelativeLayout>

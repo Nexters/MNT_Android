@@ -6,15 +6,17 @@ import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.service.DBApi
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.service.model.User
+import com.example.mnt_android.service.repository.DBRepository
+import com.example.mnt_android.util.SUCCESS
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class ApplicantListViewModel(private val dbApi: DBApi) : BaseViewModel() {
+class ApplicantListViewModel(private val dbApi: DBRepository) : BaseViewModel() {
     var roomId = MutableLiveData<Int>()
     var isManager = MutableLiveData<Int>()
-    private var _applicantList = MutableLiveData<ArrayList<User>>()
-    val applicantList : LiveData<ArrayList<User>>
+    private var _applicantList = MutableLiveData<ArrayList<Applicant>>()
+    val applicantList : LiveData<ArrayList<Applicant>>
         get() = _applicantList
 
     fun setApplicantList() {
@@ -24,10 +26,10 @@ class ApplicantListViewModel(private val dbApi: DBApi) : BaseViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     it.run {
-                        if (apiStatus.httpStatus == 200) {
-                            val userList = arrayListOf<User>()
+                        if (apiStatus.httpStatus == SUCCESS) {
+                            val userList = arrayListOf<Applicant>()
                             data.forEach { applicant ->
-                                userList.add(applicant.user)
+                                userList.add(applicant)
                             }
                             _applicantList.value = userList
                         }
