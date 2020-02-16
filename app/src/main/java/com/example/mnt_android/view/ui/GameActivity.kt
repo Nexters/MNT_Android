@@ -26,7 +26,6 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     private lateinit var timeLineFragment: TimeLineFragment
     private lateinit var missionFragment: GameMissionFragment
-    private lateinit var dashBoardFragment: DashBoardFragment
 
     override var viewModel = BaseViewModel()
     override val layoutId: Int
@@ -37,7 +36,6 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
         timeLineFragment = TimeLineFragment(isManager)
         missionFragment = GameMissionFragment()
-        dashBoardFragment = DashBoardFragment(isManager)
 
         fragmentManager = supportFragmentManager
 
@@ -46,10 +44,15 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     override fun onClick(v: View?) {
         when (v) {
-            dashboard_tv -> changeFragment(dashBoardFragment)
-            show_all_tv -> changeFragment(timeLineFragment)
-            mission_tv -> changeFragment(missionFragment)
+            dashboard_layout -> changeActivity(DashBoardActivity::class.java)
+            feed_layout -> changeFragment(timeLineFragment)
+            mission_layout -> changeFragment(missionFragment)
         }
+    }
+
+    private fun <T> changeActivity(clazz: Class<T>) {
+        val intent = Intent(this, clazz)
+        startActivity(intent)
     }
 
     private fun changeFragment(fragment: Fragment) {

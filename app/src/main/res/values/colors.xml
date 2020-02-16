@@ -7,4 +7,6 @@
     <color name="colorHotPink">#ff8585</color>
     <color name="colorRedPink">#ff3f3f</color>
     <color name="colorLightGray">#f6f6f6</color>
+    <color name="colorGray">#999999</color>
+    <color name="colorDashBoardBackground">#f8f7f7</color>
 </resources>

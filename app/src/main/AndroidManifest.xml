@@ -16,6 +16,7 @@
       >
 
 
+        <activity android:name=".view.ui.DashBoardActivity"></activity>
         <activity android:name=".view.ui.TimeLineFilterActivity" />
         <activity android:name=".view.ui.ManitoActivity" />
         <activity android:name=".view.ui.GameActivity" />
