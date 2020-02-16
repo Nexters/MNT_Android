@@ -1,20 +1,15 @@
 package com.example.mnt_android.viewmodel
 
 import android.app.Application
-import android.content.Intent
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.service.model.CheckRoomList
 import com.example.mnt_android.service.model.RoomInfo
 import com.example.mnt_android.service.repository.DBRepository
-import com.example.mnt_android.view.ui.LoginActivity
-import com.example.mnt_android.view.ui.LoginActivity.Companion.sf
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer

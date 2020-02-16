@@ -52,14 +52,9 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         }
     }
 
-    private fun <T> changeActivity(clazz: Class<T>) {
-        val intent = Intent(this, clazz)
-        startActivity(intent)
-    }
-
     private fun changeFragment(fragment: Fragment) {
         fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(frame_game.id, fragment)
+        fragmentTransaction.replace(game_layout.id, fragment)
         fragmentTransaction.commit()
     }
 

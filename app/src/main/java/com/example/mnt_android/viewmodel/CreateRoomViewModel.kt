@@ -1,21 +1,16 @@
 package com.example.mnt_android.viewmodel
 
 import android.icu.text.SimpleDateFormat
-import android.os.Build
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.service.model.Room
 import com.example.mnt_android.service.model.RoomId
-import com.example.mnt_android.service.model.RoomInfo
 import com.example.mnt_android.service.model.SendRoom
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.view.ui.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.*
-import kotlin.random.Random
 
 class CreateRoomViewModel : BaseViewModel()
 {

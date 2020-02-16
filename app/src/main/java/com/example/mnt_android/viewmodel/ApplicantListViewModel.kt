@@ -3,9 +3,7 @@ package com.example.mnt_android.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mnt_android.base.BaseViewModel
-import com.example.mnt_android.service.DBApi
 import com.example.mnt_android.service.model.Applicant
-import com.example.mnt_android.service.model.User
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.util.SUCCESS
 import io.reactivex.android.schedulers.AndroidSchedulers
