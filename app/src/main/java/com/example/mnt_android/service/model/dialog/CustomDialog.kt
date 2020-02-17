@@ -22,7 +22,10 @@ class CustomDialog(
                 question_tv.text = questionMsg
                 confirm_btn.run {
                     text = confirmMsg
-                    setOnClickListener { confirmOnClickListener }
+                    setOnClickListener {
+                        dismiss()
+                        confirmOnClickListener()
+                    }
                 }
                 cancel_btn.run {
                     text = cancelMsg

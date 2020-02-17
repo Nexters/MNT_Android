@@ -34,20 +34,27 @@ interface DBApi {
     //방 참가
     @GET("api/room/attend/{roomId}")
     fun attendRoom(
-        @Path("roomId") roomId : Int ,
+        @Path("roomId") roomId : Long ,
         @Query("userId") userId: String
     ): Completable
 
     // 마니또 방 시작
     @GET("/api/room/start/{roomId}")
     fun startRoom(
-        @Path("roomId") roomId: Int
+        @Path("roomId") roomId: Long
     ) : Completable
 
     // 참여자 리스트
     @GET("/api/room/user-list/{roomId}")
     fun userList(
-        @Path("roomId") roomId: Int
+        @Path("roomId") roomId: Long
     ) : Single<ApplicantResponse>
+
+    // 참여자 삭제
+    @DELETE("/api/room/user")
+    fun exitUser(
+        @Query("roomId") roomId: Long,
+        @Query("userId") userId: String
+    ) : Completable
 
 }

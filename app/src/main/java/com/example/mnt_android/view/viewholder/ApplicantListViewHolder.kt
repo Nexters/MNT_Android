@@ -8,7 +8,11 @@ import com.example.mnt_android.service.model.dialog.CustomDialog
 import com.example.mnt_android.util.FALSE
 import kotlinx.android.synthetic.main.item_applicant.view.*
 
-class ApplicantListViewHolder(view: View, private val isManager: Int) : BaseViewHolder(view) {
+class ApplicantListViewHolder(
+    view: View,
+    private val isManager: Int,
+    private val onExitApplicant: (Long, String) -> Unit
+) : BaseViewHolder(view) {
 
     companion object {
         private val TAG = "ApplicantList Dialog"
@@ -20,7 +24,13 @@ class ApplicantListViewHolder(view: View, private val isManager: Int) : BaseView
             applicant_name_tv.text = applicant.user.name
             exit_btn.setOnClickListener {
                 val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
-                CustomDialog(applicant.user.name).show(supportFragmentManager, TAG)
+                CustomDialog(
+                    "${applicant.user.name}님을 내보내시겠습니까?",
+                    "취소",
+                    "내보내기"
+                ) {
+                    onExitApplicant(applicant.room.id.toLong(), applicant.user.id)
+                }.show(supportFragmentManager, TAG)
             }
 
             if (isManager == 1 && applicant.isCreater == FALSE) {

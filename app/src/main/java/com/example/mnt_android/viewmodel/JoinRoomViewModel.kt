@@ -102,7 +102,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
         else
         {
 
-            repository.attendRoom(roomNum.toInt(), sf.getString("kakao_token", "null"))
+            repository.attendRoom(roomNum.toLong(), sf.getString("kakao_token", "null"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Action {
