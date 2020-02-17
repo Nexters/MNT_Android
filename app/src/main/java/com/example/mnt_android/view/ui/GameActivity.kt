@@ -38,7 +38,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     private lateinit var timeLineFragment: TimeLineFragment
     private lateinit var missionFragment: GameMissionFragment
-    private lateinit var dashBoardFragment: DashBoardApplicantFragment
+    private lateinit var dashBoardApplicantFragment: DashBoardApplicantFragment
+    private lateinit var dashBoardManagerFragment: DashBoardManagerFragment
 
     private val disposable = CompositeDisposable()
     private var screenMaxHeight: Int = 0
@@ -52,7 +53,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
         timeLineFragment = TimeLineFragment(isManager)
         missionFragment = GameMissionFragment()
-        dashBoardFragment = DashBoardApplicantFragment()
+        dashBoardApplicantFragment = DashBoardApplicantFragment()
+        dashBoardManagerFragment = DashBoardManagerFragment()
 
         fragmentManager = supportFragmentManager
 
@@ -105,7 +107,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     override fun onClick(v: View?) {
         when (v) {
             dashboard_layout -> {
-                changeFragment(dashBoardFragment)
+                changeFragment(dashBoardManagerFragment)
                 selectBtn(dashboard_iv, dashboard_tv)
             }
             feed_layout -> {
