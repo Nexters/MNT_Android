@@ -18,6 +18,11 @@ class JoinRoomFragment2 : Fragment()
 {
     lateinit var joinRoomViewModel: JoinRoomViewModel
     lateinit var binding: FragmentJoinroom2Binding
+
+    companion object {
+        private const val IS_NOT_MANAGER = 0
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,7 +46,7 @@ class JoinRoomFragment2 : Fragment()
     private fun setEventListener() {
         bu_lookparticipant_joinroom2.setOnClickListener {
             val intent = Intent(context, ApplicantListActivity::class.java)
-            intent.putExtra(TAG_IS_MANAGER, 0)
+            intent.putExtra(TAG_IS_MANAGER, IS_NOT_MANAGER)
             intent.putExtra(TAG_ROOM_ID, joinRoomViewModel.roomInfo.num.value)
             context?.startActivity(intent)
         }

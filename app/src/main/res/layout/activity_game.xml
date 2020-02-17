@@ -8,7 +8,7 @@
         tools:context=".view.ui.GameActivity">
 
         <FrameLayout
-            android:id="@+id/frag_game"
+            android:id="@+id/game_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -17,41 +17,97 @@
             tools:layout_editor_absoluteX="-49dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="#22000000"
-            app:layout_constraintBottom_toBottomOf="parent">
-            <TextView
-                android:id="@+id/dashboard_tv"
+            android:id="@+id/floating_menu_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.701"
+            app:layout_constraintHeight_percent="0.073"
+            app:layout_constraintVertical_bias="0.922"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:elevation="10dp"
+            android:background="@drawable/layout_floating_menu">
+
+            <LinearLayout
+                android:id="@+id/dashboard_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:onClick="onClick"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/show_all_tv"
-                android:textSize="15sp"
-                android:text="대시보드"/>
-            <TextView
-                android:id="@+id/show_all_tv"
+                app:layout_constraintEnd_toStartOf="@id/feed_layout">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/dashboard"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="대시보드"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/feed_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:onClick="onClick"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/dashboard_tv"
-                app:layout_constraintEnd_toStartOf="@id/mission_tv"
-                android:textSize="15sp"
-                android:text="모아보기"/>
-            <TextView
-                android:id="@+id/mission_tv"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/dashboard_layout"
+                app:layout_constraintEnd_toStartOf="@id/mission_layout">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/feed"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="모아보기"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/mission_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:onClick="onClick"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/show_all_tv"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="15sp"
-                android:text="미션"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/feed_layout"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/mission_select"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="미션"/>
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,4 +4,13 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorHotPink">#ff8585</color>
+    <color name="colorRedPink">#ff3f3f</color>
+    <color name="colorLightGray1">#f6f6f6</color>
+    <color name="colorLightGray2">#808080</color>
+    <color name="colorLightBlueBlack">#0f1525</color>
+    <color name="colorLightBlack">#080808</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorTimeLineBorder">#ebebeb</color>
+    <color name="colorDashBoardBackground">#f8f7f7</color>
 </resources>

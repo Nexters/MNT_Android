@@ -1,15 +1,21 @@
 package com.example.mnt_android.view.ui
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Point
+import android.util.AttributeSet
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
 import com.example.mnt_android.base.BaseViewModel
+import com.example.mnt_android.bus.scrollEventBus
 import com.example.mnt_android.databinding.ActivityGameBinding
 import com.example.mnt_android.service.model.DoMission
+import com.example.mnt_android.util.TAG_IS_MANAGER
 import kotlinx.android.synthetic.main.activity_game.*
 import com.kakao.kakaolink.v2.KakaoLinkResponse
 import com.kakao.network.ErrorResult
@@ -17,12 +23,13 @@ import com.kakao.network.callback.ResponseCallback
 import com.kakao.kakaolink.v2.KakaoLinkService
 import java.util.HashMap
 import com.kakao.message.template.*
+import io.reactivex.disposables.CompositeDisposable
+import kotlin.math.absoluteValue
 
 class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.OnClickListener {
-
-    companion object {
-        const val TAG_IS_MANAGER = "isManager"
-    }
+    override var viewModel = BaseViewModel()
+    override val layoutId: Int
+        get() = R.layout.activity_game
 
     private lateinit var fragmentManager: FragmentManager
     private lateinit var fragmentTransaction: FragmentTransaction
@@ -31,9 +38,9 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     private lateinit var missionFragment: GameMissionFragment
     private lateinit var dashBoardFragment: DashBoardFragment
 
-    override var viewModel = BaseViewModel()
-    override val layoutId: Int
-        get() = com.example.mnt_android.R.layout.activity_game
+    private val disposable = CompositeDisposable()
+    private var screenMaxHeight: Int = 0
+    private var screenMinHeight: Int = 0
 
     override fun initSetting() {
         val isManager = intent.getBooleanExtra(TAG_IS_MANAGER, false)
@@ -43,23 +50,51 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         dashBoardFragment = DashBoardFragment(isManager)
 
         fragmentManager = supportFragmentManager
-
         changeFragment(timeLineFragment)
+    }
 
-        Toast.makeText(this, "Game", Toast.LENGTH_SHORT).show()
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        eventBusSetting()
+    }
+
+    private fun getScreenHeight() : Int {
+        val display = windowManager.defaultDisplay
+        val point = Point()
+        display.getSize(point)
+        return point.y
+    }
+
+    private fun eventBusSetting() {
+        screenMaxHeight = getScreenHeight()
+        screenMinHeight = floating_menu_layout.y.toInt()
+        disposable.add(scrollEventBus.subscribe {
+            val y = floating_menu_layout.y
+            val maxDiff = screenMaxHeight - screenMinHeight
+
+            floating_menu_layout.y += if (it.absoluteValue > maxDiff) {
+                if (it > 0) maxDiff else maxDiff * -1
+            } else if (it > 0 && y < screenMaxHeight) {
+                it
+            } else if (it < 0 && y > screenMinHeight) {
+                it
+            } else {
+                0
+            }
+        })
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            dashboard_tv -> changeFragment(dashBoardFragment)
-            show_all_tv -> changeFragment(timeLineFragment)
-            mission_tv -> changeFragment(missionFragment)
+            dashboard_layout -> changeFragment(dashBoardFragment)
+            feed_layout -> changeFragment(timeLineFragment)
+            mission_layout -> changeFragment(missionFragment)
         }
     }
 
     private fun changeFragment(fragment: Fragment) {
         fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(com.example.mnt_android.R.id.frag_game, fragment)
+        fragmentTransaction.replace(game_layout.id, fragment)
         fragmentTransaction.commit()
     }
 
@@ -105,4 +140,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         startActivity(intent)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.clear()
+    }
 }

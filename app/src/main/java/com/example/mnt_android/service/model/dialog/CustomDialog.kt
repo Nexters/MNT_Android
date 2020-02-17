@@ -1,27 +1,40 @@
 package com.example.mnt_android.service.model.dialog
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.mnt_android.R
+import kotlinx.android.synthetic.main.custom_dialog.view.*
 
-// TODO: 전달받을 데이터 타입 수정 필요
-class CustomDialog(private val message: String) : DialogFragment() {
+class CustomDialog(
+    private val questionMsg: String,
+    private val cancelMsg: String? = "cancel",
+    private val confirmMsg: String? = "confirm",
+    private val confirmOnClickListener: () -> Unit = {}
+) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            builder.setMessage("$message CustomDialog")
-                .setPositiveButton("Confirm") { dialog, id ->
-                    Toast.makeText(context, "$message Confirm", Toast.LENGTH_SHORT).show()
-                    dialog.dismiss()
+            val view = it.layoutInflater.inflate(R.layout.custom_dialog, null).apply {
+                question_tv.text = questionMsg
+                confirm_btn.run {
+                    text = confirmMsg
+                    setOnClickListener { confirmOnClickListener }
                 }
-                .setNegativeButton("Cancel") { dialog, id ->
-                    Toast.makeText(context, "$message Cancel", Toast.LENGTH_SHORT).show()
-                    dialog.dismiss()
+                cancel_btn.run {
+                    text = cancelMsg
+                    setOnClickListener { dismiss() }
                 }
-            builder.create()
+            }
+
+            AlertDialog.Builder(it).apply {
+                setView(view)
+            }.create().apply {
+                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            }
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 }
