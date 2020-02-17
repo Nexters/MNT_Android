@@ -4,7 +4,7 @@ import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.example.mnt_android.base.BaseViewHolder
 import com.example.mnt_android.service.model.Applicant
-import com.example.mnt_android.service.model.dialog.CustomDialog
+import com.example.mnt_android.view.dialog.ConfirmDialog
 import com.example.mnt_android.util.FALSE
 import kotlinx.android.synthetic.main.item_applicant.view.*
 
@@ -24,7 +24,7 @@ class ApplicantListViewHolder(
             applicant_name_tv.text = applicant.user.name
             exit_btn.setOnClickListener {
                 val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
-                CustomDialog(
+                ConfirmDialog(
                     "${applicant.user.name}님을 내보내시겠습니까?",
                     "취소",
                     "내보내기"

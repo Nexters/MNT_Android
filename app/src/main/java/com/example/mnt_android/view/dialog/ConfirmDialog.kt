@@ -1,4 +1,4 @@
-package com.example.mnt_android.service.model.dialog
+package com.example.mnt_android.view.dialog
 
 import android.app.Dialog
 import android.graphics.Color
@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.mnt_android.R
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 
-class CustomDialog(
+class ConfirmDialog(
     private val questionMsg: String,
     private val cancelMsg: String? = "cancel",
     private val confirmMsg: String? = "confirm",
