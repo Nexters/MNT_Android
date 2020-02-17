@@ -385,8 +385,8 @@
                             android:text="알람 설정" />
 
                         <Switch
-                            android:layout_width="46dp"
-                            android:layout_height="23dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:track="@drawable/switch_track"
                             android:thumb="@drawable/switch_thumb"/>
                     </LinearLayout>

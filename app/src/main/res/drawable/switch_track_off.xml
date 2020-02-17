@@ -9,7 +9,4 @@
         android:height="23dp" />
     <solid
         android:color="@color/colorTrackOff" />
-    <stroke
-        android:width="2dp"
-        android:color="@color/colorTrackOff"/>
 </shape>
