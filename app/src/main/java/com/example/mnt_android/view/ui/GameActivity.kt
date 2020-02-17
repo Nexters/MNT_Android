@@ -1,11 +1,12 @@
 package com.example.mnt_android.view.ui
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Point
-import android.util.AttributeSet
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -24,6 +25,7 @@ import com.kakao.kakaolink.v2.KakaoLinkService
 import java.util.HashMap
 import com.kakao.message.template.*
 import io.reactivex.disposables.CompositeDisposable
+import org.jetbrains.anko.textColor
 import kotlin.math.absoluteValue
 
 class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.OnClickListener {
@@ -42,6 +44,9 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     private var screenMaxHeight: Int = 0
     private var screenMinHeight: Int = 0
 
+    private var selectedBtn : ImageView? = null
+    private var selectedTv : TextView? = null
+
     override fun initSetting() {
         val isManager = intent.getBooleanExtra(TAG_IS_MANAGER, false)
 
@@ -50,12 +55,18 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         dashBoardFragment = DashBoardFragment(isManager)
 
         fragmentManager = supportFragmentManager
+
         changeFragment(timeLineFragment)
+        selectBtn(feed_iv, feed_tv)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        eventBusSetting()
+        if (hasFocus) {
+            eventBusSetting()
+        } else {
+            clearEventBus()
+        }
     }
 
     private fun getScreenHeight() : Int {
@@ -66,8 +77,11 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     }
 
     private fun eventBusSetting() {
+        if (screenMinHeight == 0) {
+            screenMinHeight = floating_menu_layout.y.toInt()
+        }
         screenMaxHeight = getScreenHeight()
-        screenMinHeight = floating_menu_layout.y.toInt()
+
         disposable.add(scrollEventBus.subscribe {
             val y = floating_menu_layout.y
             val maxDiff = screenMaxHeight - screenMinHeight
@@ -84,12 +98,26 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         })
     }
 
+    private fun clearEventBus() {
+        disposable.clear()
+    }
+
     override fun onClick(v: View?) {
         when (v) {
-            dashboard_layout -> changeFragment(dashBoardFragment)
-            feed_layout -> changeFragment(timeLineFragment)
-            mission_layout -> changeFragment(missionFragment)
+            dashboard_layout -> {
+                changeFragment(dashBoardFragment)
+                selectBtn(dashboard_iv, dashboard_tv)
+            }
+            feed_layout -> {
+                changeFragment(timeLineFragment)
+                selectBtn(feed_iv, feed_tv)
+            }
+            mission_layout -> {
+                changeFragment(missionFragment)
+                selectBtn(mission_iv, mission_tv)
+            }
         }
+        floating_menu_layout.y = screenMinHeight.toFloat()
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -97,6 +125,18 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         fragmentTransaction.replace(game_layout.id, fragment)
         fragmentTransaction.commit()
     }
+
+
+    private fun selectBtn(btn: ImageView, tv: TextView) {
+        selectedBtn?.isSelected = false
+        selectedTv?.textColor = getResColor(R.color.colorLightGray2)
+        btn.isSelected = true
+        tv.textColor = getResColor(R.color.colorSelected)
+        selectedBtn = btn
+        selectedTv = tv
+    }
+
+    private fun getResColor(colorId: Int) = ResourcesCompat.getColor(resources, colorId, null)
 
     fun startMission() {
 
@@ -138,10 +178,5 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
         val intent = Intent(this@GameActivity,CreateMissionActivity::class.java)
         startActivity(intent)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.clear()
     }
 }
