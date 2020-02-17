@@ -38,7 +38,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     private lateinit var timeLineFragment: TimeLineFragment
     private lateinit var missionFragment: GameMissionFragment
-    private lateinit var dashBoardFragment: DashBoardFragment
+    private lateinit var dashBoardFragment: DashBoardApplicantFragment
 
     private val disposable = CompositeDisposable()
     private var screenMaxHeight: Int = 0
@@ -52,7 +52,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
         timeLineFragment = TimeLineFragment(isManager)
         missionFragment = GameMissionFragment()
-        dashBoardFragment = DashBoardFragment(isManager)
+        dashBoardFragment = DashBoardApplicantFragment()
 
         fragmentManager = supportFragmentManager
 
