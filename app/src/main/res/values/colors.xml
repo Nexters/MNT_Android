@@ -13,6 +13,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorLightBlueBlack">#222b45</color>
     <color name="colorSelected">#ff5050</color>
+    <color name="colorBlackNotice">#4f4f4f</color>
     <color name="colorTimeLineBorder">#ebebeb</color>
     <color name="colorDashBoardBackground">#f8f7f7</color>
     <color name="colorTrackOn">#ffd72e</color>
