@@ -24,6 +24,6 @@ class CustomAlertDialog(private val dialogMsg: String, private val btnMsg: Strin
             }.create().apply {
                 window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             }
-        } ?: throw IllegalAccessException("Activity cannot be null")
+        } ?: throw IllegalStateException("Activity cannot be null")
     }
 }
