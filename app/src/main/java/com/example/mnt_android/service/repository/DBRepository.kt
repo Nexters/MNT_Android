@@ -39,7 +39,8 @@ class DBRepository {
 
     fun exitUser(roomId: Long, userId: String): Completable = api.exitUser(roomId, userId)
 
-
+    fun makeMission(makemission : MakeMission) : Completable =
+        api.makeMission(makemission)
 
 
 

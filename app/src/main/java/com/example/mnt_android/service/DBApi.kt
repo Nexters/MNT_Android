@@ -57,4 +57,9 @@ interface DBApi {
         @Query("userId") userId: String
     ) : Completable
 
+    @POST("/api/mission/make")
+    fun makeMission(
+        @Body makemission : MakeMission
+    ) : Completable
+
 }

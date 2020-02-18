@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string-array name="create_mission">
-
-
+<resources><string-array name="arr_create_mission">
     <item>미션 선택하기</item>
-    <item>이름 3행시</item>
-    <item>닮은꼴 찾기</item>
-    <item>응원하기</item>
-    <item>직접입력</item>
+    <item>💬 하고 싶은 이야기</item>
+    <item>💌 응원의 메시지 보내기</item>
+    <item>👏🏻 은근슬쩍 칭찬하기</item>
+    <item>📜 이름으로 3행시 짓기</item>
+    <item>🎬 떠오르는 영화 한편</item>
+    <item>📰 함께 읽고 싶은 글</item>
+    <item>🧞 소원을 말해봐</item>
+    <item>🧑‍🤝‍🧑 함께해요</item>
+    <item>🚑 도움주기</item>
+    <item>🤔 한 문장으로 힌트주기</item>
+    <item>🕵️ 이미지로 힌트주기</item>
+    <item>👀 닮은꼴 캐릭터</item>
+    <item>⭐ 닮은 연예인 찾기</item>
+    <item>🍽️ 어울리는 음식 or 음료</item>
+    <item>🔭 멀리서 관찰하기</item>
+    <item>📸 함께 사진찍기</item>
+    <item>🎁 선물 인증샷</item>
+    <item>✍️ 마음이 따듯해지는 손편지</item>
 
 
 </string-array></resources>

@@ -35,17 +35,29 @@ class MainActivity : AppCompatActivity() {
         joinRoomViewModel = ViewModelProviders.of(this@MainActivity)[JoinRoomViewModel::class.java]
 
         joinRoomViewModel.checkRoom()
-        val sf = getSharedPreferences("login", 0)
-
+        val sf = getSharedPreferences("login",0)
+        val editor = sf.edit()
         userId = sf.getString("kakao_token","null")
 
-
+        joinRoomViewModel.isLogined.observe(this, Observer {
+            if(it==false)
+            {
+                var intent = Intent(this,LoginActivity::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(intent)
+                finish()
+            }
+        })
 
         joinRoomViewModel.isJoined.observe(this, Observer {
             val intent = intent
             val str = intent.data
             if(it==true)
             {
+                editor.putInt("roomId", joinRoomViewModel.checkRoom.value!!.room.id)
+               editor.commit()
+                Log.d("wlgusdnzzz","Main roomId : ${sf.getInt("roomId",0).toString()}")
+
                 if(str!=null)
                 {
 
@@ -54,21 +66,20 @@ class MainActivity : AppCompatActivity() {
                     if (joinRoomViewModel.isStarted.value == false) {
                         //방장이 방을 시작하지 않음
                         if (joinRoomViewModel.isManager.value == true) {
-                            Toast.makeText(
-                                this,
-                                "방장임 CreateRoom의 Frag3으로 넘어가야함",
-                                Toast.LENGTH_SHORT
-                            ).show()
 
-                            sf.edit().putBoolean("isManager", true)
+
+                            editor.putBoolean("isManager", true)
+                            editor.commit()
 
                             val intent = Intent(this, CreateRoomActivity::class.java)
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                             intent.putExtra("fragNum", 2)
                             intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
                             startActivity(intent)
 
                         } else {
                             val intent = Intent(this, JoinRoomActivity::class.java)
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                             intent.putExtra("fragNum", 1)
                             intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
                             startActivity(intent)
@@ -77,21 +88,24 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         //방장이 방을 시작함
                         if (joinRoomViewModel.isManager.value == true)
-                            sf.edit().putBoolean("isManager", true)
+                            editor.putBoolean("isManager", true)
+                        editor.commit()
 
                         if (sf.getBoolean("check", false)) {
                             //내 마니또를 확인했음
                             val intent = Intent(this, GameActivity::class.java)
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                            intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
                             startActivity(intent)
                         } else {
                             //내 마니또를 확인하지 못함
                             val intent = Intent(this, JoinRoomActivity::class.java)
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                             intent.putExtra("fragNum", 2)
                             intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
                             startActivity(intent)
                         }
                     }
-                    sf.edit().commit()
 
             }
             else

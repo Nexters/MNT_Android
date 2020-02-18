@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import com.example.mnt_android.databinding.FragmentJoinroom1Binding
@@ -21,15 +23,25 @@ class JoinRoomFragment : Fragment()
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_joinroom1,container,false)
 
-        joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
-
-        binding.joinRoomViewModel =joinRoomViewModel
-        binding.joinRoomActivity=(activity as JoinRoomActivity)
 
 
 
         return binding.root
 
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let {
+            joinRoomViewModel = ViewModelProviders.of(this)[JoinRoomViewModel::class.java]
+
+            joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
+
+            binding.joinRoomViewModel =joinRoomViewModel
+            binding.joinRoomActivity=(activity as JoinRoomActivity)
+            binding.lifecycleOwner=this
+        }
 
     }
 }
