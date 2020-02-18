@@ -1,20 +1,15 @@
 package com.example.mnt_android.viewmodel
 
 import android.app.Application
-import android.content.Intent
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.service.model.CheckRoomList
 import com.example.mnt_android.service.model.RoomInfo
 import com.example.mnt_android.service.repository.DBRepository
-import com.example.mnt_android.view.ui.LoginActivity
-import com.example.mnt_android.view.ui.LoginActivity.Companion.sf
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
@@ -56,6 +51,8 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                     if (t?.checkRoomList != null) {
                         checkRoom.value = t!!.checkRoomList[0]
 
+                        Log.d("wlgusdnzzz",checkRoom.value!!.room.isStart.toString())
+
                         if (checkRoom.value!!.isCreater == 1) {
                             //내가 방장임
                             Log.d("wlgusdnzzz", "내가방장")
@@ -74,7 +71,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
 
                             if (checkRoom.value!!.room.isStart == 0) {
                                 //방이 아직 시작하지 않음
-                                isStarted.value = true
+                                isStarted.value = false
                                 //임시
                             } else {
                                 //방이 이미 시작됨
@@ -93,6 +90,11 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                     }
                 })
         }
+        else
+        {
+            Log.d("wlgusdnzzz","아직 가입 X")
+            isLogined.value=false
+        }
     }
 
     fun attendRoom(roomNum : String)
@@ -107,7 +109,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
         else
         {
 
-            repository.attendRoom(roomNum.toInt(), sf.getString("kakao_token", "null"))
+            repository.attendRoom(roomNum.toLong(), sf.getString("kakao_token", "null"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Action {

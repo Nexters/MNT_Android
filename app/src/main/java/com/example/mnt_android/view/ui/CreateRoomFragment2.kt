@@ -28,28 +28,23 @@ class CreateRoomFragment2 : Fragment()
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_createroom2,container,false)
 
-        createRoomViewModel = (activity as CreateRoomActivity).createRoomViewModel
 
 
-        binding.createRoomViewModel=(activity as CreateRoomActivity).createRoomViewModel
-        binding.createRoomActivity=(activity as CreateRoomActivity)
-
-        createRoomViewModel.startDay.observe((activity as CreateRoomActivity), Observer {
-
-            tv_startDay_createroom2.text=it
-        })
-
-        createRoomViewModel.endDay.observe((activity as CreateRoomActivity), Observer {
-
-            tv_endDay_createroom2.text=it
-        })
 
         return binding.root
         // return inflater.inflate(R.layout.activity_createroom2,container,false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.let {
+            createRoomViewModel = (activity as CreateRoomActivity).createRoomViewModel
+
+
+            binding.createRoomViewModel=(activity as CreateRoomActivity).createRoomViewModel
+            binding.createRoomActivity=(activity as CreateRoomActivity)
+
+            binding.lifecycleOwner=this
+        }
 
         var maxpeoplespinadapter = ArrayAdapter.createFromResource(context,R.array.max_people,R.layout.spinner_item)
         maxpeoplespinadapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
@@ -69,6 +64,7 @@ class CreateRoomFragment2 : Fragment()
         }
 
     }
+
 
 
 

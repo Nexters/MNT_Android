@@ -1,5 +1,6 @@
 package com.example.mnt_android.viewmodel
 
+import android.content.res.Resources
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -7,82 +8,74 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mnt_android.service.model.CreateMission
 import com.kakao.auth.KakaoSDK.init
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.R
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.example.mnt_android.service.model.MakeMission
+import com.example.mnt_android.service.model.Mission
+import com.example.mnt_android.service.repository.DBRepository
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Action
+import io.reactivex.schedulers.Schedulers
 
-class CreateMissionViewModel : ViewModel()
+
+class CreateMissionViewModel(application: Application) : AndroidViewModel(application)
 {
-    var createMission : CreateMission
-
-    var direct : MutableLiveData<Boolean> = MutableLiveData()
+    val app = application
     var name : MutableLiveData<String> = MutableLiveData()
     var des : MutableLiveData<String> = MutableLiveData()
     var send : MutableLiveData<Boolean> = MutableLiveData()
+    var fragmentNum : Int=0
+    var isAbleImg : MutableLiveData<Int> = MutableLiveData()
+    lateinit var missionDesArray  : Array<String>
+    lateinit var missionNameArray  : Array<String>
+    var isCreated : MutableLiveData<Boolean> = MutableLiveData()
+    private val repository = DBRepository()
 
     init {
-        direct.value=false
-        createMission = CreateMission("미션이름","미션설명",false)
+
+        missionDesArray = app.resources.getStringArray(com.example.mnt_android.R.array.arr_create_mission_des)
+            missionNameArray = app.resources.getStringArray(com.example.mnt_android.R.array.arr_create_mission)
+
+        isAbleImg.value=0
+
+        Log.d("wlgusdnzzz","init")
     }
 
 
 
     fun setMission(i : Int)
     {
-
-        when(i)
-        {
-            0->{
-               name.value="미션이름0"
-                des.value="미션설명0"
-
-
-            }
-            1->{
-                name.value="미션이름1"
-               des.value="미션설명1"
-            }
-            2->{
-                name.value="미션이름2"
-                des.value="미션설명2"
-            }
-            3->{
-                name.value="미션이름3"
-                des.value="미션설명3"
-            }
-            4->{
-                name.value=null
-                des.value=null
-            }
-        }
-
+        name.value=missionNameArray[i]
+        des.value=missionDesArray[i]
     }
 
-    fun writeDirect(i : Int)
-    {
-        if(i==4)
-            direct.value=true
-        else
-            direct.value=false
-    }
 
-    fun sendMission()
-    {
 
-        createMission.missionName.value=name.value
-        createMission.missionDescription.value=des.value
-        send.value=true
-        //API 호출
+    fun makeMission(roomId : Int)
+    {
+        repository.makeMission(MakeMission(0, isAbleImg.value!!,name.value.toString(),roomId))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(Action {
+                Log.d("wlgusdnzzz","미션 생성 성공")
+                isCreated.value=true
+            })
     }
 
     fun checkImage()
     {
-        when(createMission.imageCheck.value)
+        when(isAbleImg.value)
         {
-            false->
+            0->
             {
-                createMission.imageCheck.value=true
+                isAbleImg.value=1
             }
-            true->
+            1->
             {
-                createMission.imageCheck.value=false
+                isAbleImg.value=0
             }
         }
     }

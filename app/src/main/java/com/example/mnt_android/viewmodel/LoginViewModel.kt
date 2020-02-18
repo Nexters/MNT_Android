@@ -4,25 +4,16 @@
 package com.example.mnt_android.viewmodel
 
 import android.app.Application
-import android.content.Intent
 import android.util.Log
-import android.view.View
-import androidx.core.content.ContextCompat.startActivity
-import androidx.databinding.ObservableInt
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.service.model.KakaoUser
 import com.example.mnt_android.service.model.User
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.service.repository.SessionCallback
 import com.example.mnt_android.view.ui.LoginActivity
-import com.example.mnt_android.view.ui.MainActivity
 import com.google.firebase.iid.FirebaseInstanceId
-import com.google.gson.JsonObject
-import com.kakao.auth.AuthType
 import com.kakao.auth.Session
-import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer

@@ -3,6 +3,7 @@ package com.example.mnt_android.di
 import com.example.mnt_android.service.DBApi
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.viewmodel.ApplicantListViewModel
+import com.example.mnt_android.viewmodel.ManitoListViewModel
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -48,5 +49,9 @@ var networkModule = module {
 
     viewModel {
         ApplicantListViewModel(get())
+    }
+
+    viewModel {
+        ManitoListViewModel(get())
     }
 }

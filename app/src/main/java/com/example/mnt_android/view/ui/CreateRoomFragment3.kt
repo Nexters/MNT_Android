@@ -21,17 +21,26 @@ class CreateRoomFragment3 : Fragment()
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_createroom3,container,false)
 
-        createRoomViewModel = (activity as CreateRoomActivity).createRoomViewModel
 
-
-        binding.createRoomViewModel=createRoomViewModel
-        binding.createRoomActivity = (activity as CreateRoomActivity)
 
 
         return binding.root
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let {
+            createRoomViewModel = (activity as CreateRoomActivity).createRoomViewModel
+
+
+            binding.createRoomViewModel=createRoomViewModel
+            binding.createRoomActivity = (activity as CreateRoomActivity)
+            binding.lifecycleOwner=this
+        }
+
+
+    }
 
 
 

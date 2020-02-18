@@ -3,28 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="15dp">
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
     <ImageView
         android:id="@+id/profile_iv"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/sample_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
         android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/img_profile_face_14"
         />
 
     <TextView
         android:id="@+id/applicant_name_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        tools:text="지뉴진"/>
+        android:layout_toEndOf="@id/profile_iv"
+        android:layout_toStartOf="@id/exit_btn"
+        android:layout_centerVertical="true"
+        android:maxLength="15"
+        android:maxLines="1"
+        android:textSize="15sp"
+        android:textColor="@color/colorLightBlueBlack"
+        tools:text="구예희텍스트최대최대는이거까지구예희텍스트최대최대는이거까지"/>
 
     <ImageButton
         android:id="@+id/exit_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/sample_btn"
-        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/log_out"
+        android:visibility="invisible"
         />
 </RelativeLayout>

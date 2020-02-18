@@ -141,7 +141,7 @@
             android:textColor="#ffffff"
             android:gravity="center"
             android:background="@drawable/button_hot_pink"
-            android:onClick="@{createRoomActivity::onClick}"
+            android:onClick="@{()->createRoomViewModel.startRoom()}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

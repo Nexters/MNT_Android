@@ -1,16 +1,13 @@
 package com.example.mnt_android.view.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.mnt_android.R
-import com.example.mnt_android.databinding.FragmentJoinroom1Binding
 import com.example.mnt_android.databinding.FragmentLogin1Binding
-import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import com.example.mnt_android.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment()
@@ -24,10 +21,7 @@ class LoginFragment : Fragment()
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login1,container,false)
 
-        loginViewModel=(activity as LoginActivity).loginViewModel
 
-        binding.loginViewModel = (activity as LoginActivity).loginViewModel
-        binding.loginActivity=(activity as LoginActivity)
 
 
         //Log.d("wlgusdnzzz",loginViewModel.kuser.nickname.value)
@@ -35,5 +29,16 @@ class LoginFragment : Fragment()
         return binding.root
 
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let {
+            loginViewModel=(activity as LoginActivity).loginViewModel
+
+            binding.loginViewModel = (activity as LoginActivity).loginViewModel
+            binding.loginActivity=(activity as LoginActivity)
+            binding.lifecycleOwner=this
+        }
     }
 }

@@ -4,13 +4,13 @@ import android.view.View
 import com.example.mnt_android.R
 import com.example.mnt_android.view.viewholder.ApplicantListViewHolder
 import com.example.mnt_android.base.BaseAdapter
-import com.example.mnt_android.service.model.User
+import com.example.mnt_android.service.model.Applicant
 
-private val applicantList = arrayListOf("김대경", "김소영", "구예희", "최민섭", "한지혜", "지현우", "박지혜", "진유진")
-
-class ApplicantListAdapter : BaseAdapter<User>() {
+class ApplicantListAdapter(private val onExitApplicant: (Long, String) -> Unit) : BaseAdapter<Applicant>() {
     override val layoutId: Int
         get() = R.layout.item_applicant
 
-    override fun viewHolder(layout: Int, view: View) = ApplicantListViewHolder(view)
+    var isManager: Int = 0
+
+    override fun viewHolder(layout: Int, view: View) = ApplicantListViewHolder(view, isManager, onExitApplicant)
 }

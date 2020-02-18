@@ -27,19 +27,20 @@ class DBRepository {
                   userId : String) : Flowable<RoomId> =
        api.createRoom(room,userId)
 
-    fun attendRoom(roomId : Int,
+    fun attendRoom(roomId : Long,
                    userId : String) : Completable =
         api.attendRoom(roomId,userId)
 
-    fun userList(roomId : Int) : Single<ApplicantResponse> =
+    fun userList(roomId : Long) : Single<ApplicantResponse> =
         api.userList(roomId)
 
-    fun startRoom(roomId : Int) : Completable =
+    fun startRoom(roomId : Long) : Completable =
         api.startRoom(roomId)
 
+    fun exitUser(roomId: Long, userId: String): Completable = api.exitUser(roomId, userId)
 
-
-
+    fun makeMission(makemission : MakeMission) : Completable =
+        api.makeMission(makemission)
 
 
 

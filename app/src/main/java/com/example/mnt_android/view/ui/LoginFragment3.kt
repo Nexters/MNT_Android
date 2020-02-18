@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.mnt_android.R
-import com.example.mnt_android.databinding.FragmentLogin1Binding
 import com.example.mnt_android.databinding.FragmentLogin3Binding
 import com.example.mnt_android.viewmodel.LoginViewModel
 
@@ -22,15 +21,23 @@ class LoginFragment3 : Fragment()
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login3,container,false)
 
-        loginViewModel=(activity as LoginActivity).loginViewModel
 
-        binding.loginViewModel = (activity as LoginActivity).loginViewModel
-        binding.loginActivity=(activity as LoginActivity)
 
 
 
         return binding.root
 
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let {
+            loginViewModel=(activity as LoginActivity).loginViewModel
+
+            binding.loginViewModel = (activity as LoginActivity).loginViewModel
+            binding.loginActivity=(activity as LoginActivity)
+            binding.lifecycleOwner=this
+        }
     }
 }

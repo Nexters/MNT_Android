@@ -18,6 +18,11 @@ class JoinRoomFragment2 : Fragment()
 {
     lateinit var joinRoomViewModel: JoinRoomViewModel
     lateinit var binding: FragmentJoinroom2Binding
+
+    companion object {
+        private const val IS_NOT_MANAGER = 0
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,23 +30,29 @@ class JoinRoomFragment2 : Fragment()
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_joinroom2,container,false)
 
-        joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
 
-        binding.joinRoomViewModel = joinRoomViewModel
-        binding.joinRoomActivity=(activity as JoinRoomActivity)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.let{
+            joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
+
+            binding.joinRoomViewModel = joinRoomViewModel
+            binding.joinRoomActivity=(activity as JoinRoomActivity)
+            binding.lifecycleOwner=this
+        }
+
         setEventListener()
     }
 
     private fun setEventListener() {
         bu_lookparticipant_joinroom2.setOnClickListener {
             val intent = Intent(context, ApplicantListActivity::class.java)
-            intent.putExtra(TAG_IS_MANAGER, 0)
+            intent.putExtra(TAG_IS_MANAGER, IS_NOT_MANAGER)
             intent.putExtra(TAG_ROOM_ID, joinRoomViewModel.roomInfo.num.value)
             context?.startActivity(intent)
         }

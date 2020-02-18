@@ -90,8 +90,14 @@ class CreateRoomActivity :FragmentActivity()
                 setFrag(2)
         })
 
-        createRoomViewModel.startDay.observe(this,androidx.lifecycle.Observer {
-            Toast.makeText(this,it!!,Toast.LENGTH_SHORT).show()
+        createRoomViewModel.isStarted.observe(this,androidx.lifecycle.Observer {
+            if(it==true)
+            {
+                val intent  =Intent(this,GameActivity::class.java)
+                intent.putExtra(TAG_IS_MANAGER, IS_MANAGER)
+                intent.putExtra(TAG_ROOM_ID, createRoomViewModel.id)
+                startActivity(intent)
+            }
         })
 
     }
@@ -113,12 +119,10 @@ class CreateRoomActivity :FragmentActivity()
             if(index==1)
             {
                 createRoomViewModel.startDay.value="$year-$month-$dayOfMonth"
-                Log.d("wlgusdnzzz",createRoomViewModel.startDay.value)
             }
             else
             {
                 createRoomViewModel.endDay.value= "$year-$month-$dayOfMonth"
-                Log.d("wlgusdnzzz", createRoomViewModel.endDay.value)
             }
 
 
@@ -213,13 +217,6 @@ class CreateRoomActivity :FragmentActivity()
 
     fun onClick(v: View) {
         when(v) {
-            bu_createroom_createroom3 -> {
-                createRoomViewModel.startRoom {
-                    Toast.makeText(this, "마니또를 시작합니다 !", Toast.LENGTH_SHORT).show()
-                    changeActivity(GameActivity::class.java)
-                }
-            }
-
             bu_lookparticipant_createroom3 -> {
                 changeActivity(ApplicantListActivity::class.java)
             }

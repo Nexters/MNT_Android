@@ -1,38 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.ui.TimeLineFragment">
 
-        <LinearLayout
-            android:id="@+id/button_layout"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:gravity="end">
-            <ImageButton
-                android:id="@+id/manito_list_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/sample_btn"/>
-            <ImageButton
-                android:id="@+id/filter_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/sample_btn"/>
-        </LinearLayout>
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/content_rv"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_below="@id/button_layout"
-            android:layout_alignParentBottom="true"
-            tools:listitem="@layout/item_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-    </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/button_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:padding="16dp">
+
+                    <ImageButton
+                        android:id="@+id/manito_list_btn"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="18dp"
+                        android:background="@drawable/people" />
+
+                    <ImageButton
+                        android:id="@+id/filter_btn"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/options_2" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="6dp">
+
+                    <TextView
+                        android:id="@+id/name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlueBlack"
+                        android:textSize="20sp"
+                        tools:text="프루또" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/name_tv"
+                        android:textColor="@color/colorBlueBlack"
+                        android:textSize="20sp"
+                        android:text="님, " />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/name_tv"
+                        android:textColor="@color/colorBlueBlack"
+                        android:textSize="20sp"
+                        android:text="안녕하세요!" />
+
+                    <RelativeLayout
+                        android:layout_width="112dp"
+                        android:layout_height="64dp"
+                        android:layout_alignParentEnd="true">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/profile_icon_strawberry"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:paddingStart="10dp"
+                            android:src="@drawable/img_profile_icon_cherry"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/img_profile_grape"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/content_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginRight="26dp"
+                    tools:listitem="@layout/item_content" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
