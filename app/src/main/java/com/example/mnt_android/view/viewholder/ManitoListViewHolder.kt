@@ -1,25 +1,16 @@
 package com.example.mnt_android.view.viewholder
 
 import android.view.View
-import com.bumptech.glide.Glide
 import com.example.mnt_android.base.BaseViewHolder
+import com.example.mnt_android.service.model.Applicant
 import kotlinx.android.synthetic.main.item_manito.view.*
 
 class ManitoListViewHolder(view: View, private val isManager: Boolean) :  BaseViewHolder(view) {
     override fun onBind(data: Any) {
-        val manito = data as Array<String>
+        val applicant = data as Applicant
         itemView.run {
-            if (isManager) {
-                naeto_tv.text = manito[0]
-                Glide.with(this)
-                    .load(manito[1])
-                    .into(naeto_iv)
-            }
-            Glide.with(this)
-                .load(manito[3])
-                .into(nito_iv)
-            nito_tv.text = manito[2]
+            naeto_tv.text = applicant.user.name
+            nito_tv.text = applicant.manittoId
         }
     }
-
 }

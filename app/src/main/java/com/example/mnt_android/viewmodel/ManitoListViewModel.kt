@@ -9,17 +9,16 @@ import com.example.mnt_android.util.SUCCESS
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+class ManitoListViewModel(private val dbRepository: DBRepository) : BaseViewModel() {
+    private val _manitoList = MutableLiveData<ArrayList<Applicant>>()
+    val isManager = MutableLiveData<Boolean>()
 
-class ApplicantListViewModel(private val dbRepository: DBRepository) : BaseViewModel() {
-    var roomId = MutableLiveData<Long>()
-    var isManager = MutableLiveData<Int>()
-    private var _applicantList = MutableLiveData<ArrayList<Applicant>>()
-    val applicantList : LiveData<ArrayList<Applicant>>
-        get() = _applicantList
+    val manitoList: LiveData<ArrayList<Applicant>>
+        get() = _manitoList
 
-    fun setApplicantList() {
+    fun getUserList(roomId: Long) {
         addDisposable(
-            dbRepository.userList(roomId.value ?: -1)
+            dbRepository.userList(roomId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -29,22 +28,9 @@ class ApplicantListViewModel(private val dbRepository: DBRepository) : BaseViewM
                             data.forEach { applicant ->
                                 userList.add(applicant)
                             }
-                            _applicantList.value = userList
+                            _manitoList.value = userList
                         }
                     }
-                }, {
-
-                })
-        )
-    }
-
-    fun exitApplicant(roomId: Long, userId: String) {
-        addDisposable(
-            dbRepository.exitUser(roomId, userId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    setApplicantList()
                 }, {
 
                 })
