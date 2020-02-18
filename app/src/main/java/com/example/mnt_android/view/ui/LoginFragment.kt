@@ -21,10 +21,7 @@ class LoginFragment : Fragment()
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login1,container,false)
 
-        loginViewModel=(activity as LoginActivity).loginViewModel
 
-        binding.loginViewModel = (activity as LoginActivity).loginViewModel
-        binding.loginActivity=(activity as LoginActivity)
 
 
         //Log.d("wlgusdnzzz",loginViewModel.kuser.nickname.value)
@@ -32,5 +29,16 @@ class LoginFragment : Fragment()
         return binding.root
 
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let {
+            loginViewModel=(activity as LoginActivity).loginViewModel
+
+            binding.loginViewModel = (activity as LoginActivity).loginViewModel
+            binding.loginActivity=(activity as LoginActivity)
+            binding.lifecycleOwner=this
+        }
     }
 }

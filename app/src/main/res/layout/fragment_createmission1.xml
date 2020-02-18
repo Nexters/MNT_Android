@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="createMissionViewModel"
+            type="com.example.mnt_android.viewmodel.CreateMissionViewModel" />
+        <variable
+            name="createMissionActivity"
+            type="com.example.mnt_android.view.ui.CreateMissionActivity" />
+        <import type="android.view.View"></import>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:id="@+id/bu_back_create_mission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="596dp"
+            android:text="x"
+            android:onClick="@{()->createMissionActivity.onBackPressed()}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Spinner
+            android:id="@+id/spin_mission_name_create_mission"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/et_mission_description_create_mission"/>
+
+
+
+        <EditText
+            android:id="@+id/et_mission_description_create_mission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="설명을 입력해주세요"
+            android:text="@={createMissionViewModel.des}"
+            app:layout_constraintTop_toBottomOf="@id/spin_mission_name_create_mission"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tb_image_create_mission"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="171dp" />
+
+        <ToggleButton
+            android:id="@+id/tb_image_create_mission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="이미지X"
+            android:textOn="이미지O"
+            android:onClick="@{()->createMissionViewModel.checkImage()}"
+            app:layout_constraintBottom_toTopOf="@+id/bu_create_mission_create_mission"
+            app:layout_constraintTop_toBottomOf="@id/et_mission_description_create_mission"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteX="161dp"
+            tools:layout_editor_absoluteY="392dp" />
+
+        <Button
+            android:id="@+id/bu_create_mission_create_mission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="미션생성하기"
+            android:onClick="@{()->createMissionViewModel.makeMission(createMissionActivity.roomId)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_image_create_mission"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteX="166dp"
+            tools:layout_editor_absoluteY="625dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

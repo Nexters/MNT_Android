@@ -51,6 +51,8 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                     if (t?.checkRoomList != null) {
                         checkRoom.value = t!!.checkRoomList[0]
 
+                        Log.d("wlgusdnzzz",checkRoom.value!!.room.isStart.toString())
+
                         if (checkRoom.value!!.isCreater == 1) {
                             //내가 방장임
                             Log.d("wlgusdnzzz", "내가방장")
@@ -69,7 +71,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
 
                             if (checkRoom.value!!.room.isStart == 0) {
                                 //방이 아직 시작하지 않음
-                                isStarted.value = true
+                                isStarted.value = false
                                 //임시
                             } else {
                                 //방이 이미 시작됨
@@ -87,6 +89,11 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                         isJoined.value = false
                     }
                 })
+        }
+        else
+        {
+            Log.d("wlgusdnzzz","아직 가입 X")
+            isLogined.value=false
         }
     }
 

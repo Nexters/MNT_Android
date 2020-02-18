@@ -30,16 +30,22 @@ class JoinRoomFragment2 : Fragment()
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_joinroom2,container,false)
 
-        joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
 
-        binding.joinRoomViewModel = joinRoomViewModel
-        binding.joinRoomActivity=(activity as JoinRoomActivity)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.let{
+            joinRoomViewModel=(activity as JoinRoomActivity).joinRoomViewModel
+
+            binding.joinRoomViewModel = joinRoomViewModel
+            binding.joinRoomActivity=(activity as JoinRoomActivity)
+            binding.lifecycleOwner=this
+        }
+
         setEventListener()
     }
 

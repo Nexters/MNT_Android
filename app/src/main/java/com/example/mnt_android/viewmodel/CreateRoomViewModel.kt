@@ -10,6 +10,7 @@ import com.example.mnt_android.service.model.SendRoom
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.view.ui.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
 
 class CreateRoomViewModel : BaseViewModel()
@@ -25,6 +26,7 @@ class CreateRoomViewModel : BaseViewModel()
   var maxPeople : String = ""
  var id : Int = -1
  var isCreated : MutableLiveData<Boolean> = MutableLiveData()
+    var isStarted : MutableLiveData<Boolean> =  MutableLiveData()
   lateinit var roomId : RoomId
  var userId : String = ""
  lateinit var format : SimpleDateFormat
@@ -76,14 +78,15 @@ class CreateRoomViewModel : BaseViewModel()
    // repository.createRoom()
   }
 
- fun startRoom(success: () -> Unit) {
+ fun startRoom() {
    addDisposable(
     repository.startRoom(id.toLong())
      .subscribeOn(Schedulers.io())
      .observeOn(AndroidSchedulers.mainThread())
-     .subscribe(success, {
-
-     })
+        .subscribe(Action {
+            isStarted.value=true
+            Log.d("wlgusdnzzz","방시작됨")
+        })
    )
  }
 

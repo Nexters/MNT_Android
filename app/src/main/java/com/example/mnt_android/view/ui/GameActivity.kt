@@ -10,13 +10,16 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
 import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.bus.scrollEventBus
 import com.example.mnt_android.databinding.ActivityGameBinding
+import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.service.model.DoMission
 import com.example.mnt_android.util.TAG_IS_MANAGER
+import com.example.mnt_android.viewmodel.BackPressViewModel
 import kotlinx.android.synthetic.main.activity_game.*
 import com.kakao.kakaolink.v2.KakaoLinkResponse
 import com.kakao.network.ErrorResult
@@ -36,10 +39,13 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     private lateinit var fragmentManager: FragmentManager
     private lateinit var fragmentTransaction: FragmentTransaction
 
+    private lateinit var backPressViewModel: BackPressViewModel
     private lateinit var timeLineFragment: TimeLineFragment
     private lateinit var missionFragment: GameMissionFragment
     private lateinit var dashBoardApplicantFragment: DashBoardApplicantFragment
     private lateinit var dashBoardManagerFragment: DashBoardManagerFragment
+
+    private lateinit var checkRoom : CheckRoom
 
     private val disposable = CompositeDisposable()
     private var screenMaxHeight: Int = 0
@@ -48,13 +54,14 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     private var selectedBtn : ImageView? = null
     private var selectedTv : TextView? = null
 
+
     override fun initSetting() {
         val isManager = intent.getBooleanExtra(TAG_IS_MANAGER, false)
-
         timeLineFragment = TimeLineFragment(isManager)
         missionFragment = GameMissionFragment()
         dashBoardApplicantFragment = DashBoardApplicantFragment()
         dashBoardManagerFragment = DashBoardManagerFragment()
+        backPressViewModel = ViewModelProviders.of(this)[BackPressViewModel::class.java]
 
         fragmentManager = supportFragmentManager
 
@@ -102,6 +109,12 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     private fun clearEventBus() {
         disposable.clear()
+    }
+
+    override fun onBackPressed() {
+
+        backPressViewModel.onBackPressed(this)
+
     }
 
     override fun onClick(v: View?) {
@@ -169,9 +182,6 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
 
 
-        val mission = DoMission("미션이름", "미션설명", "")
-        Toast.makeText(this, "미션수행", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this@GameActivity, DoMissionActivity::class.java)
        // intent.putExtra("mission", mission)
       //  startActivity(intent)
     }
@@ -179,6 +189,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     {
 
         val intent = Intent(this@GameActivity,CreateMissionActivity::class.java)
+
         startActivity(intent)
     }
 }
