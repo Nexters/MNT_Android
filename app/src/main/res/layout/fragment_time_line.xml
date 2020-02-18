@@ -37,49 +37,69 @@
                         android:background="@drawable/options_2" />
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="6dp">
+
+                    <TextView
+                        android:id="@+id/name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlueBlack"
+                        android:textSize="20sp"
+                        tools:text="프루또" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/name_tv"
+                        android:textColor="@color/colorBlueBlack"
+                        android:textSize="20sp"
+                        android:text="님, " />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/name_tv"
+                        android:textColor="@color/colorBlueBlack"
+                        android:textSize="20sp"
+                        android:text="안녕하세요!" />
+
+                    <RelativeLayout
+                        android:layout_width="112dp"
+                        android:layout_height="64dp"
+                        android:layout_alignParentEnd="true">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/profile_icon_strawberry"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:paddingStart="10dp"
+                            android:src="@drawable/img_profile_icon_cherry"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/img_profile_grape"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/content_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="26dp"
                     android:layout_marginRight="26dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:id="@+id/profile_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/name_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorLightBlueBlack"
-                            android:textSize="20sp"
-                            tools:text="프루또" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/name_tv"
-                            android:textColor="@color/colorLightBlueBlack"
-                            android:textSize="20sp"
-                            android:text="님, " />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/name_tv"
-                            android:textColor="@color/colorLightBlueBlack"
-                            android:textSize="20sp"
-                            android:text="안녕하세요!" />
-                    </RelativeLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/content_rv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_content" />
-                </LinearLayout>
+                    tools:listitem="@layout/item_content" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

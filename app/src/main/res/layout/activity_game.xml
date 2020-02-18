@@ -43,14 +43,17 @@
                 app:layout_constraintEnd_toStartOf="@id/feed_layout">
 
                 <ImageView
+                    android:id="@+id/dashboard_iv"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/dashboard"
+                    android:background="@drawable/button_dash_board"
                     />
                 <TextView
+                    android:id="@+id/dashboard_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorLightGray2"
                     android:textSize="10sp"
                     android:text="대시보드"/>
 
@@ -69,14 +72,17 @@
                 app:layout_constraintEnd_toStartOf="@id/mission_layout">
 
                 <ImageView
+                    android:id="@+id/feed_iv"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/feed"
+                    android:background="@drawable/button_feed"
                     />
                 <TextView
+                    android:id="@+id/feed_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorLightGray2"
                     android:textSize="10sp"
                     android:text="모아보기"/>
 
@@ -96,12 +102,14 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
+                    android:id="@+id/mission_iv"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/mission_select"
+                    android:background="@drawable/button_mission"
                     />
                 <TextView
+                    android:id="@+id/mission_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"

@@ -10,8 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class ApplicantListViewModel(private val dbApi: DBRepository) : BaseViewModel() {
-    var roomId = MutableLiveData<Int>()
+class ApplicantListViewModel(private val dbRepository: DBRepository) : BaseViewModel() {
+    var roomId = MutableLiveData<Long>()
     var isManager = MutableLiveData<Int>()
     private var _applicantList = MutableLiveData<ArrayList<Applicant>>()
     val applicantList : LiveData<ArrayList<Applicant>>
@@ -19,7 +19,7 @@ class ApplicantListViewModel(private val dbApi: DBRepository) : BaseViewModel() 
 
     fun setApplicantList() {
         addDisposable(
-            dbApi.userList(roomId.value ?: -1)
+            dbRepository.userList(roomId.value ?: -1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -32,6 +32,19 @@ class ApplicantListViewModel(private val dbApi: DBRepository) : BaseViewModel() 
                             _applicantList.value = userList
                         }
                     }
+                }, {
+
+                })
+        )
+    }
+
+    fun exitApplicant(roomId: Long, userId: String) {
+        addDisposable(
+            dbRepository.exitUser(roomId, userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    setApplicantList()
                 }, {
 
                 })

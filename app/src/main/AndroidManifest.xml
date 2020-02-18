@@ -13,26 +13,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-
+        <activity android:name=".view.ui.ShowManittoActivity"></activity>
         <activity android:name=".view.ui.TimeLineFilterActivity" />
         <activity android:name=".view.ui.ManitoActivity" />
         <activity android:name=".view.ui.GameActivity" />
         <activity android:name=".view.ui.DoMissionActivity" />
         <activity android:name=".view.ui.CreateMissionActivity" />
         <activity android:name=".view.ui.ApplicantListActivity" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-        <activity android:name=".view.ui.JoinRoomActivity"/>
+
+        <activity android:name=".view.ui.JoinRoomActivity" />
         <activity
             android:name=".view.ui.CreateRoomActivity"
-            android:windowSoftInputMode="stateAlwaysVisible"/>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity android:name=".view.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="@string/kakaolink_host"
                     android:scheme="@string/kakao_scheme" />
@@ -47,4 +50,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

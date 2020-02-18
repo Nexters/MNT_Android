@@ -78,7 +78,7 @@ class CreateRoomViewModel : BaseViewModel()
 
  fun startRoom(success: () -> Unit) {
    addDisposable(
-    repository.startRoom(id)
+    repository.startRoom(id.toLong())
      .subscribeOn(Schedulers.io())
      .observeOn(AndroidSchedulers.mainThread())
      .subscribe(success, {

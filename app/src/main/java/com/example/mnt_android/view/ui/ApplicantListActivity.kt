@@ -20,7 +20,9 @@ class ApplicantListActivity :
     override fun initSetting() {
         applicant_rv.apply {
             layoutManager = LinearLayoutManager(this@ApplicantListActivity)
-            adapter = ApplicantListAdapter()
+            adapter = ApplicantListAdapter { roomId, userId ->
+                viewModel.exitApplicant(roomId, userId)
+            }
         }
 
         setViewModel()
@@ -31,7 +33,7 @@ class ApplicantListActivity :
         dataBinding.viewModel = viewModel
         dataBinding.lifecycleOwner = this
         viewModel.run {
-            roomId.value = intent.getIntExtra(TAG_ROOM_ID, -1)
+            roomId.value = intent.getLongExtra(TAG_ROOM_ID, -1)
             isManager.value = intent.getIntExtra(TAG_IS_MANAGER, 0)
             setApplicantList()
         }

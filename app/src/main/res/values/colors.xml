@@ -8,9 +8,14 @@
     <color name="colorRedPink">#ff3f3f</color>
     <color name="colorLightGray1">#f6f6f6</color>
     <color name="colorLightGray2">#808080</color>
-    <color name="colorLightBlueBlack">#0f1525</color>
+    <color name="colorBlueBlack">#0f1525</color>
     <color name="colorLightBlack">#080808</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorLightBlueBlack">#222b45</color>
+    <color name="colorSelected">#ff5050</color>
+    <color name="colorBlackNotice">#4f4f4f</color>
     <color name="colorTimeLineBorder">#ebebeb</color>
     <color name="colorDashBoardBackground">#f8f7f7</color>
+    <color name="colorTrackOn">#ffd72e</color>
+    <color name="colorTrackOff">#dedede</color>
 </resources>
