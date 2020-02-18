@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.ui.ShowManittoActivity"></activity>
+        <activity android:name=".view.ui.MissionDetailActivity"/>
+        <activity android:name=".view.ui.ShowManittoActivity" />
         <activity android:name=".view.ui.TimeLineFilterActivity" />
         <activity android:name=".view.ui.ManitoActivity" />
         <activity android:name=".view.ui.GameActivity" />
