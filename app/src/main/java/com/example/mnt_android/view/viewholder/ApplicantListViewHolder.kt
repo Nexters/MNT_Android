@@ -15,7 +15,7 @@ class ApplicantListViewHolder(
 ) : BaseViewHolder(view) {
 
     companion object {
-        private val TAG = "ApplicantList Dialog"
+        private const val TAG = "ApplicantList Dialog"
     }
 
     override fun onBind(data: Any) {
