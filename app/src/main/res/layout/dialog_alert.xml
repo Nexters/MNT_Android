@@ -24,6 +24,7 @@
                 android:id="@+id/question_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:textColor="@color/colorLightBlueBlack"
                 android:textSize="15sp"
                 tools:text="니또에게 미션을 전달했습니다."/>
