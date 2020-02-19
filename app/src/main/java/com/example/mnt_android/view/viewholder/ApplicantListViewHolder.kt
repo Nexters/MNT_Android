@@ -3,9 +3,9 @@ package com.example.mnt_android.view.viewholder
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.example.mnt_android.base.BaseViewHolder
+import com.example.mnt_android.extension.isFalse
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.view.dialog.ConfirmDialog
-import com.example.mnt_android.util.FALSE
 import kotlinx.android.synthetic.main.item_applicant.view.*
 
 class ApplicantListViewHolder(
@@ -33,7 +33,7 @@ class ApplicantListViewHolder(
                 }.show(supportFragmentManager, TAG)
             }
 
-            if (isManager == 1 && applicant.isCreater == FALSE) {
+            if (isManager == 1 && applicant.isCreater.isFalse) {
                 exit_btn.visibility = View.VISIBLE
             }
         }

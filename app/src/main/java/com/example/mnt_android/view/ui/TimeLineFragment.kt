@@ -2,14 +2,12 @@ package com.example.mnt_android.view.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseFragment
-import com.example.mnt_android.bus.scrollEventBus
 import com.example.mnt_android.databinding.FragmentTimeLineBinding
 import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.view.adapter.ContentListAdapter
@@ -39,9 +37,6 @@ class TimeLineFragment(private val isManager: Boolean = false) :
     }
 
     private fun setEventListener() {
-        scroll_view.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            scrollEventBus.onNext(scrollY - oldScrollY)
-        }
         manito_list_btn.setOnClickListener {
             val intent = Intent(context, ManitoActivity::class.java)
             intent.putExtra(TAG_IS_MANAGER, isManager)
