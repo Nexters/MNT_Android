@@ -62,6 +62,7 @@ dependencies {
     def koin_version = '2.0.1'
     def firebase_messaging_version = '20.1.0'
     def firebase_core_version = '17.2.2'
+    def material_version = '1.2.0-alpha04'
 
     //RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
@@ -93,6 +94,8 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:$koin_version"
     implementation "org.koin:koin-core:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
+    // material
+    implementation "com.google.android.material:material:$material_version"
 
     // 카카오 로그인 sdk를 사용하기 위해 필요.
     implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.27.0'

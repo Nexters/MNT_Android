@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseFragment
@@ -13,8 +14,11 @@ import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.view.adapter.ContentListAdapter
 import kotlinx.android.synthetic.main.fragment_time_line.*
 
-class TimeLineFragment(private val isManager: Boolean = false) :
-    BaseFragment() {
+class TimeLineFragment(private val isManager: Boolean = false) : BaseFragment() {
+    companion object {
+        private const val TAG = "TimeLine Filter Bottom Sheet"
+    }
+
     private lateinit var binding: FragmentTimeLineBinding
 
     override fun onCreateView(
@@ -43,8 +47,9 @@ class TimeLineFragment(private val isManager: Boolean = false) :
             startActivity(intent)
         }
         filter_btn.setOnClickListener {
-            val intent = Intent(context, TimeLineFilterActivity::class.java)
-            startActivity(intent)
+            val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
+            val missionFilterBottomSheet = MissionFilterBottomSheet()
+            missionFilterBottomSheet.show(supportFragmentManager, TAG)
         }
     }
 }
