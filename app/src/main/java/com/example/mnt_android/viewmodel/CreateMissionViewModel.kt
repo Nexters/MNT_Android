@@ -36,12 +36,11 @@ class CreateMissionViewModel(application: Application) : AndroidViewModel(applic
 
     init {
 
-        missionDesArray = app.resources.getStringArray(com.example.mnt_android.R.array.arr_create_mission_des)
+            missionDesArray = app.resources.getStringArray(com.example.mnt_android.R.array.arr_create_mission_des)
             missionNameArray = app.resources.getStringArray(com.example.mnt_android.R.array.arr_create_mission)
 
         isAbleImg.value=0
 
-        Log.d("wlgusdnzzz","init")
     }
 
 
@@ -56,7 +55,7 @@ class CreateMissionViewModel(application: Application) : AndroidViewModel(applic
 
     fun makeMission(roomId : Int)
     {
-        repository.makeMission(MakeMission(0, isAbleImg.value!!,name.value.toString(),roomId))
+        repository.makeMission(Mission(0, isAbleImg.value!!,name.value.toString(),roomId,null))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(Action {

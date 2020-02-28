@@ -18,6 +18,7 @@ import com.example.mnt_android.R
 import com.example.mnt_android.databinding.FragmentCreatemission1Binding
 import com.example.mnt_android.databinding.FragmentCreateroom1Binding
 import com.example.mnt_android.view.dialog.ConfirmDialog
+import com.example.mnt_android.view.dialog.CustomAlertDialog
 import com.example.mnt_android.view.dialog.NoticeDialog
 import com.example.mnt_android.viewmodel.CreateMissionViewModel
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
@@ -35,10 +36,6 @@ class CreateMissionFragment : Fragment()
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_createmission1,container,false)
-
-
-
-
         return binding.root
 
 
@@ -58,21 +55,21 @@ class CreateMissionFragment : Fragment()
         createMissionViewModel.isCreated.observe(this, Observer {
             if(it==true)
             {
-                Log.d("wlgusdnzzz","cereate")
                 createMissionViewModel.isCreated.observe(this, Observer {
                     if(it==true)
                     {
                         ConfirmDialog("참가자들에게 미션이 부여되며 알림이 울립니다.","취소","보내기")
                         {
-                            NoticeDialog("참가자들에게 미션을 전달했습니다.", "??")
+                           CustomAlertDialog("참가자들에게 미션을 전달했습니다.","확인"){
+                               createMissionViewModel.isCreated.value = false
+                           }
                                 .show(
                                     (activity as CreateMissionActivity).supportFragmentManager,
                                     "CreateMission"
                                 )
 
-                            Handler().postDelayed({
-                                createMissionViewModel.isCreated.value = false
-                            },2000)
+
+
                         }.show((activity as CreateMissionActivity).supportFragmentManager,"CreateMission")
 
 

@@ -40,7 +40,6 @@ class CreateMissionActivity : AppCompatActivity()
 {
     lateinit var createMissionViewModel: CreateMissionViewModel
     lateinit var createMissionFragment : CreateMissionFragment
-    lateinit var createMissionFragment2 : CreateMissionFragment2
     lateinit var fragmentTransaction: FragmentTransaction
     lateinit var fragmentManager: FragmentManager
     lateinit var backPressViewModel : BackPressViewModel
@@ -57,11 +56,10 @@ class CreateMissionActivity : AppCompatActivity()
         backPressViewModel = ViewModelProviders.of(this)[BackPressViewModel::class.java]
         createMissionViewModel=ViewModelProviders.of(this)[CreateMissionViewModel::class.java]
         createMissionFragment= CreateMissionFragment()
-        createMissionFragment2= CreateMissionFragment2()
         fragmentManager =supportFragmentManager
         fragmentTransaction = fragmentManager.beginTransaction()
 
-        sf = applicationContext.getSharedPreferences("login", 0)
+        sf = getSharedPreferences("login", 0)
 
         roomId = sf.getInt("roomId",0)
 
@@ -84,12 +82,7 @@ class CreateMissionActivity : AppCompatActivity()
                 fragmentTransaction.commit()
 
             }
-            1->
-            {
-                fragmentTransaction.replace(R.id.frag_createmission,createMissionFragment2)
-                createMissionViewModel.fragmentNum=1
-                fragmentTransaction.commit()
-            }
+
 
         }
     }

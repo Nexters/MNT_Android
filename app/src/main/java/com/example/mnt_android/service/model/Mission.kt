@@ -14,7 +14,7 @@ class Mission (
     @SerializedName("roomId")
     var roomId : Int,
     @SerializedName("userMissions")
-    var userMissions : Array<UserMission>
+    var userMissions : Array<UserMission>?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

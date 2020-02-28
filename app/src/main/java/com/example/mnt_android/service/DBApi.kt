@@ -59,7 +59,13 @@ interface DBApi {
 
     @POST("/api/mission/make")
     fun makeMission(
-        @Body makemission : MakeMission
+        @Body mission : Mission
+    ) : Completable
+
+    @POST("/api/mission/send")
+    fun sendMission(
+        @Body userMission : UserMission,
+        @Query("missionId") missionId : Long
     ) : Completable
 
 }
