@@ -16,58 +16,94 @@
         android:layout_height="match_parent">
 
 
+        <ImageView
+            android:id="@+id/iv_img_joinroom2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.21"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:srcCompat="@drawable/fruits"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <TextView
             android:id="@+id/tv_roomname_joinroom2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.71"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintVertical_bias="0.27"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:textSize="22sp"
+            android:textColor="#222b45"
+            android:gravity="center"
             android:text="@{joinRoomViewModel.checkRoom.room.name.toString()}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_startdate_joinroom2"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 
         <TextView
             android:id="@+id/tv_startdate_joinroom2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{joinRoomViewModel.checkRoom.room.startDay}"
-            app:layout_constraintTop_toBottomOf="@id/tv_roomname_joinroom2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintHeight_percent="0.13"
+            app:layout_constraintVertical_bias="0.37"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:gravity="center"
+            android:text="@{joinRoomViewModel.startDayText_joinroom2}"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_enddate_joinroom2"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/combined_shape"/>
+
+
 
         <TextView
-            android:id="@+id/tv_enddate_joinroom2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{joinRoomViewModel.checkRoom.room.endDay}"
-            app:layout_constraintTop_toBottomOf="@id/tv_startdate_joinroom2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bu_kakaolink_joinroom2"/>
-
-        <Button
             android:id="@+id/bu_kakaolink_joinroom2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카카오 링크"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintHeight_percent="0.074"
+            app:layout_constraintVertical_bias="0.75"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:text="@string/tv_send_kakaolink"
             android:onClick="@{()->joinRoomActivity.sendKakaoLink(joinRoomViewModel.roomInfo.num.toString())}"
-            app:layout_constraintTop_toBottomOf="@id/tv_enddate_joinroom2"
-            app:layout_constraintBottom_toTopOf="@id/bu_lookparticipant_joinroom2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-        <Button
-            android:id="@+id/bu_lookparticipant_joinroom2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="참가자 보기"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bu_kakaolink_joinroom2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/button_hot_pink"/>
+
+        <TextView
+            android:id="@+id/bu_lookparticipant_joinroom2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintHeight_percent="0.074"
+            app:layout_constraintVertical_bias="0.85"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:textSize="18sp"
+            android:textColor="#ff3f3f"
+            android:gravity="center"
+            android:text="@string/tv_look_participant"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="#ffffff"/>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

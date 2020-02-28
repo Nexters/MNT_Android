@@ -1,6 +1,10 @@
 package com.example.mnt_android.viewmodel
 
 import android.app.Application
+import android.graphics.Color
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableInt
@@ -29,11 +33,27 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
     var isStarted : MutableLiveData<Boolean> = MutableLiveData()
     var isLogined : MutableLiveData<Boolean> = MutableLiveData()
     var isManager : MutableLiveData<Boolean> = MutableLiveData()
-    lateinit var progressBar : ObservableInt
+    var progressBar : ObservableInt
+    var startDayText_joinroom2 : String=""
+    var myName = ""
+    var nittoName="ㅁㅁㅁ"
+    var name_joinroom3 = SpannableStringBuilder()
+    var startDayText_joinroom3 : String = ""
     init {
         checkNitto.value=false
         //isJoined.value=false
         //isSearched.value=false
+        myName = sf.getString("kakao_nickname","")
+
+        //임시
+        name_joinroom3 = SpannableStringBuilder("$myName 의 마니또는 $nittoName 입니다.")
+
+        name_joinroom3.setSpan(ForegroundColorSpan(Color.parseColor("#ff5050")),
+            0,myName.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        name_joinroom3.setSpan(ForegroundColorSpan(Color.parseColor("#ff5050")),
+            myName.length+7,myName.length+7+nittoName.length-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
         isStarted.value=false
         progressBar = ObservableInt(View.GONE)
     }
@@ -50,6 +70,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                 .subscribe({ t: CheckRoomList? ->
                     if (t?.checkRoomList != null) {
                         checkRoom.value = t!!.checkRoomList[0]
+                        startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
 
                         Log.d("wlgusdnzzz",checkRoom.value!!.room.isStart.toString())
 
@@ -68,7 +89,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                                 isStarted.value = true
                             }
                         } else {
-
+                            //내가 방장X
                             if (checkRoom.value!!.room.isStart == 0) {
                                 //방이 아직 시작하지 않음
                                 isStarted.value = false
@@ -120,7 +141,10 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                             if(t?.checkRoomList!=null)
                             {
                                 checkRoom.value = t!!.checkRoomList[0]
+                                startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
+                                Log.d("wlgusdnzzz","${checkRoom.value!!.room.startDay}")
                                 isSearched.value=true
+
                                 //MainActivity에서 변수 Observing함
                             }
                             else

@@ -94,6 +94,9 @@ class JoinRoomActivity : AppCompatActivity()
             //MainActivity에서 방이 존재한다고 판단하여 방정보를 넘김
             joinRoomViewModel.fragmentNum=fragNum
             joinRoomViewModel.checkRoom.value=checkRoom
+            joinRoomViewModel.startDayText_joinroom2="${joinRoomViewModel.checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
+            joinRoomViewModel.startDayText_joinroom3="${joinRoomViewModel.checkRoom.value!!.room.startDay} 까지 푸르또 친구를 많이 많이 챙겨주세요!"
+
             setFrag(fragNum)
 
         }
@@ -115,7 +118,6 @@ class JoinRoomActivity : AppCompatActivity()
     {
         val intent = Intent(this@JoinRoomActivity,GameActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        intent.putExtra(TAG_IS_MANAGER, isManager_cb.isChecked)
         startActivity(intent)
         finish()
     }

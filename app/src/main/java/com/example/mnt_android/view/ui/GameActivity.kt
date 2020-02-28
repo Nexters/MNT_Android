@@ -199,6 +199,13 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
        // intent.putExtra("mission", mission)
       //  startActivity(intent)
     }
+    fun doMission()
+    {
+
+        val intent = Intent(this@GameActivity,DoMissionActivity::class.java)
+
+        startActivity(intent)
+    }
     fun createMission()
     {
 

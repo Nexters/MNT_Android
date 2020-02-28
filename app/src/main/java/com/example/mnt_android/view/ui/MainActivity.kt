@@ -34,11 +34,13 @@ class MainActivity : AppCompatActivity() {
         binding.mainActivity=this@MainActivity
         joinRoomViewModel = ViewModelProviders.of(this@MainActivity)[JoinRoomViewModel::class.java]
 
-        joinRoomViewModel.checkRoom()
         val sf = getSharedPreferences("login",0)
         val editor = sf.edit()
+
+
         userId = sf.getString("kakao_token","null")
 
+        joinRoomViewModel.checkRoom()
         joinRoomViewModel.isLogined.observe(this, Observer {
             if(it==false)
             {
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         })
-
+/*
         joinRoomViewModel.isJoined.observe(this, Observer {
             val intent = intent
             val str = intent.data
@@ -56,7 +58,6 @@ class MainActivity : AppCompatActivity() {
             {
                 editor.putInt("roomId", joinRoomViewModel.checkRoom.value!!.room.id)
                editor.commit()
-                Log.d("wlgusdnzzz","Main roomId : ${sf.getInt("roomId",0).toString()}")
 
                 if(str!=null)
                 {
@@ -89,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                         //방장이 방을 시작함
                         if (joinRoomViewModel.isManager.value == true)
                             editor.putBoolean("isManager", true)
-                        editor.commit()
+                            editor.commit()
 
                         if (sf.getBoolean("check", false)) {
                             //내 마니또를 확인했음
@@ -122,7 +123,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
+*/
     }
 
     fun createroom()

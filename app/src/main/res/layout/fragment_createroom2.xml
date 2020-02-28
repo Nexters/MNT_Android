@@ -90,7 +90,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:hint="시작날짜"
-            android:text="@{createRoomViewModel.maxPeople}"
+            android:text="@{createRoomViewModel.startDay}"
             app:layout_constraintWidth_percent="0.35"
             app:layout_constraintHeight_percent="0.04"
             app:layout_constraintVertical_bias="0.47"

@@ -10,7 +10,7 @@ class UserMission(
     @SerializedName("id")
     var id : Int,
     @SerializedName("missionId")
-    var missionId: String,
+    var missionId: String?,
     @SerializedName("missionImg")
     var missionImg : String,
     @SerializedName("roomId")

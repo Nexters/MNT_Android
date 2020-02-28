@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:onClick="@{()->gameActivity.startMission()}"
+            android:onClick="@{()->gameActivity.doMission()}"
             android:text="미션선택"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

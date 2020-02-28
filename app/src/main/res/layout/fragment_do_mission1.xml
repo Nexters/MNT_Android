@@ -10,87 +10,65 @@
             name="doMissionActivity"
             type="com.example.mnt_android.view.ui.DoMissionActivity" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv_name_domission1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="78dp"
+            android:layout_marginTop="106dp"
+            android:text="미션 이름"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bu_back_do_mission1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="X"
-        android:onClick="@{()->doMissionActivity.onBackPressed()}"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/bu_next_do_mission1"
-        app:layout_constraintBaseline_toBaselineOf="@id/bu_next_do_mission1"/>
+        <TextView
+            android:id="@+id/tv_des__domission1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="54dp"
+            android:text="미션 설명"
+            app:layout_constraintStart_toStartOf="@+id/tv_name_domission1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_domission1" />
 
-    <Button
-        android:id="@+id/bu_next_do_mission1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="다음"
-        android:onClick="@{()->doMissionActivity.setFrag(1)}"
-        app:layout_constraintBottom_toTopOf="@id/tv_missionname_do_mision1"
-        app:layout_constraintHorizontal_bias="0.987"
-        app:layout_constraintLeft_toLeftOf="@id/bu_back_do_mission1"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:ems="10"
+            android:text="@={doMissionViewModel.missionText}"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_des__domission1" />
 
-    <TextView
-        android:id="@+id/tv_missionname_do_mision1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{doMissionViewModel.doMission.name}"
-        app:layout_constraintTop_toBottomOf="@id/bu_next_do_mission1"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_missiondescription_do_mision1"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="100dp" />
+        <TextView
+            android:id="@+id/tv_image_domission1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="169dp"
+            android:layout_marginTop="127dp"
+            android:text="이미지 가져오기"
+            android:onClick="@{()->doMissionActivity.setImage()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText" />
 
-    <TextView
-        android:id="@+id/tv_missiondescription_do_mision1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{doMissionViewModel.doMission.description}"
+        <TextView
+            android:id="@+id/tv_domission_domission1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="81dp"
+            android:text="미션수행하기"
+            android:onClick="@{()->doMissionActivity.setFrag(1)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        app:layout_constraintTop_toBottomOf="@id/tv_missionname_do_mision1"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/et_writetext_do_mision1"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="134dp" />
-
-    <EditText
-        android:id="@+id/et_writetext_do_mision1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@={doMissionViewModel.str}"
-        app:layout_constraintTop_toBottomOf="@id/tv_missiondescription_do_mision1"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_uploadimage_do_mision1"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="210dp" />
-
-    <TextView
-        android:id="@+id/tv_uploadimage_do_mision1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이미지 업로드"
-        android:onClick="@{()->doMissionActivity.setImage()}"
-        app:layout_constraintTop_toBottomOf="@id/et_writetext_do_mision1"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="393dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
