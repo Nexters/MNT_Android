@@ -1,11 +1,13 @@
 package com.example.mnt_android.view.ui
 
+import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.graphics.Point
+import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -14,11 +16,13 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
 import com.example.mnt_android.base.BaseViewModel
-import com.example.mnt_android.bus.scrollEventBus
+import com.example.mnt_android.bus.SWIPE_DOWN
+import com.example.mnt_android.bus.SWIPE_UP
+import com.example.mnt_android.bus.swipeEventBus
 import com.example.mnt_android.databinding.ActivityGameBinding
 import com.example.mnt_android.service.model.CheckRoom
-import com.example.mnt_android.service.model.DoMission
 import com.example.mnt_android.util.TAG_IS_MANAGER
+import com.example.mnt_android.view.listener.SwipeDetecter
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import kotlinx.android.synthetic.main.activity_game.*
 import com.kakao.kakaolink.v2.KakaoLinkResponse
@@ -29,7 +33,6 @@ import java.util.HashMap
 import com.kakao.message.template.*
 import io.reactivex.disposables.CompositeDisposable
 import org.jetbrains.anko.textColor
-import kotlin.math.absoluteValue
 
 class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.OnClickListener {
     override var viewModel = BaseViewModel()
@@ -48,8 +51,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     private lateinit var checkRoom : CheckRoom
 
     private val disposable = CompositeDisposable()
-    private var screenMaxHeight: Int = 0
-    private var screenMinHeight: Int = 0
+    private var screenMaxHeight: Float = 0f
+    private var screenMinHeight: Float = 0f
 
     private var selectedBtn : ImageView? = null
     private var selectedTv : TextView? = null
@@ -69,6 +72,16 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         selectBtn(feed_iv, feed_tv)
     }
 
+    override fun onCreateView(
+        parent: View?,
+        name: String,
+        context: Context,
+        attrs: AttributeSet
+    ): View? {
+        parent?.setOnTouchListener(SwipeDetecter())
+        return super.onCreateView(parent, name, context, attrs)
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
@@ -78,38 +91,40 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         }
     }
 
-    private fun getScreenHeight() : Int {
+    private fun getScreenHeight() : Float {
         val display = windowManager.defaultDisplay
         val point = Point()
         display.getSize(point)
-        return point.y
+        return point.y.toFloat()
     }
 
+
+    // TODO : 메뉴바 코드 나중에 정리 필요
     private fun eventBusSetting() {
-        if (screenMinHeight == 0) {
-            screenMinHeight = floating_menu_layout.y.toInt()
+        if (screenMinHeight == 0f) {
+            screenMinHeight = floating_menu_layout.y
+            screenMaxHeight = getScreenHeight()
         }
-        screenMaxHeight = getScreenHeight()
 
-        disposable.add(scrollEventBus.subscribe {
-            val y = floating_menu_layout.y
-            val maxDiff = screenMaxHeight - screenMinHeight
-
-            floating_menu_layout.y += if (it.absoluteValue > maxDiff) {
-                if (it > 0) maxDiff else maxDiff * -1
-            } else if (it > 0 && y < screenMaxHeight) {
-                it
-            } else if (it < 0 && y > screenMinHeight) {
-                it
-            } else {
-                0
+        disposable.add(swipeEventBus.subscribe {
+            when(it) {
+                SWIPE_UP -> hideMenuBar(floating_menu_layout)
+                SWIPE_DOWN -> showMenuBar(floating_menu_layout)
+                else -> showMenuBar(floating_menu_layout)
             }
         })
     }
 
-    private fun clearEventBus() {
-        disposable.clear()
-    }
+    private fun clearEventBus() = disposable.clear()
+
+    private fun hideMenuBar(v: View) = moveMenuBar(v, screenMaxHeight - screenMinHeight).start()
+
+    private fun showMenuBar(v: View) = moveMenuBar(v, 0f).start()
+
+    private fun moveMenuBar(view: View, translationY: Float) =
+        ObjectAnimator.ofFloat(view, "translationY", translationY).apply {
+            duration = 300
+        }
 
     override fun onBackPressed() {
 
@@ -120,7 +135,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     override fun onClick(v: View?) {
         when (v) {
             dashboard_layout -> {
-                changeFragment(dashBoardManagerFragment)
+                changeFragment(dashBoardApplicantFragment)
                 selectBtn(dashboard_iv, dashboard_tv)
             }
             feed_layout -> {
@@ -132,7 +147,6 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
                 selectBtn(mission_iv, mission_tv)
             }
         }
-        floating_menu_layout.y = screenMinHeight.toFloat()
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -184,6 +198,13 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
        // intent.putExtra("mission", mission)
       //  startActivity(intent)
+    }
+    fun doMission()
+    {
+
+        val intent = Intent(this@GameActivity,DoMissionActivity::class.java)
+
+        startActivity(intent)
     }
     fun createMission()
     {

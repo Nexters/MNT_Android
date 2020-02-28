@@ -5,14 +5,18 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
+import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import com.example.mnt_android.viewmodel.SplashViewModel
 
 class SplashActivity : AppCompatActivity()
 {
     lateinit var splashViewModel: SplashViewModel
+    lateinit var joinRoomViewModel : JoinRoomViewModel
 
     var editor : SharedPreferences.Editor?=null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,18 +24,101 @@ class SplashActivity : AppCompatActivity()
 
         setContentView(R.layout.activity_splash)
         splashViewModel = ViewModelProviders.of(this)[SplashViewModel::class.java]
+        joinRoomViewModel = ViewModelProviders.of(this)[JoinRoomViewModel::class.java]
+
+        joinRoomViewModel.checkRoom()
 
         var sf =getSharedPreferences("login",0)
+        editor = sf.edit()
         Handler().postDelayed({
             if(sf.getString("kakao_token","null")!="null")
             {
                 //이미 로그인을 했었다
                 Log.d("wlgusdnzzz",sf.getString("kakao_token","null"))
 
-                var intent = Intent(this,MainActivity::class.java)
+                joinRoomViewModel.isJoined.observe(this, Observer {
+                    val intent = intent
+                    val str = intent.data
+                    if(it==true)
+                    {
+                        editor!!.putInt("roomId", joinRoomViewModel.checkRoom.value!!.room.id)
+                        editor!!.commit()
+
+                        if(str!=null)
+                        {
+
+                        }
+                        //참가한 방이 존재
+                        if (joinRoomViewModel.isStarted.value == false) {
+                            //방장이 방을 시작하지 않음
+                            if (joinRoomViewModel.isManager.value == true) {
+
+
+                                editor!!.putBoolean("isManager", true)
+                                editor!!.commit()
+
+                                val intent = Intent(this, CreateRoomActivity::class.java)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                intent.putExtra("fragNum", 2)
+                                intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
+                                startActivity(intent)
+
+                            } else {
+                                val intent = Intent(this, JoinRoomActivity::class.java)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                intent.putExtra("fragNum", 1)
+                                intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
+                                startActivity(intent)
+                            }
+
+                        } else {
+                            //방장이 방을 시작함
+                            if (joinRoomViewModel.isManager.value == true)
+                                editor!!.putBoolean("isManager", true)
+                                editor!!.commit()
+
+                            if (sf.getBoolean("check", false)) {
+                                //내 마니또를 확인했음
+                                val intent = Intent(this, GameActivity::class.java)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
+                                startActivity(intent)
+                            } else {
+                                //내 마니또를 확인하지 못함
+                                val intent = Intent(this, JoinRoomActivity::class.java)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                intent.putExtra("fragNum", 2)
+                                intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
+                                startActivity(intent)
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        Toast.makeText(this,"참가한 방이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                        //참가한 방이 없다
+
+                        if(str!=null)
+                        {
+                            val intent = Intent(this, JoinRoomActivity::class.java)
+                            intent.putExtra("fragNum", 0)
+                            intent.putExtra("roomNum", intent.data.getQueryParameter("roomnum"))
+                            startActivity(intent)
+                        }
+
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        startActivity(intent)
+
+                    }
+                })
+
+              /* var intent = Intent(this,MainActivity::class.java)
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 startActivity(intent)
-                finish()
+                finish()*/
+
             }
             else
             {

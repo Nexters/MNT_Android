@@ -1,6 +1,7 @@
 package com.example.mnt_android.view.ui
 
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.FragmentJoinroom3Binding
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
+import kotlinx.android.synthetic.main.fragment_joinroom3.*
 
 class JoinRoomFragment3 : Fragment()
 {
@@ -39,6 +41,9 @@ class JoinRoomFragment3 : Fragment()
 
             binding.joinRoomViewModel = joinRoomViewModel
             binding.lifecycleOwner = this
+
+
+
         }
     }
     }

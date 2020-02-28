@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseFragment
 import com.example.mnt_android.databinding.FragmentDashBoardApplicantBinding
-import com.example.mnt_android.view.dialog.ConfirmDialog
+import com.example.mnt_android.view.dialog.CustomAlertDialog
 import com.example.mnt_android.view.dialog.NoticeDialog
 import kotlinx.android.synthetic.main.fragment_dash_board_applicant.*
 
@@ -39,12 +39,10 @@ class DashBoardApplicantFragment : BaseFragment() {
             NoticeDialog("개발자정보", "고민중").show(supportFragmentManager, TAG)
         }
         exit_room_layout.setOnClickListener {
-            ConfirmDialog(
-                "푸르또 방을 나가시겠습니까?\n한번 나가면 다시 들어올 수 없습니다.",
-                "취소",
-                "나가기"
-            ) {
-            }.show(
+            CustomAlertDialog(
+                "당신의 호의를 기다리는 마니또를 생각하세요.",
+                "확인"
+            ).show(
                 supportFragmentManager,
                 TAG
             )

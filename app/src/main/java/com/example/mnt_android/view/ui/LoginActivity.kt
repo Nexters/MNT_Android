@@ -64,8 +64,8 @@ class LoginActivity : AppCompatActivity()
         loginViewModel.isLogined.observe(this, Observer {
             if(it==true)
             {
-                editor?.putString("kakao_id",loginViewModel.kuser.nickname.value)
-                editor?.putString("kakao_nickname",loginViewModel.kuser.id)
+                editor?.putString("kakao_nickname",loginViewModel.kuser.nickname.value)
+                editor?.putString("kakao_id",loginViewModel.kuser.id)
                 editor?.putString("kakao_token",loginViewModel.kuser.token)
                 editor?.commit()
             }
