@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="301dp"
+        android:layout_height="232dp"
+        android:padding="15dp"
+        android:background="@drawable/round_layout_white">
+
+        <LinearLayout
+            android:id="@+id/text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/confirm_btn"
+            android:orientation="vertical"
+            android:padding="17dp"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/emoticon_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="15dp"
+                android:textColor="@color/colorLightBlueBlack"
+                android:textSize="30sp"
+                tools:text="🎉"/>
+            <TextView
+                android:id="@+id/question_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorLightBlueBlack"
+                android:textSize="15sp"
+                tools:text="니또에게 미션을 전달했습니다.니또에게 미션을 전달했습니다."/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="17dp"
+            android:background="@drawable/button_hot_pink"
+            android:stateListAnimator="@null"
+            android:textSize="15sp"
+            android:textColor="@color/colorWhite"
+            tools:text="내보내기"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
