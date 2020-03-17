@@ -18,6 +18,7 @@ import com.example.mnt_android.databinding.ActivityCreateroomBinding
 import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.util.TAG_ROOM_ID
+import com.example.mnt_android.view.ui.LoginActivity.Companion.editor
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
 import com.google.firebase.iid.FirebaseInstanceId
@@ -93,9 +94,12 @@ class CreateRoomActivity :FragmentActivity()
         createRoomViewModel.isStarted.observe(this,androidx.lifecycle.Observer {
             if(it==true)
             {
+                editor!!.putBoolean("isManager", true)
+                editor!!.commit()
                 val intent  =Intent(this,GameActivity::class.java)
                 intent.putExtra(TAG_IS_MANAGER, IS_MANAGER)
                 intent.putExtra(TAG_ROOM_ID, createRoomViewModel.id)
+                intent.putExtra("roomName",createRoomViewModel.name)
                 startActivity(intent)
             }
         })
@@ -136,7 +140,7 @@ class CreateRoomActivity :FragmentActivity()
 
     }
 
-    fun sendKakaoLink(roomnum : Int)
+    fun sendKakaoLink(roomnum : Long)
     {
     var params = TextTemplate
         .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())

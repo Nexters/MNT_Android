@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class RoomId(
     @SerializedName("data")
-    var roomId : Int
+    var roomId : Long
 )
