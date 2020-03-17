@@ -16,7 +16,7 @@ import com.example.mnt_android.viewmodel.TimeLineViewModel
 import kotlinx.android.synthetic.main.fragment_time_line.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TimeLineFragment(private val isManager: Boolean = false) : BaseFragment() {
+class TimeLineFragment(private val roomId: Long, private val _isManager: Boolean = false) : BaseFragment() {
     companion object {
         private const val TAG = "TimeLine Filter Bottom Sheet"
     }
@@ -31,13 +31,17 @@ class TimeLineFragment(private val isManager: Boolean = false) : BaseFragment() 
     ): View? {
         binding = bind(inflater, container, R.layout.fragment_time_line)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel.apply {
+            isManager.value = _isManager
+            setContentList(roomId)
+        }
         return binding.root
     }
 
     override fun initializeUI() {
         content_rv.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = ContentListAdapter(isManager)
+            adapter = ContentListAdapter()
         }
 
         setEventListener()
@@ -46,7 +50,7 @@ class TimeLineFragment(private val isManager: Boolean = false) : BaseFragment() 
     private fun setEventListener() {
         manito_list_btn.setOnClickListener {
             val intent = Intent(context, ManitoActivity::class.java)
-            intent.putExtra(TAG_IS_MANAGER, isManager)
+            intent.putExtra(TAG_IS_MANAGER, _isManager)
             startActivity(intent)
         }
         filter_btn.setOnClickListener {
