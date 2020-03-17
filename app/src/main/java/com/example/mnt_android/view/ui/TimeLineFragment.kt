@@ -55,7 +55,12 @@ class TimeLineFragment(private val roomId: Long, private val _isManager: Boolean
         }
         filter_btn.setOnClickListener {
             val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
-            val missionFilterBottomSheet = MissionFilterBottomSheet()
+            val _missionList = resources.getStringArray(R.array.arr_create_mission).let {
+                it.sliceArray(1 until it.size) // 첫번째 리스트는 '미션 선택하기'여서 하나 잘랐슴미다
+            }
+            val missionFilterBottomSheet = MissionFilterBottomSheet().apply {
+                missionList = _missionList
+            }
             missionFilterBottomSheet.show(supportFragmentManager, TAG)
         }
     }
