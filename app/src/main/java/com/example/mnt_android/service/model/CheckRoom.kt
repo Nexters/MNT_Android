@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 class CheckRoom(
     @SerializedName("id")
-    val id: Int,
+    val id: Long,
     @SerializedName("isCreater")
     val isCreater: Int,
     @SerializedName("manittoId")
@@ -18,7 +18,7 @@ class CheckRoom(
     val user : User
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readLong(),
         parcel.readInt(),
         parcel.readString(),
         parcel.readParcelable(Room::class.java.classLoader),
@@ -27,7 +27,7 @@ class CheckRoom(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
+        parcel.writeLong(id)
         parcel.writeInt(isCreater)
         parcel.writeString(manittoId)
         parcel.writeParcelable(room, flags)

@@ -53,7 +53,7 @@ class CreateMissionViewModel(application: Application) : AndroidViewModel(applic
 
 
 
-    fun makeMission(roomId : Int)
+    fun makeMission(roomId : Long)
     {
         repository.makeMission(Mission(0, isAbleImg.value!!,name.value.toString(),roomId,null))
             .subscribeOn(Schedulers.io())

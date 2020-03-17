@@ -44,7 +44,7 @@ class CreateMissionActivity : AppCompatActivity()
     lateinit var fragmentManager: FragmentManager
     lateinit var backPressViewModel : BackPressViewModel
     lateinit var sf : SharedPreferences
-    var roomId : Int = 0
+    var roomId : Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +61,7 @@ class CreateMissionActivity : AppCompatActivity()
 
         sf = getSharedPreferences("login", 0)
 
-        roomId = sf.getInt("roomId",0)
+        roomId = sf.getLong("roomId",0)
 
         setFrag(0)
 

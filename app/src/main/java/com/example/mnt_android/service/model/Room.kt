@@ -11,7 +11,7 @@ class Room(
     @SerializedName("endDay")
     var endDay : String,
     @SerializedName("id")
-    var id : Int,
+    var id : Long,
     @SerializedName("isDone")
     var isDone :Int,
     @SerializedName("isStart")
@@ -28,7 +28,7 @@ class Room(
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         //여기서 String to Date
-        parcel.readInt(),
+        parcel.readLong(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
@@ -49,7 +49,7 @@ Date to = transFormat.parse(from);
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(endDay)
-        parcel.writeInt(id)
+        parcel.writeLong(id)
         parcel.writeInt(isDone)
         parcel.writeInt(isStart)
         parcel.writeInt(maxPeople)
