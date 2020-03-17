@@ -41,7 +41,9 @@ class DashBoardManagerFragment : BaseFragment() {
 
         exit_room_layout.setOnClickListener {
             ConfirmDialog(
-                "푸르또 방을 나가시겠습니까?\n한번 나가면 다시 들어올 수 없습니다.",
+                "프루또를 끝내시겠습니까?\n" +
+                        "참여자들의 니또가 공개되며,\n" +
+                        "더 이상 미션을 부여하고 수행할 수 없습니다.",
                 "취소",
                 "나가기"
             ) {
