@@ -45,6 +45,13 @@ class DBRepository {
     fun sendMission(userMission: UserMission,
                     missionId : Long) : Completable =
         api.sendMission(userMission,missionId)
+    
+    fun getUserMission(userId : String,
+                       roomId : Long) : Flowable<GetUserMission> =
+        api.getUserMission(userId,roomId)
+
+    fun groupByMission(roomId : Long) : Flowable<GetManagerMission> =
+        api.groupByMission(roomId)
 
 
 }

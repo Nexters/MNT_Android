@@ -24,7 +24,7 @@ class CreateRoomViewModel : BaseViewModel()
   var startDay : MutableLiveData<String> = MutableLiveData()
     var endDay : MutableLiveData<String> = MutableLiveData()
   var maxPeople : String = ""
- var id : Int = -1
+ var id : Long = -1
  var isCreated : MutableLiveData<Boolean> = MutableLiveData()
     var isStarted : MutableLiveData<Boolean> =  MutableLiveData()
   lateinit var roomId : RoomId
@@ -84,6 +84,7 @@ class CreateRoomViewModel : BaseViewModel()
      .subscribeOn(Schedulers.io())
      .observeOn(AndroidSchedulers.mainThread())
         .subscribe(Action {
+            //방이 정상적으로 시작되었는 지 확인 필요 (인원 문제)
             isStarted.value=true
             Log.d("wlgusdnzzz","방시작됨")
         })

@@ -90,6 +90,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                             }
                         } else {
                             //내가 방장X
+                            isManager.value=false
                             if (checkRoom.value!!.room.isStart == 0) {
                                 //방이 아직 시작하지 않음
                                 isStarted.value = false
