@@ -1,8 +1,10 @@
 package com.example.mnt_android.service
 
 import com.example.mnt_android.service.model.*
+import com.example.mnt_android.view.ui.MainActivity.Companion.userId
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.kakao.auth.StringSet.api
 import io.reactivex.Flowable
 
 import io.reactivex.Completable
@@ -67,5 +69,16 @@ interface DBApi {
         @Body userMission : UserMission,
         @Query("missionId") missionId : Long
     ) : Completable
+
+    @GET("/api/mission/done/{userId}")
+    fun getUserMission(
+        @Path("userId") userId : String,
+        @Query("roomId") roomId : Long
+    ) : Flowable<GetUserMission>
+
+    @GET("/api/mission/list/order-mission/{roomId}")
+    fun groupByMission(
+        @Path("roomId") roomId : Long
+    ) : Flowable<GetManagerMission>
 
 }

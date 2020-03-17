@@ -37,6 +37,7 @@ class JoinRoomActivity : AppCompatActivity()
     lateinit var fragmentTransaction: FragmentTransaction
     lateinit var fragmentManager: FragmentManager
     lateinit var backPressViewModel : BackPressViewModel
+    var checkRoom : CheckRoom?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +87,7 @@ class JoinRoomActivity : AppCompatActivity()
 
         val intent = intent
         val str = intent.data
-        val checkRoom:CheckRoom? = intent.getParcelableExtra("checkRoom")
+        checkRoom = intent.getParcelableExtra("checkRoom")
         val roomId : Int?=intent.getIntExtra("roomId",0)
         val fragNum = intent.getIntExtra("fragNum",0)
         if(checkRoom!=null)
@@ -118,6 +119,7 @@ class JoinRoomActivity : AppCompatActivity()
     {
         val intent = Intent(this@JoinRoomActivity,GameActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.putExtra("roomName",checkRoom?.room?.name)
         startActivity(intent)
         finish()
     }

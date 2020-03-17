@@ -6,6 +6,7 @@ import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.util.FALSE_INT
 import com.example.mnt_android.view.adapter.ApplicantListAdapter
 import com.example.mnt_android.view.adapter.ManitoListAdapter
+import com.example.mnt_android.view.adapter.MissionManagerListAdapter
 
 @BindingAdapter("adapterApplicantList", "isManager")
 fun bindAdapterApplicantList(
@@ -30,6 +31,18 @@ fun bindAdapterManitoList(
     memberList?.let { list ->
         (view.adapter as ManitoListAdapter).run {
             this.isManager = isManager
+            setList(list)
+        }
+    }
+}
+
+@BindingAdapter("adapterMissionManagerList")
+fun bindAdapterMissionManagerList(
+    view: RecyclerView,
+    missionList: ArrayList<Pair<String,String>>?
+) {
+    missionList?.let { list ->
+        (view.adapter as MissionManagerListAdapter).run {
             setList(list)
         }
     }

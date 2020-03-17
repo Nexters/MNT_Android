@@ -3,15 +3,20 @@ package com.example.mnt_android.view.ui
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Point
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
@@ -19,11 +24,14 @@ import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.bus.SWIPE_DOWN
 import com.example.mnt_android.bus.SWIPE_UP
 import com.example.mnt_android.bus.swipeEventBus
+import com.example.mnt_android.databinding.ActivityCreateMissionBinding
 import com.example.mnt_android.databinding.ActivityGameBinding
 import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.view.listener.SwipeDetecter
 import com.example.mnt_android.viewmodel.BackPressViewModel
+import com.example.mnt_android.viewmodel.CreateMissionViewModel
+import com.example.mnt_android.viewmodel.GameViewModel
 import kotlinx.android.synthetic.main.activity_game.*
 import com.kakao.kakaolink.v2.KakaoLinkResponse
 import com.kakao.network.ErrorResult
@@ -43,12 +51,12 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     private lateinit var fragmentTransaction: FragmentTransaction
 
     private lateinit var backPressViewModel: BackPressViewModel
+     lateinit var gameViewModel: GameViewModel
     private lateinit var timeLineFragment: TimeLineFragment
-    private lateinit var missionFragment: GameMissionFragment
+    private lateinit var missionApplicantFragment: MissionApplicantFragment
+    private lateinit var missionManagerFragment: MissionManagerFragment
     private lateinit var dashBoardApplicantFragment: DashBoardApplicantFragment
     private lateinit var dashBoardManagerFragment: DashBoardManagerFragment
-
-    private lateinit var checkRoom : CheckRoom
 
     private val disposable = CompositeDisposable()
     private var screenMaxHeight: Float = 0f
@@ -56,20 +64,37 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     private var selectedBtn : ImageView? = null
     private var selectedTv : TextView? = null
-
+     lateinit var sharedPreferences  : SharedPreferences
 
     override fun initSetting() {
-        val isManager = intent.getBooleanExtra(TAG_IS_MANAGER, false)
-        timeLineFragment = TimeLineFragment(isManager)
-        missionFragment = GameMissionFragment()
+        sharedPreferences = getSharedPreferences("login",0)
+        val binding = DataBindingUtil
+            .setContentView<ActivityGameBinding>(this, R.layout.activity_game)
+
+        binding.lifecycleOwner = this
+        gameViewModel= ViewModelProvider(this).get(GameViewModel::class.java)
+        timeLineFragment = TimeLineFragment(sharedPreferences.getBoolean("isManager",false))
+
+       if(sharedPreferences.getBoolean("isManager",false))
+        {
+            missionManagerFragment = MissionManagerFragment()
+        }
+        else
+        {
+            missionApplicantFragment = MissionApplicantFragment()
+        }
         dashBoardApplicantFragment = DashBoardApplicantFragment()
         dashBoardManagerFragment = DashBoardManagerFragment()
-        backPressViewModel = ViewModelProviders.of(this)[BackPressViewModel::class.java]
-
+        backPressViewModel = ViewModelProvider(this).get(BackPressViewModel::class.java)
+        gameViewModel.title = "'"+intent.getStringExtra("roomName")+"'" + "\n미션을 등록해주세요."
         fragmentManager = supportFragmentManager
+
 
         changeFragment(timeLineFragment)
         selectBtn(feed_iv, feed_tv)
+
+
+
     }
 
     override fun onCreateView(
@@ -135,7 +160,14 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     override fun onClick(v: View?) {
         when (v) {
             dashboard_layout -> {
-                changeFragment(dashBoardApplicantFragment)
+                if(sharedPreferences.getBoolean("isManager",false))
+                {
+                    changeFragment(dashBoardManagerFragment)
+                }
+                else
+                {
+                    changeFragment(dashBoardApplicantFragment)
+                }
                 selectBtn(dashboard_iv, dashboard_tv)
             }
             feed_layout -> {
@@ -143,7 +175,14 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
                 selectBtn(feed_iv, feed_tv)
             }
             mission_layout -> {
-                changeFragment(missionFragment)
+                if(sharedPreferences.getBoolean("isManager",false))
+                {
+                    changeFragment(missionManagerFragment)
+                }
+                else
+                {
+                    changeFragment(missionApplicantFragment)
+                }
                 selectBtn(mission_iv, mission_tv)
             }
         }
@@ -151,7 +190,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     private fun changeFragment(fragment: Fragment) {
         fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(game_layout.id, fragment)
+        fragmentTransaction.replace(R.id.game_layout, fragment)
         fragmentTransaction.commit()
     }
 
@@ -213,4 +252,21 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
         startActivity(intent)
     }
+
+    override fun onResume() {
+        super.onResume()
+
+       if(sharedPreferences.getBoolean("isManager",false)) {
+           gameViewModel.groupByMission(sharedPreferences.getLong("roomId", 0))
+           Log.d("wlgusdnzzz","매니저")
+       }
+        else {
+           gameViewModel.getUserMission(
+               sharedPreferences.getString("kakao_token", ""),
+               sharedPreferences.getLong("roomId", 0)
+           )
+           Log.d("wlgusdnzzz","참가자")
+       }
+    }
+
 }

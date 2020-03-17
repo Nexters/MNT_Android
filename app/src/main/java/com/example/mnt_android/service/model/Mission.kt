@@ -6,30 +6,30 @@ import com.google.gson.annotations.SerializedName
 
 class Mission (
     @SerializedName("id")
-    var id : Int,
+    var id : Long,
     @SerializedName("isAbleImg")
     var isAbleImg : Int,
     @SerializedName("name")
     var name : String,
     @SerializedName("roomId")
-    var roomId : Int,
-    @SerializedName("userMissions")
+    var roomId : Long,
+    @SerializedName("userMission")
     var userMissions : Array<UserMission>?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readLong(),
         parcel.readInt(),
         parcel.readString(),
-        parcel.readInt(),
+        parcel.readLong(),
         parcel.createTypedArray(UserMission)
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
+        parcel.writeLong(id)
         parcel.writeInt(isAbleImg)
         parcel.writeString(name)
-        parcel.writeInt(roomId)
+        parcel.writeLong(roomId)
         parcel.writeTypedArray(userMissions, flags)
     }
 
