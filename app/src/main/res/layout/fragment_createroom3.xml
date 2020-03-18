@@ -54,7 +54,7 @@
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="푸르또방이 생성되었습니다. 초대코드를 공유해서 친구들을 초대하세요.  "
+            android:text="프루또방이 생성되었습니다. 초대코드를 공유해서 친구들을 초대하세요.  "
             app:layout_constraintVertical_bias="0.37"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHeight_percent="0.11"

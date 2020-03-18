@@ -22,7 +22,7 @@
         app:layout_constraintWidth_percent="0.54"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.02"
-        android:text="내 푸르또는 누구일까요?"
+        android:text="내 프루또는 누구일까요?"
         android:textSize="20sp"
         android:textColor="#0f1525"
         android:gravity="center"
