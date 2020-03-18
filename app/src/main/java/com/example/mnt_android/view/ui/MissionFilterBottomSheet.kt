@@ -2,24 +2,19 @@ package com.example.mnt_android.view.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.DisplayMetrics
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import com.example.mnt_android.R
 import com.example.mnt_android.service.model.Applicant
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_mission_filter.*
-import org.jetbrains.anko.textColor
-import org.jetbrains.anko.windowManager
+
 
 class MissionFilterBottomSheet : BottomSheetDialogFragment() {
     var missionList: Array<String> = arrayOf()
@@ -27,8 +22,8 @@ class MissionFilterBottomSheet : BottomSheetDialogFragment() {
 
     var missionToMeOnClickListener: () -> Unit = {}
     var missionFromMeOnClickListener: () -> Unit = {}
-    var missionListOnClickListener: () -> Unit = {}
-    var participantListOnClickListener: () -> Unit = {}
+    var missionListOnClickListener: (missionName: String) -> Unit = {}
+    var participantListOnClickListener: (userId: String) -> Unit = {}
 
     @SuppressLint("RestrictedApi")
     override fun setupDialog(dialog: Dialog, style: Int) {
@@ -61,7 +56,7 @@ class MissionFilterBottomSheet : BottomSheetDialogFragment() {
                 } else {
                     visibility = View.VISIBLE
                     missionList.forEach {
-                        addView(getTv(it))
+                        addView(getMissionItem(it))
                     }
                 }
             }
@@ -73,7 +68,7 @@ class MissionFilterBottomSheet : BottomSheetDialogFragment() {
                 } else {
                     visibility = View.VISIBLE
                     missionList.forEach {
-                        addView(getTv(it))
+                        addView(getUserItem("", 1, it))
                     }
                 }
             }
@@ -81,18 +76,26 @@ class MissionFilterBottomSheet : BottomSheetDialogFragment() {
         close_btn.setOnClickListener { dismiss() }
     }
 
-    private fun getTv(mission: String? = "") = TextView(context).apply {
-        val ms = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 17f, context.resources.displayMetrics).toInt()
-        text = mission
-        textColor = ResourcesCompat.getColor(resources, R.color.colorLightBlueBlack, null)
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
-        ellipsize = TextUtils.TruncateAt.END
-        maxLines = 1
-        layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            setPadding(0, ms, 0, ms)
+    private fun getMissionItem(mission: String = ""): LinearLayout {
+        val inflater = LayoutInflater.from(context)
+        return (inflater.inflate(R.layout.item_filter_list, null, false) as LinearLayout).apply {
+            findViewById<ImageView>(R.id.iv).visibility = View.GONE
+            findViewById<TextView>(R.id.tv).text = mission
+            setOnClickListener { missionListOnClickListener(mission) }
+        }
+    }
+
+    private fun getUserItem(userId: String, imgId: Int, title: String = ""): LinearLayout {
+        val inflater = LayoutInflater.from(context)
+        return (inflater.inflate(R.layout.item_filter_list, null, false) as LinearLayout).apply {
+            val imgRes = resources.getIdentifier(
+                "img_profile_face_${"%02d".format(imgId)}",
+                "drawable",
+                context?.packageName
+            )
+            findViewById<ImageView>(R.id.iv).setImageResource(imgRes)
+            findViewById<TextView>(R.id.tv).text = title
+            setOnClickListener { participantListOnClickListener(userId) }
         }
     }
 }
