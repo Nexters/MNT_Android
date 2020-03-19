@@ -13,15 +13,18 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
+import com.example.mnt_android.service.model.UserMission
+import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.DoMissionViewModel
-import java.io.File
-import java.io.FileInputStream
+import java.io.*
 
 class DoMissionActivity : AppCompatActivity()
 {
@@ -33,12 +36,13 @@ class DoMissionActivity : AppCompatActivity()
     lateinit var fragmentManager: FragmentManager
     lateinit var backPressViewModel : BackPressViewModel
     val REQUEST_TEXT_GALLERY = 4
+    val REQUEST_GALLERY = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_do_mission)
 
-        doMissionViewModel = ViewModelProviders.of(this)[DoMissionViewModel::class.java]
+        doMissionViewModel = ViewModelProvider(this)[DoMissionViewModel::class.java]
         backPressViewModel=  ViewModelProviders.of(this)[BackPressViewModel::class.java]
 
         fragmentManager=supportFragmentManager
@@ -46,6 +50,12 @@ class DoMissionActivity : AppCompatActivity()
         doMissionFragment= DoMissionFragment()
         doMissionFragment2= DoMissionFragment2()
 
+        doMissionViewModel.nowUserMission.value =
+            intent.getParcelableExtra("nowUserMission") as UserMissionResponse
+        doMissionViewModel.missionDescription =
+            resources
+            .getStringArray(R.array.arr_create_mission_des)[resources.getStringArray(R.array.arr_create_mission)
+                                                        .indexOf(doMissionViewModel.nowUserMission.value!!.missionName)]
 
 
          setFrag(0)
@@ -71,28 +81,7 @@ class DoMissionActivity : AppCompatActivity()
 
     }
 
- /*
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        if(resultCode== Activity.RESULT_OK)
-        {
-            var ff = File(photoPath)
-            var bit = MediaStore.Images.Media.getBitmap(contentResolver, Uri.fromFile(ff))
-            if(bit!=null)
-            {
-                Toast.makeText(this@Popupselect,"사진생성",Toast.LENGTH_LONG).show()
-            }
-        }
-
-        var intent: Intent = Intent()
-
-        intent.putExtra("path", photoPath)
-
-        setResult(Activity.RESULT_OK, intent)
-        finish()
-    }
-*/
     fun setFrag(n : Int)
     {
         fragmentTransaction = fragmentManager.beginTransaction()
@@ -132,6 +121,30 @@ class DoMissionActivity : AppCompatActivity()
         }
 
     }
+
+    fun saveBitmapToJpeg(bitmap : Bitmap,name : String) : File
+    {
+        val storage = this.cacheDir
+        val filename = name + ".jpg"
+        var tempFile = File(storage,filename)
+
+        try{
+            tempFile.createNewFile()
+            var out = FileOutputStream(tempFile)
+            bitmap.compress(Bitmap.CompressFormat.JPEG,90,out)
+            out.close()
+
+
+        } catch (e : FileNotFoundException){
+            Log.e("wlgusdnzzz",e.toString())
+        } catch (e : IOException){
+            Log.e("wlgusdnzzz",e.toString())
+        }
+
+        return tempFile
+
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==REQUEST_TEXT_GALLERY)
@@ -148,7 +161,7 @@ class DoMissionActivity : AppCompatActivity()
                 val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
                 val picturePath = cursor.getString(column_index);
 
-                cursor.close();
+                cursor.close()
                 // String picturePath contains the path of selected Image
                 var matrix = Matrix();
                 val bmp = BitmapFactory.decodeStream(FileInputStream(picturePath), null, null)
@@ -156,6 +169,8 @@ class DoMissionActivity : AppCompatActivity()
                     Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
 
                 Log.d("wlgusdnzzz", bm.toString())
+                doMissionViewModel.file = saveBitmapToJpeg(bm,picturePath)
+                Log.d("wlgusdnzzz",doMissionViewModel.file.toString())
 
                 doMissionViewModel.bitmap = bm
             }

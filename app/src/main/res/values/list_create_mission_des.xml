@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources><string-array name="arr_create_mission_des">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <item>미션을 선택해주세요</item>
    <item>니또에게 하고 싶은 말을 적어주세요!</item>
     <item>좋은하루가 될 수 있도록 니또를 응원해주세요.</item>
@@ -36,6 +19,7 @@
     <item>니또와 함께 찍은 사진을 올려주세요! 들키지 않고 찍어야겠지만, 내 얼굴도 드러나면 안되겠죠?!</item>
     <item>니또에게 전달할 선물을 사진으로 먼저 알려주세요.</item>
     <item>하고 싶은 말을 적고, 촬영해서 사진으로 보내주세요!</item>
+   <item>미션1 설명</item>
 
 
 </string-array></resources>
