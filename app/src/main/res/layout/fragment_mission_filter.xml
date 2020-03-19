@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_bottom_sheet">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/close_btn"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/close"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorBlueBlack"
+                android:textSize="20sp"
+                android:text="필터"/>
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/top_layout"
+            android:layout_alignParentBottom="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginBottom="14dp">
+                <RelativeLayout
+                    android:id="@+id/mission_to_me_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:paddingTop="26dp"
+                    android:paddingBottom="26dp"
+                    android:background="@drawable/button_light_gray">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorLightBlueBlack"
+                        android:text="나에게 온 미션 보기"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/mission_from_me_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:paddingTop="26dp"
+                    android:paddingBottom="26dp"
+                    android:background="@drawable/button_light_gray">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorLightBlueBlack"
+                        android:text="내가 보낸 미션 보기"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/view_by_mission_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:paddingTop="26dp"
+                    android:paddingBottom="26dp"
+                    android:background="@drawable/button_light_gray">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorLightBlueBlack"
+                        android:text="미션별로 보기"/>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="14dp"
+                        android:src="@drawable/chevron_down"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/view_by_mission_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginBottom="17dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="26dp"
+                    android:paddingEnd="26dp"
+                    android:visibility="gone"
+                    android:background="@drawable/spinner_round_layout_white_border"/>
+
+                <RelativeLayout
+                    android:id="@+id/view_by_participant_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:paddingTop="26dp"
+                    android:paddingBottom="26dp"
+                    android:background="@drawable/button_light_gray">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorLightBlueBlack"
+                        android:text="참가자별로 보기"/>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="14dp"
+                        android:src="@drawable/chevron_down"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/view_by_participant_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginBottom="17dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="26dp"
+                    android:paddingEnd="26dp"
+                    android:visibility="gone"
+                    android:background="@drawable/spinner_round_layout_white_border"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

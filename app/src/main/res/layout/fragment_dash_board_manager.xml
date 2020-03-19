@@ -53,7 +53,7 @@
                         android:layout_below="@id/name_tv"
                         android:textColor="@color/colorBlueBlack"
                         android:textSize="20sp"
-                        android:text="푸르또를 잘 보살펴주세요" />
+                        android:text="프루또를 잘 보살펴주세요" />
                 </RelativeLayout>
 
                 <ImageView

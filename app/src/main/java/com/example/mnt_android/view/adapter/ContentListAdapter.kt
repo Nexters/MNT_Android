@@ -21,9 +21,10 @@ val itemList = arrayListOf(
     )
 )
 
-class ContentListAdapter(private val isManager: Boolean) : BaseAdapter<Array<String>>() {
+class ContentListAdapter() : BaseAdapter<Array<String>>() {
     override val layoutId: Int
         get() = R.layout.item_content
+    var isManager: Boolean = false
 
     init {
 //        TODO("api 연결되면 정확한 데이터 넘겨주기")
