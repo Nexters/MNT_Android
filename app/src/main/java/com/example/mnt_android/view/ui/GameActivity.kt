@@ -73,7 +73,10 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
         binding.lifecycleOwner = this
         gameViewModel= ViewModelProvider(this).get(GameViewModel::class.java)
-        timeLineFragment = TimeLineFragment(sharedPreferences.getBoolean("isManager",false))
+        timeLineFragment = TimeLineFragment(
+            sharedPreferences.getLong("roomId", 0),
+            sharedPreferences.getBoolean("isManager", false)
+        )
 
        if(sharedPreferences.getBoolean("isManager",false))
         {

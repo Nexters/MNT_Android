@@ -53,5 +53,6 @@ class DBRepository {
     fun groupByMission(roomId : Long) : Flowable<GetManagerMission> =
         api.groupByMission(roomId)
 
+    fun getMissionList(roomId: Long): Flowable<UserMissionResponse> = api.getMissionList(roomId)
 
 }

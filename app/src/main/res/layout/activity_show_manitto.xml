@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlackNotice"
                 android:textSize="15sp"
-                tools:text="2020.02.20 (월) 정오까지 푸르또 친구를 많이 많이 챙겨주세요!💌"/>
+                tools:text="2020.02.20 (월) 정오까지 프루또 친구를 많이 많이 챙겨주세요!💌"/>
         </LinearLayout>
 
         <Button

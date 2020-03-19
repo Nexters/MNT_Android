@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorLightBlueBlack"
                 android:textSize="13sp"
-                tools:text="푸르또 방을 나가시겠습니까?" />
+                tools:text="프루또 방을 나가시겠습니까?" />
         </LinearLayout>
 
     </RelativeLayout>
