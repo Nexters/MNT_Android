@@ -4,6 +4,7 @@ import com.example.mnt_android.service.DBApi
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.viewmodel.ApplicantListViewModel
 import com.example.mnt_android.viewmodel.ManitoListViewModel
+import com.example.mnt_android.viewmodel.TimeLineViewModel
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -53,5 +54,9 @@ var networkModule = module {
 
     viewModel {
         ManitoListViewModel(get())
+    }
+
+    viewModel {
+        TimeLineViewModel(get())
     }
 }

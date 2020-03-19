@@ -96,7 +96,7 @@ class JoinRoomActivity : AppCompatActivity()
             joinRoomViewModel.fragmentNum=fragNum
             joinRoomViewModel.checkRoom.value=checkRoom
             joinRoomViewModel.startDayText_joinroom2="${joinRoomViewModel.checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
-            joinRoomViewModel.startDayText_joinroom3="${joinRoomViewModel.checkRoom.value!!.room.startDay} 까지 푸르또 친구를 많이 많이 챙겨주세요!"
+            joinRoomViewModel.startDayText_joinroom3="${joinRoomViewModel.checkRoom.value!!.room.startDay} 까지 프루또 친구를 많이 많이 챙겨주세요!"
 
             setFrag(fragNum)
 

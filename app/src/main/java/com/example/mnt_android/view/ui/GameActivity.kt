@@ -73,7 +73,10 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
         binding.lifecycleOwner = this
         gameViewModel= ViewModelProvider(this).get(GameViewModel::class.java)
-        timeLineFragment = TimeLineFragment(sharedPreferences.getBoolean("isManager",false))
+        timeLineFragment = TimeLineFragment(
+            sharedPreferences.getLong("roomId", 0),
+            sharedPreferences.getBoolean("isManager", false)
+        )
 
        if(sharedPreferences.getBoolean("isManager",false))
         {
@@ -242,7 +245,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     {
 
         val intent = Intent(this@GameActivity,DoMissionActivity::class.java)
-
+        Log.d("wlgusdnzzz",gameViewModel.userMissions[0].toString())
+        intent.putExtra("nowUserMission",gameViewModel.userMissions[0])
         startActivity(intent)
     }
     fun createMission()
