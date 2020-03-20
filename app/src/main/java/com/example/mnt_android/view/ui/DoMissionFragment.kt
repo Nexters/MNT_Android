@@ -57,5 +57,16 @@ class DoMissionFragment : Fragment()
             }
         })
 
+        doMissionViewModel.imageButtonText.observe(this, Observer {
+            if(it!=R.string.tv_get_image.toString())
+            {
+                tv_domission_domission1.setBackgroundResource(R.drawable.button_hot_pink)
+            }
+            else
+            {
+                tv_domission_domission1.setBackgroundResource(R.drawable.button_disable)
+            }
+        })
+
     }
 }

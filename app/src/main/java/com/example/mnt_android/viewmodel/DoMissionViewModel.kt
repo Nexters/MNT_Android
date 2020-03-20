@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.mnt_android.R
 import com.example.mnt_android.service.model.DoMission
 import com.example.mnt_android.service.model.User
 import com.example.mnt_android.service.model.UserMission
@@ -17,6 +18,7 @@ import com.example.mnt_android.view.ui.MainActivity.Companion.userId
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_do_mission1.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -36,6 +38,7 @@ class DoMissionViewModel(application : Application) : AndroidViewModel(applicati
     var bitmap : Bitmap?=null
     var nowUserMission = MutableLiveData<UserMissionResponse>()
     var missionDescription = ""
+    var imageButtonText = MutableLiveData<String>(app.getString(R.string.tv_get_image))
     init {
         //넘겨받은 값으로 초기화
 
@@ -43,7 +46,6 @@ class DoMissionViewModel(application : Application) : AndroidViewModel(applicati
         roomId = app.getSharedPreferences("login",0).getLong("roomId",0)
         userId = app.getSharedPreferences("login",0).getString("kakao_token","")
 
-        Log.d("wlgusdnzzz","roomId : $roomId  userId : $userId")
 
     }
 
@@ -60,12 +62,6 @@ class DoMissionViewModel(application : Application) : AndroidViewModel(applicati
             strdate = format1.format(today)
         }
 
-
-        Log.d("wlgusdnzzz","roomId : $roomId  userId : $userId")
-        Log.d("wlgusdnzzz","missionId : ${nowUserMission.value!!.missionId}  missionText : ${missionText.value}")
-
-        //var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file)
-       // var body = MultipartBody.Part.createFormData("img",file?.name,requestFile)
         repository.sendMission(roomId,userId,nowUserMission.value!!.missionId,missionText.value!!.toString(),file)
            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -5,33 +5,33 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 class CheckRoom(
-    @SerializedName("fruttoId")
-    val fruttoId: Int,//나의 프루또 Id
+
     @SerializedName("isCreater")
     val isCreater: Int,
-    @SerializedName("manittoFruttoId")
-    val manittoFruttoId: String?,//내 마니또의 프루또 Id
+    @SerializedName("manitto")
+    val manitto: UserResponse?,//내 마니또의 프루또 Id
     @SerializedName("room")
     val room : Room,
-
     @SerializedName("user")
-    val user : User
+    val user : User,
+    @SerializedName("userFruttoId")
+    val userFruttoId: Int?//나의 프루또 Id
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readInt(),
-        parcel.readString(),
+        parcel.readParcelable(UserResponse::class.java.classLoader),
         parcel.readParcelable(Room::class.java.classLoader),
-        parcel.readParcelable(User::class.java.classLoader)
+        parcel.readParcelable(User::class.java.classLoader),
+        parcel.readValue(Int::class.java.classLoader) as? Int
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(fruttoId)
         parcel.writeInt(isCreater)
-        parcel.writeString(manittoFruttoId)
+        parcel.writeParcelable(manitto, flags)
         parcel.writeParcelable(room, flags)
         parcel.writeParcelable(user, flags)
+        parcel.writeValue(userFruttoId)
     }
 
     override fun describeContents(): Int {
@@ -48,4 +48,3 @@ class CheckRoom(
         }
     }
 }
-

@@ -24,6 +24,7 @@ import com.example.mnt_android.service.model.UserMission
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.example.mnt_android.viewmodel.DoMissionViewModel
+import kotlinx.android.synthetic.main.fragment_do_mission1.*
 import java.io.*
 
 class DoMissionActivity : AppCompatActivity()
@@ -73,9 +74,9 @@ class DoMissionActivity : AppCompatActivity()
         }
         else
         {
-            val intent = Intent(Intent.ACTION_PICK);
-            intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-            startActivityForResult(intent, REQUEST_TEXT_GALLERY);
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.setType(MediaStore.Images.Media.CONTENT_TYPE)
+            startActivityForResult(intent, REQUEST_TEXT_GALLERY)
         }
 
 
@@ -88,7 +89,7 @@ class DoMissionActivity : AppCompatActivity()
         when(n)
         {
             0 ->
-            {
+                {
                 fragmentTransaction.replace(R.id.frag_do_mission,doMissionFragment)
                 doMissionViewModel.fragmentNum=0
                 fragmentTransaction.commit()
@@ -96,9 +97,16 @@ class DoMissionActivity : AppCompatActivity()
             }
             1->
             {
-                fragmentTransaction.replace(R.id.frag_do_mission,doMissionFragment2)
-                doMissionViewModel.fragmentNum=1
-                fragmentTransaction.commit()
+                if(doMissionViewModel.file==null && doMissionViewModel.missionText.value=="")
+                {
+                    Toast.makeText(this,"니또를 위해 미션을 작성해주세요 ㅜㅜ",Toast.LENGTH_LONG).show()
+                }
+                else
+                {
+                    fragmentTransaction.replace(R.id.frag_do_mission, doMissionFragment2)
+                    doMissionViewModel.fragmentNum = 1
+                    fragmentTransaction.commit()
+                }
             }
         }
     }
@@ -125,7 +133,7 @@ class DoMissionActivity : AppCompatActivity()
     fun saveBitmapToJpeg(bitmap : Bitmap,name : String) : File
     {
         val storage = this.cacheDir
-        val filename = name + ".jpg"
+        val filename = System.currentTimeMillis().toString()+ ".jpg"
         var tempFile = File(storage,filename)
 
         try{
@@ -141,6 +149,7 @@ class DoMissionActivity : AppCompatActivity()
             Log.e("wlgusdnzzz",e.toString())
         }
 
+        doMissionViewModel.imageButtonText.value = filename
         return tempFile
 
     }
@@ -150,27 +159,25 @@ class DoMissionActivity : AppCompatActivity()
         if(requestCode==REQUEST_TEXT_GALLERY)
         {
             if(data!=null) {
-                val selectedImage = data?.getData();
+                val selectedImage = data?.getData()
                 var filePathColumn: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
                 var cursor = getContentResolver().query(
                     selectedImage,
                     filePathColumn, null, null, null
-                );
-                cursor.moveToFirst();
+                )
+                cursor.moveToFirst()
 
                 val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-                val picturePath = cursor.getString(column_index);
+                val picturePath = cursor.getString(column_index)
 
                 cursor.close()
                 // String picturePath contains the path of selected Image
-                var matrix = Matrix();
+                var matrix = Matrix()
                 val bmp = BitmapFactory.decodeStream(FileInputStream(picturePath), null, null)
                 var bm =
-                    Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
+                    Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true)
 
-                Log.d("wlgusdnzzz", bm.toString())
                 doMissionViewModel.file = saveBitmapToJpeg(bm,picturePath)
-                Log.d("wlgusdnzzz",doMissionViewModel.file.toString())
 
                 doMissionViewModel.bitmap = bm
             }
