@@ -1,7 +1,10 @@
 package com.example.mnt_android.binding
 
+import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.util.FALSE_INT
@@ -62,4 +65,13 @@ fun bindAdapterMissionList(
             setList(list)
         }
     }
+}
+
+@BindingAdapter("android:src")
+fun setIvSrc(view: ImageView, imgSrc: String?) {
+    imgSrc?.let {
+        Glide.with(view.context)
+            .load(it)
+            .into(view)
+    } ?: { view.visibility = View.GONE }()
 }

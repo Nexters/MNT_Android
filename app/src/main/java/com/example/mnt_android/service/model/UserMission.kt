@@ -8,11 +8,11 @@ class UserMission(
     @SerializedName("content")
     var content : String,
     @SerializedName("id")
-    var id : Int,
+    var id : Int?,
     @SerializedName("missionId")
     var missionId: String?,
     @SerializedName("missionImg")
-    var missionImg : String,
+    var missionImg : String?,
     @SerializedName("roomId")
     var roomId : Int,
     @SerializedName("userDone")
@@ -37,7 +37,7 @@ class UserMission(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(content)
-        parcel.writeInt(id)
+        parcel.writeInt(id ?: -1)
         parcel.writeString(missionId)
         parcel.writeString(missionImg)
         parcel.writeInt(roomId)
