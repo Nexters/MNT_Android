@@ -3,6 +3,7 @@ package com.example.mnt_android.view.adapter
 import android.view.View
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseAdapter
+import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.view.viewholder.ContentListViewHolder
 
 val itemList = arrayListOf(
@@ -21,15 +22,10 @@ val itemList = arrayListOf(
     )
 )
 
-class ContentListAdapter() : BaseAdapter<Array<String>>() {
+class ContentListAdapter() : BaseAdapter<UserMissionResponse>() {
     override val layoutId: Int
         get() = R.layout.item_content
     var isManager: Boolean = false
-
-    init {
-//        TODO("api 연결되면 정확한 데이터 넘겨주기")
-        setList(itemList)
-    }
 
     override fun viewHolder(layout: Int, view: View) = ContentListViewHolder(view, isManager)
 }

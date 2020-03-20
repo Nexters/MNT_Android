@@ -48,6 +48,10 @@ class TimeLineFragment(private val roomId: Long, private val _isManager: Boolean
     }
 
     private fun setEventListener() {
+        swipe_layout.setOnRefreshListener {
+            viewModel.setContentList(roomId)
+            swipe_layout.isRefreshing = false
+        }
         manito_list_btn.setOnClickListener {
             val intent = Intent(context, ManitoActivity::class.java)
             intent.putExtra(TAG_IS_MANAGER, _isManager)

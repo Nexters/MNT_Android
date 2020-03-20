@@ -84,6 +84,6 @@ interface DBApi {
     @GET("/api/mission/list/{roomId}")
     fun getMissionList(
         @Path("roomId") roomId : Long
-    ) : Flowable<UserMissionResponse>
+    ) : Flowable<MissionListResponse>
 
 }
