@@ -96,7 +96,7 @@ class JoinRoomActivity : AppCompatActivity()
             joinRoomViewModel.fragmentNum=fragNum
             joinRoomViewModel.checkRoom.value=checkRoom
             joinRoomViewModel.startDayText_joinroom2="${joinRoomViewModel.checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
-            joinRoomViewModel.startDayText_joinroom3="${joinRoomViewModel.checkRoom.value!!.room.startDay} 까지 프루또 친구를 많이 많이 챙겨주세요!"
+            joinRoomViewModel.startDayText_joinroom3="${joinRoomViewModel.checkRoom.value!!.room.startDay} 까지 프루또 친구를 많이 많이 챙겨주세요!\uD83D\uDC8C"
 
             setFrag(fragNum)
 
@@ -117,6 +117,9 @@ class JoinRoomActivity : AppCompatActivity()
 
     fun checkNitto()
     {
+
+        //여기서 니또 확인 sf 저장
+
         val intent = Intent(this@JoinRoomActivity,GameActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         intent.putExtra("roomName",checkRoom?.room?.name)

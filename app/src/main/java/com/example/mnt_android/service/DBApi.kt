@@ -9,7 +9,9 @@ import io.reactivex.Flowable
 
 import io.reactivex.Completable
 import io.reactivex.Single
+import okhttp3.MultipartBody
 import retrofit2.http.*
+import java.io.File
 
 interface DBApi {
 
@@ -64,10 +66,22 @@ interface DBApi {
         @Body mission : Mission
     ) : Completable
 
+    @GET("/api/user/manitto")
+    fun getManitto(
+        @Query("roomId") roomId : Long,
+        @Query("userId") userId: String
+    ) : Flowable<User>
+
+
+    @Headers("Accept: */*",
+        "Content-Type: multipart/form-data;boundary=--------------------------398696160624612408788457")
     @POST("/api/mission/send")
     fun sendMission(
-        @Body userMission : UserMission,
-        @Query("missionId") missionId : Long
+        @Query("roomId") roomId  : Long,
+        @Query("userId") userId : String,
+        @Query("missionId") missionId : Long,
+        @Query("content") content : String,
+        @Query("img") img : File?
     ) : Completable
 
     @GET("/api/mission/done/{userId}")

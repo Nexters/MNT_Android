@@ -73,17 +73,22 @@
                     android:id="@+id/tv_naming_domission2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:gravity="left"
+                    android:gravity="center_vertical"
                     android:layout_weight="2"
-                    android:text="TextView" />
+                    android:text="내과일 님이 마니또이름 에게"
+                    android:textSize="15sp"
+                    android:textColor="#080808"
+                    />
 
                 <TextView
                     android:id="@+id/tv_date_domission2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:gravity="left"
+                    android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="오늘"
+                    android:textSize="11sp"
+                    android:textColor="#808080"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -109,6 +114,7 @@
             app:layout_constraintHeight_percent="0.05"
             app:layout_constraintVertical_bias="0.6"
             app:layout_constraintHorizontal_bias="0.5"
+            android:text="@{doMissionViewModel.nowUserMission.missionName}"
             android:textSize="15sp"
             android:textColor="#000000"
             app:layout_constraintTop_toTopOf="parent"
@@ -141,7 +147,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_hot_pink"
-            android:text="미션수행하기"
+            android:text="완료"
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:onClick="@{()->doMissionViewModel.sendMission()}"
