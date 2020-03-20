@@ -16,7 +16,7 @@ class UserMission(
     @SerializedName("roomId")
     var roomId : Int,
     @SerializedName("userDone")
-    var userDone : Int,
+    var userDone : Int?,
     @SerializedName("userDoneTime")
     var userDoneTime : String,
     @SerializedName("userId")
@@ -41,7 +41,7 @@ class UserMission(
         parcel.writeString(missionId)
         parcel.writeString(missionImg)
         parcel.writeInt(roomId)
-        parcel.writeInt(userDone)
+        parcel.writeInt(userDone ?: -1)
         parcel.writeString(userDoneTime)
         parcel.writeParcelable(user, flags)
     }

@@ -21,7 +21,7 @@ class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(
 
     fun setMissionList(userId: String, roomId: Long, success: () -> Unit) {
         addDisposable(
-            dbRepository.getMissionTypeList(userId, roomId)
+            dbRepository.getUserMission(userId, roomId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

@@ -41,6 +41,7 @@ import java.util.HashMap
 import com.kakao.message.template.*
 import io.reactivex.disposables.CompositeDisposable
 import org.jetbrains.anko.textColor
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.OnClickListener {
     override var viewModel = BaseViewModel()
@@ -51,7 +52,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     private lateinit var fragmentTransaction: FragmentTransaction
 
     private lateinit var backPressViewModel: BackPressViewModel
-     lateinit var gameViewModel: GameViewModel
+    val gameViewModel by viewModel<GameViewModel>()
     private lateinit var timeLineFragment: TimeLineFragment
     private lateinit var missionApplicantFragment: MissionApplicantFragment
     private lateinit var missionManagerFragment: MissionManagerFragment
@@ -72,7 +73,6 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
             .setContentView<ActivityGameBinding>(this, R.layout.activity_game)
 
         binding.lifecycleOwner = this
-        gameViewModel= ViewModelProvider(this).get(GameViewModel::class.java)
         timeLineFragment = TimeLineFragment(
             sharedPreferences.getString("kakao_token", ""),
             sharedPreferences.getLong("roomId", 0),
@@ -85,7 +85,10 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         }
         else
         {
-            missionApplicantFragment = MissionApplicantFragment()
+            missionApplicantFragment = MissionApplicantFragment(
+                sharedPreferences.getString("kakao_token", ""),
+                sharedPreferences.getLong("roomId", 0)
+            )
         }
         dashBoardApplicantFragment = DashBoardApplicantFragment()
         dashBoardManagerFragment = DashBoardManagerFragment()
