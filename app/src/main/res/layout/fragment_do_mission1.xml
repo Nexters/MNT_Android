@@ -18,57 +18,117 @@
 
         <TextView
             android:id="@+id/tv_name_domission1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="78dp"
-            android:layout_marginTop="106dp"
-            android:text="미션 이름"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintHorizontal_bias="0.07"
+            android:textSize="20sp"
+            android:textColor="#0f1525"
+            android:text="@{doMissionViewModel.nowUserMission.missionName}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_des__domission1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="54dp"
-            android:text="미션 설명"
-            app:layout_constraintStart_toStartOf="@+id/tv_name_domission1"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name_domission1" />
+            android:id="@+id/tv_des_domission1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintHeight_percent="0.03"
+            app:layout_constraintVertical_bias="0.18"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:textSize="15sp"
+            android:textColor="#2e3a59"
+            android:text="@{doMissionViewModel.missionDescription}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:id="@+id/et_content_domission1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.87"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.36"
+            android:background="@drawable/textview_round"
+            android:hint="텍스트를 입력해주세요"
             android:ems="10"
             android:text="@={doMissionViewModel.missionText}"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_des__domission1" />
+            android:inputType="textMultiLine|textPersonName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <TextView
-            android:id="@+id/tv_image_domission1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="169dp"
-            android:layout_marginTop="127dp"
-            android:text="이미지 가져오기"
-            android:onClick="@{()->doMissionActivity.setImage()}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+        <LinearLayout
+            android:background="@drawable/button_pink"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintWidth_percent="0.87"
+            app:layout_constraintHeight_percent="0.083"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.65"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <TextView
+                android:id="@+id/tv_image_domission1"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="7"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:textSize="15sp"
+                android:textColor="#222b45"
+                android:text="@{doMissionViewModel.imageButtonText}"
+                android:onClick="@{()->doMissionActivity.setImage()}"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:textSize="12sp"
+                android:textColor="#ff5050"
+                android:gravity="right"
+                android:text="앨범"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+
+                android:src="@drawable/arrow_right"/>
+        </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/tv_domission_domission1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="81dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="미션수행하기"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            app:layout_constraintHeight_percent="0.074"
+            app:layout_constraintWidth_percent="0.89"
+            app:layout_constraintVertical_bias="0.96"
+            app:layout_constraintHorizontal_bias="0.5"
             android:onClick="@{()->doMissionActivity.setFrag(1)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:background="@drawable/button_disable"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

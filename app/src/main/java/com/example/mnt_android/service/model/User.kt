@@ -12,7 +12,6 @@ class User(
 
     @SerializedName("fcmToken")
     val fcmToken: String?,
-
     @SerializedName("id")
     val id: String,
     @SerializedName("name")
@@ -49,4 +48,3 @@ class User(
         }
     }
 }
-

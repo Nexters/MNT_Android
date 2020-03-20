@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 class UserMission(
     @SerializedName("content")
-    var content : String,
+    var content : String?,
     @SerializedName("id")
     var id : Int?,
     @SerializedName("missionId")
@@ -18,18 +18,17 @@ class UserMission(
     @SerializedName("userDone")
     var userDone : Int?,
     @SerializedName("userDoneTime")
-    var userDoneTime : String,
+    var userDoneTime : String?,
     @SerializedName("userId")
     var user : User
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
-        parcel.readInt(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readParcelable(User::class.java.classLoader)
     ) {

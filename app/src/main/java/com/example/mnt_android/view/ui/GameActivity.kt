@@ -249,7 +249,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     {
 
         val intent = Intent(this@GameActivity,DoMissionActivity::class.java)
-
+        Log.d("wlgusdnzzz",gameViewModel.userMissions[0].toString())
+        intent.putExtra("nowUserMission",gameViewModel.userMissions[0])
         startActivity(intent)
     }
     fun createMission()

@@ -9,6 +9,9 @@ import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
+import org.intellij.lang.annotations.Flow
+import java.io.File
 
 class DBRepository {
 
@@ -31,6 +34,10 @@ class DBRepository {
                    userId : String) : Completable =
         api.attendRoom(roomId,userId)
 
+    fun getManitto(roomId : Long,
+                   userId : String) : Flowable<User> =
+        api.getManitto(roomId,userId)
+
     fun userList(roomId : Long) : Single<ApplicantResponse> =
         api.userList(roomId)
 
@@ -42,9 +49,12 @@ class DBRepository {
     fun makeMission(mission : Mission) : Completable =
         api.makeMission(mission)
 
-    fun sendMission(userMission: UserMission,
-                    missionId : Long) : Completable =
-        api.sendMission(userMission,missionId)
+    fun sendMission(roomId  : Long,
+                    userId : String,
+                    missionId : Long,
+                    content : String,
+                    img : File?) : Completable =
+        api.sendMission(roomId,userId,missionId,content,img)
     
     fun getUserMission(userId : String,
                        roomId : Long) : Flowable<MissionListResponse> =
