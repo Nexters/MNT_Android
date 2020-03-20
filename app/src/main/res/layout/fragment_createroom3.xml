@@ -50,19 +50,30 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="프루또방이 생성되었습니다. 초대코드를 공유해서 친구들을 초대하세요.  "
-            app:layout_constraintVertical_bias="0.37"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHeight_percent="0.11"
-            app:layout_constraintWidth_percent="0.84"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/combined_shape"/>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0.42"
+                android:textSize="15sp"
+                android:textColor="@color/colorBlackNotice"
+                android:text="프루또방이 생성되었습니다.\n초대코드를 공유해서 친구들을 초대하세요.  " />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tv_createroom3_1"
@@ -87,8 +98,9 @@
             android:layout_height="0dp"
             app:layout_constraintWidth_percent="0.2"
             app:layout_constraintHeight_percent="0.07"
+            android:gravity="center"
             android:textSize="24sp"
-            android:textColor="#000000"
+            android:textColor="@color/colorBlack"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_bias="0.53"
             android:text="@{Long.toString(createRoomViewModel.id)}"
@@ -99,11 +111,9 @@
 
         <ImageView
             android:id="@+id/iv_copy"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:srcCompat="@drawable/copy"
-            app:layout_constraintHeight_percent="0.07"
-            app:layout_constraintWidth_percent="0.07"
+            android:layout_width="25dp"
+            android:layout_height="24dp"
+            android:src="@drawable/copy"
             app:layout_constraintVertical_bias="0.53"
             app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintTop_toTopOf="parent"
