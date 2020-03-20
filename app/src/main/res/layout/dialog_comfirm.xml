@@ -22,7 +22,10 @@
                 android:id="@+id/question_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:gravity="center"
                 android:textSize="15sp"
+                android:textColor="@color/colorLightBlueBlack"
                 tools:text="홍길동님을 내보내시겠습니까?"/>
         </LinearLayout>
 
