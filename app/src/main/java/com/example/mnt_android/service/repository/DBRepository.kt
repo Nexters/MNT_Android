@@ -55,4 +55,6 @@ class DBRepository {
 
     fun getMissionList(roomId: Long): Flowable<MissionListResponse> = api.getMissionList(roomId)
 
+    fun getMissionTypeList(userId: String, roomId: Long): Flowable<MissionListResponse> =
+        api.getMissionTypeList(userId, roomId)
 }

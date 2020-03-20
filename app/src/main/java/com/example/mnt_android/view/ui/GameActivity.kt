@@ -74,6 +74,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         binding.lifecycleOwner = this
         gameViewModel= ViewModelProvider(this).get(GameViewModel::class.java)
         timeLineFragment = TimeLineFragment(
+            sharedPreferences.getString("kakao_token", ""),
             sharedPreferences.getLong("roomId", 0),
             sharedPreferences.getBoolean("isManager", false)
         )
