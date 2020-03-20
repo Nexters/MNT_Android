@@ -103,6 +103,12 @@ class SplashActivity : AppCompatActivity()
                                 startActivity(intent)
                             } else {
                                 //내 마니또를 확인하지 못함
+
+                                editor!!.putInt("myFruttoId",joinRoomViewModel.checkRoom.value!!.userFruttoId!!)//내 FruttoId 저장
+                                editor!!.putInt("manittoFruttoId",joinRoomViewModel.checkRoom.value!!.manitto?.fruttoId!!)//내 마니또의 FruttoId 저장
+                                editor!!.putString("manittoName",joinRoomViewModel.checkRoom.value!!.manitto?.name!!)
+                                editor!!.commit()
+
                                 val intent = Intent(this, JoinRoomActivity::class.java)
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                 intent.putExtra("fragNum", 2)

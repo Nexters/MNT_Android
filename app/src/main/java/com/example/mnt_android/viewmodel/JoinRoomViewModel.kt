@@ -36,23 +36,25 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
     var progressBar : ObservableInt
     var startDayText_joinroom2 : String=""
     var myName = ""
-    var nittoName="ㅁㅁㅁ"
+    var nittoName=""
     var name_joinroom3 = SpannableStringBuilder()
     var startDayText_joinroom3 : String = ""
+
     init {
         checkNitto.value=false
         //isJoined.value=false
         //isSearched.value=false
         myName = sf.getString("kakao_nickname","")
+        nittoName = sf.getString("manittoName","")
 
         //임시
-        name_joinroom3 = SpannableStringBuilder("$myName 의 마니또는 $nittoName 입니다.")
+        name_joinroom3 = SpannableStringBuilder("${myName}님의 마니또는 ${nittoName}님입니다.")
 
         name_joinroom3.setSpan(ForegroundColorSpan(Color.parseColor("#ff5050")),
-            0,myName.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            0,myName.length+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         name_joinroom3.setSpan(ForegroundColorSpan(Color.parseColor("#ff5050")),
-            myName.length+7,myName.length+7+nittoName.length-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            myName.length+8,myName.length+8+nittoName.length+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         isStarted.value=false
         progressBar = ObservableInt(View.GONE)
@@ -139,9 +141,10 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ t: CheckRoomList? ->
-                            if(t?.checkRoomList!=null)
+                            if(t?.checkRoomList != null)
                             {
                                 checkRoom.value = t!!.checkRoomList[0]
+                               Log.d("wlgusdnzzz",checkRoom.value.toString())
                                 startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
                                 Log.d("wlgusdnzzz","${checkRoom.value!!.room.startDay}")
                                 isSearched.value=true
