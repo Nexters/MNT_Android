@@ -57,12 +57,11 @@ class DBRepository {
         api.sendMission(roomId,userId,missionId,content,img)
     
     fun getUserMission(userId : String,
-                       roomId : Long) : Flowable<GetUserMission> =
+                       roomId : Long) : Flowable<MissionListResponse> =
         api.getUserMission(userId,roomId)
 
     fun groupByMission(roomId : Long) : Flowable<GetManagerMission> =
         api.groupByMission(roomId)
 
-    fun getMissionList(roomId: Long): Flowable<UserMissionResponse> = api.getMissionList(roomId)
-
+    fun getMissionList(roomId: Long): Flowable<MissionListResponse> = api.getMissionList(roomId)
 }

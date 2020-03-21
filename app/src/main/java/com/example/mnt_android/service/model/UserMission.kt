@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 class UserMission(
     @SerializedName("content")
     var content : String?,
+    @SerializedName("id")
+    var id : Int?,
     @SerializedName("missionId")
     var missionId: String?,
     @SerializedName("missionImg")
@@ -34,10 +36,11 @@ class UserMission(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(content)
+        parcel.writeInt(id ?: -1)
         parcel.writeString(missionId)
         parcel.writeString(missionImg)
         parcel.writeInt(roomId)
-        parcel.writeValue(userDone)
+        parcel.writeInt(userDone ?: -1)
         parcel.writeString(userDoneTime)
         parcel.writeParcelable(user, flags)
     }

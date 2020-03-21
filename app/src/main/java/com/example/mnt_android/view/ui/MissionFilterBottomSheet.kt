@@ -11,19 +11,16 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.mnt_android.R
+import com.example.mnt_android.bus.*
 import com.example.mnt_android.service.model.Applicant
+import com.example.mnt_android.vo.MissionVO
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_mission_filter.*
 
 
-class MissionFilterBottomSheet : BottomSheetDialogFragment() {
-    var missionList: Array<String> = arrayOf()
+class MissionFilterBottomSheet(private val userId: String) : BottomSheetDialogFragment() {
+    var missionList: ArrayList<MissionVO> = arrayListOf()
     var participantList: ArrayList<Applicant> = arrayListOf()
-
-    var missionToMeOnClickListener: () -> Unit = {}
-    var missionFromMeOnClickListener: () -> Unit = {}
-    var missionListOnClickListener: (missionName: String) -> Unit = {}
-    var participantListOnClickListener: (userId: String) -> Unit = {}
 
     @SuppressLint("RestrictedApi")
     override fun setupDialog(dialog: Dialog, style: Int) {
@@ -47,11 +44,22 @@ class MissionFilterBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun setEventListener() {
-        mission_to_me_btn.setOnClickListener { missionToMeOnClickListener }
-        mission_from_me_btn.setOnClickListener { missionFromMeOnClickListener }
+        order_mission_list_btn.setOnClickListener {
+            sendFilteringEvent(arrayOf(MISSION_LIST_ALL))
+            dismiss()
+        }
+        mission_to_me_btn.setOnClickListener {
+            sendFilteringEvent(arrayOf(MISSION_LIST_TO_ME, userId))
+            dismiss()
+        }
+        mission_from_me_btn.setOnClickListener {
+            sendFilteringEvent(arrayOf(MISSION_LIST_FROM_ME, userId))
+            dismiss()
+        }
         view_by_mission_btn.setOnClickListener {
             view_by_mission_layout.run {
                 if (visibility == View.VISIBLE) {
+                    removeAllViews()
                     visibility = View.GONE
                 } else {
                     visibility = View.VISIBLE
@@ -64,11 +72,13 @@ class MissionFilterBottomSheet : BottomSheetDialogFragment() {
         view_by_participant_btn.setOnClickListener {
             view_by_participant_layout.run {
                 if (visibility == View.VISIBLE) {
+                    removeAllViews()
                     visibility = View.GONE
                 } else {
                     visibility = View.VISIBLE
                     missionList.forEach {
-                        addView(getUserItem("", 1, it))
+                        addView(getUserItem(userId, 1, "이름암거나"))
+                        // TODO : 참여자 리스트로 수정 필요
                     }
                 }
             }
@@ -76,12 +86,20 @@ class MissionFilterBottomSheet : BottomSheetDialogFragment() {
         close_btn.setOnClickListener { dismiss() }
     }
 
-    private fun getMissionItem(mission: String = ""): LinearLayout {
+    private fun getMissionItem(mission: MissionVO): LinearLayout {
         val inflater = LayoutInflater.from(context)
         return (inflater.inflate(R.layout.item_filter_list, null, false) as LinearLayout).apply {
             findViewById<ImageView>(R.id.iv).visibility = View.GONE
-            findViewById<TextView>(R.id.tv).text = mission
-            setOnClickListener { missionListOnClickListener(mission) }
+            findViewById<TextView>(R.id.tv).text = mission.missionName
+            setOnClickListener {
+                sendFilteringEvent(
+                    arrayOf(
+                        MISSION_LIST_MISSION_TYPE,
+                        mission.missionId.toString()
+                    )
+                )
+                dismiss()
+            }
         }
     }
 
@@ -95,7 +113,15 @@ class MissionFilterBottomSheet : BottomSheetDialogFragment() {
             )
             findViewById<ImageView>(R.id.iv).setImageResource(imgRes)
             findViewById<TextView>(R.id.tv).text = title
-            setOnClickListener { participantListOnClickListener(userId) }
+            setOnClickListener {
+                sendFilteringEvent(
+                    arrayOf(
+                        MISSION_LIST_PARTICIPANT,
+                        userId
+                    )
+                )
+                dismiss()
+            }
         }
     }
 }
