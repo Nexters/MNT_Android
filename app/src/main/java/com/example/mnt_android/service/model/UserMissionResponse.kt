@@ -10,7 +10,7 @@ class UserMissionResponse (
     @SerializedName("manittoFruttoId")//내 마니또의 넘버
     var manittoFruttoId : Int,
     @SerializedName("missionId")
-    var missionId : Long,
+    var missionId : Int,
     @SerializedName("missionName")
     var missionName: String,
     @SerializedName("userFruttoId")//나의 넘버
@@ -21,7 +21,7 @@ class UserMissionResponse (
     constructor(parcel: Parcel) : this(
         parcel.readParcelable(User::class.java.classLoader),
         parcel.readInt(),
-        parcel.readLong(),
+        parcel.readInt(),
         parcel.readString(),
         parcel.readInt(),
         parcel.readParcelable(UserMission::class.java.classLoader)
@@ -31,7 +31,7 @@ class UserMissionResponse (
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(manitto, flags)
         parcel.writeInt(manittoFruttoId)
-        parcel.writeLong(missionId)
+        parcel.writeInt(missionId)
         parcel.writeString(missionName)
         parcel.writeInt(userFruttoId)
         parcel.writeParcelable(userMission, flags)
