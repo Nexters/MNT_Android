@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/combined_shape"/>
+                android:src="@drawable/combined_shape_down"/>
 
             <TextView
                 android:id="@+id/textView3"

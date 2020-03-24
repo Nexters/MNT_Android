@@ -1,8 +1,9 @@
-package com.example.mnt_android
+package com.example.mnt_android.view.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.mnt_android.R
 import kotlinx.android.synthetic.main.activity_finish.*
 
 class FinishActivity : AppCompatActivity() {

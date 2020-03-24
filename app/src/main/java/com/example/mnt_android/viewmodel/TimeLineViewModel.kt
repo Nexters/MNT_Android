@@ -62,7 +62,7 @@ class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(
                 MISSION_LIST_ALL -> _allContentList.value?.let { filteredList = it }
                 MISSION_LIST_TO_ME, MISSION_LIST_PARTICIPANT -> {
                     _allContentList.value?.forEach {
-                        if(it.manitto.id == filterContents[1]) filteredList.add(it)
+                        if(it.manitto?.id == filterContents[1]) filteredList.add(it)
                     }
                 }
 
@@ -74,7 +74,7 @@ class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(
 
                 MISSION_LIST_MISSION_TYPE -> {
                     _allContentList.value?.forEach {
-                        if(it.missionId == filterContents[1].toInt()) filteredList.add(it)
+                        if(it.missionId == filterContents[1].toLong()) filteredList.add(it)
                     }
                 }
             }

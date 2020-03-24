@@ -25,6 +25,7 @@ class UserMission(
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
@@ -36,11 +37,11 @@ class UserMission(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(content)
-        parcel.writeInt(id ?: -1)
+        parcel.writeValue(id)
         parcel.writeString(missionId)
         parcel.writeString(missionImg)
         parcel.writeInt(roomId)
-        parcel.writeInt(userDone ?: -1)
+        parcel.writeValue(userDone)
         parcel.writeString(userDoneTime)
         parcel.writeParcelable(user, flags)
     }
