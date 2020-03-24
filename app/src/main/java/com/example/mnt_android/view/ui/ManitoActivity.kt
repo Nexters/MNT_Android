@@ -31,8 +31,7 @@ class ManitoActivity : BaseActivity<ActivityManitoBinding, ManitoListViewModel>(
         dataBinding.viewModel = viewModel
         viewModel.run {
             isManager.value = intent.getBooleanExtra(TAG_IS_MANAGER, false)
-            getUserList(intent.getLongExtra(TAG_ROOM_ID, 56370))
-            //TODO: Default Value 수정 필요
+            getUserList(intent.getLongExtra(TAG_ROOM_ID, -1))
         }
     }
 

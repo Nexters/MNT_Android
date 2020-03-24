@@ -13,6 +13,7 @@ import com.example.mnt_android.bus.MISSION_LIST_ALL
 import com.example.mnt_android.bus.filteringEventBus
 import com.example.mnt_android.databinding.FragmentTimeLineBinding
 import com.example.mnt_android.util.TAG_IS_MANAGER
+import com.example.mnt_android.util.TAG_ROOM_ID
 import com.example.mnt_android.view.adapter.ContentListAdapter
 import com.example.mnt_android.viewmodel.TimeLineViewModel
 import io.reactivex.disposables.CompositeDisposable
@@ -67,6 +68,7 @@ class TimeLineFragment(private val userId: String, private val roomId: Long, pri
         manito_list_btn.setOnClickListener {
             val intent = Intent(context, ManitoActivity::class.java)
             intent.putExtra(TAG_IS_MANAGER, _isManager)
+            intent.putExtra(TAG_ROOM_ID, roomId)
             startActivity(intent)
         }
         filter_btn.setOnClickListener {
