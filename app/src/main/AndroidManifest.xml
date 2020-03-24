@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.ui.SelectManitoActivity"></activity>
         <activity android:name=".view.ui.FinishActivity" />
         <activity android:name=".view.ui.MissionDetailActivity" />
         <activity android:name=".view.ui.ShowManittoActivity" />
