@@ -11,6 +11,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 import org.intellij.lang.annotations.Flow
+import retrofit2.http.Multipart
 import java.io.File
 
 class DBRepository {
@@ -53,16 +54,15 @@ class DBRepository {
                     userId : String,
                     missionId : Long,
                     content : String,
-                    img : File?) : Completable =
+                    img : MultipartBody.Part?) : Completable =
         api.sendMission(roomId,userId,missionId,content,img)
     
     fun getUserMission(userId : String,
-                       roomId : Long) : Flowable<GetUserMission> =
+                       roomId : Long) : Flowable<MissionListResponse> =
         api.getUserMission(userId,roomId)
 
     fun groupByMission(roomId : Long) : Flowable<GetManagerMission> =
         api.groupByMission(roomId)
 
-    fun getMissionList(roomId: Long): Flowable<UserMissionResponse> = api.getMissionList(roomId)
-
+    fun getMissionList(roomId: Long): Flowable<MissionListResponse> = api.getMissionList(roomId)
 }

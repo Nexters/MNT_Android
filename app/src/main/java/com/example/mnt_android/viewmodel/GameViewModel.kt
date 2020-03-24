@@ -1,22 +1,28 @@
 package com.example.mnt_android.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mnt_android.base.BaseViewModel
+import com.example.mnt_android.extension.isTrue
 import com.example.mnt_android.service.model.*
 import com.example.mnt_android.service.repository.DBRepository
+import com.example.mnt_android.util.SUCCESS
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class GameViewModel : BaseViewModel()
+class GameViewModel(private val repository: DBRepository) : BaseViewModel()
 {
     var title : String=""
     var userMissions = ArrayList<UserMissionResponse>()
     var missionResponses = ArrayList<MissionResponse>()
     var missionManager = ArrayList<Pair<String,String>>()
     var changeManagerList = MutableLiveData<Boolean>()
-    private val repository = DBRepository()
+    private val _doneMissionTypeList = MutableLiveData<ArrayList<UserMissionResponse>>()
+    val doneMissionTypeList: LiveData<ArrayList<UserMissionResponse>> = _doneMissionTypeList
+    private val _notDoneMissionTypeList = MutableLiveData<ArrayList<UserMissionResponse>>()
+    val notDoneMissionTypeList: LiveData<ArrayList<UserMissionResponse>> = _notDoneMissionTypeList
 
 
     fun getUserMission(userId : String, roomId : Long)
@@ -25,10 +31,25 @@ class GameViewModel : BaseViewModel()
             repository.getUserMission(userId,roomId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({t ->
-                    userMissions = ArrayList(t.userMissionResponses)// 나의 미션 정보
-                    Log.d("wlgusdnzzz",userMissions.size.toString())
-                    Log.d("wlgusdnzzz",userMissions[0].missionName)
+                .subscribe({
+                    it.run {
+                        if(apiStatus.httpStatus == SUCCESS) {
+                            userMissions = data // 나의 미션 정보
+                            data.forEach { mission ->
+                                val done = arrayListOf<UserMissionResponse>()
+                                val notDone = arrayListOf<UserMissionResponse>()
+
+                                mission.userMission.userDone?.let { isDone ->
+                                    if (isDone.isTrue) done.add(mission)
+                                } ?: { notDone.add(mission) }()
+
+                                _doneMissionTypeList.value = done
+                                _notDoneMissionTypeList.value = notDone
+                            }
+                            Log.d("wlgusdnzzz",userMissions.size.toString())
+                            Log.d("wlgusdnzzz",userMissions[0].missionName)
+                        }
+                    }
                 },{t ->
                     Log.d("wlgusdnzzz",t.toString())
                 })

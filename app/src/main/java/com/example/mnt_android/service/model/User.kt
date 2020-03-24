@@ -11,13 +11,13 @@ import java.util.*
 class User(
 
     @SerializedName("fcmToken")
-    val fcmToken: String,
+    val fcmToken: String?,
     @SerializedName("id")
     val id: String,
     @SerializedName("name")
     val name : String,
     @SerializedName("profilePic")
-    val profilePic: String
+    val profilePic: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),

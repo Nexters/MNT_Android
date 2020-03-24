@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources><string-array name="arr_create_mission_des">
     <item>미션을 선택해주세요</item>
-   <item>니또에게 하고 싶은 말을 적어주세요!</item>
+    <item>니또에게 하고 싶은 말을 적어주세요!</item>
     <item>좋은하루가 될 수 있도록 니또를 응원해주세요.</item>
     <item>니또가 힘이 날 수 있도록 은근슬쩍 칭찬해주세요.</item>
     <item>니또의 이름으로 3행시를 지어주세요.</item>
