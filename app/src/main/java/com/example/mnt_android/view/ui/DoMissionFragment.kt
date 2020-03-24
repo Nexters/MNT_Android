@@ -2,6 +2,7 @@ package com.example.mnt_android.view.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +50,15 @@ class DoMissionFragment : Fragment()
         doMissionViewModel.missionText.observe(this, Observer {
             if(it=="")
             {
-                tv_domission_domission1.setBackgroundResource(R.drawable.button_disable)
+                if(doMissionViewModel.imageButtonText.value!=getString(R.string.tv_get_image))
+                {
+                    tv_domission_domission1.setBackgroundResource(R.drawable.button_hot_pink)
+                }
+                else
+                {
+                    tv_domission_domission1.setBackgroundResource(R.drawable.button_disable)
+                }
+
             }
             else
             {
@@ -58,13 +67,21 @@ class DoMissionFragment : Fragment()
         })
 
         doMissionViewModel.imageButtonText.observe(this, Observer {
-            if(it!=R.string.tv_get_image.toString())
+            if(it!=getString(R.string.tv_get_image))
             {
                 tv_domission_domission1.setBackgroundResource(R.drawable.button_hot_pink)
             }
             else
             {
-                tv_domission_domission1.setBackgroundResource(R.drawable.button_disable)
+                if(doMissionViewModel.missionText.value=="")
+                {
+                    tv_domission_domission1.setBackgroundResource(R.drawable.button_disable)
+                }
+                else
+                {
+                    tv_domission_domission1.setBackgroundResource(R.drawable.button_hot_pink)
+                }
+
             }
         })
 

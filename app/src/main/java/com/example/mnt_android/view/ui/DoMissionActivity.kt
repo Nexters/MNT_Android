@@ -58,6 +58,8 @@ class DoMissionActivity : AppCompatActivity()
             .getStringArray(R.array.arr_create_mission_des)[resources.getStringArray(R.array.arr_create_mission)
                                                         .indexOf(doMissionViewModel.nowUserMission.value!!.missionName)]
 
+        Log.d("wlgusdnzzz","missionId : "+doMissionViewModel.nowUserMission.value!!.missionId.toString())
+
 
          setFrag(0)
 
@@ -130,7 +132,7 @@ class DoMissionActivity : AppCompatActivity()
 
     }
 
-    fun saveBitmapToJpeg(bitmap : Bitmap,name : String) : File
+    fun saveBitmapToJpeg(bitmap : Bitmap) : File
     {
         val storage = this.cacheDir
         val filename = System.currentTimeMillis().toString()+ ".jpg"
@@ -143,9 +145,11 @@ class DoMissionActivity : AppCompatActivity()
             out.close()
 
 
-        } catch (e : FileNotFoundException){
+        } catch (e : FileNotFoundException)
+            {
             Log.e("wlgusdnzzz",e.toString())
-        } catch (e : IOException){
+        } catch (e : IOException)
+        {
             Log.e("wlgusdnzzz",e.toString())
         }
 
@@ -153,6 +157,7 @@ class DoMissionActivity : AppCompatActivity()
         return tempFile
 
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -171,17 +176,23 @@ class DoMissionActivity : AppCompatActivity()
                 val picturePath = cursor.getString(column_index)
 
                 cursor.close()
-                // String picturePath contains the path of selected Image
                 var matrix = Matrix()
                 val bmp = BitmapFactory.decodeStream(FileInputStream(picturePath), null, null)
-                var bm =
+                var height = bmp.height
+                var width = bmp.width
+                var bm : Bitmap?=null
+                while (height > 100) {
+
+                    bm = Bitmap.createScaledBitmap(bmp, (width * 100) / height, 100, true)
+                    height = bm.getHeight()
+                    width = bm.getWidth()
+                }
+                /*var bm =
                     Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true)
-
-                doMissionViewModel.file = saveBitmapToJpeg(bm,picturePath)
-
+*/
+                doMissionViewModel.file = saveBitmapToJpeg(bm!!)
                 doMissionViewModel.bitmap = bm
             }
-
 
         }
 

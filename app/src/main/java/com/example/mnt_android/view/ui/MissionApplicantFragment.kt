@@ -42,4 +42,12 @@ class MissionApplicantFragment(private val userId: String, private val roomId: L
             adapter = DoneMissionListAdapter()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.getUserMission(userId, roomId)
+
+    }
+
 }

@@ -30,7 +30,7 @@ class DoMissionViewModel(application : Application) : AndroidViewModel(applicati
 
     val app = application
     var fragmentNum = 0
-    var missionText : MutableLiveData<String> = MutableLiveData()
+    var missionText : MutableLiveData<String> = MutableLiveData("")
     var roomId : Long = 0
     var isSended : MutableLiveData<Boolean> = MutableLiveData()
     private val repository = DBRepository()
@@ -48,21 +48,9 @@ class DoMissionViewModel(application : Application) : AndroidViewModel(applicati
 
 
     }
-
     fun sendMission()
-    {
-        val today = Date()
-        var strdate: String? = null
-
-        var format1 = SimpleDateFormat()
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-
-            format1 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-            strdate = format1.format(today)
-        }
-
-        repository.sendMission(roomId,userId,nowUserMission.value!!.missionId,missionText.value!!.toString(),file)
+    {Log.d("wlgusdnzzz","file"+file?.name)
+        repository.sendMission(roomId,userId,nowUserMission.value!!.missionId.toLong(),missionText.value!!.toString(),MultipartBody.Part.createFormData("img",file?.name, RequestBody.create(MediaType.parse("multipart/form-data"),file)))
            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

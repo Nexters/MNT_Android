@@ -24,10 +24,10 @@ class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseVi
                     true -> userMission.user.name
                     false -> userFruttoId.toString()
                 }
-                nito_tv.text = manitto.name
+                nito_tv.text = manitto?.name
                 mission_type_tv.text = missionName
                 content_tv.text = userMission.content
-                day_tv.text = userMission.userDoneTime.checkUploadDate
+                day_tv.text = userMission.userDoneTime?.checkUploadDate
                 setOnClickListener {
                     val intent = Intent(context, MissionDetailActivity::class.java)
                     intent.putExtra(TAG_IS_MANAGER, isManager)

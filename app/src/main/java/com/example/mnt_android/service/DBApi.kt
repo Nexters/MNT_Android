@@ -72,7 +72,7 @@ interface DBApi {
         @Query("userId") userId: String
     ) : Flowable<User>
 
-
+    @Multipart
     @Headers("Accept: */*",
         "Content-Type: multipart/form-data;boundary=--------------------------398696160624612408788457")
     @POST("/api/mission/send")
@@ -81,7 +81,7 @@ interface DBApi {
         @Query("userId") userId : String,
         @Query("missionId") missionId : Long,
         @Query("content") content : String,
-        @Query("img") img : File?
+        @Part img : MultipartBody.Part?
     ) : Completable
 
     @GET("/api/mission/done/{userId}")
