@@ -7,11 +7,12 @@ import com.example.mnt_android.bus.*
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.util.SUCCESS
+import com.example.mnt_android.vo.FruttoListVO
 import com.example.mnt_android.vo.MissionVO
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(){
+class TimeLineViewModel(private val fruttoList: FruttoListVO, private val dbRepository: DBRepository) : BaseViewModel(){
     val isManager = MutableLiveData<Boolean>(false)
     private var filterType = arrayOf(MISSION_LIST_ALL)
     private val _allContentList = MutableLiveData<ArrayList<UserMissionResponse>>()
@@ -19,20 +20,18 @@ class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(
     val contentList: LiveData<ArrayList<UserMissionResponse>> = _contentList
     var missionList: ArrayList<MissionVO> = arrayListOf()
 
-    fun setMissionList(userId: String, roomId: Long, success: () -> Unit) {
+    fun setMissionList(roomId: Long, success: () -> Unit) {
         addDisposable(
-            dbRepository.getUserMission(userId, roomId)
+            dbRepository.groupByMission(roomId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     it.run {
-                        if (apiStatus.httpStatus == SUCCESS) {
-                            missionList = arrayListOf()
-                            data.forEach { mission ->
-                                missionList.add(MissionVO(mission.missionId, mission.missionName))
-                            }
-                            success()
+                        missionList.clear()
+                        missionResponses.forEach { mission ->
+                            missionList.add(MissionVO(mission.id, mission.missionName))
                         }
+                        success()
                     }
                 }, {})
         )
@@ -43,10 +42,10 @@ class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(
             dbRepository.getMissionList(roomId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    it.run {
+                .subscribe({ ml ->
+                    ml.run {
                         if(apiStatus.httpStatus == SUCCESS) {
-                            _allContentList.value = data
+                            _allContentList.value = ArrayList(data.sortedWith(compareByDescending { it.userMission.userDoneTime }))
                             success()
                         }
                     }

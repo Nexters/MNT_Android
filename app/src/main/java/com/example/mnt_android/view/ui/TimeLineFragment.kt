@@ -71,7 +71,7 @@ class TimeLineFragment(private val userId: String, private val roomId: Long, pri
         }
         filter_btn.setOnClickListener {
             val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
-            viewModel.setMissionList(userId, roomId) {
+            viewModel.setMissionList(roomId) {
                 val missionFilterBottomSheet = MissionFilterBottomSheet(userId).apply {
                     missionList = viewModel.missionList
                 }
