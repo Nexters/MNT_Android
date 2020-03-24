@@ -61,7 +61,7 @@ var networkModule = module {
     }
 
     viewModel {
-        TimeLineViewModel(get(), get())
+        TimeLineViewModel(get())
     }
 
     viewModel {

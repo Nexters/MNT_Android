@@ -7,12 +7,11 @@ import com.example.mnt_android.bus.*
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.util.SUCCESS
-import com.example.mnt_android.vo.FruttoListVO
 import com.example.mnt_android.vo.MissionVO
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class TimeLineViewModel(private val fruttoList: FruttoListVO, private val dbRepository: DBRepository) : BaseViewModel(){
+class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(){
     val isManager = MutableLiveData<Boolean>(false)
     private var filterType = arrayOf(MISSION_LIST_ALL)
     private val _allContentList = MutableLiveData<ArrayList<UserMissionResponse>>()
