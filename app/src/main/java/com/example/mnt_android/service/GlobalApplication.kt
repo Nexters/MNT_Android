@@ -2,8 +2,9 @@ package com.example.mnt_android.service
 
 
 import android.app.Application
-import com.example.mnt_android.di.networkModule
+import com.example.mnt_android.di.moduleList
 import com.kakao.auth.KakaoSDK
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class GlobalApplication : Application() {
@@ -13,7 +14,8 @@ class GlobalApplication : Application() {
         KakaoSDK.init(KakaoSDKAdapter())
 
         startKoin {
-            modules(networkModule)
+            androidContext(applicationContext)
+            modules(moduleList)
         }
     }
 

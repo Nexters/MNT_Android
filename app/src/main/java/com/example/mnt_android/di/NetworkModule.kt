@@ -3,14 +3,20 @@ package com.example.mnt_android.di
 import com.example.mnt_android.service.DBApi
 import com.example.mnt_android.service.repository.DBRepository
 import com.example.mnt_android.viewmodel.*
+import com.example.mnt_android.vo.FruttoListVO
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 
 var networkModule = module {
     single {
@@ -66,3 +72,21 @@ var networkModule = module {
         GameViewModel(get())
     }
 }
+
+var fileModule = module {
+    single {
+        var source: InputStream? = null
+        val assetManager = androidContext().assets
+
+        try {
+            source = assetManager.open("FruttoData.json")
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        val reader = InputStreamReader(source)
+        Gson().fromJson(reader, FruttoListVO::class.java)
+    }
+}
+
+var moduleList = arrayListOf(networkModule, fileModule)

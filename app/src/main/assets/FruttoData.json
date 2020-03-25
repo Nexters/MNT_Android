@@ -1,0 +1,131 @@
+{ "fruttoUserData" : [
+  {
+    "id" : 1,
+    "koreanName" : "칵테일",
+    "koreanNickName" : "관리자",
+    "englishName" : "tropical",
+    "backgroundFruit1" : "pineapple",
+    "backgroundFruit2" : "lemon"
+  },
+  {
+    "id" : 2,
+    "koreanName" : "아보카도",
+    "koreanNickName" : "보카도",
+    "englishName" : "avocado",
+    "backgroundFruit1" : "kiwi",
+    "backgroundFruit2" : "melon"
+  },
+  {
+    "id" : 3,
+    "koreanName" : "키위",
+    "koreanNickName" : "키위링",
+    "englishName" : "kiwi",
+    "backgroundFruit1" : "avocado",
+    "backgroundFruit2" : "melon"
+  },
+  {
+    "id" : 4,
+    "koreanName" : "멜론",
+    "koreanNickName" : "말론",
+    "englishName" : "melon",
+    "backgroundFruit1" : "kiwi",
+    "backgroundFruit2" : "greenapple"
+  },
+  {
+    "id" : 5,
+    "koreanName" : "그린애플",
+    "koreanNickName" : "그린애플",
+    "englishName" : "greenapple",
+    "backgroundFruit1" : "pear",
+    "backgroundFruit2" : "kiwi"
+  },
+  {
+    "id" : 6,
+    "koreanName" : "배",
+    "koreanNickName" : "배에",
+    "englishName" : "pear",
+    "backgroundFruit1" : "avocado",
+    "backgroundFruit2" : "greenapple"
+  },
+  {
+    "id" : 7,
+    "koreanName" : "레드애플",
+    "koreanNickName" : "레드애플",
+    "englishName" : "redapple",
+    "backgroundFruit1" : "watermelon",
+    "backgroundFruit2" : "cherry"
+  },
+  {
+    "id" : 8,
+    "koreanName" : "수박",
+    "koreanNickName" : "워터말론",
+    "englishName" : "watermelon",
+    "backgroundFruit1" : "strawberry",
+    "backgroundFruit2" : "redapple"
+  },
+  {
+    "id" : 9,
+    "koreanName" : "딸기",
+    "koreanNickName" : "베리",
+    "englishName" : "strawberry",
+    "backgroundFruit1" : "cherry",
+    "backgroundFruit2" : "peach"
+  },
+  {
+    "id" : 10,
+    "koreanName" : "복숭아",
+    "koreanNickName" : "숭아",
+    "englishName" : "peach",
+    "backgroundFruit1" : "strawberry",
+    "backgroundFruit2" : "redapple"
+  },
+  {
+    "id" : 11,
+    "koreanName" : "포도",
+    "koreanNickName" : "포도링",
+    "englishName" : "grape",
+    "backgroundFruit1" : "redapple",
+    "backgroundFruit2" : "strawberry"
+  },
+  {
+    "id" : 12,
+    "koreanName" : "체리",
+    "koreanNickName" : "체리또",
+    "englishName" : "cherry",
+    "backgroundFruit1" : "redapple",
+    "backgroundFruit2" : "watermelon"
+  },
+  {
+    "id" : 13,
+    "koreanName" : "바나나",
+    "koreanNickName" : "나나",
+    "englishName" : "banana",
+    "backgroundFruit1" : "orange",
+    "backgroundFruit2" : "lemon"
+  },
+  {
+    "id" : 14,
+    "koreanName" : "레몬",
+    "koreanNickName" : "레모니",
+    "englishName" : "lemon",
+    "backgroundFruit1" : "banana",
+    "backgroundFruit2" : "orange"
+  },
+  {
+    "id" : 15,
+    "koreanName" : "파인애플",
+    "koreanNickName" : "파이리",
+    "englishName" : "pineapple",
+    "backgroundFruit1" : "lemon",
+    "backgroundFruit2" : "banana"
+  },
+  {
+    "id" : 16,
+    "koreanName" : "오렌지",
+    "koreanNickName" : "오랑지",
+    "englishName" : "orange",
+    "backgroundFruit1" : "pineapple",
+    "backgroundFruit2" : "lemon"
+  }
+]
+}
