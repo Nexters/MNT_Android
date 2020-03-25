@@ -1,9 +1,9 @@
 package com.example.mnt_android.service.model
 
 data class Applicant(
-    val id: Int,
-    val room: Room,
+    val isCreater: Int,
+    val manitto: UserResponse,
     val user: User,
-    val manittoId: String,
-    val isCreater: Int
+    val userFruttoId: Int,
+    val room: Room
 )

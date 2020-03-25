@@ -19,20 +19,18 @@ class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(
     val contentList: LiveData<ArrayList<UserMissionResponse>> = _contentList
     var missionList: ArrayList<MissionVO> = arrayListOf()
 
-    fun setMissionList(userId: String, roomId: Long, success: () -> Unit) {
+    fun setMissionList(roomId: Long, success: () -> Unit) {
         addDisposable(
-            dbRepository.getUserMission(userId, roomId)
+            dbRepository.groupByMission(roomId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     it.run {
-                        if (apiStatus.httpStatus == SUCCESS) {
-                            missionList = arrayListOf()
-                            data.forEach { mission ->
-                                missionList.add(MissionVO(mission.missionId, mission.missionName))
-                            }
-                            success()
+                        missionList.clear()
+                        missionResponses.forEach { mission ->
+                            missionList.add(MissionVO(mission.id, mission.missionName))
                         }
+                        success()
                     }
                 }, {})
         )
@@ -43,10 +41,10 @@ class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(
             dbRepository.getMissionList(roomId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    it.run {
+                .subscribe({ ml ->
+                    ml.run {
                         if(apiStatus.httpStatus == SUCCESS) {
-                            _allContentList.value = data
+                            _allContentList.value = ArrayList(data.sortedWith(compareByDescending { it.userMission.userDoneTime }))
                             success()
                         }
                     }
@@ -74,7 +72,7 @@ class TimeLineViewModel(private val dbRepository: DBRepository) : BaseViewModel(
 
                 MISSION_LIST_MISSION_TYPE -> {
                     _allContentList.value?.forEach {
-                        if(it.missionId == filterContents[1].toInt()) filteredList.add(it)
+                        if(it.missionId == filterContents[1].toLong()) filteredList.add(it)
                     }
                 }
             }

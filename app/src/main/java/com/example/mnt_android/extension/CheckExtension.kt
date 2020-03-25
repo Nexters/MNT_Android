@@ -29,7 +29,6 @@ val String.checkUploadDate: String
 
         return when(todayDateStr.toInt() - updateDateStr.toInt()) {
             0 -> "오늘"
-            1-> "어제"
             else -> SimpleDateFormat("MM월 dd일", Locale.KOREA).format(updateDate)
         }
     }
