@@ -51,7 +51,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application)
             .subscribe(Action {
                 //로그인 성공
                 top_login2 = kuser.nickname.value.toString()+"님, 반가워요!"
-                Log.d("wlgusdnzzz",top_login2)
                 isLogined.value=true
             },
                 Consumer {

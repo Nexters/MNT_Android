@@ -74,20 +74,16 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                         checkRoom.value = t!!.checkRoomList[0]
                         startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
 
-                        Log.d("wlgusdnzzz",checkRoom.value!!.room.isStart.toString())
 
                         if (checkRoom.value!!.isCreater == 1) {
                             //내가 방장임
-                            Log.d("wlgusdnzzz", "내가방장")
                             isManager.value = true
 
                             if (checkRoom.value!!.room.isStart == 0) {
                                 //내가 아직 방을시작하지 않음
-                                Log.d("wlgusdnzzz", "방시작X")
                                 isStarted.value = false
                             } else {
                                 //내가 이미 방을 시작함
-                                Log.d("wlgusdnzzz", "방시작O")
                                 isStarted.value = true
                             }
                         } else {
@@ -116,7 +112,6 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
         }
         else
         {
-            Log.d("wlgusdnzzz","아직 가입 X")
             isLogined.value=false
         }
     }
@@ -144,9 +139,8 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                             if(t?.checkRoomList != null)
                             {
                                 checkRoom.value = t!!.checkRoomList[0]
-                               Log.d("wlgusdnzzz",checkRoom.value.toString())
                                 startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
-                                Log.d("wlgusdnzzz","${checkRoom.value!!.room.startDay}")
+
                                 isSearched.value=true
 
                                 //MainActivity에서 변수 Observing함
