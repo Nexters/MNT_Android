@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity()
        loginViewModel.kuser.nickname.observe(this,object : Observer<String?> {
             override fun onChanged(t: String?) {
                 Log.d(TAG,t)
-                if(t!= sf?.getString("kakao_id","null"))
+                if(t!= sf?.getString("kakao_nickname","null"))
                 {
                    setFrag(1)
 
@@ -132,12 +132,6 @@ class LoginActivity : AppCompatActivity()
         val intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
     }
-
-    fun setImage()
-    {
-        Toast.makeText(this,"Select Image", Toast.LENGTH_SHORT).show()
-    }
-
 
     override fun onBackPressed() {
 

@@ -1,9 +1,13 @@
 package com.example.mnt_android.view.ui
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseFragment
@@ -16,8 +20,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MissionApplicantFragment(private val userId: String, private val roomId: Long) :
     BaseFragment() {
-    private val viewModel by viewModel<GameViewModel>()
+    lateinit var viewModel : GameViewModel
     private lateinit var binding: FragmentMissionApplicantBinding
+    var notDoneAdapter = NotDoneMissionListAdapter()
+    var doneAdapter = DoneMissionListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,28 +31,54 @@ class MissionApplicantFragment(private val userId: String, private val roomId: L
         savedInstanceState: Bundle?
     ): View? {
         binding = bind(inflater, container, R.layout.fragment_mission_applicant)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel.apply {
-            getUserMission(userId, roomId)
-        }
+
+
+
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activity?.let {
+
+            binding.lifecycleOwner = this
+            viewModel = (activity as GameActivity).gameViewModel
+
+            rv_mission_not_done.run {
+                layoutManager = LinearLayoutManager(context)
+                adapter = notDoneAdapter
+            }
+            rv_mission_done.run {
+                layoutManager = LinearLayoutManager(context)
+                adapter = doneAdapter
+            }
+
+            viewModel.listIsDone.observe(this, Observer {
+                if(it)
+                {
+                    notDoneAdapter.setList(viewModel.notDoneUserMissions)
+                    doneAdapter.setList(viewModel.doneUserMissions)
+                }
+            })
+
+        }
+
+    }
+
     override fun initializeUI() {
-        rv_mission_not_done.run {
-            layoutManager = LinearLayoutManager(context)
-            adapter = NotDoneMissionListAdapter()
-        }
-        rv_mission_done.run {
-            layoutManager = LinearLayoutManager(context)
-            adapter = DoneMissionListAdapter()
-        }
+
     }
 
     override fun onResume() {
         super.onResume()
 
-        viewModel.getUserMission(userId, roomId)
+        viewModel.getUserMission(
+            (activity as GameActivity).sharedPreferences.getString("kakao_token", ""),
+            (activity as GameActivity).sharedPreferences.getLong("roomId", 0)
+        )
+
+
 
     }
 

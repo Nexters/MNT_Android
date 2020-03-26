@@ -15,18 +15,16 @@ import io.reactivex.schedulers.Schedulers
 class GameViewModel(private val repository: DBRepository) : BaseViewModel()
 {
     var title : String=""
-    var userMissions = ArrayList<UserMissionResponse>()
+    var doneUserMissions = ArrayList<UserMissionResponse>()
+    var notDoneUserMissions = ArrayList<UserMissionResponse>()
     var missionResponses = ArrayList<MissionResponse>()
     var missionManager = ArrayList<Pair<String,String>>()
     var changeManagerList = MutableLiveData<Boolean>()
-    private val _doneMissionTypeList = MutableLiveData<ArrayList<UserMissionResponse>>()
-    val doneMissionTypeList: LiveData<ArrayList<UserMissionResponse>> = _doneMissionTypeList
-    private val _notDoneMissionTypeList = MutableLiveData<ArrayList<UserMissionResponse>>()
-    val notDoneMissionTypeList: LiveData<ArrayList<UserMissionResponse>> = _notDoneMissionTypeList
-
+    var listIsDone = MutableLiveData<Boolean>(false)
 
     fun getUserMission(userId : String, roomId : Long)
     {
+        listIsDone.value=false
         addDisposable(
             repository.getUserMission(userId,roomId)
                 .subscribeOn(Schedulers.io())
@@ -34,21 +32,22 @@ class GameViewModel(private val repository: DBRepository) : BaseViewModel()
                 .subscribe({
                     it.run {
                         if(apiStatus.httpStatus == SUCCESS) {
-                            userMissions = data // 나의 미션 정보
+                            Log.d("wlgusdnzzz","미션 Size : "+this.data.size.toString())
+                            val done = arrayListOf<UserMissionResponse>()
+                            val notDone = arrayListOf<UserMissionResponse>()
+
                             data.forEach { mission ->
-                                val done = arrayListOf<UserMissionResponse>()
-                                val notDone = arrayListOf<UserMissionResponse>()
 
                                 mission.userMission.userDone?.let { isDone ->
                                     if (isDone.isTrue) done.add(mission)
                                 } ?: { notDone.add(mission) }()
 
-                                _doneMissionTypeList.value = done
-                                _notDoneMissionTypeList.value = notDone
+                                doneUserMissions = done
+                                notDoneUserMissions = notDone
                             }
-                            Log.d("wlgusdnzzz",userMissions.size.toString())
-                            Log.d("wlgusdnzzz",userMissions[0].missionName)
+
                         }
+                        listIsDone.value=true
                     }
                 },{t ->
                     Log.d("wlgusdnzzz",t.toString())
@@ -65,12 +64,9 @@ class GameViewModel(private val repository: DBRepository) : BaseViewModel()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({t ->
-                Log.d("wlgusdnzzz",t.missionResponses.size.toString())
                 missionResponses = ArrayList(t.missionResponses)
                 for(data in missionResponses)
                 {
-                    Log.d("wlgusdnzzz",data.toString())
-                    Log.d("wlgusdnzzz",data.userMissions.size.toString())
                     var total = data.userMissions.size
                     var done = 0
                     for(userData in data.userMissions)

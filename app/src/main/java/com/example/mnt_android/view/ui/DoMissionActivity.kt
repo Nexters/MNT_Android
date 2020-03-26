@@ -58,8 +58,6 @@ class DoMissionActivity : AppCompatActivity()
             .getStringArray(R.array.arr_create_mission_des)[resources.getStringArray(R.array.arr_create_mission)
                                                         .indexOf(doMissionViewModel.nowUserMission.value!!.missionName)]
 
-        Log.d("wlgusdnzzz","missionId : "+doMissionViewModel.nowUserMission.value!!.missionId.toString())
-
 
          setFrag(0)
 
