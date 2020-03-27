@@ -1,12 +1,15 @@
 package com.example.mnt_android.view.viewholder
 
+import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.mnt_android.base.BaseViewHolder
 import com.example.mnt_android.extension.checkUploadDate
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.util.TAG_IS_MANAGER
+import com.example.mnt_android.util.getFruttoData
 import com.example.mnt_android.view.ui.MissionDetailActivity
 import kotlinx.android.synthetic.main.item_content.view.*
 
@@ -15,11 +18,13 @@ class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseVi
         val content = data as UserMissionResponse
         content.run {
             itemView.run {
-                userMission.missionImg?.let { imgUrl ->
-                    Glide.with(context)
-                        .load(imgUrl)
-                        .into(image_iv)
-                } ?: { image_iv.visibility = View.GONE }()
+                if (userMission.missionImg != null) {
+                    setContentImg(context, userMission.missionImg!!, image_iv)
+                } else {
+                    image_iv.visibility = View.GONE
+                }
+                setFruitImg(context, userFruttoId, naeto_iv)
+                setFaceImg(context, manitto?.fruttoId, nito_iv)
                 naeto_tv.text = when (isManager) {
                     true -> userMission.user.name
                     false -> userFruttoId.toString()
@@ -34,8 +39,32 @@ class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseVi
                     intent.putExtra(MissionDetailActivity.TAG_MISSION, content)
                     context.startActivity(intent)
                 }
-                //TODO: 아이콘 이미지 변경, id값 처리 필요
             }
         }
+    }
+
+    private fun setContentImg(context: Context, url: String, iv: ImageView) {
+        Glide.with(context)
+            .load(url)
+            .into(iv)
+    }
+
+    private fun setFruitImg(context: Context, imgId: Int?, iv: ImageView) {
+        val imgNm = getFruttoData(context, (imgId?:-1)+1)?.englishName
+        val imgRes = context.resources.getIdentifier(
+            "img_profile_chat_${imgNm}",
+            "drawable",
+            context.packageName
+        )
+        iv.setImageResource(imgRes)
+    }
+
+    private fun setFaceImg(context: Context, imgId: Int?, iv: ImageView) {
+        val imgRes = context.resources.getIdentifier(
+            "img_profile_face_${"%02d".format(imgId)}",
+            "drawable",
+            context.packageName
+        )
+        iv.setImageResource(imgRes)
     }
 }

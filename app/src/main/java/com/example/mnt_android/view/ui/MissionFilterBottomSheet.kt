@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.mnt_android.R
 import com.example.mnt_android.bus.*
+import com.example.mnt_android.extension.isFalse
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.vo.MissionVO
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -76,9 +77,10 @@ class MissionFilterBottomSheet(private val userId: String) : BottomSheetDialogFr
                     visibility = View.GONE
                 } else {
                     visibility = View.VISIBLE
-                    missionList.forEach {
-                        addView(getUserItem(userId, 1, "이름암거나"))
-                        // TODO : 참여자 리스트로 수정 필요
+                    participantList.forEach {
+                        if (it.isCreater.isFalse){
+                            addView(getUserItem(it.user.id, it.userFruttoId, it.user.name))
+                        }
                     }
                 }
             }

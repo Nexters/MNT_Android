@@ -57,6 +57,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlueBlack"
                         android:textSize="20sp"
+                        android:text="@{viewModel.userNm}"
                         tools:text="프루또" />
 
                     <TextView
