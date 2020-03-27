@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseFragment
 import com.example.mnt_android.databinding.FragmentCreateroom1Binding
-import com.example.mnt_android.databinding.FragmentGameMissionBinding
 import com.example.mnt_android.databinding.FragmentMissionManagerBinding
 import com.example.mnt_android.view.adapter.ApplicantListAdapter
 import com.example.mnt_android.view.adapter.MissionListAdapter
@@ -23,7 +22,6 @@ import com.example.mnt_android.viewmodel.CreateRoomViewModel
 import com.example.mnt_android.viewmodel.GameViewModel
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import kotlinx.android.synthetic.main.activity_applicant_list.*
-import kotlinx.android.synthetic.main.fragment_game_mission.*
 import kotlinx.android.synthetic.main.fragment_mission_manager.*
 
 class MissionManagerFragment : Fragment()
@@ -71,6 +69,11 @@ class MissionManagerFragment : Fragment()
 
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        gameViewModel.groupByMission( (activity as GameActivity).sharedPreferences.getLong("roomId", 0))
     }
 
 }

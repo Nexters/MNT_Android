@@ -35,9 +35,6 @@ class SplashActivity : AppCompatActivity()
             if(sf.getString("kakao_token","null")!="null")
             {
                 //이미 로그인을 했었다
-                Log.d("wlgusdnzzz",sf.getString("kakao_token","null"))
-                Log.d("wlgusdnzzz",sf.getString("kakao_nickname","null"))
-
                 joinRoomViewModel.isJoined.observe(this, Observer {
                     val intent = intent
                     val str = intent.data
@@ -138,10 +135,6 @@ class SplashActivity : AppCompatActivity()
                     }
                 })
 
-              /* var intent = Intent(this,MainActivity::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                startActivity(intent)
-                finish()*/
 
             }
             else

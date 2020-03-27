@@ -245,14 +245,6 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
        // intent.putExtra("mission", mission)
       //  startActivity(intent)
     }
-    fun doMission()
-    {
-
-        val intent = Intent(this@GameActivity,DoMissionActivity::class.java)
-        Log.d("wlgusdnzzz",gameViewModel.userMissions[0].toString())
-        intent.putExtra("nowUserMission",gameViewModel.userMissions[0])
-        startActivity(intent)
-    }
     fun createMission()
     {
 
@@ -265,14 +257,10 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         super.onResume()
 
        if(sharedPreferences.getBoolean("isManager",false)) {
-           gameViewModel.groupByMission(sharedPreferences.getLong("roomId", 0))
-           Log.d("wlgusdnzzz","매니저")
+
        }
         else {
-           gameViewModel.getUserMission(
-               sharedPreferences.getString("kakao_token", ""),
-               sharedPreferences.getLong("roomId", 0)
-           )
+
            Log.d("wlgusdnzzz","참가자")
        }
     }

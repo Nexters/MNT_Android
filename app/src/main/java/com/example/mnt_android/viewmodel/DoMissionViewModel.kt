@@ -50,7 +50,7 @@ class DoMissionViewModel(application : Application) : AndroidViewModel(applicati
     }
     fun sendMission()
     {Log.d("wlgusdnzzz","file"+file?.name)
-        repository.sendMission(roomId,userId,nowUserMission.value!!.missionId.toLong(),missionText.value!!.toString(),MultipartBody.Part.createFormData("img",file?.name, RequestBody.create(MediaType.parse("multipart/form-data"),file)))
+        repository.sendMission(roomId,userId,nowUserMission.value!!.missionId.toLong(),missionText.value!!.toString(),MultipartBody.Part.createFormData("img", file?.name, RequestBody.create(MediaType.parse("img/png"), file)))
            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

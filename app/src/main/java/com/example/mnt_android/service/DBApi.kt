@@ -73,8 +73,7 @@ interface DBApi {
     ) : Flowable<User>
 
     @Multipart
-    @Headers("Accept: */*",
-        "Content-Type: multipart/form-data;boundary=--------------------------398696160624612408788457")
+    @Headers("Accept: */*", "Accept-Encoding: gzip,deflate")
     @POST("/api/mission/send")
     fun sendMission(
         @Query("roomId") roomId  : Long,

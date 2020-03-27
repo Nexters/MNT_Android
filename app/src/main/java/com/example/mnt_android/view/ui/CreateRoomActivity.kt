@@ -51,8 +51,6 @@ class CreateRoomActivity :FragmentActivity()
         binding.lifecycleOwner = this // LiveData를 사용하기 위해서 없으면 Observe할때마다 refresh안딤
 
 
-        Log.d("wlgusdnzzz",FirebaseInstanceId.getInstance().token!!)
-
         createRoomViewModel = ViewModelProviders.of(this)[CreateRoomViewModel::class.java]
         backPressViewModel=  ViewModelProviders.of(this)[BackPressViewModel::class.java]
 
