@@ -60,8 +60,8 @@ var networkModule = module {
         ManitoListViewModel(get())
     }
 
-    viewModel {
-        TimeLineViewModel(get())
+    viewModel { (userNm: String) ->
+        TimeLineViewModel(userNm, get())
     }
 
     viewModel {

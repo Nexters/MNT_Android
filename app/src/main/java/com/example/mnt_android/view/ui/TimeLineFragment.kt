@@ -19,14 +19,15 @@ import com.example.mnt_android.viewmodel.TimeLineViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_time_line.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class TimeLineFragment(private val userId: String, private val roomId: Long, private val _isManager: Boolean = false) :
+class TimeLineFragment(private val userName: String, private val userId: String, private val roomId: Long, private val _isManager: Boolean = false) :
     BaseFragment() {
     companion object {
         private const val TAG = "TimeLine Filter Bottom Sheet"
     }
 
-    private val viewModel by viewModel<TimeLineViewModel>()
+    private val viewModel by viewModel<TimeLineViewModel> { parametersOf(userName) }
     private lateinit var binding: FragmentTimeLineBinding
 
     private val disposable = CompositeDisposable()
@@ -73,11 +74,16 @@ class TimeLineFragment(private val userId: String, private val roomId: Long, pri
         }
         filter_btn.setOnClickListener {
             val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
-            viewModel.setMissionList(roomId) {
-                val missionFilterBottomSheet = MissionFilterBottomSheet(userId).apply {
-                    missionList = viewModel.missionList
+            val missionFilterBottomSheet = MissionFilterBottomSheet(userId)
+            missionFilterBottomSheet.show(supportFragmentManager, TAG)
+
+            viewModel.run {
+                setMissionList(roomId) {
+                    missionFilterBottomSheet.missionList = it
                 }
-                missionFilterBottomSheet.show(supportFragmentManager, TAG)
+                setUserList(roomId) {
+                    missionFilterBottomSheet.participantList = it
+                }
             }
         }
     }
