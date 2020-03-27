@@ -90,6 +90,18 @@ fun bindAdapterMissionList(
     }
 }
 
+@BindingAdapter("adapterSelectApplicantList")
+fun bindSelectApplicantList(
+    view: RecyclerView,
+    applicantList: ArrayList<Applicant>?
+) {
+    applicantList?.let { list ->
+        (view.adapter as SelectManitoListAdapter).run {
+            setList(list)
+        }
+    }
+}
+
 @BindingAdapter("android:src")
 fun setIvSrc(view: ImageView, imgSrc: String?) {
     imgSrc?.let {
