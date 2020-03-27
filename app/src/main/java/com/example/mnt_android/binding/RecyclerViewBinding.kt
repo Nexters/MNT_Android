@@ -2,12 +2,14 @@ package com.example.mnt_android.binding
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.util.FALSE_INT
+import com.example.mnt_android.util.getFruttoData
 import com.example.mnt_android.view.adapter.*
 
 @BindingAdapter("adapterApplicantList", "isManager")
@@ -95,4 +97,77 @@ fun setIvSrc(view: ImageView, imgSrc: String?) {
             .load(it)
             .into(view)
     } ?: { view.visibility = View.GONE }()
+}
+
+@BindingAdapter("fruitProfileSrc")
+fun setFruitProfileSrc(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, (id ?: -1) + 1)?.englishName
+    val imgRes = context.resources.getIdentifier(
+        "img_profile_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("fruitChatProfileSrc")
+fun setFruitChatProfileSrc(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, (id ?: -1) + 1)?.englishName
+    val imgRes = context.resources.getIdentifier(
+        "img_profile_chat_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("fruitIconProfileSrc1")
+fun setFruitIconProfileSrc1(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, (id ?: -1) + 1)?.backgroundFruit1
+    val imgRes = context.resources.getIdentifier(
+        "img_profile_icon_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("fruitIconProfileSrc2")
+fun setFruitIconProfileSrc2(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, (id ?: -1) + 1)?.backgroundFruit2
+    val imgRes = context.resources.getIdentifier(
+        "img_profile_icon_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("faceProfileSrc")
+fun setFaceProfileSrc(view: ImageView, id: Int?) {
+    id?.let {
+        val context = view.context
+        val imgRes = context.resources.getIdentifier(
+            "img_profile_face_${"%02d".format(it)}",
+            "drawable",
+            context.packageName
+        )
+        view.setImageResource(imgRes)
+    }
+}
+
+@BindingAdapter("nickName", "isManager")
+fun setNickName(view: TextView, name: String?, isManager: Boolean) {
+    name?.let {
+        if (isManager) {
+            view.text = name
+        } else {
+            val context = view.context
+            view.text = getFruttoData(context, it.toInt()+1)?.koreanNickName
+        }
+    }
 }

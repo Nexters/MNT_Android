@@ -6,10 +6,11 @@ import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.mnt_android.base.BaseViewHolder
+import com.example.mnt_android.binding.setFaceProfileSrc
+import com.example.mnt_android.binding.setFruitChatProfileSrc
 import com.example.mnt_android.extension.checkUploadDate
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.util.TAG_IS_MANAGER
-import com.example.mnt_android.util.getFruttoData
 import com.example.mnt_android.view.ui.MissionDetailActivity
 import kotlinx.android.synthetic.main.item_content.view.*
 
@@ -23,8 +24,8 @@ class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseVi
                 } else {
                     image_iv.visibility = View.GONE
                 }
-                setFruitImg(context, userFruttoId, naeto_iv)
-                setFaceImg(context, manitto?.fruttoId, nito_iv)
+                setFruitChatProfileSrc(naeto_iv, userFruttoId)
+                setFaceProfileSrc(nito_iv, manitto?.fruttoId)
                 naeto_tv.text = when (isManager) {
                     true -> userMission.user.name
                     false -> userFruttoId.toString()
@@ -47,24 +48,5 @@ class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseVi
         Glide.with(context)
             .load(url)
             .into(iv)
-    }
-
-    private fun setFruitImg(context: Context, imgId: Int?, iv: ImageView) {
-        val imgNm = getFruttoData(context, (imgId?:-1)+1)?.englishName
-        val imgRes = context.resources.getIdentifier(
-            "img_profile_chat_${imgNm}",
-            "drawable",
-            context.packageName
-        )
-        iv.setImageResource(imgRes)
-    }
-
-    private fun setFaceImg(context: Context, imgId: Int?, iv: ImageView) {
-        val imgRes = context.resources.getIdentifier(
-            "img_profile_face_${"%02d".format(imgId)}",
-            "drawable",
-            context.packageName
-        )
-        iv.setImageResource(imgRes)
     }
 }
