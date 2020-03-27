@@ -20,6 +20,7 @@ class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseVi
         content.run {
             itemView.run {
                 if (userMission.missionImg != null) {
+                    image_iv.visibility = View.VISIBLE
                     setContentImg(context, userMission.missionImg!!, image_iv)
                 } else {
                     image_iv.visibility = View.GONE

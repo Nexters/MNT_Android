@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.mnt_android.R
+import com.example.mnt_android.binding.setFaceProfileSrc
 import com.example.mnt_android.bus.*
 import com.example.mnt_android.extension.isFalse
 import com.example.mnt_android.service.model.Applicant
@@ -19,7 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_mission_filter.*
 
 
-class MissionFilterBottomSheet(private val userId: String) : BottomSheetDialogFragment() {
+class MissionFilterBottomSheet(private val userId: String, private val isManager: Boolean) : BottomSheetDialogFragment() {
     var missionList: ArrayList<MissionVO> = arrayListOf()
     var participantList: ArrayList<Applicant> = arrayListOf()
 
@@ -45,16 +46,22 @@ class MissionFilterBottomSheet(private val userId: String) : BottomSheetDialogFr
     }
 
     private fun setEventListener() {
+        if(isManager) {
+            mission_to_me_btn.visibility = View.GONE
+            mission_from_me_btn.visibility = View.GONE
+        } else {
+            mission_to_me_btn.setOnClickListener {
+                sendFilteringEvent(arrayOf(MISSION_LIST_TO_ME, userId))
+                dismiss()
+            }
+            mission_from_me_btn.setOnClickListener {
+                sendFilteringEvent(arrayOf(MISSION_LIST_FROM_ME, userId))
+                dismiss()
+            }
+        }
+
         order_mission_list_btn.setOnClickListener {
             sendFilteringEvent(arrayOf(MISSION_LIST_ALL))
-            dismiss()
-        }
-        mission_to_me_btn.setOnClickListener {
-            sendFilteringEvent(arrayOf(MISSION_LIST_TO_ME, userId))
-            dismiss()
-        }
-        mission_from_me_btn.setOnClickListener {
-            sendFilteringEvent(arrayOf(MISSION_LIST_FROM_ME, userId))
             dismiss()
         }
         view_by_mission_btn.setOnClickListener {
@@ -108,12 +115,7 @@ class MissionFilterBottomSheet(private val userId: String) : BottomSheetDialogFr
     private fun getUserItem(userId: String, imgId: Int, title: String = ""): LinearLayout {
         val inflater = LayoutInflater.from(context)
         return (inflater.inflate(R.layout.item_filter_list, null, false) as LinearLayout).apply {
-            val imgRes = resources.getIdentifier(
-                "img_profile_face_${"%02d".format(imgId)}",
-                "drawable",
-                context?.packageName
-            )
-            findViewById<ImageView>(R.id.iv).setImageResource(imgRes)
+            setFaceProfileSrc(findViewById(R.id.iv), imgId)
             findViewById<TextView>(R.id.tv).text = title
             setOnClickListener {
                 sendFilteringEvent(
