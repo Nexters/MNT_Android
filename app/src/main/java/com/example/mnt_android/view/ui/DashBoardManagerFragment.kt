@@ -10,13 +10,17 @@ import com.example.mnt_android.base.BaseFragment
 import com.example.mnt_android.databinding.FragmentDashBoardManagerBinding
 import com.example.mnt_android.view.dialog.ConfirmDialog
 import com.example.mnt_android.view.dialog.NoticeDialog
+import com.example.mnt_android.viewmodel.DashBoardViewModel
 import kotlinx.android.synthetic.main.fragment_dash_board_manager.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class DashBoardManagerFragment : BaseFragment() {
+class DashBoardManagerFragment(private val userId: String, private val roomId: Long) : BaseFragment() {
     companion object {
         private const val TAG = "DashBoard Manager Dialog"
+        private const val ADMIN = "admin"
     }
 
+    private val viewModel by viewModel<DashBoardViewModel>()
     private lateinit var binding: FragmentDashBoardManagerBinding
 
     override fun onCreateView(
@@ -26,6 +30,9 @@ class DashBoardManagerFragment : BaseFragment() {
     ): View? {
         binding = bind(inflater, container, R.layout.fragment_dash_board_manager)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel.apply {
+            loadDashBoard(ADMIN, userId, roomId)
+        }
         return binding.root
     }
 
@@ -47,6 +54,7 @@ class DashBoardManagerFragment : BaseFragment() {
                 "취소",
                 "나가기"
             ) {
+                viewModel.endRoom(roomId)
             }.show(
                 supportFragmentManager,
                 TAG

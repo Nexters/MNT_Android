@@ -42,6 +42,12 @@ interface DBApi {
         @Query("userId") userId: String
     ): Completable
 
+    //방 종료
+    @GET("api/room/end/{roomId}")
+    fun endRoom(
+        @Path("roomId") roomId : Long
+    ): Completable
+
     // 마니또 방 시작
     @GET("/api/room/start/{roomId}")
     fun startRoom(
@@ -98,4 +104,11 @@ interface DBApi {
     fun getMissionList(
         @Path("roomId") roomId : Long
     ) : Flowable<MissionListResponse>
+
+    @GET("/api/mission/dashBoard/{roll}")
+    fun getDashBoardData(
+        @Path("roll") roll: String,
+        @Query("userId") userId: String,
+        @Query("roomId") roomId : Long
+    ) : Flowable<DashBoardResponse>
 }

@@ -6,11 +6,15 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mnt_android.extension.checkUploadDate
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.util.FALSE_INT
 import com.example.mnt_android.util.getFruttoData
 import com.example.mnt_android.view.adapter.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @BindingAdapter("adapterApplicantList", "isManager")
 fun bindAdapterApplicantList(
@@ -181,5 +185,18 @@ fun setNickName(view: TextView, name: String?, isManager: Boolean) {
             val context = view.context
             view.text = getFruttoData(context, it.toInt()+1)?.koreanNickName
         }
+    }
+}
+
+@BindingAdapter("endDayToDDay")
+fun convertEndDayToDDay(view: TextView, endDay: String?) {
+    endDay?.let {
+        val ONE_DAY = 24 * 60 * 60 * 1000
+
+        val endDayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+        val calendar = Calendar.getInstance()
+        calendar.time = endDayFormat.parse(it)
+        val dday = (calendar.timeInMillis - System.currentTimeMillis()) / ONE_DAY
+        view.text = if (dday > 0) dday.toString() else "0"
     }
 }

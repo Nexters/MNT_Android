@@ -91,8 +91,14 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
                 sharedPreferences.getLong("roomId", 0)
             )
         }
-        dashBoardApplicantFragment = DashBoardApplicantFragment()
-        dashBoardManagerFragment = DashBoardManagerFragment()
+        dashBoardApplicantFragment = DashBoardApplicantFragment(
+            sharedPreferences.getString("kakao_token", ""),
+            sharedPreferences.getLong("roomId", 0)
+        )
+        dashBoardManagerFragment = DashBoardManagerFragment(
+            sharedPreferences.getString("kakao_token", ""),
+            sharedPreferences.getLong("roomId", 0)
+        )
         backPressViewModel = ViewModelProvider(this).get(BackPressViewModel::class.java)
         gameViewModel.title = "'"+intent.getStringExtra("roomName")+"'" + "\n미션을 등록해주세요."
         fragmentManager = supportFragmentManager

@@ -10,13 +10,17 @@ import com.example.mnt_android.base.BaseFragment
 import com.example.mnt_android.databinding.FragmentDashBoardApplicantBinding
 import com.example.mnt_android.view.dialog.CustomAlertDialog
 import com.example.mnt_android.view.dialog.NoticeDialog
+import com.example.mnt_android.viewmodel.DashBoardViewModel
 import kotlinx.android.synthetic.main.fragment_dash_board_applicant.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class DashBoardApplicantFragment : BaseFragment() {
+class DashBoardApplicantFragment(private val userId: String, private val roomId: Long) : BaseFragment() {
     companion object {
         private const val TAG = "Dashboard Applicant Dialog"
+        private const val USER = "user"
     }
 
+    private val viewModel by viewModel<DashBoardViewModel>()
     private lateinit var binding: FragmentDashBoardApplicantBinding
 
     override fun onCreateView(
@@ -26,6 +30,9 @@ class DashBoardApplicantFragment : BaseFragment() {
     ): View? {
         binding = bind(inflater, container, R.layout.fragment_dash_board_applicant)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel.apply {
+            loadDashBoard(USER, userId, roomId)
+        }
         return binding.root
     }
 

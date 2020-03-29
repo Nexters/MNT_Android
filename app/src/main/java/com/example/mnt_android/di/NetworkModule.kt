@@ -69,6 +69,10 @@ var networkModule = module {
     }
 
     viewModel {
+        DashBoardViewModel(get())
+    }
+
+    viewModel {
         GameViewModel(get())
     }
 }

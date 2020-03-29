@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mnt_android.viewmodel.DashBoardViewModel" />
+    </data>
+
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -162,6 +168,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorLightBlack"
                                 android:textSize="17sp"
+                                app:endDayToDDay="@{viewModel.dashBoard.room.endDay}"
                                 tools:text="24" />
                         </LinearLayout>
                     </LinearLayout>
@@ -201,6 +208,7 @@
                             android:text="생성한 미션" />
 
                         <LinearLayout
+                            android:id="@+id/created_mission_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="7dp"
@@ -211,6 +219,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorLightBlack"
                                 android:textSize="17sp"
+                                android:text="@{String.valueOf(viewModel.dashBoard.missionCountOfAll)}"
                                 tools:text="24" />
 
                             <TextView
@@ -264,9 +273,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorLightBlack"
+                            android:gravity="center"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:textSize="17sp"
+                            android:text="@{viewModel.dashBoard.room.name}"
                             tools:text="넥스터즈 방방" />
                     </LinearLayout>
                 </RelativeLayout>
