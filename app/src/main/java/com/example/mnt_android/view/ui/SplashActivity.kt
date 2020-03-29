@@ -69,6 +69,8 @@ class SplashActivity : AppCompatActivity()
                             }
                             else
                             {
+                                editor!!.putString("manitto_name", joinRoomViewModel.checkRoom.value?.manitto?.name)
+
                                 val intent = Intent(this, JoinRoomActivity::class.java)
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                 intent.putExtra("fragNum", 1)

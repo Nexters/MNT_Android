@@ -9,7 +9,9 @@ import com.example.mnt_android.util.SUCCESS
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class DashBoardViewModel(private val dbRepository: DBRepository) : BaseViewModel() {
+class DashBoardViewModel(private val dbRepository: DBRepository, private val _manittoName: String?) : BaseViewModel() {
+    val manittoName: LiveData<String>
+        get() = MutableLiveData(_manittoName)
     private val _dashBoard = MutableLiveData<DashBoard>()
     val dashBoard: LiveData<DashBoard> = _dashBoard
 

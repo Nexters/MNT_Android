@@ -68,8 +68,8 @@ var networkModule = module {
         MissionDetailViewModel()
     }
 
-    viewModel {
-        DashBoardViewModel(get())
+    viewModel { (manittoNm: String?) ->
+        DashBoardViewModel(get(), manittoNm)
     }
 
     viewModel {

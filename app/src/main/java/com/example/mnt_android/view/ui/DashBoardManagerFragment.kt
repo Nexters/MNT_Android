@@ -13,6 +13,7 @@ import com.example.mnt_android.view.dialog.NoticeDialog
 import com.example.mnt_android.viewmodel.DashBoardViewModel
 import kotlinx.android.synthetic.main.fragment_dash_board_manager.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DashBoardManagerFragment(private val userId: String, private val roomId: Long) : BaseFragment() {
     companion object {
@@ -20,7 +21,7 @@ class DashBoardManagerFragment(private val userId: String, private val roomId: L
         private const val ADMIN = "admin"
     }
 
-    private val viewModel by viewModel<DashBoardViewModel>()
+    private val viewModel by viewModel<DashBoardViewModel> { parametersOf(null) }
     private lateinit var binding: FragmentDashBoardManagerBinding
 
     override fun onCreateView(

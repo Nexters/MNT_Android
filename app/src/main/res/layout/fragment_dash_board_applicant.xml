@@ -115,6 +115,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorLightBlack"
                             android:textSize="17sp"
+                            android:text="@{viewModel.manittoName}"
                             tools:text="진유진" />
                     </LinearLayout>
                 </RelativeLayout>

@@ -13,14 +13,15 @@ import com.example.mnt_android.view.dialog.NoticeDialog
 import com.example.mnt_android.viewmodel.DashBoardViewModel
 import kotlinx.android.synthetic.main.fragment_dash_board_applicant.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class DashBoardApplicantFragment(private val userId: String, private val roomId: Long) : BaseFragment() {
+class DashBoardApplicantFragment(private val userId: String, private val roomId: Long, private val manittoNm: String) : BaseFragment() {
     companion object {
         private const val TAG = "Dashboard Applicant Dialog"
         private const val USER = "user"
     }
 
-    private val viewModel by viewModel<DashBoardViewModel>()
+    private val viewModel by viewModel<DashBoardViewModel> { parametersOf(manittoNm) }
     private lateinit var binding: FragmentDashBoardApplicantBinding
 
     override fun onCreateView(

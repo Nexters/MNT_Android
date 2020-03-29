@@ -93,7 +93,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         }
         dashBoardApplicantFragment = DashBoardApplicantFragment(
             sharedPreferences.getString("kakao_token", ""),
-            sharedPreferences.getLong("roomId", 0)
+            sharedPreferences.getLong("roomId", 0),
+            sharedPreferences.getString("manitto_name", "")
         )
         dashBoardManagerFragment = DashBoardManagerFragment(
             sharedPreferences.getString("kakao_token", ""),
