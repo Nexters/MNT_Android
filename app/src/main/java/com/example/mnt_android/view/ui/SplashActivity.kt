@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
+import com.example.mnt_android.extension.isTrue
 import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import com.example.mnt_android.viewmodel.SplashViewModel
@@ -69,8 +70,6 @@ class SplashActivity : AppCompatActivity()
                             }
                             else
                             {
-                                editor!!.putString("manitto_name", joinRoomViewModel.checkRoom.value?.manitto?.name)
-
                                 val intent = Intent(this, JoinRoomActivity::class.java)
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                 intent.putExtra("fragNum", 1)
@@ -81,12 +80,19 @@ class SplashActivity : AppCompatActivity()
                         }
                         else
                         {
+                            joinRoomViewModel.pr.setIsManager(joinRoomViewModel.isManager.value)
                             //방장이 방을 시작함
-                            if (joinRoomViewModel.isManager.value == true)
+                            if (joinRoomViewModel.isDone.isTrue) {
+                                val cls = when(joinRoomViewModel.pr.getCheckNaeto()) {
+                                    true -> GameActivity::class.java
+                                    false -> FinishActivity::class.java
+                                }
+                                val i = Intent(baseContext, cls)
+                                startActivity(i)
+                            }
+                            else if (joinRoomViewModel.isManager.value == true)
                             {
                                 //내가 방장이고 방이 이미 시작됨
-                                editor!!.putBoolean("isManager", true)
-                                editor!!.commit()
                                 val intent = Intent(this, GameActivity::class.java)
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                 intent.putExtra(TAG_IS_MANAGER,true)
@@ -94,7 +100,7 @@ class SplashActivity : AppCompatActivity()
                                 startActivity(intent)
 
                             }
-                            else if (sf.getBoolean("check", false)) {
+                            else if (joinRoomViewModel.pr.getCheckNito()) {
                                 //내 마니또를 확인했음
                                 val intent = Intent(this, GameActivity::class.java)
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -103,16 +109,20 @@ class SplashActivity : AppCompatActivity()
                             } else {
                                 //내 마니또를 확인하지 못함
 
-                                editor!!.putInt("myFruttoId",joinRoomViewModel.checkRoom.value!!.userFruttoId!!)//내 FruttoId 저장
-                                editor!!.putInt("manittoFruttoId",joinRoomViewModel.checkRoom.value!!.manitto?.fruttoId!!)//내 마니또의 FruttoId 저장
-                                editor!!.putString("manittoName",joinRoomViewModel.checkRoom.value!!.manitto?.name!!)
+                                joinRoomViewModel.pr.setFruttoId(joinRoomViewModel.fruttoId)
+                                joinRoomViewModel.pr.setManitoNm(joinRoomViewModel.nittoName)
+                                joinRoomViewModel.pr.setManitoFruttoId(joinRoomViewModel.manitoFruttoId)
                                 editor!!.commit()
 
-                                val intent = Intent(this, JoinRoomActivity::class.java)
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                intent.putExtra("fragNum", 2)
-                                intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
-                                startActivity(intent)
+//                                val intent = Intent(this, JoinRoomActivity::class.java)
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+//                                intent.putExtra("fragNum", 2)
+//                                intent.putExtra("checkRoom", joinRoomViewModel.checkRoom.value)
+//                                startActivity(intent)
+
+                                val i = Intent(this, ShowManittoActivity::class.java)
+                                i.putExtra(ShowManittoActivity.TAG_END_DAY, joinRoomViewModel.endDay)
+                                startActivity(i)
                             }
                         }
 

@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
 import com.example.mnt_android.databinding.ActivitySelectManitoBinding
-import com.example.mnt_android.service.model.UserResponse
 import com.example.mnt_android.view.adapter.SelectManitoListAdapter
 import com.example.mnt_android.view.dialog.NoticeManitoDialog
 import com.example.mnt_android.viewmodel.ManitoListViewModel
@@ -29,12 +28,9 @@ class SelectManitoActivity : BaseActivity<ActivitySelectManitoBinding, ManitoLis
     }
 
     private fun setDatabinding() {
-        val sf = getSharedPreferences("login", 0)
-        val roomId = sf.getLong("roomId", 0)
-
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModel.apply {
-            getUserList(roomId)
+            getUserList()
         }
     }
 
@@ -48,18 +44,18 @@ class SelectManitoActivity : BaseActivity<ActivitySelectManitoBinding, ManitoLis
             }
         }
         confirm_btn.onClick {
-            var manito: UserResponse? = null
-            val sf = getSharedPreferences("login", 0)
-            val userId = sf.getString("kakao_token", "")
+            var naetoNm: String? = null
+            var naetoFruttoId: Int? = null
             viewModel.manitoList.value?.forEach checkNaeto@ { applicant ->
-                if(applicant.user.id == userId) {
-                    manito = applicant.manitto
+                if(applicant.manitto.id == viewModel.getUserId()) {
+                    naetoNm = applicant.user.name
+                    naetoFruttoId = applicant.userFruttoId
                     return@checkNaeto
                 }
             }
 
-            NoticeManitoDialog(manito?.fruttoId, manito?.name) {
-                // TODO : 방이 종료되었다고 설정하는 코드 필요
+            NoticeManitoDialog(naetoFruttoId, naetoNm) {
+                viewModel.setCheckNaeto()
                 val i = Intent(baseContext, GameActivity::class.java)
                 startActivity(i)
                 finish()

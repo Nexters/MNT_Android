@@ -12,22 +12,18 @@ import com.example.mnt_android.base.BaseFragment
 import com.example.mnt_android.bus.MISSION_LIST_ALL
 import com.example.mnt_android.bus.filteringEventBus
 import com.example.mnt_android.databinding.FragmentTimeLineBinding
-import com.example.mnt_android.util.TAG_IS_MANAGER
-import com.example.mnt_android.util.TAG_ROOM_ID
 import com.example.mnt_android.view.adapter.ContentListAdapter
 import com.example.mnt_android.viewmodel.TimeLineViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_time_line.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
-class TimeLineFragment(private val userName: String, private val userId: String, private val roomId: Long, private val _isManager: Boolean = false) :
-    BaseFragment() {
+class TimeLineFragment : BaseFragment() {
     companion object {
         private const val TAG = "TimeLine Filter Bottom Sheet"
     }
 
-    private val viewModel by viewModel<TimeLineViewModel> { parametersOf(userName) }
+    private val viewModel by viewModel<TimeLineViewModel>()
     private lateinit var binding: FragmentTimeLineBinding
 
     private val disposable = CompositeDisposable()
@@ -40,8 +36,7 @@ class TimeLineFragment(private val userName: String, private val userId: String,
         binding = bind(inflater, container, R.layout.fragment_time_line)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel.apply {
-            isManager.value = _isManager
-            setFilteredContentList(roomId, arrayOf(MISSION_LIST_ALL))
+            setFilteredContentList(arrayOf(MISSION_LIST_ALL))
         }
         return binding.root
     }
@@ -63,25 +58,24 @@ class TimeLineFragment(private val userName: String, private val userId: String,
 
     private fun setEventListener() {
         swipe_layout.setOnRefreshListener {
-            viewModel.setFilteredContentList(roomId)
+            viewModel.setFilteredContentList()
             swipe_layout.isRefreshing = false
         }
         manito_list_btn.setOnClickListener {
             val intent = Intent(context, ManitoActivity::class.java)
-            intent.putExtra(TAG_IS_MANAGER, _isManager)
-            intent.putExtra(TAG_ROOM_ID, roomId)
             startActivity(intent)
         }
         filter_btn.setOnClickListener {
             val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
-            val missionFilterBottomSheet = MissionFilterBottomSheet(userId, _isManager)
+            val missionFilterBottomSheet =
+                MissionFilterBottomSheet(viewModel.getUserId(), viewModel.getIsManager())
             missionFilterBottomSheet.show(supportFragmentManager, TAG)
 
             viewModel.run {
-                setMissionList(roomId) {
+                setMissionList {
                     missionFilterBottomSheet.missionList = it
                 }
-                setUserList(roomId) {
+                setUserList {
                     missionFilterBottomSheet.participantList = it
                 }
             }
@@ -91,7 +85,7 @@ class TimeLineFragment(private val userName: String, private val userId: String,
     private fun setEventBus() {
         disposable.add(
             filteringEventBus.subscribe { filterType ->
-                viewModel.setFilteredContentList(roomId, filterType)
+                viewModel.setFilteredContentList(filterType)
             }
         )
     }

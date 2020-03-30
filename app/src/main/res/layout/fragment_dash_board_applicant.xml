@@ -43,6 +43,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlueBlack"
                         android:textSize="20sp"
+                        app:isManager="@{viewModel.isManager}"
+                        app:nickName="@{String.valueOf(viewModel.userFruttoId)}"
                         tools:text="포도링" />
 
                     <TextView
@@ -65,7 +67,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:src="@drawable/img_profile_grape"
+                    fruitProfileSrc="@{viewModel.userFruttoId}"
+                    tools:src="@drawable/img_profile_grape"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.786" />
@@ -100,7 +103,8 @@
                         <ImageView
                             android:layout_width="87dp"
                             android:layout_height="87dp"
-                            android:src="@drawable/dashboard_image_1" />
+                            app:faceProfileSrc="@{viewModel.manitoFruttoId}"
+                            tools:src="@drawable/dashboard_image_1" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -115,7 +119,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorLightBlack"
                             android:textSize="17sp"
-                            android:text="@{viewModel.manittoName}"
+                            android:text="@{viewModel.manittoNm}"
                             tools:text="진유진" />
                     </LinearLayout>
                 </RelativeLayout>
@@ -169,7 +173,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorLightBlack"
                                 android:textSize="17sp"
-                                endDayToDDay="@{viewModel.dashBoard.room.endDay}"
+                                app:endDayToDDay="@{viewModel.dashBoard.room.endDay}"
                                 tools:text="24" />
                         </LinearLayout>
                     </LinearLayout>
@@ -220,7 +224,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorLightBlack"
                                 android:textSize="17sp"
-                                android:text="@{String.valueOf(viewModel.dashBoard.missionCountOfUserReceive)}"
+                                android:text="@{String.valueOf(viewModel.dashBoard.missionCountOfUserSend)}"
                                 tools:text="3" />
 
                             <TextView
@@ -303,7 +307,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorLightBlack"
                                 android:textSize="17sp"
-                                android:text="@{String.valueOf(viewModel.dashBoard.missionCountOfUserSend)}"
+                                android:text="@{String.valueOf(viewModel.dashBoard.missionCountOfUserReceive)}"
                                 tools:text="4" />
 
                             <TextView
@@ -400,10 +404,12 @@
                             android:text="알람 설정" />
 
                         <Switch
+                            android:id="@+id/notification_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:track="@drawable/switch_track"
-                            android:thumb="@drawable/switch_thumb"/>
+                            android:thumb="@drawable/switch_thumb"
+                            android:checked="@{viewModel.onNotification}"/>
                     </LinearLayout>
                 </RelativeLayout>
 

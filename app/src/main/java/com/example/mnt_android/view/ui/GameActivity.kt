@@ -73,12 +73,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
             .setContentView<ActivityGameBinding>(this, R.layout.activity_game)
 
         binding.lifecycleOwner = this
-        timeLineFragment = TimeLineFragment(
-            sharedPreferences.getString("kakao_nickname ", ""),
-            sharedPreferences.getString("kakao_token", ""),
-            sharedPreferences.getLong("roomId", 0),
-            sharedPreferences.getBoolean("isManager", false)
-        )
+        timeLineFragment = TimeLineFragment()
 
        if(sharedPreferences.getBoolean("isManager",false))
         {
@@ -91,15 +86,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
                 sharedPreferences.getLong("roomId", 0)
             )
         }
-        dashBoardApplicantFragment = DashBoardApplicantFragment(
-            sharedPreferences.getString("kakao_token", ""),
-            sharedPreferences.getLong("roomId", 0),
-            sharedPreferences.getString("manitto_name", "")
-        )
-        dashBoardManagerFragment = DashBoardManagerFragment(
-            sharedPreferences.getString("kakao_token", ""),
-            sharedPreferences.getLong("roomId", 0)
-        )
+        dashBoardApplicantFragment = DashBoardApplicantFragment()
+        dashBoardManagerFragment = DashBoardManagerFragment()
         backPressViewModel = ViewModelProvider(this).get(BackPressViewModel::class.java)
         gameViewModel.title = "'"+intent.getStringExtra("roomName")+"'" + "\n미션을 등록해주세요."
         fragmentManager = supportFragmentManager

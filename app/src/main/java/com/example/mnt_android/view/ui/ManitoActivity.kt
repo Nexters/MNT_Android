@@ -28,10 +28,8 @@ class ManitoActivity : BaseActivity<ActivityManitoBinding, ManitoListViewModel>(
 
     private fun setViewModel() {
         dataBinding.lifecycleOwner = this
-        dataBinding.viewModel = viewModel
-        viewModel.run {
-            isManager.value = intent.getBooleanExtra(TAG_IS_MANAGER, false)
-            getUserList(intent.getLongExtra(TAG_ROOM_ID, -1))
+        dataBinding.viewModel = viewModel.apply {
+            getUserList()
         }
     }
 
