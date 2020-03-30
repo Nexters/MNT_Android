@@ -115,6 +115,14 @@ fun setIvSrc(view: ImageView, imgSrc: String?) {
     } ?: { view.visibility = View.GONE }()
 }
 
+@BindingAdapter("android:visibility")
+fun setVisibility(view: View, isVisible: Boolean) {
+    view.visibility = when(isVisible) {
+        true -> View.VISIBLE
+        false -> View.GONE
+    }
+}
+
 @BindingAdapter("fruitProfileSrc")
 fun setFruitProfileSrc(view: ImageView, id: Int?) {
     val context = view.context
