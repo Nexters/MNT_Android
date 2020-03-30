@@ -9,7 +9,7 @@ import com.example.mnt_android.service.model.Applicant
 import kotlinx.android.synthetic.main.item_manito.view.*
 
 class ManitoListViewHolder(view: View, private val isManager: Boolean) :  BaseViewHolder(view) {
-    override fun onBind(data: Any) {
+    override fun onBind(position: Int, data: Any) {
         val applicant = data as Applicant
         itemView.run {
             val naetoName = if(isManager) applicant.user.name else applicant.userFruttoId.toString()

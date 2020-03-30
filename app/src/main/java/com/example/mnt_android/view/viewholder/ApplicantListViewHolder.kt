@@ -18,7 +18,7 @@ class ApplicantListViewHolder(
         private const val TAG = "ApplicantList Dialog"
     }
 
-    override fun onBind(data: Any) {
+    override fun onBind(position: Int, data: Any) {
         val applicant = data as Applicant
         itemView.run {
             applicant_name_tv.text = applicant.user.name

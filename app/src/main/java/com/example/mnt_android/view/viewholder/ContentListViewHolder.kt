@@ -15,7 +15,7 @@ import com.example.mnt_android.view.ui.MissionDetailActivity
 import kotlinx.android.synthetic.main.item_content.view.*
 
 class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseViewHolder(view) {
-    override fun onBind(data: Any) {
+    override fun onBind(position: Int, data: Any) {
         val content = data as UserMissionResponse
         content.run {
             itemView.run {

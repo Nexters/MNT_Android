@@ -12,7 +12,7 @@ class MissionListViewHolder(view: View) : BaseViewHolder(view) {
         private val TAG = "Mission Dialog"
     }
 
-    override fun onBind(data: Any) {
+    override fun onBind(position: Int, data: Any) {
         val applicant = data as String
         itemView.run {
             applicant_name_tv.text = applicant

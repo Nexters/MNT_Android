@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.item_participant.view.*
 
 class SelectManitoListViewHolder(view: View, private val onClick: (String?, View?) -> Unit) :
     BaseViewHolder(view) {
-    override fun onBind(data: Any) {
+    override fun onBind(position: Int, data: Any) {
         val content = data as Applicant
         content.run {
             itemView.run {
