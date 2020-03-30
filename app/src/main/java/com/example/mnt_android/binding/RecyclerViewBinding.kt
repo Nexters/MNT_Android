@@ -163,6 +163,18 @@ fun setFruitIconProfileSrc2(view: ImageView, id: Int?) {
     view.setImageResource(imgRes)
 }
 
+@BindingAdapter("popupEndFruit")
+fun setPopupEndFruit(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, (id ?: -1) + 1)?.backgroundFruit2
+    val imgRes = context.resources.getIdentifier(
+        "img_popup_end_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
 @BindingAdapter("faceProfileSrc")
 fun setFaceProfileSrc(view: ImageView, id: Int?) {
     id?.let {
