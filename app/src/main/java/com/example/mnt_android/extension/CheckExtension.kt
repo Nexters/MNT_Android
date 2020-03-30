@@ -32,3 +32,17 @@ val String.checkUploadDate: String
             else -> SimpleDateFormat("MM월 dd일", Locale.KOREA).format(updateDate)
         }
     }
+
+val String.noticeDate: String
+    get() {
+        val days = arrayOf("일", "월", "화", "수", "목", "금", "토")
+
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+        val noticeDateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.KOREA)
+        val date = dateFormat.parse(this)
+        val calendar = Calendar.getInstance().apply {
+            time = date
+        }
+        val day = days[calendar.get(Calendar.DAY_OF_WEEK)-1]
+        return "${noticeDateFormat.format(calendar.time)} (${day})"
+    }

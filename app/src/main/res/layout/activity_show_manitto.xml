@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mnt_android.viewmodel.ShowManittoViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -30,6 +36,7 @@
             android:gravity="center_horizontal">
 
             <TextView
+                android:id="@+id/naeto_tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -46,13 +53,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/colorBlack"
-                android:text="의 마니또는 "/>
+                android:text="의 니또는 "/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/colorSelected"
+                android:text="@{viewModel.manittoData.name}"
                 tools:text="진유진"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -84,10 +92,12 @@
                 android:orientation="vertical"
                 android:gravity="center">
                 <ImageView
+                    android:id="@+id/naeto_iv"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/img_profile_avocado"/>
                 <TextView
+                    android:id="@+id/naeto_tv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
@@ -115,12 +125,14 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/img_profile_face_01"/>
+                    app:faceProfileSrc="@{viewModel.manittoData.fruttoId}"
+                    tools:src="@drawable/img_profile_face_01"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"
+                    android:text="@{viewModel.manittoData.name}"
                     tools:text="진유진"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -137,6 +149,7 @@
             android:background="@drawable/rectangle_copy_2"
             >
             <TextView
+                android:id="@+id/notice_end_day_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
