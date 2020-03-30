@@ -126,7 +126,7 @@ fun setVisibility(view: View, isVisible: Boolean) {
 @BindingAdapter("fruitProfileSrc")
 fun setFruitProfileSrc(view: ImageView, id: Int?) {
     val context = view.context
-    val imgNm = getFruttoData(context, (id ?: 0) + 1)?.englishName
+    val imgNm = getFruttoData(context, id ?: 0)?.englishName
     val imgRes = context.resources.getIdentifier(
         "img_profile_${imgNm}",
         "drawable",
@@ -138,7 +138,7 @@ fun setFruitProfileSrc(view: ImageView, id: Int?) {
 @BindingAdapter("fruitChatProfileSrc")
 fun setFruitChatProfileSrc(view: ImageView, id: Int?) {
     val context = view.context
-    val imgNm = getFruttoData(context, (id ?: 0) + 1)?.englishName
+    val imgNm = getFruttoData(context, id ?: 0)?.englishName
     val imgRes = context.resources.getIdentifier(
         "img_profile_chat_${imgNm}",
         "drawable",
@@ -150,7 +150,7 @@ fun setFruitChatProfileSrc(view: ImageView, id: Int?) {
 @BindingAdapter("fruitIconProfileSrc1")
 fun setFruitIconProfileSrc1(view: ImageView, id: Int?) {
     val context = view.context
-    val imgNm = getFruttoData(context, (id ?: 0) + 1)?.backgroundFruit1
+    val imgNm = getFruttoData(context, id ?: 0)?.backgroundFruit1
     val imgRes = context.resources.getIdentifier(
         "img_profile_icon_${imgNm}",
         "drawable",
@@ -162,7 +162,7 @@ fun setFruitIconProfileSrc1(view: ImageView, id: Int?) {
 @BindingAdapter("fruitIconProfileSrc2")
 fun setFruitIconProfileSrc2(view: ImageView, id: Int?) {
     val context = view.context
-    val imgNm = getFruttoData(context, (id ?: 0) + 1)?.backgroundFruit2
+    val imgNm = getFruttoData(context, id ?: 0)?.backgroundFruit2
     val imgRes = context.resources.getIdentifier(
         "img_profile_icon_${imgNm}",
         "drawable",
@@ -174,7 +174,7 @@ fun setFruitIconProfileSrc2(view: ImageView, id: Int?) {
 @BindingAdapter("popupEndFruit")
 fun setPopupEndFruit(view: ImageView, id: Int?) {
     val context = view.context
-    val imgNm = getFruttoData(context, (id ?: 0) + 1)?.backgroundFruit2
+    val imgNm = getFruttoData(context, id ?: 0)?.englishName
     val imgRes = context.resources.getIdentifier(
         "img_popup_end_${imgNm}",
         "drawable",
@@ -203,7 +203,7 @@ fun setNickName(view: TextView, name: String?, isManager: Boolean) {
             view.text = it
         } else {
             val context = view.context
-            view.text = getFruttoData(context, it.toInt()+1)?.koreanNickName
+            view.text = getFruttoData(context, it.toInt())?.koreanNickName
         }
     }
 }
