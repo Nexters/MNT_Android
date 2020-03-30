@@ -38,9 +38,11 @@ class DBRepository {
     fun endRoom(roomId: Long): Completable =
         api.endRoom(roomId)
 
-    fun getManitto(roomId : Long,
-                   userId : String) : Flowable<User> =
-        api.getManitto(roomId,userId)
+    fun getManitto(
+        roomId: Long,
+        userId: String
+    ): Flowable<UserResponseResult> =
+        api.getManitto(roomId, userId)
 
     fun userList(roomId : Long) : Single<ApplicantResponse> =
         api.userList(roomId)

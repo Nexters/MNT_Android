@@ -18,14 +18,14 @@ val Int.isFalse: Boolean
 
 val String.checkUploadDate: String
     get() {
-        val MD_FORMAT = "%02d"
         val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+        val updateDateFormat = SimpleDateFormat("yyyyMMdd", Locale.KOREA)
 
-        val todayDateStr = "${calendar.get(Calendar.YEAR)}${MD_FORMAT.format(calendar.get(Calendar.MONTH)+1)}${MD_FORMAT.format(calendar.get(Calendar.DAY_OF_MONTH))}"
-        val updateDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
-        val updateDate = updateDateFormat.parse(this.split("T")[0])
+        val todayDateStr = updateDateFormat.format(calendar.time)
+        val updateDate = dateFormat.parse(this.split("T")[0])
         calendar.time = updateDate
-        val updateDateStr = "${calendar.get(Calendar.YEAR)}${MD_FORMAT.format(calendar.get(Calendar.MONTH)+1)}${MD_FORMAT.format(calendar.get(Calendar.DAY_OF_MONTH))}"
+        val updateDateStr = updateDateFormat.format(calendar.time)
 
         return when(todayDateStr.toInt() - updateDateStr.toInt()) {
             0 -> "오늘"

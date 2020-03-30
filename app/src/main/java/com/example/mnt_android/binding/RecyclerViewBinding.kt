@@ -216,7 +216,7 @@ fun convertEndDayToDDay(view: TextView, endDay: String?) {
         val endDayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
         val calendar = Calendar.getInstance()
         calendar.time = endDayFormat.parse(it)
-        val dday = (calendar.timeInMillis - System.currentTimeMillis()) / ONE_DAY
+        val dday = ((calendar.timeInMillis - System.currentTimeMillis()) / ONE_DAY) + 1
         view.text = if (dday > 0) dday.toString() else "0"
     }
 }

@@ -76,7 +76,7 @@ interface DBApi {
     fun getManitto(
         @Query("roomId") roomId : Long,
         @Query("userId") userId: String
-    ) : Flowable<User>
+    ) : Flowable<UserResponseResult>
 
     @Multipart
     @Headers("Accept: */*", "Accept-Encoding: gzip,deflate")
