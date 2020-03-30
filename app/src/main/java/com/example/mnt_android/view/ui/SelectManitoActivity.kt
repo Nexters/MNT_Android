@@ -1,5 +1,6 @@
 package com.example.mnt_android.view.ui
 
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
@@ -32,7 +33,12 @@ class SelectManitoActivity : BaseActivity<ActivitySelectManitoBinding, ManitoLis
     private fun setEventListener() {
         participants_rv.run {
             layoutManager = GridLayoutManager(context, 2)
-            adapter = SelectManitoListAdapter()
+            adapter = SelectManitoListAdapter().apply {
+                item.observe(this@SelectManitoActivity, Observer {
+                    confirm_btn.isEnabled = true
+                })
+            }
+        }
         }
     }
 }

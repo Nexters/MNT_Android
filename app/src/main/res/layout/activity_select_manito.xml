@@ -97,6 +97,7 @@
             android:layout_margin="20dp"
             android:padding="20dp"
             android:background="@drawable/bottom_select_button"
+            android:enabled="false"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:text="선택완료"/>

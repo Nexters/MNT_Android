@@ -180,7 +180,7 @@ fun setFaceProfileSrc(view: ImageView, id: Int?) {
 fun setNickName(view: TextView, name: String?, isManager: Boolean) {
     name?.let {
         if (isManager) {
-            view.text = name
+            view.text = it
         } else {
             val context = view.context
             view.text = getFruttoData(context, it.toInt()+1)?.koreanNickName
