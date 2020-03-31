@@ -61,27 +61,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/img_profile_face_04"/>
+                    app:faceProfileSrc="@{viewModel.nitoId}"
+                    tools:src="@drawable/img_profile_face_04"/>
                 <ImageView
                     android:id="@+id/naeto_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/img_profile_chat_avocado"/>
+                    app:fruitChatProfileSrc="@{viewModel.naetoId}"
+                    tools:src="@drawable/img_profile_chat_avocado"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp">
+
                 <TextView
                     android:id="@+id/naeto_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorLightBlack"
                     android:textSize="15sp"
-                    android:text="@{viewModel.naetoName}"
-                    tools:text="보카도"/>
+                    app:isManager="@{viewModel.isManager}"
+                    app:nickName="@{viewModel.naetoName}"
+                    tools:text="보카도" />
                 <TextView
                     android:id="@+id/naeto_tx"
                     android:layout_width="wrap_content"

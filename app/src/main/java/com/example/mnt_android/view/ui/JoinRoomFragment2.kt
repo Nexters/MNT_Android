@@ -53,7 +53,7 @@ class JoinRoomFragment2 : Fragment()
         bu_lookparticipant_joinroom2.setOnClickListener {
             val intent = Intent(context, ApplicantListActivity::class.java)
             intent.putExtra(TAG_IS_MANAGER, IS_NOT_MANAGER)
-            intent.putExtra(TAG_ROOM_ID, joinRoomViewModel.roomInfo.num.value)
+            intent.putExtra(TAG_ROOM_ID, joinRoomViewModel.pr.getRoomId())
             context?.startActivity(intent)
         }
     }

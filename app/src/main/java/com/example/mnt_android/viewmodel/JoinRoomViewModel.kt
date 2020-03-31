@@ -14,6 +14,7 @@ import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.service.model.CheckRoomList
 import com.example.mnt_android.service.model.RoomInfo
 import com.example.mnt_android.service.repository.DBRepository
+import com.example.mnt_android.service.repository.PreferencesRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
@@ -22,6 +23,7 @@ import io.reactivex.schedulers.Schedulers
 class JoinRoomViewModel(application: Application) : AndroidViewModel(application)
 {
     val app = application
+    val pr = PreferencesRepository(application.baseContext)
     var roomInfo : RoomInfo = RoomInfo()
     var sf = app.getSharedPreferences("login",0)
    var checkNitto : MutableLiveData<Boolean> = MutableLiveData()
@@ -33,10 +35,14 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
     var isStarted : MutableLiveData<Boolean> = MutableLiveData()
     var isLogined : MutableLiveData<Boolean> = MutableLiveData()
     var isManager : MutableLiveData<Boolean> = MutableLiveData()
+    var isDone = 0
     var progressBar : ObservableInt
     var startDayText_joinroom2 : String=""
     var myName = ""
     var nittoName=""
+    var fruttoId: Int? = null
+    var manitoFruttoId: Int? = null
+    var endDay: String? = null
     var name_joinroom3 = SpannableStringBuilder()
     var startDayText_joinroom3 : String = ""
 
@@ -96,6 +102,11 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                             } else {
                                 //방이 이미 시작됨
                                 isStarted.value = true
+                                isDone = checkRoom.value?.room?.isDone ?: 0
+                                nittoName = checkRoom.value?.manitto?.name ?: ""
+                                fruttoId = checkRoom.value?.userFruttoId
+                                manitoFruttoId = checkRoom.value?.manitto?.fruttoId
+                                endDay = checkRoom.value?.room?.endDay
                             }
 
                         }

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="301dp"
+        android:layout_height="342dp"
+        android:padding="15dp"
+        android:background="@drawable/round_layout_white">
+
+        <LinearLayout
+            android:id="@+id/text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/confirm_btn"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/question_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="17dp"
+                android:gravity="center"
+                android:textColor="@color/colorLightBlueBlack"
+                android:textSize="15sp"
+                android:text="당신의 마니또는?"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/popup_end_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:src="@drawable/img_popup_end_pineapple"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/popup_end_iv"
+                    app:layout_constraintEnd_toEndOf="@id/popup_end_iv"
+                    app:layout_constraintTop_toTopOf="@id/popup_end_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/popup_end_iv"
+                    app:layout_constraintVertical_bias="0.37">
+
+                    <TextView
+                        android:id="@+id/manitto_name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorLightBlack"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        tools:text="진유진진진"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorLightBlack"
+                        android:text="!"/>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="17dp"
+            android:background="@drawable/button_light_gray"
+            android:stateListAnimator="@null"
+            android:textSize="15sp"
+            android:textColor="@color/colorRedPink"
+            android:text="확인"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

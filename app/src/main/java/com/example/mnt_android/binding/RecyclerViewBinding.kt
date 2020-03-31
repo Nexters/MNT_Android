@@ -2,13 +2,21 @@ package com.example.mnt_android.binding
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mnt_android.extension.checkUploadDate
+import com.example.mnt_android.extension.isFalse
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.service.model.UserMissionResponse
+import com.example.mnt_android.service.repository.PreferencesRepository
 import com.example.mnt_android.util.FALSE_INT
+import com.example.mnt_android.util.getFruttoData
 import com.example.mnt_android.view.adapter.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @BindingAdapter("adapterApplicantList", "isManager")
 fun bindAdapterApplicantList(
@@ -32,8 +40,13 @@ fun bindAdapterManitoList(
 ) {
     memberList?.let { list ->
         (view.adapter as ManitoListAdapter).run {
+            val userList = arrayListOf<Applicant>()
+            list.forEach { applicant ->
+                if (applicant.isCreater.isFalse)
+                    userList.add(applicant)
+            }
             this.isManager = isManager
-            setList(list)
+            setList(userList)
         }
     }
 }
@@ -88,6 +101,24 @@ fun bindAdapterMissionList(
     }
 }
 
+@BindingAdapter("adapterSelectApplicantList")
+fun bindSelectApplicantList(
+    view: RecyclerView,
+    applicantList: ArrayList<Applicant>?
+) {
+    applicantList?.let { list ->
+        (view.adapter as SelectManitoListAdapter).run {
+            val userId = PreferencesRepository(view.context).getUserId()
+            val userList = arrayListOf<Applicant>()
+            list.forEach { applicant ->
+                if (applicant.isCreater.isFalse && applicant.user.id != userId)
+                    userList.add(applicant)
+            }
+            setList(userList)
+        }
+    }
+}
+
 @BindingAdapter("android:src")
 fun setIvSrc(view: ImageView, imgSrc: String?) {
     imgSrc?.let {
@@ -95,4 +126,110 @@ fun setIvSrc(view: ImageView, imgSrc: String?) {
             .load(it)
             .into(view)
     } ?: { view.visibility = View.GONE }()
+}
+
+@BindingAdapter("android:visibility")
+fun setVisibility(view: View, isVisible: Boolean) {
+    view.visibility = when(isVisible) {
+        true -> View.VISIBLE
+        false -> View.GONE
+    }
+}
+
+@BindingAdapter("fruitProfileSrc")
+fun setFruitProfileSrc(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, id ?: 0)?.englishName
+    val imgRes = context.resources.getIdentifier(
+        "img_profile_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("fruitChatProfileSrc")
+fun setFruitChatProfileSrc(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, id ?: 0)?.englishName
+    val imgRes = context.resources.getIdentifier(
+        "img_profile_chat_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("fruitIconProfileSrc1")
+fun setFruitIconProfileSrc1(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, id ?: 0)?.backgroundFruit1
+    val imgRes = context.resources.getIdentifier(
+        "img_profile_icon_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("fruitIconProfileSrc2")
+fun setFruitIconProfileSrc2(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, id ?: 0)?.backgroundFruit2
+    val imgRes = context.resources.getIdentifier(
+        "img_profile_icon_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("popupEndFruit")
+fun setPopupEndFruit(view: ImageView, id: Int?) {
+    val context = view.context
+    val imgNm = getFruttoData(context, id ?: 0)?.englishName
+    val imgRes = context.resources.getIdentifier(
+        "img_popup_end_${imgNm}",
+        "drawable",
+        context.packageName
+    )
+    view.setImageResource(imgRes)
+}
+
+@BindingAdapter("faceProfileSrc")
+fun setFaceProfileSrc(view: ImageView, id: Int?) {
+    id?.let {
+        val context = view.context
+        val imgRes = context.resources.getIdentifier(
+            "img_profile_face_${"%02d".format(it)}",
+            "drawable",
+            context.packageName
+        )
+        view.setImageResource(imgRes)
+    }
+}
+
+@BindingAdapter("nickName", "isManager")
+fun setNickName(view: TextView, name: String?, isManager: Boolean) {
+    name?.let {
+        if (isManager) {
+            view.text = it
+        } else {
+            val context = view.context
+            view.text = getFruttoData(context, it.toInt())?.koreanNickName
+        }
+    }
+}
+
+@BindingAdapter("endDayToDDay")
+fun convertEndDayToDDay(view: TextView, endDay: String?) {
+    endDay?.let {
+        val ONE_DAY = 24 * 60 * 60 * 1000
+
+        val endDayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+        val calendar = Calendar.getInstance()
+        calendar.time = endDayFormat.parse(it)
+        val dday = ((calendar.timeInMillis - System.currentTimeMillis()) / ONE_DAY) + 1
+        view.text = if (dday > 0) dday.toString() else "0"
+    }
 }

@@ -73,11 +73,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
             .setContentView<ActivityGameBinding>(this, R.layout.activity_game)
 
         binding.lifecycleOwner = this
-        timeLineFragment = TimeLineFragment(
-            sharedPreferences.getString("kakao_token", ""),
-            sharedPreferences.getLong("roomId", 0),
-            sharedPreferences.getBoolean("isManager", false)
-        )
+        timeLineFragment = TimeLineFragment()
 
        if(sharedPreferences.getBoolean("isManager",false))
         {

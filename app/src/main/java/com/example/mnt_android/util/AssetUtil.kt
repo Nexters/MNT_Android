@@ -28,7 +28,7 @@ fun getFruttoData(context: Context, id: Int): FruttoDataVO? {
     val fruttoDataList = getFruttoDataList(context)
     var fruttoData: FruttoDataVO? = null
     fruttoDataList.fruttoUserData.forEach checkData@{
-        if (it.id == id) {
+        if (it.id == id+1) {
             fruttoData = it
             return@checkData
         }
