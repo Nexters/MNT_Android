@@ -47,7 +47,7 @@ class DBRepository {
     fun userList(roomId : Long) : Single<ApplicantResponse> =
         api.userList(roomId)
 
-    fun startRoom(roomId : Long) : Completable =
+    fun startRoom(roomId : Long) : Single<ApiResponse> =
         api.startRoom(roomId)
 
     fun exitUser(roomId: Long, userId: String): Completable = api.exitUser(roomId, userId)

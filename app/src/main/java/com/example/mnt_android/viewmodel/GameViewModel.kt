@@ -59,7 +59,7 @@ class GameViewModel(private val repository: DBRepository) : BaseViewModel()
     fun groupByMission(roomId : Long)
     {
         changeManagerList.value=false
-              missionManager.clear()
+        missionManager.clear()
         addDisposable(repository.groupByMission(roomId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

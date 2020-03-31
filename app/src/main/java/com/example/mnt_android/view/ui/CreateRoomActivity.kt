@@ -91,7 +91,7 @@ class CreateRoomActivity :FragmentActivity()
         })
 
         createRoomViewModel.isStarted.observe(this,androidx.lifecycle.Observer {
-            if(it==true)
+            if(it==1)
             {
                 editor!!.putBoolean("isManager", true)
                 editor!!.commit()
@@ -100,6 +100,10 @@ class CreateRoomActivity :FragmentActivity()
                 intent.putExtra(TAG_ROOM_ID, createRoomViewModel.id)
                 intent.putExtra("roomName",createRoomViewModel.name)
                 startActivity(intent)
+            }
+            else if(it==2)
+            {
+                Toast.makeText(this,"방 인원이 충분하지 않습니다.",Toast.LENGTH_LONG).show()
             }
         })
 

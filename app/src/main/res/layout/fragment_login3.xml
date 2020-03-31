@@ -50,7 +50,7 @@
             android:textColor="#585858"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintHorizontal_bias="0.08"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -62,12 +62,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{loginViewModel.kuser.nickname}"
+            android:gravity="left"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.53"
-            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintHorizontal_bias="0.08"
             android:textSize="17sp"
             android:textColor="#0f1525"/>
 
@@ -85,7 +86,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.6"
-            app:layout_constraintWidth_percent="0.2" />
+            app:layout_constraintWidth_percent="0.4" />
 
         <TextView
             android:id="@+id/tv_id_login3"
@@ -114,11 +115,11 @@
             android:textColor="#ffffff"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHeight_percent="0.074"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.85"
+            app:layout_constraintHeight_percent="0.074"
             app:layout_constraintWidth_percent="0.9"
             app:layout_goneMarginLeft="20dp"
             app:layout_goneMarginRight="20dp" />
