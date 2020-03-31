@@ -36,6 +36,11 @@
             android:name=".view.ui.CreateRoomActivity"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity android:name=".view.ui.MainActivity">
+
+        </activity>
+        <activity android:name=".view.ui.LoginActivity" />
+        <activity android:name=".view.ui.SplashActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -45,11 +50,6 @@
                 <data
                     android:host="@string/kakaolink_host"
                     android:scheme="@string/kakao_scheme" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".view.ui.LoginActivity" />
-        <activity android:name=".view.ui.SplashActivity">
-            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

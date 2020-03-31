@@ -63,9 +63,6 @@ class CreateRoomActivity :FragmentActivity()
         setFrag(0)
 
 
-
-
-
         val intent = intent
         val str = intent.data
         if(str!=null)
@@ -120,11 +117,11 @@ class CreateRoomActivity :FragmentActivity()
 
             if(index==1)
             {
-                createRoomViewModel.startDay.value="$year-$month-$dayOfMonth"
+                createRoomViewModel.startDay.value="$year-${month+1}-$dayOfMonth"
             }
             else
             {
-                createRoomViewModel.endDay.value= "$year-$month-$dayOfMonth"
+                createRoomViewModel.endDay.value= "$year-${month+1}-$dayOfMonth"
             }
 
 
