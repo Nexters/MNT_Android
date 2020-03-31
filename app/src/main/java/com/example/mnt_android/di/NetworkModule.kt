@@ -2,6 +2,7 @@ package com.example.mnt_android.di
 
 import com.example.mnt_android.service.DBApi
 import com.example.mnt_android.service.repository.DBRepository
+import com.example.mnt_android.service.repository.PreferencesRepository
 import com.example.mnt_android.viewmodel.*
 import com.example.mnt_android.vo.FruttoListVO
 import com.google.gson.Gson
@@ -57,11 +58,15 @@ var networkModule = module {
     }
 
     viewModel {
-        ManitoListViewModel(get())
+        ManitoListViewModel(get(), get())
     }
 
     viewModel {
-        TimeLineViewModel(get())
+        ShowManittoViewModel(get(), get())
+    }
+
+    viewModel {
+        TimeLineViewModel(get(), get())
     }
 
     viewModel {
@@ -69,7 +74,17 @@ var networkModule = module {
     }
 
     viewModel {
+        DashBoardViewModel(get(), get())
+    }
+
+    viewModel {
         GameViewModel(get())
+    }
+}
+
+var repositoryModule = module {
+    single {
+        PreferencesRepository(androidContext())
     }
 }
 
@@ -89,4 +104,4 @@ var fileModule = module {
     }
 }
 
-var moduleList = arrayListOf(networkModule, fileModule)
+var moduleList = arrayListOf(networkModule, repositoryModule, fileModule)

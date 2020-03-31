@@ -13,7 +13,7 @@ class FinishActivity : AppCompatActivity() {
         setContentView(R.layout.activity_finish)
 
         confirm_btn.setOnClickListener {
-            startActivity(Intent(this, null))
+            startActivity(Intent(this, SelectManitoActivity::class.java))
             finish()
         }
     }

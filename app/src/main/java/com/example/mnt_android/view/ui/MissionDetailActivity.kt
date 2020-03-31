@@ -3,7 +3,6 @@ package com.example.mnt_android.view.ui
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
 import com.example.mnt_android.databinding.ActivityMissionDetailBinding
-import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.viewmodel.MissionDetailViewModel
 import kotlinx.android.synthetic.main.activity_mission_detail.*
@@ -25,10 +24,8 @@ class MissionDetailActivity : BaseActivity<ActivityMissionDetailBinding, Mission
 
     private fun setViewModel() {
         dataBinding.lifecycleOwner = this
-        dataBinding.viewModel = viewModel
-        viewModel.run {
-            isManager = intent.getBooleanExtra(TAG_IS_MANAGER, false)
-            val test = intent.getParcelableExtra<UserMissionResponse>(TAG_MISSION)
+        dataBinding.viewModel = viewModel.apply {
+            isManager.value = intent.getBooleanExtra(TAG_IS_MANAGER, false)
             setMission(intent.getParcelableExtra(TAG_MISSION))
         }
     }

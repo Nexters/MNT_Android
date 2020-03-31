@@ -7,16 +7,20 @@ import com.example.mnt_android.extension.checkUploadDate
 import com.example.mnt_android.service.model.UserMissionResponse
 
 class MissionDetailViewModel : BaseViewModel() {
-    var isManager = false
+    var isManager = MutableLiveData<Boolean>(false)
 
     private val _mission = MutableLiveData<UserMissionResponse>()
     val mission: LiveData<UserMissionResponse> = _mission
 
+    val naetoId: LiveData<Int>
+        get() = MutableLiveData(mission.value?.userFruttoId)
+    val nitoId: LiveData<Int>
+        get() = MutableLiveData(mission.value?.manitto?.fruttoId)
     val naetoName: LiveData<String>
         get() = MutableLiveData(
-            when (isManager) {
+            when (isManager.value) {
                 true -> mission.value?.userMission?.user?.name
-                false -> mission.value?.userFruttoId.toString()
+                else -> mission.value?.userFruttoId.toString()
             }
         )
     val nitoName: LiveData<String>

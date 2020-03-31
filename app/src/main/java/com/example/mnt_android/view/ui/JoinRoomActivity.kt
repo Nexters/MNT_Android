@@ -10,12 +10,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.ActivityJoinroomBinding
 import com.example.mnt_android.databinding.ActivityMainBinding
 import com.example.mnt_android.service.model.CheckRoom
+import com.example.mnt_android.service.repository.PreferencesRepository
 import com.example.mnt_android.util.TAG_IS_MANAGER
+import com.example.mnt_android.viewmodel.ApplicantListViewModel
 import com.example.mnt_android.viewmodel.JoinRoomViewModel
 import com.example.mnt_android.viewmodel.BackPressViewModel
 import com.kakao.kakaolink.v2.KakaoLinkResponse
@@ -46,8 +49,7 @@ class JoinRoomActivity : AppCompatActivity()
         binding.lifecycleOwner = this
         joinRoomViewModel = ViewModelProviders.of(this)[JoinRoomViewModel::class.java]
         backPressViewModel=  ViewModelProviders.of(this)[BackPressViewModel::class.java]
-
-        fragmentManager=supportFragmentManager
+       fragmentManager=supportFragmentManager
         fragmentTransaction=fragmentManager.beginTransaction()
         joinRoomFragment= JoinRoomFragment()
         joinRoomFragment2= JoinRoomFragment2()
@@ -125,6 +127,14 @@ class JoinRoomActivity : AppCompatActivity()
         intent.putExtra("roomName",checkRoom?.room?.name)
         startActivity(intent)
         finish()
+    }
+
+    fun lookParticipants()
+    {
+        val intent = Intent(this,ApplicantListActivity::class.java)
+        intent.putExtra("isManager",0)
+        intent.putExtra("roomId",PreferencesRepository(this).getRoomId())
+        startActivity(intent)
     }
 
     fun setFrag(n : Int)

@@ -35,14 +35,19 @@ class DBRepository {
                    userId : String) : Completable =
         api.attendRoom(roomId,userId)
 
-    fun getManitto(roomId : Long,
-                   userId : String) : Flowable<User> =
-        api.getManitto(roomId,userId)
+    fun endRoom(roomId: Long): Completable =
+        api.endRoom(roomId)
+
+    fun getManitto(
+        roomId: Long,
+        userId: String
+    ): Flowable<UserResponseResult> =
+        api.getManitto(roomId, userId)
 
     fun userList(roomId : Long) : Single<ApplicantResponse> =
         api.userList(roomId)
 
-    fun startRoom(roomId : Long) : Completable =
+    fun startRoom(roomId : Long) : Single<ApiResponse> =
         api.startRoom(roomId)
 
     fun exitUser(roomId: Long, userId: String): Completable = api.exitUser(roomId, userId)
@@ -65,4 +70,6 @@ class DBRepository {
         api.groupByMission(roomId)
 
     fun getMissionList(roomId: Long): Flowable<MissionListResponse> = api.getMissionList(roomId)
+
+    fun getDashBoardData(roll: String, roomId: Long, userId: String) = api.getDashBoardData(roll, userId, roomId)
 }

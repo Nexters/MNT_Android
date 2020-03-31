@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.item_manito.view.*
 import kotlinx.android.synthetic.main.item_mission_manager.view.*
 
 class MissionManagerListViewHolder(view: View, private val isManager: Boolean) :  BaseViewHolder(view) {
-    override fun onBind(data: Any) {
+    override fun onBind(position: Int, data: Any) {
         val mission = data as Pair<String,String>
         itemView.run {
 

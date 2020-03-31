@@ -6,7 +6,7 @@ import com.example.mnt_android.service.model.UserMissionResponse
 import kotlinx.android.synthetic.main.item_mission_done_applicant.view.*
 
 class DoneMissionListViewHolder(view: View) : BaseViewHolder(view) {
-    override fun onBind(data: Any) {
+    override fun onBind(position: Int, data: Any) {
         val content = data as UserMissionResponse
         content.run {
             itemView.run {

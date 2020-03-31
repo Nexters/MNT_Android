@@ -4,19 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseFragment
 import com.example.mnt_android.databinding.FragmentDashBoardManagerBinding
 import com.example.mnt_android.view.dialog.ConfirmDialog
 import com.example.mnt_android.view.dialog.NoticeDialog
+import com.example.mnt_android.viewmodel.DashBoardViewModel
 import kotlinx.android.synthetic.main.fragment_dash_board_manager.*
+import org.jetbrains.anko.sdk21.listeners.onClick
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DashBoardManagerFragment : BaseFragment() {
     companion object {
         private const val TAG = "DashBoard Manager Dialog"
     }
 
+    private val viewModel by viewModel<DashBoardViewModel>()
     private lateinit var binding: FragmentDashBoardManagerBinding
 
     override fun onCreateView(
@@ -26,6 +31,9 @@ class DashBoardManagerFragment : BaseFragment() {
     ): View? {
         binding = bind(inflater, container, R.layout.fragment_dash_board_manager)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel.apply {
+            loadDashBoard()
+        }
         return binding.root
     }
 
@@ -35,11 +43,15 @@ class DashBoardManagerFragment : BaseFragment() {
 
     private fun setEventListener() {
         val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
-        dev_info_layout.setOnClickListener {
+        notification_switch.onClick {
+            viewModel.setOnNotification(!notification_switch.isChecked)
+        }
+
+        dev_info_layout.onClick {
             NoticeDialog("개발자정보", "고민중").show(supportFragmentManager, TAG)
         }
 
-        exit_room_layout.setOnClickListener {
+        exit_room_layout.onClick {
             ConfirmDialog(
                 "프루또를 끝내시겠습니까?\n" +
                         "참여자들의 니또가 공개되며,\n" +
@@ -47,6 +59,8 @@ class DashBoardManagerFragment : BaseFragment() {
                 "취소",
                 "나가기"
             ) {
+                viewModel.endRoom()
+                Toast.makeText(context, "프루또가 종료되었습니다.", Toast.LENGTH_SHORT).show()
             }.show(
                 supportFragmentManager,
                 TAG

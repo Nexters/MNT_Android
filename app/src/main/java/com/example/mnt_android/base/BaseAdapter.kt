@@ -22,7 +22,7 @@ abstract class BaseAdapter<listType : Any> : RecyclerView.Adapter<BaseViewHolder
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         try {
-            holder.onBind(itemList[position])
+            holder.onBind(position, itemList[position])
         } catch (e: Exception) {
             e.printStackTrace()
         }

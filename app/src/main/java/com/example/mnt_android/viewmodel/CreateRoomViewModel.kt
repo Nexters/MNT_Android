@@ -2,6 +2,7 @@ package com.example.mnt_android.viewmodel
 
 import android.icu.text.SimpleDateFormat
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.service.model.Room
@@ -26,7 +27,7 @@ class CreateRoomViewModel : BaseViewModel()
   var maxPeople : String = ""
  var id : Long = -1
  var isCreated : MutableLiveData<Boolean> = MutableLiveData()
-    var isStarted : MutableLiveData<Boolean> =  MutableLiveData()
+    var isStarted : MutableLiveData<Int> =  MutableLiveData()
   lateinit var roomId : RoomId
  var userId : String = ""
  lateinit var format : SimpleDateFormat
@@ -41,19 +42,6 @@ class CreateRoomViewModel : BaseViewModel()
 
 
   }
-
-  fun setDate()
-  {
-
-  }
-
-  fun setRoomInfo()
-  {
-
-
-
-  }
-
 
   fun createRoom()
   {
@@ -70,6 +58,7 @@ class CreateRoomViewModel : BaseViewModel()
 
       Log.d("wlgusdnzzz",t?.roomId.toString())
 
+
       isCreated.value=true
 
      })
@@ -83,10 +72,13 @@ class CreateRoomViewModel : BaseViewModel()
     repository.startRoom(id.toLong())
      .subscribeOn(Schedulers.io())
      .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(Action {
-            //방이 정상적으로 시작되었는 지 확인 필요 (인원 문제)
-            isStarted.value=true
-            Log.d("wlgusdnzzz","방시작됨")
+        .subscribe({
+            if(it.apiStatus.label=="방 인원이 충분하지 않습니다")
+                isStarted.value = 2
+            else
+                isStarted.value = 1
+        },{
+
         })
    )
  }

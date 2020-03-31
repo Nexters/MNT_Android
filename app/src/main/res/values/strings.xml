@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MNT_Android</string>
+    <string name="app_name">Frutto</string>
     <string name="kakao_app_key">69da4fe38643b28e96fc980132358b1a</string>
     <string name="kakao_scheme">kakao69da4fe38643b28e96fc980132358b1a</string>
     <string name="kakaolink_host">kakaolink</string>
@@ -16,6 +16,6 @@
     <string name="tv_look_participant">참여자 보기 👫</string>
     <string name="tv_invitecode">초대코드를 입력해주세요 💌</string>
     <string name="tv_get_image">📷 이미지 업로드</string>
-
+    <string name="tv_notice_end_day"> 정오까지 니또를 많이 많이 챙겨주세요!💌</string>
 
 </resources>

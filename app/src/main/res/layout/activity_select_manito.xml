@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mnt_android.viewmodel.ManitoListViewModel" />
+    </data>
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -65,19 +72,21 @@
                     android:gravity="center"
                     android:textSize="14sp"
                     android:textColor="@color/colorBlackNotice"
-                    android:text="푸르또가 종료되었습니다.\n마니또를 공개하기 전에\n본인의 마니또를 맞춰보세요!"/>
+                    android:text="프루또가 종료되었습니다.\n마니또를 공개하기 전에\n본인의 마니또를 맞춰보세요!"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
         
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/participants_rv"
-            android:layout_width="0dp"
+            android:layout_width="332dp"
             android:layout_height="0dp"
-            android:layout_margin="21dp"
+            android:layout_margin="38dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_layout"
             app:layout_constraintBottom_toTopOf="@id/confirm_btn"
+            app:adapterSelectApplicantList="@{viewModel.manitoList}"
+            android:overScrollMode="never"
             tools:listitem="@layout/item_participant"/>
         
         <Button
@@ -88,6 +97,7 @@
             android:layout_margin="20dp"
             android:padding="20dp"
             android:background="@drawable/bottom_select_button"
+            android:enabled="false"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:text="선택완료"/>

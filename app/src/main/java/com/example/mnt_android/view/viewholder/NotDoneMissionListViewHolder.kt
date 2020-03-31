@@ -8,7 +8,7 @@ import com.example.mnt_android.view.ui.DoMissionActivity
 import kotlinx.android.synthetic.main.item_mission_notdone_applicant.view.*
 
 class NotDoneMissionListViewHolder(view: View) : BaseViewHolder(view) {
-    override fun onBind(data: Any) {
+    override fun onBind(position: Int, data: Any) {
         val content = data as UserMissionResponse
         content.run {
             itemView.run {

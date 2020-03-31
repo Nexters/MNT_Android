@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 class UserMissionResponse (
     @SerializedName("manitto")
-    var manitto : User?,//내 마니또 정보
-    @SerializedName("manittoFruttoId")//내 마니또의 넘버
-    var manittoFruttoId : Int,
+    var manitto : Manitto?,//내 마니또 정보
     @SerializedName("missionId")
     var missionId : Int,
     @SerializedName("missionName")
@@ -19,8 +17,7 @@ class UserMissionResponse (
     var userMission : UserMission
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readParcelable(User::class.java.classLoader),
-        parcel.readInt(),
+        parcel.readParcelable(Manitto::class.java.classLoader),
         parcel.readInt(),
         parcel.readString(),
         parcel.readInt(),
@@ -30,7 +27,6 @@ class UserMissionResponse (
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(manitto, flags)
-        parcel.writeInt(manittoFruttoId)
         parcel.writeInt(missionId)
         parcel.writeString(missionName)
         parcel.writeInt(userFruttoId)

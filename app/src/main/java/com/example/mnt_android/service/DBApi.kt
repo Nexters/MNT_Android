@@ -1,17 +1,12 @@
 package com.example.mnt_android.service
 
 import com.example.mnt_android.service.model.*
-import com.example.mnt_android.view.ui.MainActivity.Companion.userId
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
-import com.kakao.auth.StringSet.api
 import io.reactivex.Flowable
 
 import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import retrofit2.http.*
-import java.io.File
 
 interface DBApi {
 
@@ -42,11 +37,17 @@ interface DBApi {
         @Query("userId") userId: String
     ): Completable
 
+    //방 종료
+    @GET("api/room/end/{roomId}")
+    fun endRoom(
+        @Path("roomId") roomId : Long
+    ): Completable
+
     // 마니또 방 시작
     @GET("/api/room/start/{roomId}")
     fun startRoom(
         @Path("roomId") roomId: Long
-    ) : Completable
+    ) : Single<ApiResponse>
 
     // 참여자 리스트
     @GET("/api/room/user-list/{roomId}")
@@ -70,7 +71,7 @@ interface DBApi {
     fun getManitto(
         @Query("roomId") roomId : Long,
         @Query("userId") userId: String
-    ) : Flowable<User>
+    ) : Flowable<UserResponseResult>
 
     @Multipart
     @Headers("Accept: */*", "Accept-Encoding: gzip,deflate")
@@ -98,4 +99,11 @@ interface DBApi {
     fun getMissionList(
         @Path("roomId") roomId : Long
     ) : Flowable<MissionListResponse>
+
+    @GET("/api/mission/dashBoard/{roll}")
+    fun getDashBoardData(
+        @Path("roll") roll: String,
+        @Query("userId") userId: String,
+        @Query("roomId") roomId : Long
+    ) : Flowable<DashBoardResponse>
 }

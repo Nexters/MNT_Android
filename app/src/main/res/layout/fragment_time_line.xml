@@ -16,7 +16,8 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,6 +58,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlueBlack"
                         android:textSize="20sp"
+                        android:text="@{viewModel.userNm}"
                         tools:text="프루또" />
 
                     <TextView
@@ -83,6 +85,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_alignParentEnd="true"
+                            app:fruitIconProfileSrc2="@{viewModel.userFruttoId}"
                             android:src="@drawable/profile_icon_strawberry"/>
 
                         <ImageView
@@ -90,12 +93,14 @@
                             android:layout_height="match_parent"
                             android:layout_centerHorizontal="true"
                             android:paddingStart="10dp"
+                            app:fruitIconProfileSrc1="@{viewModel.userFruttoId}"
                             android:src="@drawable/img_profile_icon_cherry"/>
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_alignParentStart="true"
+                            app:fruitProfileSrc="@{viewModel.userFruttoId}"
                             android:src="@drawable/img_profile_grape"/>
                     </RelativeLayout>
                 </RelativeLayout>
@@ -110,6 +115,26 @@
                     app:adapterMissionList="@{viewModel.contentList}"
                     app:isManager="@{viewModel.isManager}"
                     tools:listitem="@layout/item_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="@{viewModel.contentList.size()==0?true:false}">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="24dp"
+                        android:src="@drawable/group_2"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="@color/colorLightGray2"
+                        android:text="프루또들을 위한 \n미션을 등록해주세요!"/>
+                </LinearLayout>
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
