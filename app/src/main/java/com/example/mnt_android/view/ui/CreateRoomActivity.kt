@@ -2,6 +2,7 @@ package com.example.mnt_android.view.ui
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
@@ -39,7 +40,8 @@ class CreateRoomActivity :FragmentActivity()
     lateinit var fragmentTransaction: FragmentTransaction
     lateinit var fragmentManager: FragmentManager
     lateinit var backPressViewModel : BackPressViewModel
-
+    lateinit var sf : SharedPreferences
+    lateinit var editor : SharedPreferences.Editor
     companion object {
         private const val IS_MANAGER = 1
     }
@@ -50,6 +52,8 @@ class CreateRoomActivity :FragmentActivity()
             .setContentView<ActivityCreateroomBinding>(this, R.layout.activity_createroom)
         binding.lifecycleOwner = this // LiveData를 사용하기 위해서 없으면 Observe할때마다 refresh안딤
 
+        sf = getSharedPreferences("login",0)
+        editor = sf.edit()
 
         createRoomViewModel = ViewModelProviders.of(this)[CreateRoomViewModel::class.java]
         backPressViewModel=  ViewModelProviders.of(this)[BackPressViewModel::class.java]
