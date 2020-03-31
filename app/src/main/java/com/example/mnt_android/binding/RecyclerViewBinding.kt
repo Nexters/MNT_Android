@@ -7,8 +7,10 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mnt_android.extension.checkUploadDate
+import com.example.mnt_android.extension.isFalse
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.service.model.UserMissionResponse
+import com.example.mnt_android.service.repository.PreferencesRepository
 import com.example.mnt_android.util.FALSE_INT
 import com.example.mnt_android.util.getFruttoData
 import com.example.mnt_android.view.adapter.*
@@ -38,8 +40,13 @@ fun bindAdapterManitoList(
 ) {
     memberList?.let { list ->
         (view.adapter as ManitoListAdapter).run {
+            val userList = arrayListOf<Applicant>()
+            list.forEach { applicant ->
+                if (applicant.isCreater.isFalse)
+                    userList.add(applicant)
+            }
             this.isManager = isManager
-            setList(list)
+            setList(userList)
         }
     }
 }
@@ -101,7 +108,13 @@ fun bindSelectApplicantList(
 ) {
     applicantList?.let { list ->
         (view.adapter as SelectManitoListAdapter).run {
-            setList(list)
+            val userId = PreferencesRepository(view.context).getUserId()
+            val userList = arrayListOf<Applicant>()
+            list.forEach { applicant ->
+                if (applicant.isCreater.isFalse && applicant.user.id != userId)
+                    userList.add(applicant)
+            }
+            setList(userList)
         }
     }
 }

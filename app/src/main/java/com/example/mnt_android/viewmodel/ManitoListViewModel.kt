@@ -27,12 +27,7 @@ class ManitoListViewModel(
                 .subscribe({
                     it.run {
                         if (apiStatus.httpStatus == SUCCESS) {
-                            val userList = arrayListOf<Applicant>()
-                            data.forEach { applicant ->
-                                if (applicant.isCreater.isFalse && applicant.user.id != pr.getUserId())
-                                    userList.add(applicant)
-                            }
-                            _manitoList.value = userList
+                            _manitoList.value = data
                         }
                     }
                 }, {
