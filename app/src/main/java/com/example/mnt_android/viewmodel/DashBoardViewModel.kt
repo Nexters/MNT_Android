@@ -56,10 +56,11 @@ class DashBoardViewModel(
         pr.setOnNotification(on)
     }
 
-    fun getIsManager() = pr.getIsManager()
+    fun getUserId() = pr.getUserId()
     fun getUserNm() = pr.getUserNm()
     fun getUserFruttoId() = pr.getFruttoId()
     fun getManittoNm() = pr.getManitoNm()
     fun getManitoFruttoId() = pr.getManitoFruttoId()
+    fun getCheckNaeto() = pr.getCheckNaeto()
     fun getOnNotification() = pr.getOnNotification()
 }

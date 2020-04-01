@@ -43,8 +43,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlueBlack"
                         android:textSize="20sp"
-                        app:isManager="@{viewModel.isManager}"
-                        app:nickName="@{String.valueOf(viewModel.userFruttoId)}"
+                        app:nickName="@{viewModel.userFruttoId}"
                         tools:text="포도링" />
 
                     <TextView
@@ -61,7 +60,8 @@
                         android:layout_below="@id/name_tv"
                         android:textColor="@color/colorBlueBlack"
                         android:textSize="20sp"
-                        android:text="니또를 챙겨줄 때입니다." />
+                        android:text='@{!viewModel.checkNaeto?String.valueOf(@string/greeting_dashboard_not_done_applicant):String.valueOf(@string/greeting_dashboard_done)}'
+                        tools:text="@string/greeting_dashboard_not_done_applicant"/>
                 </RelativeLayout>
 
                 <ImageView

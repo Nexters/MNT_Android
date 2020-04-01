@@ -16,7 +16,7 @@ import com.example.mnt_android.util.getFruttoData
 import com.example.mnt_android.view.ui.MissionDetailActivity
 import kotlinx.android.synthetic.main.item_content.view.*
 
-class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseViewHolder(view) {
+class ContentListViewHolder(view: View, private val isPublic: Boolean) : BaseViewHolder(view) {
     override fun onBind(position: Int, data: Any) {
         val content = data as UserMissionResponse
         content.run {
@@ -30,14 +30,13 @@ class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseVi
                 setFruitChatProfileSrc(naeto_iv, userFruttoId)
                 setFaceProfileSrc(nito_iv, manitto?.fruttoId)
 
-                naeto_tv.text = if(isManager) userMission.user.name else getFruttoData(context, userFruttoId)?.koreanNickName
+                naeto_tv.text = if(isPublic) userMission.user.name else getFruttoData(context, userFruttoId)?.koreanNickName
                 nito_tv.text = manitto?.name
                 mission_type_tv.text = missionName
                 content_tv.text = userMission.content
                 day_tv.text = userMission.userDoneTime?.checkUploadDate
                 setOnClickListener {
                     val intent = Intent(context, MissionDetailActivity::class.java)
-                    intent.putExtra(TAG_IS_MANAGER, isManager)
                     intent.putExtra(MissionDetailActivity.TAG_MISSION, content)
                     context.startActivity(intent)
                 }

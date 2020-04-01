@@ -83,8 +83,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorLightBlack"
                     android:textSize="15sp"
-                    app:isManager="@{viewModel.isManager}"
-                    app:nickName="@{viewModel.naetoName}"
+                    app:isPublic="@{viewModel.isManager || viewModel.checkNaeto}"
+                    app:autoNickName="@{viewModel.naetoName}"
                     tools:text="보카도" />
                 <TextView
                     android:id="@+id/naeto_tx"

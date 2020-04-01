@@ -40,4 +40,5 @@ class ManitoListViewModel(
 
     fun getIsManager() = pr.getIsManager()
     fun getUserId() = pr.getUserId()
+    fun getCheckNaeto() = pr.getCheckNaeto()
 }
