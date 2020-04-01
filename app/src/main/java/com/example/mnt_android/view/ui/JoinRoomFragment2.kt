@@ -43,6 +43,7 @@ class JoinRoomFragment2 : Fragment()
 
             binding.joinRoomViewModel = joinRoomViewModel
             binding.joinRoomActivity=(activity as JoinRoomActivity)
+
             binding.lifecycleOwner=this
         }
 

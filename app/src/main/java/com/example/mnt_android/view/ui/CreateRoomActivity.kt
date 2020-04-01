@@ -2,6 +2,7 @@ package com.example.mnt_android.view.ui
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
@@ -39,7 +40,8 @@ class CreateRoomActivity :FragmentActivity()
     lateinit var fragmentTransaction: FragmentTransaction
     lateinit var fragmentManager: FragmentManager
     lateinit var backPressViewModel : BackPressViewModel
-
+    lateinit var sf : SharedPreferences
+    lateinit var editor : SharedPreferences.Editor
     companion object {
         private const val IS_MANAGER = 1
     }
@@ -50,6 +52,8 @@ class CreateRoomActivity :FragmentActivity()
             .setContentView<ActivityCreateroomBinding>(this, R.layout.activity_createroom)
         binding.lifecycleOwner = this // LiveData를 사용하기 위해서 없으면 Observe할때마다 refresh안딤
 
+        sf = getSharedPreferences("login",0)
+        editor = sf.edit()
 
         createRoomViewModel = ViewModelProviders.of(this)[CreateRoomViewModel::class.java]
         backPressViewModel=  ViewModelProviders.of(this)[BackPressViewModel::class.java]
@@ -61,9 +65,6 @@ class CreateRoomActivity :FragmentActivity()
         createRoomFragment3= CreateRoomFragment3()
 
         setFrag(0)
-
-
-
 
 
         val intent = intent
@@ -90,7 +91,7 @@ class CreateRoomActivity :FragmentActivity()
         })
 
         createRoomViewModel.isStarted.observe(this,androidx.lifecycle.Observer {
-            if(it==true)
+            if(it==1)
             {
                 editor!!.putBoolean("isManager", true)
                 editor!!.commit()
@@ -99,6 +100,10 @@ class CreateRoomActivity :FragmentActivity()
                 intent.putExtra(TAG_ROOM_ID, createRoomViewModel.id)
                 intent.putExtra("roomName",createRoomViewModel.name)
                 startActivity(intent)
+            }
+            else if(it==2)
+            {
+                Toast.makeText(this,"방 인원이 충분하지 않습니다.",Toast.LENGTH_LONG).show()
             }
         })
 
@@ -120,11 +125,11 @@ class CreateRoomActivity :FragmentActivity()
 
             if(index==1)
             {
-                createRoomViewModel.startDay.value="$year-$month-$dayOfMonth"
+                createRoomViewModel.startDay.value="$year-${month+1}-$dayOfMonth"
             }
             else
             {
-                createRoomViewModel.endDay.value= "$year-$month-$dayOfMonth"
+                createRoomViewModel.endDay.value= "$year-${month+1}-$dayOfMonth"
             }
 
 

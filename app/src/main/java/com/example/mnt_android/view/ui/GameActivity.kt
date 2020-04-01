@@ -75,6 +75,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         binding.lifecycleOwner = this
         timeLineFragment = TimeLineFragment()
 
+        Log.d("wlgusdnzzz",sharedPreferences.getLong("roomId",0).toString())
+
        if(sharedPreferences.getBoolean("isManager",false))
         {
             missionManagerFragment = MissionManagerFragment()

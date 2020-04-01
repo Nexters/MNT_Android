@@ -179,9 +179,9 @@ class DoMissionActivity : AppCompatActivity()
                 var height = bmp.height
                 var width = bmp.width
                 var bm : Bitmap?=null
-                while (height > 100) {
+                while (height > 300) {
 
-                    bm = Bitmap.createScaledBitmap(bmp, (width * 100) / height, 100, true)
+                    bm = Bitmap.createScaledBitmap(bmp, (width * 300) / height, 300, true)
                     height = bm.getHeight()
                     width = bm.getWidth()
                 }
