@@ -122,7 +122,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:visibility="@{viewModel.contentList.size()==0?true:false}">
+                    android:visibility="@{viewModel.contentList.size()==0}">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

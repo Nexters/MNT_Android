@@ -51,7 +51,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center_vertical"
-            android:padding="15dp">
+            android:paddingTop="4dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <RelativeLayout
                 android:layout_width="95dp"
@@ -135,14 +137,16 @@
                 android:id="@+id/mission_img_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="14dp"
                 android:adjustViewBounds="true"
                 android:src="@{viewModel.missionImg}"
+                android:visibility="@{viewModel.missionImg!=null}"
                 tools:src="@drawable/img_profile_chat_grape"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
                 <TextView
                     android:layout_width="wrap_content"
