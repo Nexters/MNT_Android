@@ -23,7 +23,7 @@ class ContentListViewHolder(view: View, private val isPublic: Boolean) : BaseVie
             itemView.run {
                 if (userMission.missionImg != null) {
                     image_iv.visibility = View.VISIBLE
-                    setContentImg(context, userMission.missionImg!!, image_iv)
+                    setContentImg(context, userMission.missionImg, image_iv)
                 } else {
                     image_iv.visibility = View.GONE
                 }
@@ -44,7 +44,7 @@ class ContentListViewHolder(view: View, private val isPublic: Boolean) : BaseVie
         }
     }
 
-    private fun setContentImg(context: Context, url: String, iv: ImageView) {
+    private fun setContentImg(context: Context, url: String?, iv: ImageView) {
         Glide.with(context)
             .load(url)
             .into(iv)
