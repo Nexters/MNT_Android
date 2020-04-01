@@ -81,7 +81,6 @@
             android:background="@drawable/button_hot_pink"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:onClick="@{()->createMissionViewModel.makeMission(createMissionActivity.roomId)}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
