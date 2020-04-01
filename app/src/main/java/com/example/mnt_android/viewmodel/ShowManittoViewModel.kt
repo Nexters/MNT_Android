@@ -32,9 +32,24 @@ class ShowManittoViewModel(
         )
     }
 
-    fun setCheckNito() {
-        pr.setCheckNito()
+    fun loadUserList() {
+        addDisposable(
+            dbRepository.userList(pr.getRoomId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    it.run {
+                        if (apiStatus.httpStatus == SUCCESS) {
+                            pr.setUserList(data)
+                        }
+                    }
+                }, {
+
+                })
+        )
     }
+
+    fun setCheckNito() = pr.setCheckNito()
 
     fun getUserNm() = pr.getUserNm()
     fun getUserFruttoId() = pr.getFruttoId()

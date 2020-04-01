@@ -28,6 +28,7 @@ class ShowManittoActivity : BaseActivity<ActivityShowManittoBinding, BaseViewMod
     private fun setDatabinding() {
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModel.apply {
+            loadUserList()
             loadManittoData()
         }
         dataBinding.run {
