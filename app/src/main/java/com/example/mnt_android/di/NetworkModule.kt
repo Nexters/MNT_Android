@@ -70,7 +70,7 @@ var networkModule = module {
     }
 
     viewModel {
-        MissionDetailViewModel()
+        MissionDetailViewModel(get())
     }
 
     viewModel {

@@ -52,9 +52,20 @@ class DashBoardViewModel(
         )
     }
 
-    fun setOnNotification(on: Boolean) {
-        pr.setOnNotification(on)
+    fun exitRoom(success: () -> Unit) {
+        addDisposable(
+            dbRepository.exitUser(pr.getRoomId(), pr.getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it.apiStatus.httpStatus == SUCCESS) {
+                        success()
+                    }
+                }, {})
+        )
     }
+
+    fun setOnNotification(on: Boolean) = pr.setOnNotification(on)
 
     fun getUserId() = pr.getUserId()
     fun getUserNm() = pr.getUserNm()
