@@ -87,7 +87,7 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentEnd="true"
                             app:fruitIconProfileSrc2="@{viewModel.userFruttoId}"
-                            android:src="@drawable/profile_icon_strawberry"/>
+                            android:src="@drawable/img_profile_icon_strawberry"/>
 
                         <ImageView
                             android:layout_width="wrap_content"
