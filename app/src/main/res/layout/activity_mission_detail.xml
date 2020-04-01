@@ -131,7 +131,7 @@
             android:layout_marginStart="26dp"
             android:layout_marginEnd="26dp"
             android:orientation="vertical">
-            <ImageView
+            <com.example.mnt_android.view.component.RoundImageView
                 android:id="@+id/mission_img_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

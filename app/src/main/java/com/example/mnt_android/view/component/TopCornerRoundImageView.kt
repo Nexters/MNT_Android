@@ -1,8 +1,7 @@
-package com.example.mnt_android.view.custom
+package com.example.mnt_android.view.component
 
 import android.content.Context
 import android.graphics.*
-import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.widget.ImageView
 
