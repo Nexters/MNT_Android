@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseFragment
+import com.example.mnt_android.bus.MISSION_LIST_FROM_ME
+import com.example.mnt_android.bus.MISSION_LIST_TO_ME
+import com.example.mnt_android.bus.sendFilteringEvent
 import com.example.mnt_android.databinding.FragmentDashBoardApplicantBinding
 import com.example.mnt_android.view.dialog.CustomAlertDialog
 import com.example.mnt_android.view.dialog.NoticeDialog
@@ -40,10 +44,26 @@ class DashBoardApplicantFragment : BaseFragment() {
         setEventListener()
     }
 
+    private fun changeTimeLineFragment(
+        supportFragmentManager: FragmentManager,
+        filterType: String
+    ) {
+        val fragment = TimeLineFragment(arrayOf(filterType, viewModel.getUserId()))
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.game_layout, fragment)
+        transaction.commit()
+    }
+
     private fun setEventListener() {
         val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
+        go_send_mission_layout.onClick {
+            changeTimeLineFragment(supportFragmentManager, MISSION_LIST_FROM_ME)
+        }
+        go_receive_mission_layout.onClick {
+            changeTimeLineFragment(supportFragmentManager, MISSION_LIST_TO_ME)
+        }
         notification_switch.onClick {
-            viewModel.setOnNotification(!notification_switch.isChecked)
+            viewModel.setOnNotification(notification_switch.isChecked)
         }
         dev_info_layout.onClick {
             NoticeDialog("개발자정보", "고민중").show(supportFragmentManager, TAG)

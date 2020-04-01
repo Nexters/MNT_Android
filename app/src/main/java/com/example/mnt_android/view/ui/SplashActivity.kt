@@ -114,7 +114,6 @@ class SplashActivity : AppCompatActivity()
                                     joinRoomViewModel.pr.setFruttoId(joinRoomViewModel.fruttoId)
                                     joinRoomViewModel.pr.setManitoNm(joinRoomViewModel.nittoName)
                                     joinRoomViewModel.pr.setManitoFruttoId(joinRoomViewModel.manitoFruttoId)
-                                    editor!!.commit()
 
 //                                val intent = Intent(this, JoinRoomActivity::class.java)
 //                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)

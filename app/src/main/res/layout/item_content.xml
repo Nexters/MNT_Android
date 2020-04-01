@@ -132,6 +132,8 @@
                 android:id="@+id/content_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:ellipsize="end"
                 android:textSize="13sp"
                 tools:text="하이루"/>
         </LinearLayout>
