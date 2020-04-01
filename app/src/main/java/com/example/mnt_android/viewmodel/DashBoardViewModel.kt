@@ -65,6 +65,7 @@ class DashBoardViewModel(
         )
     }
 
+    fun setCheckNaeto() = pr.setCheckNaeto()
     fun setOnNotification(on: Boolean) = pr.setOnNotification(on)
 
     fun getUserId() = pr.getUserId()
@@ -74,4 +75,5 @@ class DashBoardViewModel(
     fun getManitoFruttoId() = pr.getManitoFruttoId()
     fun getCheckNaeto() = pr.getCheckNaeto()
     fun getOnNotification() = pr.getOnNotification()
+    fun clearManitoData() = pr.clearManitoData()
 }
