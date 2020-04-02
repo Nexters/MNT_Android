@@ -46,7 +46,9 @@ fun bindAdapterManitoList(
                     userList.add(applicant)
             }
             this.isPublic = isPublic
-            setList(userList)
+            setList(userList.apply {
+                sortBy { it.manitto.name }
+            })
         }
     }
 }
@@ -114,7 +116,9 @@ fun bindSelectApplicantList(
                 if (applicant.isCreater.isFalse && applicant.user.id != userId)
                     userList.add(applicant)
             }
-            setList(userList)
+            setList(userList.apply {
+                sortBy { it.user.name }
+            })
         }
     }
 }
