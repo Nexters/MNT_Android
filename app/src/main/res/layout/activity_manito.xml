@@ -60,7 +60,7 @@
             android:layout_marginStart="26dp"
             android:layout_marginEnd="26dp"
             app:adapterManitoList="@{viewModel.manitoList}"
-            app:isManager="@{viewModel.isManager}"
+            app:isPublic="@{viewModel.isManager || viewModel.checkNaeto}"
             tools:listitem="@layout/item_manito"
             />
         

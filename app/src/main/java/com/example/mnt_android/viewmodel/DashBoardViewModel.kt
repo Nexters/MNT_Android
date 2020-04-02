@@ -52,14 +52,28 @@ class DashBoardViewModel(
         )
     }
 
-    fun setOnNotification(on: Boolean) {
-        pr.setOnNotification(on)
+    fun exitRoom(success: () -> Unit) {
+        addDisposable(
+            dbRepository.exitUser(pr.getRoomId(), pr.getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it.apiStatus.httpStatus == SUCCESS) {
+                        success()
+                    }
+                }, {})
+        )
     }
 
-    fun getIsManager() = pr.getIsManager()
+    fun setCheckNaeto() = pr.setCheckNaeto()
+    fun setOnNotification(on: Boolean) = pr.setOnNotification(on)
+
+    fun getUserId() = pr.getUserId()
     fun getUserNm() = pr.getUserNm()
     fun getUserFruttoId() = pr.getFruttoId()
     fun getManittoNm() = pr.getManitoNm()
     fun getManitoFruttoId() = pr.getManitoFruttoId()
+    fun getCheckNaeto() = pr.getCheckNaeto()
     fun getOnNotification() = pr.getOnNotification()
+    fun clearManitoData() = pr.clearManitoData()
 }

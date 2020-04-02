@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.dialog_comfirm.view.*
 
 class ConfirmDialog(
     private val questionMsg: String,
-    private val cancelMsg: String? = "cancel",
-    private val confirmMsg: String? = "confirm",
+    private val cancelMsg: String? = "취소",
+    private val confirmMsg: String? = "확인",
     private val confirmOnClickListener: () -> Unit = {}
 ) : DialogFragment() {
 

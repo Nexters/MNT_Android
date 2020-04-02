@@ -51,7 +51,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center_vertical"
-            android:padding="15dp">
+            android:paddingTop="4dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <RelativeLayout
                 android:layout_width="95dp"
@@ -83,8 +85,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorLightBlack"
                     android:textSize="15sp"
-                    app:isManager="@{viewModel.isManager}"
-                    app:nickName="@{viewModel.naetoName}"
+                    app:isPublic="@{viewModel.isManager || viewModel.checkNaeto}"
+                    app:autoNickName="@{viewModel.naetoName}"
                     tools:text="보카도" />
                 <TextView
                     android:id="@+id/naeto_tx"
@@ -131,18 +133,20 @@
             android:layout_marginStart="26dp"
             android:layout_marginEnd="26dp"
             android:orientation="vertical">
-            <ImageView
+            <com.example.mnt_android.view.component.RoundImageView
                 android:id="@+id/mission_img_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="14dp"
                 android:adjustViewBounds="true"
                 android:src="@{viewModel.missionImg}"
+                android:visibility="@{viewModel.missionImg!=null}"
                 tools:src="@drawable/img_profile_chat_grape"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
                 <TextView
                     android:layout_width="wrap_content"

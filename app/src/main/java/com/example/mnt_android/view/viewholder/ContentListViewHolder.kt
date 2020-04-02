@@ -16,28 +16,27 @@ import com.example.mnt_android.util.getFruttoData
 import com.example.mnt_android.view.ui.MissionDetailActivity
 import kotlinx.android.synthetic.main.item_content.view.*
 
-class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseViewHolder(view) {
+class ContentListViewHolder(view: View, private val isPublic: Boolean) : BaseViewHolder(view) {
     override fun onBind(position: Int, data: Any) {
         val content = data as UserMissionResponse
         content.run {
             itemView.run {
                 if (userMission.missionImg != null) {
                     image_iv.visibility = View.VISIBLE
-                    setContentImg(context, userMission.missionImg!!, image_iv)
+                    setContentImg(context, userMission.missionImg, image_iv)
                 } else {
                     image_iv.visibility = View.GONE
                 }
                 setFruitChatProfileSrc(naeto_iv, userFruttoId)
                 setFaceProfileSrc(nito_iv, manitto?.fruttoId)
 
-                naeto_tv.text = if(isManager) userMission.user.name else getFruttoData(context, userFruttoId)?.koreanNickName
+                naeto_tv.text = if(isPublic) userMission.user.name else getFruttoData(context, userFruttoId)?.koreanNickName
                 nito_tv.text = manitto?.name
                 mission_type_tv.text = missionName
                 content_tv.text = userMission.content
                 day_tv.text = userMission.userDoneTime?.checkUploadDate
                 setOnClickListener {
                     val intent = Intent(context, MissionDetailActivity::class.java)
-                    intent.putExtra(TAG_IS_MANAGER, isManager)
                     intent.putExtra(MissionDetailActivity.TAG_MISSION, content)
                     context.startActivity(intent)
                 }
@@ -45,7 +44,7 @@ class ContentListViewHolder(view: View, private val isManager: Boolean) : BaseVi
         }
     }
 
-    private fun setContentImg(context: Context, url: String, iv: ImageView) {
+    private fun setContentImg(context: Context, url: String?, iv: ImageView) {
         Glide.with(context)
             .load(url)
             .into(iv)

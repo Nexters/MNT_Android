@@ -1,12 +1,11 @@
 package com.example.mnt_android.view.ui
 
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Point
-import android.util.AttributeSet
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,22 +14,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.base.BaseActivity
 import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.bus.SWIPE_DOWN
 import com.example.mnt_android.bus.SWIPE_UP
 import com.example.mnt_android.bus.swipeEventBus
-import com.example.mnt_android.databinding.ActivityCreateMissionBinding
 import com.example.mnt_android.databinding.ActivityGameBinding
-import com.example.mnt_android.service.model.CheckRoom
-import com.example.mnt_android.util.TAG_IS_MANAGER
 import com.example.mnt_android.view.listener.SwipeDetecter
 import com.example.mnt_android.viewmodel.BackPressViewModel
-import com.example.mnt_android.viewmodel.CreateMissionViewModel
 import com.example.mnt_android.viewmodel.GameViewModel
 import kotlinx.android.synthetic.main.activity_game.*
 import com.kakao.kakaolink.v2.KakaoLinkResponse
@@ -47,6 +40,8 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     override var viewModel = BaseViewModel()
     override val layoutId: Int
         get() = R.layout.activity_game
+
+    private val swipeDetecter = SwipeDetecter()
 
     private lateinit var fragmentManager: FragmentManager
     private lateinit var fragmentTransaction: FragmentTransaction
@@ -102,14 +97,9 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
     }
 
-    override fun onCreateView(
-        parent: View?,
-        name: String,
-        context: Context,
-        attrs: AttributeSet
-    ): View? {
-        parent?.setOnTouchListener(SwipeDetecter())
-        return super.onCreateView(parent, name, context, attrs)
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        swipeDetecter.onTouch(game_layout, ev)
+        return super.dispatchTouchEvent(ev)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

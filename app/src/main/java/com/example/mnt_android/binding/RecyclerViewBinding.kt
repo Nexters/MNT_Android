@@ -32,11 +32,11 @@ fun bindAdapterApplicantList(
     }
 }
 
-@BindingAdapter("adapterManitoList", "isManager")
+@BindingAdapter("adapterManitoList", "isPublic")
 fun bindAdapterManitoList(
     view: RecyclerView,
     memberList: ArrayList<Applicant>?,
-    isManager: Boolean = false
+    isPublic: Boolean = false
 ) {
     memberList?.let { list ->
         (view.adapter as ManitoListAdapter).run {
@@ -45,7 +45,7 @@ fun bindAdapterManitoList(
                 if (applicant.isCreater.isFalse)
                     userList.add(applicant)
             }
-            this.isManager = isManager
+            this.isPublic = isPublic
             setList(userList)
         }
     }
@@ -87,15 +87,15 @@ fun bindAdapterDoneMissionTypeList(
     }
 }
 
-@BindingAdapter("adapterMissionList", "isManager")
+@BindingAdapter("adapterMissionList", "isPublic")
 fun bindAdapterMissionList(
     view: RecyclerView,
     missionList: ArrayList<UserMissionResponse>?,
-    _isManager: Boolean = false
+    isPublic: Boolean = false
 ) {
     missionList?.let { list ->
         (view.adapter as ContentListAdapter).run {
-            isManager = _isManager
+            this.isPublic = isPublic
             setList(list)
         }
     }
@@ -209,15 +209,22 @@ fun setFaceProfileSrc(view: ImageView, id: Int?) {
     }
 }
 
-@BindingAdapter("nickName", "isManager")
-fun setNickName(view: TextView, name: String?, isManager: Boolean) {
+@BindingAdapter("autoNickName", "isPublic")
+fun setAutoNickName(view: TextView, name: String?, isPublic: Boolean) {
     name?.let {
-        if (isManager) {
+        if (isPublic) {
             view.text = it
         } else {
-            val context = view.context
-            view.text = getFruttoData(context, it.toInt())?.koreanNickName
+            setNickName(view, it.toInt())
         }
+    }
+}
+
+@BindingAdapter("nickName")
+fun setNickName(view: TextView, fruttoId: Int?) {
+    fruttoId?.let {
+        val context = view.context
+        view.text = getFruttoData(context, it)?.koreanNickName
     }
 }
 
@@ -229,7 +236,7 @@ fun convertEndDayToDDay(view: TextView, endDay: String?) {
         val endDayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
         val calendar = Calendar.getInstance()
         calendar.time = endDayFormat.parse(it)
-        val dday = ((calendar.timeInMillis - System.currentTimeMillis()) / ONE_DAY) + 1
+        val dday = ((calendar.timeInMillis - System.currentTimeMillis()) / ONE_DAY)
         view.text = if (dday > 0) dday.toString() else "0"
     }
 }

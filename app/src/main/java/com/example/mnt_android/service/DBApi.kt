@@ -60,7 +60,7 @@ interface DBApi {
     fun exitUser(
         @Query("roomId") roomId: Long,
         @Query("userId") userId: String
-    ) : Completable
+    ) : Flowable<ApiResponse>
 
     @POST("/api/mission/make")
     fun makeMission(

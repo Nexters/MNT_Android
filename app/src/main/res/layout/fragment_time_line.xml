@@ -75,7 +75,8 @@
                         android:layout_below="@id/name_tv"
                         android:textColor="@color/colorBlueBlack"
                         android:textSize="20sp"
-                        android:text="안녕하세요!" />
+                        android:text='@{!viewModel.checkNaeto?String.valueOf(@string/greeting_timeline_not_done):String.valueOf(@string/greeting_timeline_done)}'
+                        tools:text="@string/greeting_timeline_not_done"/>
 
                     <RelativeLayout
                         android:layout_width="112dp"
@@ -86,7 +87,7 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentEnd="true"
                             app:fruitIconProfileSrc2="@{viewModel.userFruttoId}"
-                            android:src="@drawable/profile_icon_strawberry"/>
+                            android:src="@drawable/img_profile_icon_strawberry"/>
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -113,7 +114,7 @@
                     android:layout_marginRight="26dp"
                     android:overScrollMode="never"
                     app:adapterMissionList="@{viewModel.contentList}"
-                    app:isManager="@{viewModel.isManager}"
+                    app:isPublic="@{viewModel.isManager || viewModel.checkNaeto}"
                     tools:listitem="@layout/item_content" />
 
                 <LinearLayout
@@ -121,7 +122,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:visibility="@{viewModel.contentList.size()==0?true:false}">
+                    android:visibility="@{viewModel.contentList.size()==0}">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

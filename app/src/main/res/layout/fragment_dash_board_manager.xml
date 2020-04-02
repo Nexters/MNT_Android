@@ -60,7 +60,8 @@
                         android:layout_below="@id/name_tv"
                         android:textColor="@color/colorBlueBlack"
                         android:textSize="20sp"
-                        android:text="프루또를 잘 보살펴주세요" />
+                        android:text='@{!viewModel.checkNaeto?String.valueOf(@string/greeting_dashboard_not_done_manager):String.valueOf(@string/greeting_dashboard_done)}'
+                        tools:text="@string/greeting_dashboard_not_done_manager" />
                 </RelativeLayout>
 
                 <ImageView
