@@ -31,7 +31,6 @@ class SplashActivity : AppCompatActivity()
         splashViewModel = ViewModelProviders.of(this)[SplashViewModel::class.java]
         joinRoomViewModel = ViewModelProviders.of(this)[JoinRoomViewModel::class.java]
 
-        joinRoomViewModel.pr.setUserId("test1")
         joinRoomViewModel.checkRoom()
 
         val intent = intent
