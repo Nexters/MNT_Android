@@ -43,12 +43,14 @@ class DoMissionFragment2 : Fragment()
             doMissionViewModel=(activity as DoMissionActivity).doMissionViewModel
             binding.doMissionActivity = activity as DoMissionActivity
             binding.doMissionViewModel = doMissionViewModel
-            iv_img_mission_do_mission2.imageBitmap = doMissionViewModel.bitmap
+            doMissionViewModel.bitmap?.let {
+                iv_img_mission_do_mission2.imageBitmap = it
+            } ?: { iv_img_mission_do_mission2.visibility = View.GONE }()
 
 
             binding.lifecycleOwner=this
 
-            doMissionViewModel.isSended.observe(this, Observer {
+            doMissionViewModel.isSended.observe(viewLifecycleOwner, Observer {
                 if(it==true)
                 {
                     CustomAlertDialog("니또에게 미션을 보냈습니다.","확인"){
