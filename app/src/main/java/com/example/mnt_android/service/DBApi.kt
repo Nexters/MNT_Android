@@ -81,7 +81,15 @@ interface DBApi {
         @Query("userId") userId : String,
         @Query("missionId") missionId : Long,
         @Query("content") content : String,
-        @Part img : MultipartBody.Part?
+        @Part img : MultipartBody.Part
+    ) : Completable
+
+    @POST("/api/mission/send")
+    fun sendMission(
+        @Query("roomId") roomId  : Long,
+        @Query("userId") userId : String,
+        @Query("missionId") missionId : Long,
+        @Query("content") content : String
     ) : Completable
 
     @GET("/api/mission/done/{userId}")

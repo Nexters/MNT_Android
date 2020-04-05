@@ -55,12 +55,16 @@ class DBRepository {
     fun makeMission(mission : Mission) : Completable =
         api.makeMission(mission)
 
-    fun sendMission(roomId  : Long,
-                    userId : String,
-                    missionId : Long,
-                    content : String,
-                    img : MultipartBody.Part?) : Completable =
-        api.sendMission(roomId,userId,missionId,content,img)
+    fun sendMission(
+        roomId: Long,
+        userId: String,
+        missionId: Long,
+        content: String,
+        img: MultipartBody.Part?
+    ) = when (img == null) {
+        true -> api.sendMission(roomId, userId, missionId, content)
+        false -> api.sendMission(roomId, userId, missionId, content, img)
+    }
     
     fun getUserMission(userId : String,
                        roomId : Long) : Flowable<MissionListResponse> =
