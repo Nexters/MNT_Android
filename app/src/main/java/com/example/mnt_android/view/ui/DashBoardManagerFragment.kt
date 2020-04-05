@@ -52,7 +52,7 @@ class DashBoardManagerFragment : BaseFragment() {
         }
 
         notification_switch.onClick {
-            viewModel.setOnNotification(!notification_switch.isChecked)
+            viewModel.setOnNotification(notification_switch.isChecked)
         }
 
         dev_info_layout.onClick {
@@ -63,7 +63,7 @@ class DashBoardManagerFragment : BaseFragment() {
             if (viewModel.getCheckNaeto()) {
                 ConfirmDialog(
                     "프루또 방을 나가시겠습니까?\n" +
-                            "한번 나가면 다시 들어올 수 없습니다."
+                            "방을 나가면 다시 들어올 수 없습니다."
                 ) {
                     viewModel.exitRoom {
                         viewModel.clearManitoData()

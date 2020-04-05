@@ -74,7 +74,7 @@ class DashBoardApplicantFragment : BaseFragment() {
             if (viewModel.getCheckNaeto()) {
                 ConfirmDialog(
                     "프루또 방을 나가시겠습니까?\n" +
-                            "한번 나가면 다시 들어올 수 없습니다."
+                            "방을 나가면 다시 들어올 수 없습니다."
                 ) {
                     viewModel.exitRoom {
                         viewModel.clearManitoData()
