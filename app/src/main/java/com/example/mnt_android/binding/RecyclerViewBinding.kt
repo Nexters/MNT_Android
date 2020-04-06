@@ -233,14 +233,16 @@ fun setNickName(view: TextView, fruttoId: Int?) {
 }
 
 @BindingAdapter("endDayToDDay")
-fun convertEndDayToDDay(view: TextView, endDay: String?) {
-    endDay?.let {
+fun convertEndDayToDDay(view: TextView, endDayStr: String?) {
+    endDayStr?.let {
         val ONE_DAY = 24 * 60 * 60 * 1000
 
         val endDayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
         val calendar = Calendar.getInstance()
         calendar.time = endDayFormat.parse(it)
-        val dday = ((calendar.timeInMillis - System.currentTimeMillis()) / ONE_DAY)
+        val nowDay: Long = System.currentTimeMillis() / ONE_DAY
+        val endDay: Long = calendar.timeInMillis / ONE_DAY
+        val dday = endDay - nowDay
         view.text = if (dday > 0) dday.toString() else "0"
     }
 }

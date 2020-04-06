@@ -78,10 +78,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         }
         else
         {
-            missionApplicantFragment = MissionApplicantFragment(
-                sharedPreferences.getString("kakao_token", ""),
-                sharedPreferences.getLong("roomId", 0)
-            )
+            missionApplicantFragment = MissionApplicantFragment()
         }
         dashBoardApplicantFragment = DashBoardApplicantFragment()
         dashBoardManagerFragment = DashBoardManagerFragment()

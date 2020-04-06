@@ -93,6 +93,7 @@ class CreateRoomActivity :FragmentActivity()
         createRoomViewModel.isStarted.observe(this,androidx.lifecycle.Observer {
             if(it==1)
             {
+                editor.putLong("roomId", createRoomViewModel.roomId.roomId)
                 editor!!.putBoolean("isManager", true)
                 editor!!.commit()
                 val intent  =Intent(this,GameActivity::class.java)
