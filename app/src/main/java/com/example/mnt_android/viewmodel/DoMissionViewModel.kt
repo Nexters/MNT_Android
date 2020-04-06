@@ -43,7 +43,6 @@ class DoMissionViewModel(application : Application) : AndroidViewModel(applicati
     }
     fun sendMission()
     {
-        Log.d("wlgusdnzzz","file"+file?.name)
 
         var imgFile: MultipartBody.Part? = null
         file?.let {

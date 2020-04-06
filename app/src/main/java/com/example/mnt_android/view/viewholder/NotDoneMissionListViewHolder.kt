@@ -1,6 +1,7 @@
 package com.example.mnt_android.view.viewholder
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import com.example.mnt_android.base.BaseViewHolder
 import com.example.mnt_android.service.model.UserMissionResponse
@@ -17,7 +18,7 @@ class NotDoneMissionListViewHolder(view: View) : BaseViewHolder(view) {
 
                     val intent = Intent(context,DoMissionActivity::class.java)
                     intent.putExtra("nowUserMission",content)
-                    context.startActivity(intent)
+                   context.startActivity(intent)
 
                 }
             }

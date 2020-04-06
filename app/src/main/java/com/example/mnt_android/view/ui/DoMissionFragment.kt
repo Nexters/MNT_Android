@@ -30,6 +30,8 @@ class DoMissionFragment : Fragment()
 
 
 
+
+
         return binding.root
 
 
@@ -45,7 +47,18 @@ class DoMissionFragment : Fragment()
             binding.doMissionViewModel = doMissionViewModel
 
             binding.lifecycleOwner=this
+
+
         }
+
+        doMissionViewModel.nowUserMission.observe(this, Observer {
+
+            if(it.isAbleImg==0)
+                    linear_image_domission1.visibility=View.GONE
+                else
+                    linear_image_domission1.visibility=View.VISIBLE
+
+        })
 
         doMissionViewModel.missionText.observe(this, Observer {
             if(it=="")
