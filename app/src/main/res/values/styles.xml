@@ -10,6 +10,7 @@
         <item name="android:statusBarColor">@color/colorWhite</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:colorEdgeEffect">@color/colorHotPink</item>
     </style>
 
 </resources>

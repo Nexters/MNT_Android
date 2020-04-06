@@ -18,7 +18,9 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_time_line.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TimeLineFragment : BaseFragment() {
+class TimeLineFragment() : BaseFragment() {
+    constructor(filterType: Array<String>) : this() { currentFilterType = filterType }
+
     companion object {
         private const val TAG = "TimeLine Filter Bottom Sheet"
     }
@@ -27,6 +29,7 @@ class TimeLineFragment : BaseFragment() {
     private lateinit var binding: FragmentTimeLineBinding
 
     private val disposable = CompositeDisposable()
+    private var currentFilterType = arrayOf(MISSION_LIST_ALL)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +39,7 @@ class TimeLineFragment : BaseFragment() {
         binding = bind(inflater, container, R.layout.fragment_time_line)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel.apply {
-            setFilteredContentList(arrayOf(MISSION_LIST_ALL))
+            setFilteredContentList(currentFilterType)
         }
         return binding.root
     }

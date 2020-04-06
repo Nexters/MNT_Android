@@ -83,10 +83,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_layout_white_border">
 
-        <ImageView
+        <com.example.mnt_android.view.component.TopCornerRoundImageView
             android:id="@+id/image_iv"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="3dp"
             app:layout_constraintWidth_percent="1"
             app:layout_constraintHeight_percent="0.7"
             app:layout_constraintTop_toTopOf="parent"
@@ -132,6 +133,8 @@
                 android:id="@+id/content_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:ellipsize="end"
                 android:textSize="13sp"
                 tools:text="하이루"/>
         </LinearLayout>

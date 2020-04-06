@@ -112,4 +112,5 @@ class TimeLineViewModel(
     fun getUserNm(): String = pr.getUserNm()
     fun getUserFruttoId() = pr.getFruttoId()
     fun getIsManager() = pr.getIsManager()
+    fun getCheckNaeto() = pr.getCheckNaeto()
 }

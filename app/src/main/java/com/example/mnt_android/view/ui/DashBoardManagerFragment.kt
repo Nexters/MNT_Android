@@ -1,5 +1,6 @@
 package com.example.mnt_android.view.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,8 +44,15 @@ class DashBoardManagerFragment : BaseFragment() {
 
     private fun setEventListener() {
         val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
+        created_mission_layout.onClick {
+            val fragment = MissionManagerFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.game_layout, fragment)
+            transaction.commit()
+        }
+
         notification_switch.onClick {
-            viewModel.setOnNotification(!notification_switch.isChecked)
+            viewModel.setOnNotification(notification_switch.isChecked)
         }
 
         dev_info_layout.onClick {
@@ -52,19 +60,36 @@ class DashBoardManagerFragment : BaseFragment() {
         }
 
         exit_room_layout.onClick {
-            ConfirmDialog(
-                "프루또를 끝내시겠습니까?\n" +
-                        "참여자들의 니또가 공개되며,\n" +
-                        "더 이상 미션을 부여하고 수행할 수 없습니다.",
-                "취소",
-                "나가기"
-            ) {
-                viewModel.endRoom()
-                Toast.makeText(context, "프루또가 종료되었습니다.", Toast.LENGTH_SHORT).show()
-            }.show(
-                supportFragmentManager,
-                TAG
-            )
+            if (viewModel.getCheckNaeto()) {
+                ConfirmDialog(
+                    "프루또 방을 나가시겠습니까?\n" +
+                            "방을 나가면 다시 들어올 수 없습니다."
+                ) {
+                    viewModel.exitRoom {
+                        viewModel.clearManitoData()
+                        val i = Intent(context, SplashActivity::class.java)
+                        context?.startActivity(i)
+                    }
+                }.show(
+                    supportFragmentManager,
+                    TAG
+                )
+            } else {
+                ConfirmDialog(
+                    "프루또를 끝내시겠습니까?\n" +
+                            "참여자들의 니또가 공개되며,\n" +
+                            "더 이상 미션을 부여하고 수행할 수 없습니다.",
+                    "취소",
+                    "나가기"
+                ) {
+                    viewModel.endRoom()
+                    viewModel.setCheckNaeto()
+                    Toast.makeText(context, "프루또가 종료되었습니다.", Toast.LENGTH_SHORT).show()
+                }.show(
+                    supportFragmentManager,
+                    TAG
+                )
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ import com.example.mnt_android.view.viewholder.ContentListViewHolder
 class ContentListAdapter : BaseAdapter<UserMissionResponse>() {
     override val layoutId: Int
         get() = R.layout.item_content
-    var isManager: Boolean = false
+    var isPublic: Boolean = false
 
-    override fun viewHolder(layout: Int, view: View) = ContentListViewHolder(view, isManager)
+    override fun viewHolder(layout: Int, view: View) = ContentListViewHolder(view, isPublic)
 }

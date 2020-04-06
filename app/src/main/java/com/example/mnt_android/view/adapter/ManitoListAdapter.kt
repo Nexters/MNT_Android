@@ -9,8 +9,8 @@ import com.example.mnt_android.view.viewholder.ManitoListViewHolder
 class ManitoListAdapter : BaseAdapter<Applicant>() {
     override val layoutId: Int
         get() = R.layout.item_manito
-    var isManager = false
+    var isPublic = false
 
-    override fun viewHolder(layout: Int, view: View) = ManitoListViewHolder(view, isManager)
+    override fun viewHolder(layout: Int, view: View) = ManitoListViewHolder(view, isPublic)
 
 }

@@ -16,10 +16,8 @@ import com.example.mnt_android.view.adapter.DoneMissionListAdapter
 import com.example.mnt_android.view.adapter.NotDoneMissionListAdapter
 import com.example.mnt_android.viewmodel.GameViewModel
 import kotlinx.android.synthetic.main.fragment_mission_applicant.*
-import org.koin.android.viewmodel.ext.android.viewModel
 
-class MissionApplicantFragment(private val userId: String, private val roomId: Long) :
-    BaseFragment() {
+class MissionApplicantFragment : BaseFragment() {
     lateinit var viewModel : GameViewModel
     private lateinit var binding: FragmentMissionApplicantBinding
     var notDoneAdapter = NotDoneMissionListAdapter()

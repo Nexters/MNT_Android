@@ -1,6 +1,8 @@
 package com.example.mnt_android.service.repository
 
 import android.content.Context
+import com.example.mnt_android.service.model.Applicant
+import com.google.gson.Gson
 
 class PreferencesRepository(context: Context) {
     companion object {
@@ -15,6 +17,7 @@ class PreferencesRepository(context: Context) {
         private const val KEY_USER_ID = "kakao_token"
         private const val KEY_USER_NAME = "kakao_nickname"
         private const val KEY_USER_MANITO_NAME = "manito_name"
+        private const val KEY_USER_LIST = "user_list_of_"
         private const val KEY_USER_FRUTTO_ID = "frutto_id"
         private const val KEY_USER_MANITO_FRUTTO_ID = "manito_frutto_id"
         private const val KEY_USER_ROOM_ID = "roomId"
@@ -39,6 +42,13 @@ class PreferencesRepository(context: Context) {
 
     fun setManitoNm(manitoNm: String?) {
         editor.putString(KEY_USER_MANITO_NAME, manitoNm)
+        editor.commit()
+    }
+
+    fun setUserList(_userList: ArrayList<Applicant>) {
+        val gson = Gson()
+        val userrList = gson.toJson(_userList)
+        editor.putString("${KEY_USER_LIST}${getRoomId()}", userrList)
         editor.commit()
     }
 
@@ -93,8 +103,13 @@ class PreferencesRepository(context: Context) {
     fun getCheckNito() = sf.getBoolean(KEY_CHECK_NITO, DEFAULT_VALUE_BOOLEAN_FALSE)
     fun getCheckNaeto() = sf.getBoolean(KEY_CHECK_NAETO, DEFAULT_VALUE_BOOLEAN_FALSE)
     fun getOnNotification() = sf.getBoolean(KEY_ON_NOTIFICATION, DEFAULT_VALUE_BOOLEAN_TRUE)
+    fun getUserList(): ArrayList<Applicant> {
+        val data = sf.getString("${KEY_USER_LIST}${getRoomId()}", DEFAULT_VALUE_STRING)
+        return ArrayList(Gson().fromJson(data, Array<Applicant>::class.java).toList())
+    }
 
     fun clearManitoData() {
+        editor.remove("${KEY_USER_LIST}${getRoomId()}")
         editor.remove(KEY_USER_MANITO_NAME)
         editor.remove(KEY_USER_FRUTTO_ID)
         editor.remove(KEY_USER_MANITO_FRUTTO_ID)

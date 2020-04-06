@@ -7,7 +7,8 @@
             type="com.example.mnt_android.viewmodel.MissionDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -43,132 +44,148 @@
                 />
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/profile_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
             app:layout_constraintTop_toBottomOf="@id/top_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:gravity="center_vertical"
-            android:padding="15dp">
-
-            <RelativeLayout
-                android:layout_width="95dp"
-                android:layout_height="64dp">
-                <ImageView
-                    android:id="@+id/nito_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    app:faceProfileSrc="@{viewModel.nitoId}"
-                    tools:src="@drawable/img_profile_face_04"/>
-                <ImageView
-                    android:id="@+id/naeto_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    app:fruitChatProfileSrc="@{viewModel.naetoId}"
-                    tools:src="@drawable/img_profile_chat_avocado"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp">
-
-                <TextView
-                    android:id="@+id/naeto_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorLightBlack"
-                    android:textSize="15sp"
-                    app:isManager="@{viewModel.isManager}"
-                    app:nickName="@{viewModel.naetoName}"
-                    tools:text="보카도" />
-                <TextView
-                    android:id="@+id/naeto_tx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/naeto_tv"
-                    android:textColor="@color/colorLightBlack"
-                    android:textSize="15sp"
-                    android:text="님이 "/>
-                <TextView
-                    android:id="@+id/nito_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/naeto_tx"
-                    android:textColor="@color/colorLightBlack"
-                    android:textSize="15sp"
-                    android:text="@{viewModel.nitoName}"
-                    tools:text="지현우"/>
-                <TextView
-                    android:id="@+id/nito_tx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/nito_tv"
-                    android:textColor="@color/colorLightBlack"
-                    android:textSize="15sp"
-                    android:text="에게"/>
-
-                <TextView
-                    android:id="@+id/day_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/naeto_tv"
-                    android:textColor="@color/colorLightGray2"
-                    android:textSize="11sp"
-                    android:text="@{viewModel.updateDate}"
-                    tools:text="오늘"/>
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/profile_layout"
-            android:layout_marginStart="26dp"
-            android:layout_marginEnd="26dp"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/mission_img_iv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:adjustViewBounds="true"
-                android:src="@{viewModel.missionImg}"
-                tools:src="@drawable/img_profile_chat_grape"/>
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorBlack"
-                    android:text="# "/>
-                <TextView
-                    android:id="@+id/mission_type_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorBlack"
-                    android:text="@{viewModel.missionName}"
-                    tools:text="닮은꼴 사진 보내기"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/mission_content_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:textColor="@color/colorBlackNotice"
-                android:textSize="14sp"
-                android:text="@{viewModel.missionContent}"
-                tools:text="친하게 지내요 부엉이 현우님! 날카로운 통찰력이 매우 닮았습니다. 또 다시 만나게 되면 보카도 맞춰주셈!! 그리고 부엉이지만 탕수육은 찍어먹어!! 친하게 지내요 부엉이 현우님! 날카로운 통찰력이 매우 닮았습니다. 또 다시 만나게 되면 보카도 맞춰주셈!! 그리고 부엉이지만 탕수육은 찍어먹어!!"/>
-        </LinearLayout>
+                android:orientation="vertical"
+                android:paddingBottom="30dp">
+
+                <LinearLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp">
+                    <RelativeLayout
+                        android:layout_width="95dp"
+                        android:layout_height="64dp">
+                        <ImageView
+                            android:id="@+id/nito_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            app:faceProfileSrc="@{viewModel.nitoId}"
+                            tools:src="@drawable/img_profile_face_04"/>
+                        <ImageView
+                            android:id="@+id/naeto_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            app:fruitChatProfileSrc="@{viewModel.naetoId}"
+                            tools:src="@drawable/img_profile_chat_avocado"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp">
+
+                        <TextView
+                            android:id="@+id/naeto_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorLightBlack"
+                            android:textSize="15sp"
+                            app:isPublic="@{viewModel.isManager || viewModel.checkNaeto}"
+                            app:autoNickName="@{viewModel.naetoName}"
+                            tools:text="보카도" />
+                        <TextView
+                            android:id="@+id/naeto_tx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/naeto_tv"
+                            android:textColor="@color/colorLightBlack"
+                            android:textSize="15sp"
+                            android:text="님이 "/>
+                        <TextView
+                            android:id="@+id/nito_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/naeto_tx"
+                            android:textColor="@color/colorLightBlack"
+                            android:textSize="15sp"
+                            android:text="@{viewModel.nitoName}"
+                            tools:text="지현우"/>
+                        <TextView
+                            android:id="@+id/nito_tx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/nito_tv"
+                            android:textColor="@color/colorLightBlack"
+                            android:textSize="15sp"
+                            android:text="에게"/>
+
+                        <TextView
+                            android:id="@+id/day_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/naeto_tv"
+                            android:textColor="@color/colorLightGray2"
+                            android:textSize="11sp"
+                            android:text="@{viewModel.updateDate}"
+                            tools:text="오늘"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="26dp"
+                    android:orientation="vertical">
+                    <com.example.mnt_android.view.component.RoundImageView
+                        android:id="@+id/mission_img_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp"
+                        android:adjustViewBounds="true"
+                        android:src="@{viewModel.missionImg}"
+                        android:visibility="@{viewModel.missionImg!=null}"
+                        tools:src="@drawable/img_profile_chat_grape"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorBlack"
+                            android:text="# "/>
+                        <TextView
+                            android:id="@+id/mission_type_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorBlack"
+                            android:text="@{viewModel.missionName}"
+                            tools:text="닮은꼴 사진 보내기"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/mission_content_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:textColor="@color/colorBlackNotice"
+                        android:textSize="14sp"
+                        android:text="@{viewModel.missionContent}"
+                        tools:text="친하게 지내요 부엉이 현우님! 날카로운 통찰력이 매우 닮았습니다. 또 다시 만나게 되면 보카도 맞춰주셈!! 그리고 부엉이지만 탕수육은 찍어먹어!! 친하게 지내요 부엉이 현우님! 날카로운 통찰력이 매우 닮았습니다. 또 다시 만나게 되면 보카도 맞춰주셈!! 그리고 부엉이지만 탕수육은 찍어먹어!!"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

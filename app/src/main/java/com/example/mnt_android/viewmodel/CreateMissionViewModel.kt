@@ -15,6 +15,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.mnt_android.service.model.MakeMission
 import com.example.mnt_android.service.model.Mission
 import com.example.mnt_android.service.repository.DBRepository
+import com.example.mnt_android.service.repository.PreferencesRepository
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Action
@@ -32,6 +33,7 @@ class CreateMissionViewModel(application: Application) : AndroidViewModel(applic
     lateinit var missionDesArray  : Array<String>
     lateinit var missionNameArray  : Array<String>
     var isCreated : MutableLiveData<Boolean> = MutableLiveData()
+    private val pr = PreferencesRepository(app.baseContext)
     private val repository = DBRepository()
 
     init {
@@ -53,9 +55,9 @@ class CreateMissionViewModel(application: Application) : AndroidViewModel(applic
 
 
 
-    fun makeMission(roomId : Long)
+    fun makeMission()
     {
-        repository.makeMission(Mission(0, isAbleImg.value!!,name.value.toString(),roomId,null))
+        repository.makeMission(Mission(0, isAbleImg.value!!,name.value.toString(),pr.getRoomId(),null))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(Action {

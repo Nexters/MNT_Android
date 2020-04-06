@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class ApiResponse (
     @SerializedName("apiStatus")
-    val apiStatus : ApiStatus
+    val apiStatus : ResponseResult
 )

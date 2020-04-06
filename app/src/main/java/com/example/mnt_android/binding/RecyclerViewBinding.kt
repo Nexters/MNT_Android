@@ -32,11 +32,11 @@ fun bindAdapterApplicantList(
     }
 }
 
-@BindingAdapter("adapterManitoList", "isManager")
+@BindingAdapter("adapterManitoList", "isPublic")
 fun bindAdapterManitoList(
     view: RecyclerView,
     memberList: ArrayList<Applicant>?,
-    isManager: Boolean = false
+    isPublic: Boolean = false
 ) {
     memberList?.let { list ->
         (view.adapter as ManitoListAdapter).run {
@@ -45,8 +45,10 @@ fun bindAdapterManitoList(
                 if (applicant.isCreater.isFalse)
                     userList.add(applicant)
             }
-            this.isManager = isManager
-            setList(userList)
+            this.isPublic = isPublic
+            setList(userList.apply {
+                sortBy { it.manitto.name }
+            })
         }
     }
 }
@@ -87,15 +89,15 @@ fun bindAdapterDoneMissionTypeList(
     }
 }
 
-@BindingAdapter("adapterMissionList", "isManager")
+@BindingAdapter("adapterMissionList", "isPublic")
 fun bindAdapterMissionList(
     view: RecyclerView,
     missionList: ArrayList<UserMissionResponse>?,
-    _isManager: Boolean = false
+    isPublic: Boolean = false
 ) {
     missionList?.let { list ->
         (view.adapter as ContentListAdapter).run {
-            isManager = _isManager
+            this.isPublic = isPublic
             setList(list)
         }
     }
@@ -114,7 +116,9 @@ fun bindSelectApplicantList(
                 if (applicant.isCreater.isFalse && applicant.user.id != userId)
                     userList.add(applicant)
             }
-            setList(userList)
+            setList(userList.apply {
+                sortBy { it.user.name }
+            })
         }
     }
 }
@@ -209,27 +213,36 @@ fun setFaceProfileSrc(view: ImageView, id: Int?) {
     }
 }
 
-@BindingAdapter("nickName", "isManager")
-fun setNickName(view: TextView, name: String?, isManager: Boolean) {
+@BindingAdapter("autoNickName", "isPublic")
+fun setAutoNickName(view: TextView, name: String?, isPublic: Boolean) {
     name?.let {
-        if (isManager) {
+        if (isPublic) {
             view.text = it
         } else {
-            val context = view.context
-            view.text = getFruttoData(context, it.toInt())?.koreanNickName
+            setNickName(view, it.toInt())
         }
     }
 }
 
+@BindingAdapter("nickName")
+fun setNickName(view: TextView, fruttoId: Int?) {
+    fruttoId?.let {
+        val context = view.context
+        view.text = getFruttoData(context, it)?.koreanNickName
+    }
+}
+
 @BindingAdapter("endDayToDDay")
-fun convertEndDayToDDay(view: TextView, endDay: String?) {
-    endDay?.let {
+fun convertEndDayToDDay(view: TextView, endDayStr: String?) {
+    endDayStr?.let {
         val ONE_DAY = 24 * 60 * 60 * 1000
 
         val endDayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
         val calendar = Calendar.getInstance()
         calendar.time = endDayFormat.parse(it)
-        val dday = ((calendar.timeInMillis - System.currentTimeMillis()) / ONE_DAY) + 1
+        val nowDay: Long = System.currentTimeMillis() / ONE_DAY
+        val endDay: Long = calendar.timeInMillis / ONE_DAY
+        val dday = endDay - nowDay
         view.text = if (dday > 0) dday.toString() else "0"
     }
 }

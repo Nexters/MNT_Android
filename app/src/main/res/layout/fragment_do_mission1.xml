@@ -67,6 +67,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <LinearLayout
+            android:id="@+id/linear_image_domission1"
             android:background="@drawable/button_pink"
             android:layout_width="0dp"
             android:layout_height="0dp"

@@ -28,6 +28,7 @@ class ShowManittoActivity : BaseActivity<ActivityShowManittoBinding, BaseViewMod
     private fun setDatabinding() {
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModel.apply {
+            loadUserList()
             loadManittoData()
         }
         dataBinding.run {
@@ -43,10 +44,6 @@ class ShowManittoActivity : BaseActivity<ActivityShowManittoBinding, BaseViewMod
     private fun setEventListener() {
         confirm_btn.setOnClickListener {
             viewModel.setCheckNito()
-            val sf = getSharedPreferences("login", 0)
-            val editor = sf.edit()
-            editor.putBoolean("checkNito",true)
-            editor.commit()
             val i = Intent(this, GameActivity::class.java)
             startActivity(i)
             finish()

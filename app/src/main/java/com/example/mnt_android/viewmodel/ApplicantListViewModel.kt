@@ -44,7 +44,9 @@ class ApplicantListViewModel(private val dbRepository: DBRepository) : BaseViewM
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    setApplicantList()
+                    if (it.apiStatus.httpStatus == SUCCESS) {
+                        setApplicantList()
+                    }
                 }, {
 
                 })

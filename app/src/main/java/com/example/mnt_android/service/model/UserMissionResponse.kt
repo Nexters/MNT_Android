@@ -14,14 +14,18 @@ class UserMissionResponse (
     @SerializedName("userFruttoId")//나의 넘버
     var userFruttoId : Int,
     @SerializedName("userMission")
-    var userMission : UserMission
+    var userMission : UserMission,
+    @SerializedName("isAbleImg")
+var isAbleImg : Int
+
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readParcelable(Manitto::class.java.classLoader),
         parcel.readInt(),
         parcel.readString(),
         parcel.readInt(),
-        parcel.readParcelable(UserMission::class.java.classLoader)
+        parcel.readParcelable(UserMission::class.java.classLoader),
+        parcel.readInt()
     ) {
     }
 
@@ -31,6 +35,7 @@ class UserMissionResponse (
         parcel.writeString(missionName)
         parcel.writeInt(userFruttoId)
         parcel.writeParcelable(userMission, flags)
+        parcel.writeInt(isAbleImg)
     }
 
     override fun describeContents(): Int {

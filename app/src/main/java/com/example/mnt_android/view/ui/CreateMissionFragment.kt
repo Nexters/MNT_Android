@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +21,7 @@ import com.example.mnt_android.databinding.FragmentCreatemission1Binding
 import com.example.mnt_android.databinding.FragmentCreateroom1Binding
 import com.example.mnt_android.view.dialog.ConfirmDialog
 import com.example.mnt_android.view.dialog.CustomAlertDialog
+import com.example.mnt_android.view.dialog.CustomAlertEmoticonDialog
 import com.example.mnt_android.view.dialog.NoticeDialog
 import com.example.mnt_android.viewmodel.CreateMissionViewModel
 import com.example.mnt_android.viewmodel.CreateRoomViewModel
@@ -52,39 +55,6 @@ class CreateMissionFragment : Fragment()
             binding.lifecycleOwner=this
         }
 
-        createMissionViewModel.isCreated.observe(this, Observer {
-            if(it==true)
-            {
-                createMissionViewModel.isCreated.observe(this, Observer {
-                    if(it==true)
-                    {
-                        ConfirmDialog("참가자들에게 미션이 부여되며 알림이 울립니다.","취소","보내기")
-                        {
-                           CustomAlertDialog("참가자들에게 미션을 전달했습니다.","확인"){
-                               createMissionViewModel.isCreated.value = false
-                           }
-                                .show(
-                                    (activity as CreateMissionActivity).supportFragmentManager,
-                                    "CreateMission"
-                                )
-
-
-
-                        }.show((activity as CreateMissionActivity).supportFragmentManager,"CreateMission")
-
-
-
-                    }
-
-                })
-            }
-            else
-            {
-                (activity as CreateMissionActivity).finish()
-            }
-        })
-
-
         var missionspinadapter = ArrayAdapter.createFromResource(activity, R.array.arr_create_mission, R.layout.spinner_item)
         missionspinadapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         spin_mission_name_create_mission.adapter=missionspinadapter
@@ -104,6 +74,27 @@ class CreateMissionFragment : Fragment()
                createMissionViewModel.setMission(position)
             }
         }
+
+        bu_create_mission_create_mission.setOnClickListener {
+            val supportFragmentManager = (context as FragmentActivity).supportFragmentManager
+            ConfirmDialog("참가자들에게 미션이 부여되며\n알림이 울립니다.", "취소", "보내기")
+            {
+                createMissionViewModel.makeMission()
+                CustomAlertEmoticonDialog("\uD83C\uDF89", "참가자들에게 미션을 전달했습니다.", "확인") {
+                    createMissionViewModel.isCreated.value = false
+                }
+                    .show(
+                        supportFragmentManager,
+                        "CreateMission"
+                    )
+            }.show(supportFragmentManager, "CreateMission")
+        }
+
+        createMissionViewModel.isCreated.observe(context as LifecycleOwner, Observer {
+            if (it == false) {
+                (activity as CreateMissionActivity).finish()
+            }
+        })
 
     }
 
