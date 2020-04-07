@@ -31,12 +31,13 @@ class GameViewModel(private val repository: DBRepository) : BaseViewModel()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     it.run {
-                        if(apiStatus.httpStatus == SUCCESS) {
+                        if(apiStatus.httpStatus == SUCCESS)
+                        {
                             Log.d("wlgusdnzzz","미션 Size : "+this.data.size.toString())
                             val done = arrayListOf<UserMissionResponse>()
                             val notDone = arrayListOf<UserMissionResponse>()
 
-                            data.forEach { mission ->
+                            this.data.forEach { mission ->
 
                                 mission.userMission.userDone?.let { isDone ->
                                     if (isDone.isTrue) done.add(mission)

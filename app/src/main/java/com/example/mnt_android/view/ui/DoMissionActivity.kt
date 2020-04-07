@@ -53,6 +53,8 @@ class DoMissionActivity : AppCompatActivity()
 
         doMissionViewModel.nowUserMission.value =
             intent.getParcelableExtra("nowUserMission") as UserMissionResponse
+
+        
         doMissionViewModel.missionDescription =
             resources
             .getStringArray(R.array.arr_create_mission_des)[resources.getStringArray(R.array.arr_create_mission)
