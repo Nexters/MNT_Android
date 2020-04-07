@@ -84,7 +84,9 @@ class MissionFilterBottomSheet(private val userId: String, private val isManager
                     visibility = View.GONE
                 } else {
                     visibility = View.VISIBLE
-                    participantList.forEach {
+                    participantList.apply {
+                        sortWith(compareBy { it.user.name })
+                    }.forEach {
                         if (it.isCreater.isFalse){
                             addView(getUserItem(it.user.id, it.userFruttoId, it.user.name))
                         }
