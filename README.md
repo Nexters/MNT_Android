@@ -56,6 +56,7 @@
 
 ## 활용 기술
 * [MVVM](https://wlgusdn700.tistory.com/2?category=827157)/[DataBinding](https://wlgusdn700.tistory.com/3?category=827157) : Activity가 많아 중복되는 코드를 줄이고, UI 코드를 줄이기 위해 사용
+* BindingAdapter : DataBinding와 리사이클러 뷰를 연동할 때 Item을 편하게 넣기 위해 사용
 * [RxJava](https://wlgusdn700.tistory.com/4?category=827157) / [RxAndroid](https://wlgusdn700.tistory.com/5?category=827157) : 서버와 HTTP 통신이 많으므로, Rx를 이용해 안드로이드 내 비동기작업에서의 Thread관리를 위해 사용
 * [Retrofit](https://wlgusdn700.tistory.com/9?category=827157) : 서버와의 HTTP통신을 짧은 코드와 간편화하기 위해 사용
 * Glide : 이미지 삽입, 관리 등을 간편화하기 위해 사용
