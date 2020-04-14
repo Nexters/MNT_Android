@@ -59,7 +59,6 @@ class SessionCallback(application : Application) : ISessionCallback {
                     LoginActivity.editor?.putString("kakao_token",Session.getCurrentSession().tokenInfo.accessToken)
 
                     LoginActivity.editor?.commit()*/
-                    user.id = result?.id.toString()
                     user.nickname.value=result?.nickname
                     user.token=Session.getCurrentSession().tokenInfo.accessToken
                 }
@@ -70,9 +69,6 @@ class SessionCallback(application : Application) : ISessionCallback {
             }
 
         })
-           Log.d("kakaotoken",Session.getCurrentSession().tokenInfo.accessToken)
-            Log.d("kakaotoken",Session.getCurrentSession().tokenInfo.refreshToken)
-
 
     }
 

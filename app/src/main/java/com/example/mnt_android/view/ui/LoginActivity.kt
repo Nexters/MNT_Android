@@ -88,7 +88,7 @@ class LoginActivity : AppCompatActivity()
        val callback = SessionCallback(application)
         Session.getCurrentSession().addCallback(callback)
         Session.getCurrentSession().checkAndImplicitOpen()
-        Session.getCurrentSession().open(AuthType.KAKAO_LOGIN_ALL,this@LoginActivity)
+        Session.getCurrentSession().open(AuthType.KAKAO_ACCOUNT,this@LoginActivity)
         loginViewModel.kuser = callback.user
     }
 
