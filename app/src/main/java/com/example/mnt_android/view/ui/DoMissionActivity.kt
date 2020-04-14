@@ -54,7 +54,7 @@ class DoMissionActivity : AppCompatActivity()
         doMissionViewModel.nowUserMission.value =
             intent.getParcelableExtra("nowUserMission") as UserMissionResponse
 
-        
+
         doMissionViewModel.missionDescription =
             resources
             .getStringArray(R.array.arr_create_mission_des)[resources.getStringArray(R.array.arr_create_mission)
@@ -176,20 +176,20 @@ class DoMissionActivity : AppCompatActivity()
                 val picturePath = cursor.getString(column_index)
 
                 cursor.close()
-                var matrix = Matrix()
+
                 val bmp = BitmapFactory.decodeStream(FileInputStream(picturePath), null, null)
                 var height = bmp.height
                 var width = bmp.width
                 var bm : Bitmap?=null
-                while (height > 300) {
+                while (height > 720) {
 
-                    bm = Bitmap.createScaledBitmap(bmp, (width * 300) / height, 300, true)
+                    bm = Bitmap.createScaledBitmap(bmp, (width * 720) / height, 720, true)
                     height = bm.getHeight()
                     width = bm.getWidth()
                 }
-                /*var bm =
-                    Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true)
-*/
+
+
+
                 doMissionViewModel.file = saveBitmapToJpeg(bm!!)
                 doMissionViewModel.bitmap = bm
             }
