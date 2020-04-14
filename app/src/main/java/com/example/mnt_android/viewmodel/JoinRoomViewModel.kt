@@ -78,7 +78,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                 .subscribe({ t: CheckRoomList? ->
                     if (t?.checkRoomList != null) {
                         checkRoom.value = t!!.checkRoomList[0]
-                        startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
+                        startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요\uD83D\uDC4F"
 
 
                         if (checkRoom.value!!.isCreater == 1) {
@@ -151,7 +151,7 @@ class JoinRoomViewModel(application: Application) : AndroidViewModel(application
                             {
                                 checkRoom.value = t!!.checkRoomList[0]
                                 pr.setRoomId(checkRoom.value?.room?.id)
-                                startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
+                                startDayText_joinroom2  = "${checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요\uD83D\uDC4F"
 
                                 isSearched.value=true
 
