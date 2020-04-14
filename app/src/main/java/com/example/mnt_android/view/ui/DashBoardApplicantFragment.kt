@@ -54,6 +54,7 @@ class DashBoardApplicantFragment : BaseFragment() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.game_layout, fragment)
         transaction.commit()
+        (activity as? GameActivity)?.selectTimeLineBtn()
     }
 
     private fun setEventListener() {
