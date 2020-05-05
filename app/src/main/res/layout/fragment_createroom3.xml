@@ -17,6 +17,14 @@
         android:layout_height="match_parent"
         tools:context=".view.ui.CreateRoomActivity">
 
+        <ImageView
+            android:id="@+id/close_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/close"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
 
         <ImageView

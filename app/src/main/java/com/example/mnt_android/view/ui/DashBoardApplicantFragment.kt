@@ -15,6 +15,7 @@ import com.example.mnt_android.bus.sendFilteringEvent
 import com.example.mnt_android.databinding.FragmentDashBoardApplicantBinding
 import com.example.mnt_android.view.dialog.ConfirmDialog
 import com.example.mnt_android.view.dialog.CustomAlertDialog
+import com.example.mnt_android.view.dialog.DevMentionDialog
 import com.example.mnt_android.view.dialog.NoticeDialog
 import com.example.mnt_android.viewmodel.DashBoardViewModel
 import kotlinx.android.synthetic.main.fragment_dash_board_applicant.*
@@ -54,6 +55,7 @@ class DashBoardApplicantFragment : BaseFragment() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.game_layout, fragment)
         transaction.commit()
+        (activity as? GameActivity)?.selectTimeLineBtn()
     }
 
     private fun setEventListener() {
@@ -68,7 +70,16 @@ class DashBoardApplicantFragment : BaseFragment() {
             viewModel.setOnNotification(notification_switch.isChecked)
         }
         dev_info_layout.onClick {
-            NoticeDialog("개발자정보", "고민중").show(supportFragmentManager, TAG)
+           DevMentionDialog("개발자정보",
+                "\uD83D\uDE03You made my day\n" +
+                    "\n\uD83D\uDCADTo infinity...and beyond\uD83E\uDD38\u200D♀️\n" +
+                    "\n\uD83E\uDD70Viva la vida\n" +
+                    "\n\uD83D\uDC31\n" +
+                    "\n\uD83E\uDD7APlease... Don't forget me!!\n" +
+                    "\n\uD83D\uDE4A\n" +
+                    "\n\uD83D\uDE4B\u200D♂️Be my friend\n" +
+                    "\n\uD83D\uDC7BJihye ZZANG","PM 대경\n\nGUI 소영\n\nUI 예희\n\nServer 지혜\n\n" +
+                        "Android 현우\n\nAndroid 유진\n\nIOS 민섭\n\nIOS 지혜").show(supportFragmentManager, TAG)
         }
         exit_room_layout.onClick {
             if (viewModel.getCheckNaeto()) {

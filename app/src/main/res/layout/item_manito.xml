@@ -26,7 +26,9 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="포도링"/>
+            android:textSize="15sp"
+            android:textColor="@color/colorLightBlueBlack"
+            tools:text="포도링"/>
     </LinearLayout>
 
     <ImageView
@@ -61,6 +63,8 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="진유진유진유진유진유진유진"/>
+            android:textSize="15sp"
+            android:textColor="@color/colorLightBlueBlack"
+            tools:text="진유진유진유진유진유진유진"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,8 +6,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mnt_android.extension.checkUploadDate
 import com.example.mnt_android.extension.isFalse
+import com.example.mnt_android.extension.isTrue
 import com.example.mnt_android.service.model.Applicant
 import com.example.mnt_android.service.model.UserMissionResponse
 import com.example.mnt_android.service.repository.PreferencesRepository
@@ -42,7 +42,7 @@ fun bindAdapterManitoList(
         (view.adapter as ManitoListAdapter).run {
             val userList = arrayListOf<Applicant>()
             list.forEach { applicant ->
-                if (applicant.isCreater.isFalse)
+                if (!applicant.isCreater.isTrue)
                     userList.add(applicant)
             }
             this.isPublic = isPublic

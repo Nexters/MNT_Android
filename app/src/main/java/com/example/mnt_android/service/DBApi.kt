@@ -43,6 +43,12 @@ interface DBApi {
         @Path("roomId") roomId : Long
     ): Completable
 
+    //방 삭제
+    @DELETE("api/room/{roomId}")
+    fun deleteRoom(
+        @Path("roomId") roomId : Long
+    ): Completable
+
     // 마니또 방 시작
     @GET("/api/room/start/{roomId}")
     fun startRoom(

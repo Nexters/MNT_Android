@@ -83,4 +83,17 @@ class CreateRoomViewModel : BaseViewModel()
    )
  }
 
+    fun deleteRoom() {
+        addDisposable(
+            repository.deleteRoom(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+
+                 },{
+
+                })
+        )
+    }
+
 }

@@ -38,6 +38,8 @@ class DBRepository {
     fun endRoom(roomId: Long): Completable =
         api.endRoom(roomId)
 
+    fun deleteRoom(roomId: Long) = api.deleteRoom(roomId)
+
     fun getManitto(
         roomId: Long,
         userId: String

@@ -22,7 +22,7 @@
             android:layout_height="0dp"
             app:layout_constraintWidth_percent="0.701"
             app:layout_constraintHeight_percent="0.073"
-            app:layout_constraintVertical_bias="0.922"
+            app:layout_constraintVertical_bias="0.95"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
