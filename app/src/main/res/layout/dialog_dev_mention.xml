@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="301dp"
-        android:layout_height="350dp"
+        android:layout_height="400dp"
         android:background="@drawable/round_layout_white">
 
         <RelativeLayout
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 tools:text="개발자 정보" />
         </RelativeLayout>
 
@@ -53,7 +53,7 @@
                 android:gravity="left"
                 android:text="mention"
                 android:textColor="@color/colorBlack"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:padding="5dp"
                 android:background="@drawable/textview_bottomleft_round"
                 ></TextView>
@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="name"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:padding="5dp"
                 android:textColor="@color/colorBlack"
                 android:background="@drawable/textview_bottomright_round"

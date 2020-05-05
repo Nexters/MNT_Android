@@ -89,10 +89,10 @@ class JoinRoomActivity : AppCompatActivity()
         })
 
         val intent = intent
-        val str = intent.data
         checkRoom = intent.getParcelableExtra("checkRoom")
-        val roomId : Int?=intent.getIntExtra("roomId",0)
+        val roomId : Int?=intent.getIntExtra("roomNum",0)
         val fragNum = intent.getIntExtra("fragNum",0)
+        Log.d("wlgusdnzzz",roomId.toString())
         if(checkRoom!=null)
         {
             //MainActivity에서 방이 존재한다고 판단하여 방정보를 넘김
@@ -107,14 +107,9 @@ class JoinRoomActivity : AppCompatActivity()
         if(roomId!=0)
         {
             joinRoomViewModel.fragmentNum=fragNum
-            joinRoomViewModel.roomInfo.num.value=intent.getIntExtra("roomNum",0).toString()
+            joinRoomViewModel.roomInfo.num.value=roomId.toString()
         }
-       if(str!=null)
-        {
-            //카카오 링크를 통해 들어옴
-           // joinRoomViewModel.roomInfo.num.value=intent.data.getQueryParameter("roomnum")
-            //만약 내가 내 마니또 보는 화면을 봤으면 바로 타임라인 Actviity로 이동
-        }
+
 
     }
 
