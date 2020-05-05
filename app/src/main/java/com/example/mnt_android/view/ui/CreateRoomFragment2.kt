@@ -59,7 +59,7 @@ class CreateRoomFragment2 : Fragment()
                 position: Int,
                 id: Long
             ) {
-                createRoomViewModel.maxPeople= (position+1).toString()
+                createRoomViewModel.maxPeople= (position+3).toString()
             }
         }
 
