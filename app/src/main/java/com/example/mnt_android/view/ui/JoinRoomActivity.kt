@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.mnt_android.R
 import com.example.mnt_android.databinding.ActivityJoinroomBinding
 import com.example.mnt_android.databinding.ActivityMainBinding
+import com.example.mnt_android.extension.noticeDate
 import com.example.mnt_android.service.model.CheckRoom
 import com.example.mnt_android.service.repository.PreferencesRepository
 import com.example.mnt_android.util.TAG_IS_MANAGER
@@ -97,7 +98,7 @@ class JoinRoomActivity : AppCompatActivity()
             //MainActivity에서 방이 존재한다고 판단하여 방정보를 넘김
             joinRoomViewModel.fragmentNum=fragNum
             joinRoomViewModel.checkRoom.value=checkRoom
-            joinRoomViewModel.startDayText_joinroom2="${joinRoomViewModel.checkRoom.value!!.room.startDay} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요"
+            joinRoomViewModel.startDayText_joinroom2="${joinRoomViewModel.checkRoom.value!!.room.startDay.noticeDate} 에 시작합니다.\n친구들이 모일때까지 잠시 기다려주세요\uD83D\uDC4F"
             joinRoomViewModel.startDayText_joinroom3="${joinRoomViewModel.checkRoom.value!!.room.startDay} 까지 프루또 친구를 많이 많이 챙겨주세요!\uD83D\uDC8C"
 
             setFrag(fragNum)

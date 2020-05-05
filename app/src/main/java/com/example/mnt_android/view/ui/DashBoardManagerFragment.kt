@@ -49,6 +49,7 @@ class DashBoardManagerFragment : BaseFragment() {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.game_layout, fragment)
             transaction.commit()
+            (activity as? GameActivity)?.selectMissionBtn()
         }
 
         notification_switch.onClick {

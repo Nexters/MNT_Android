@@ -27,13 +27,20 @@ class ContentListViewHolder(view: View, private val isPublic: Boolean) : BaseVie
                 } else {
                     image_iv.visibility = View.GONE
                 }
+
+                if(!userMission.content.isNullOrEmpty()) {
+                    content_tv.visibility = View.VISIBLE
+                    content_tv.text = userMission.content
+                }  else {
+                    content_tv.visibility = View.GONE
+                }
+
                 setFruitChatProfileSrc(naeto_iv, userFruttoId)
                 setFaceProfileSrc(nito_iv, manitto?.fruttoId)
 
                 naeto_tv.text = if(isPublic) userMission.user.name else getFruttoData(context, userFruttoId)?.koreanNickName
                 nito_tv.text = manitto?.name
                 mission_type_tv.text = missionName
-                content_tv.text = userMission.content
                 day_tv.text = userMission.userDoneTime?.checkUploadDate
                 setOnClickListener {
                     val intent = Intent(context, MissionDetailActivity::class.java)

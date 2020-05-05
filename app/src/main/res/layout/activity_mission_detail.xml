@@ -183,6 +183,7 @@
                         android:textColor="@color/colorBlackNotice"
                         android:textSize="14sp"
                         android:text="@{viewModel.missionContent}"
+                        android:visibility='@{viewModel.missionContent.length()>0}'
                         tools:text="친하게 지내요 부엉이 현우님! 날카로운 통찰력이 매우 닮았습니다. 또 다시 만나게 되면 보카도 맞춰주셈!! 그리고 부엉이지만 탕수육은 찍어먹어!! 친하게 지내요 부엉이 현우님! 날카로운 통찰력이 매우 닮았습니다. 또 다시 만나게 되면 보카도 맞춰주셈!! 그리고 부엉이지만 탕수육은 찍어먹어!!"/>
                 </LinearLayout>
             </LinearLayout>

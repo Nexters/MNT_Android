@@ -88,7 +88,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
 
 
         changeFragment(timeLineFragment)
-        selectBtn(feed_iv, feed_tv)
+        selectTimeLineBtn()
 
 
 
@@ -160,11 +160,11 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
                 {
                     changeFragment(dashBoardApplicantFragment)
                 }
-                selectBtn(dashboard_iv, dashboard_tv)
+                selectDashBoardBtn()
             }
             feed_layout -> {
                 changeFragment(timeLineFragment)
-                selectBtn(feed_iv, feed_tv)
+                selectTimeLineBtn()
             }
             mission_layout -> {
                 if(sharedPreferences.getBoolean("isManager",false))
@@ -175,7 +175,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
                 {
                     changeFragment(missionApplicantFragment)
                 }
-                selectBtn(mission_iv, mission_tv)
+                selectMissionBtn()
             }
         }
     }
@@ -187,7 +187,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
     }
 
 
-    private fun selectBtn(btn: ImageView, tv: TextView) {
+    fun selectBtn(btn: ImageView, tv: TextView) {
         selectedBtn?.isSelected = false
         selectedTv?.textColor = getResColor(R.color.colorLightGray2)
         btn.isSelected = true
@@ -195,6 +195,10 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         selectedBtn = btn
         selectedTv = tv
     }
+
+    fun selectDashBoardBtn() = selectBtn(dashboard_iv, dashboard_tv)
+    fun selectTimeLineBtn() = selectBtn(feed_iv, feed_tv)
+    fun selectMissionBtn() = selectBtn(mission_iv, mission_tv)
 
     private fun getResColor(colorId: Int) = ResourcesCompat.getColor(resources, colorId, null)
 
