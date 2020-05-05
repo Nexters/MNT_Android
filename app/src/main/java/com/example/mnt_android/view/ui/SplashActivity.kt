@@ -33,8 +33,8 @@ class SplashActivity : AppCompatActivity()
 
         joinRoomViewModel.checkRoom()
 
-        val intent = intent
-        val str = intent.data
+        val kakao_intent = intent
+        val str = kakao_intent.data
         var sf =getSharedPreferences("login",0)
         editor = sf.edit()
         if(str==null)
@@ -136,13 +136,7 @@ class SplashActivity : AppCompatActivity()
                             Toast.makeText(this,"참가한 방이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                             //참가한 방이 없다
 
-                            if(str!=null)
-                            {
-                                val intent = Intent(this, JoinRoomActivity::class.java)
-                                intent.putExtra("fragNum", 0)
-                                intent.putExtra("roomNum", intent.data.getQueryParameter("roomnum"))
-                                startActivity(intent)
-                            }
+
 
                             val intent = Intent(this, MainActivity::class.java)
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -167,9 +161,10 @@ class SplashActivity : AppCompatActivity()
         }
         else
         {
-            val kakaoNum = intent.data.getQueryParameter(KakaoMessageService.ROOM_NUM)
-            val missionContent = intent.data.getQueryParameter(KakaoMessageService.MISSION_CONTENT)
+            val kakaoNum = kakao_intent.data.getQueryParameter(KakaoMessageService.ROOM_NUM).toInt()
+            val missionContent = kakao_intent.data.getQueryParameter(KakaoMessageService.MISSION_CONTENT)
             Log.d("wlgusdnzzz","같음")
+            Log.d("wlgusdnzzz",kakaoNum.toString())
 
             Log.d("wlgusdnzzz",sf.getString("kakao_token","null"))
             Handler().postDelayed({
@@ -389,15 +384,14 @@ class SplashActivity : AppCompatActivity()
 
                             if(str!=null)
                             {
+                                Log.d("wlgusdnzzz","123123")
                                 val intent = Intent(this, JoinRoomActivity::class.java)
                                 intent.putExtra("fragNum", 0)
-                                intent.putExtra("roomNum", intent.data.getQueryParameter("roomnum"))
+                                intent.putExtra("roomNum", kakaoNum)
                                 startActivity(intent)
                             }
 
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                            startActivity(intent)
+
 
                         }
                     })
