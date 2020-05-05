@@ -27,7 +27,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintWidth_percent="0.9"
             app:layout_constraintHeight_percent="0.05"
-            android:gravity="left"
+            android:gravity="start"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

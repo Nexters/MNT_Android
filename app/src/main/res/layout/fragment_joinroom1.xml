@@ -19,36 +19,95 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintVertical_bias="0.3"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.05"
         android:text="@string/tv_invitecode"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.05"
         android:textSize="18sp"
         android:textColor="#222b45"
-        android:gravity="left"
+        android:gravity="start"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <EditText
-        android:id="@+id/et_roomnum_joinroom1"
+    <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.9"
-        app:layout_constraintHeight_percent="0.05"
-        app:layout_constraintVertical_bias="0.4"
-        app:layout_constraintHorizontal_bias="0.08"
-        android:gravity="center"
-        android:ems="10"
-        android:inputType="number"
-        android:text="@={joinRoomViewModel.roomInfo.num}"
-        android:background="@drawable/tv_underline"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39"
+        app:layout_constraintWidth_percent="0.9">
+
+        <RelativeLayout
+            android:id="@+id/et_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_roomnum_joinroom1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/delete_text_btn"
+                android:inputType="number"
+                android:maxLength="5"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@={joinRoomViewModel.roomInfo.num}"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
+                android:background="@null" />
+
+            <ImageView
+                android:id="@+id/delete_text_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/plus_circle_fill" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/et_layout"
+            android:background="#b2b2b2" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_layout"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp">
+
+            <TextView
+                android:id="@+id/text_length_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#b2b2b2"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:textColor="#b2b2b2"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textColor="#b2b2b2"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/bu_join_joinroom1"
@@ -58,7 +117,8 @@
         app:layout_constraintWidth_percent="0.9"
         app:layout_constraintVertical_bias="0.52"
         app:layout_constraintHorizontal_bias="0.5"
-        android:background="@drawable/button_hot_pink"
+        android:background="@drawable/bottom_select_button"
+        android:enabled="false"
         android:text="입장하기"
         android:textSize="18sp"
         android:textColor="#ffffff"
