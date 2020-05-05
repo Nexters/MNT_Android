@@ -1,9 +1,7 @@
 package com.example.mnt_android.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.mnt_android.base.BaseViewModel
 import com.example.mnt_android.extension.isTrue
 import com.example.mnt_android.service.model.*
