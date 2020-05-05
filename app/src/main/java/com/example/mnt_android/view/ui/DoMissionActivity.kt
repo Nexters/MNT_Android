@@ -161,8 +161,9 @@ class DoMissionActivity : AppCompatActivity()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==REQUEST_TEXT_GALLERY)
+        if(resultCode==Activity.RESULT_OK)
         {
+
             if(data!=null) {
                 val selectedImage = data?.getData()
                 var filePathColumn: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
@@ -178,17 +179,23 @@ class DoMissionActivity : AppCompatActivity()
                 cursor.close()
 
                 val bmp = BitmapFactory.decodeStream(FileInputStream(picturePath), null, null)
+
+                Log.d("wlgusdnzzz",bmp!!.toString())
                 var height = bmp.height
                 var width = bmp.width
                 var bm : Bitmap?=null
-                while (height > 720) {
+                if(height>720) {
+                    while (height > 720) {
 
-                    bm = Bitmap.createScaledBitmap(bmp, (width * 720) / height, 720, true)
-                    height = bm.getHeight()
-                    width = bm.getWidth()
+                        bm = Bitmap.createScaledBitmap(bmp, (width * 720) / height, 720, true)
+                        height = bm.getHeight()
+                        width = bm.getWidth()
+                    }
                 }
-
-
+                else
+                {
+                    bm=bmp
+                }
 
                 doMissionViewModel.file = saveBitmapToJpeg(bm!!)
                 doMissionViewModel.bitmap = bm
