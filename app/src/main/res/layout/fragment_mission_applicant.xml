@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mnt_android.viewmodel.GameViewModel" />
+            type="com.nexters.frutto.viewmodel.GameViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

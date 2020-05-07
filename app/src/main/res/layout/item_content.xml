@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_layout_white_border">
 
-        <com.example.mnt_android.view.component.TopCornerRoundImageView
+        <com.nexters.frutto.view.component.TopCornerRoundImageView
             android:id="@+id/image_iv"
             android:layout_width="0dp"
             android:layout_height="0dp"

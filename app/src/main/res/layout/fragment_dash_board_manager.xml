@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mnt_android.viewmodel.DashBoardViewModel" />
+            type="com.nexters.frutto.viewmodel.DashBoardViewModel" />
     </data>
 
     <ScrollView

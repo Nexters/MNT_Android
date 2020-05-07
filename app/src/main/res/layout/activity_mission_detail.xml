@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mnt_android.viewmodel.MissionDetailViewModel" />
+            type="com.nexters.frutto.viewmodel.MissionDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -144,7 +144,7 @@
                     android:layout_marginStart="26dp"
                     android:layout_marginEnd="26dp"
                     android:orientation="vertical">
-                    <com.example.mnt_android.view.component.RoundImageView
+                    <com.nexters.frutto.view.component.RoundImageView
                         android:id="@+id/mission_img_iv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

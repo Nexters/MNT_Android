@@ -5,10 +5,10 @@
     <data>
         <variable
             name="joinRoomViewModel"
-            type="com.example.mnt_android.viewmodel.JoinRoomViewModel" />
+            type="com.nexters.frutto.viewmodel.JoinRoomViewModel" />
         <variable
             name="joinRoomActivity"
-            type="com.example.mnt_android.view.ui.JoinRoomActivity" />
+            type="com.nexters.frutto.view.ui.JoinRoomActivity" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:orientation="vertical" android:layout_width="match_parent"

@@ -6,10 +6,10 @@
     <data>
         <variable
             name="gameActivity"
-            type="com.example.mnt_android.view.ui.GameActivity" />
+            type="com.nexters.frutto.view.ui.GameActivity" />
         <variable
             name="gameViewModel"
-            type="com.example.mnt_android.viewmodel.GameViewModel" />
+            type="com.nexters.frutto.viewmodel.GameViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

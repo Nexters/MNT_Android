@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mnt_android.viewmodel.TimeLineViewModel" />
+            type="com.nexters.frutto.viewmodel.TimeLineViewModel" />
     </data>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

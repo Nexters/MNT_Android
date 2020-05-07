@@ -5,7 +5,7 @@
     <data>
         <variable
             name="joinRoomViewModel"
-            type="com.example.mnt_android.viewmodel.JoinRoomViewModel" />
+            type="com.nexters.frutto.viewmodel.JoinRoomViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

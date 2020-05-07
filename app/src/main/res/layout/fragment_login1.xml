@@ -5,10 +5,10 @@
     <data>
         <variable
             name="loginViewModel"
-            type="com.example.mnt_android.viewmodel.LoginViewModel" />
+            type="com.nexters.frutto.viewmodel.LoginViewModel" />
         <variable
             name="loginActivity"
-            type="com.example.mnt_android.view.ui.LoginActivity" />
+            type="com.nexters.frutto.view.ui.LoginActivity" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"

@@ -5,12 +5,13 @@
     <data>
         <variable
             name="createMissionViewModel"
-            type="com.example.mnt_android.viewmodel.CreateMissionViewModel" />
+            type="com.nexters.frutto.viewmodel.CreateMissionViewModel" />
         <variable
             name="createMissionActivity"
-            type="com.example.mnt_android.view.ui.CreateMissionActivity" />
+            type="com.nexters.frutto.view.ui.CreateMissionActivity" />
         <import type="android.view.View"></import>
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">

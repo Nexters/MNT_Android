@@ -5,10 +5,10 @@
     <data>
         <variable
             name="doMissionViewModel"
-            type="com.example.mnt_android.viewmodel.DoMissionViewModel" />
+            type="com.nexters.frutto.viewmodel.DoMissionViewModel" />
         <variable
             name="doMissionActivity"
-            type="com.example.mnt_android.view.ui.DoMissionActivity" />
+            type="com.nexters.frutto.view.ui.DoMissionActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

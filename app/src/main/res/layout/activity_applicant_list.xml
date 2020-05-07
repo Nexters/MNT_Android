@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mnt_android.viewmodel.ApplicantListViewModel" />
+            type="com.nexters.frutto.viewmodel.ApplicantListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

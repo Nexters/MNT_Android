@@ -6,10 +6,10 @@
     <data>
         <variable
             name="createRoomViewModel"
-            type="com.example.mnt_android.viewmodel.CreateRoomViewModel" />
+            type="com.nexters.frutto.viewmodel.CreateRoomViewModel" />
         <variable
             name="createRoomActivity"
-            type="com.example.mnt_android.view.ui.CreateRoomActivity" />
+            type="com.nexters.frutto.view.ui.CreateRoomActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

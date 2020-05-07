@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mnt_android.viewmodel.ShowManittoViewModel" />
+            type="com.nexters.frutto.viewmodel.ShowManittoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
