@@ -13,80 +13,132 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/arrow_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-
-        <Spinner
-            android:id="@+id/spin_mission_name_create_mission"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.1"
-            app:layout_constraintWidth_percent="0.9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintVertical_bias="0.12"
-            android:background="#f6f6f6"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="26dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/bu_create_mission_create_mission"
+            app:layout_constraintTop_toBottomOf="@id/back_btn">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/et_mission_description_create_mission"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/round_layout_white_border"
-            android:ems="10"
-            android:hint="설명을 입력해주세요"
-            android:inputType="textMultiLine|textPersonName"
-            android:text="@={createMissionViewModel.des}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHeight_percent="0.3"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"
-            app:layout_constraintWidth_percent="0.9" />
+                <Spinner
+                    android:id="@+id/spin_mission_name_create_mission"
+                    android:layout_width="match_parent"
+                    android:layout_height="67dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/button_light_gray"
+                    android:dropDownWidth="match_parent"
+                    android:dropDownVerticalOffset="115dp"
+                    android:entries="@array/arr_create_mission"
+                    android:gravity="center_vertical"
+                    android:padding="7dp" />
 
-        <CheckBox
-            android:id="@+id/cb_image_create_mission"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center_vertical"
-            app:layout_constraintHeight_percent="0.07"
-            app:layout_constraintWidth_percent="0.9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintVertical_bias="0.65"
-            android:text="이미지 업로드 여부"
-            android:textSize="15sp"
-            android:textColor="#222b45"
-            android:onClick="@{()->createMissionViewModel.checkImage()}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="14dp"
+                    android:src="@drawable/chevron_down" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="22dp">
+
+                <EditText
+                    android:id="@+id/et_mission_description_create_mission"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:background="@drawable/round_layout_white_border"
+                    android:gravity="top"
+                    android:hint="미션을 선택하면\n상세한 설명이 표시됩니다."
+                    android:inputType="textMultiLine|textPersonName"
+                    android:maxLength="80"
+                    android:paddingStart="24dp"
+                    android:paddingTop="19dp"
+                    android:paddingEnd="24dp"
+                    android:text="@={createMissionViewModel.des}"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/et_mission_description_create_mission"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="17dp">
+
+                    <TextView
+                        android:id="@+id/text_length_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#b2b2b2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/80"
+                        android:textColor="#b2b2b2" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <CheckBox
+                android:id="@+id/cb_image_create_mission"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:background="@android:color/transparent"
+                android:button="@android:color/transparent"
+                android:checked="false"
+                android:drawableStart="@drawable/checkbox_able_img"
+                android:drawablePadding="9dp"
+                android:gravity="center_vertical"
+                android:onClick="@{()->createMissionViewModel.checkImage()}"
+                android:text="이미지 업로드 여부"
+                android:textColor="@color/colorLightBlueBlack"
+                android:textSize="15sp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/bu_create_mission_create_mission"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.074"
-            app:layout_constraintWidth_percent="0.9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintVertical_bias="0.94"
-            android:text="미션 등록하기"
-            android:background="@drawable/button_hot_pink"
+            android:background="@drawable/bottom_select_button"
+            android:enabled="false"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"
-            android:textColor="#ffffff"
-            app:layout_constraintTop_toTopOf="parent"
+            android:text="미션 등록하기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.074"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.96"
+            app:layout_constraintWidth_percent="0.89" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
