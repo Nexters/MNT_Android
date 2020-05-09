@@ -30,7 +30,7 @@ class SelectManitoActivity : BaseActivity<ActivitySelectManitoBinding, ManitoLis
     private fun setDatabinding() {
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModel.apply {
-            getUserList()
+            getLocalUserList()
         }
     }
 

@@ -25,8 +25,14 @@ fun bindAdapterApplicantList(
 ) {
     applicantList?.let { list ->
         (view.adapter as ApplicantListAdapter).run {
+            val userList = arrayListOf<Applicant>()
+            list.forEach { applicant ->
+                if(applicant.isCreater != -1) {
+                    userList.add(applicant)
+                }
+            }
             isManager = _isManager
-            setList(list)
+            setList(userList)
         }
     }
 }
@@ -112,7 +118,7 @@ fun bindSelectApplicantList(
             val userId = PreferencesRepository(view.context).getUserId()
             val userList = arrayListOf<Applicant>()
             list.forEach { applicant ->
-                if (applicant.isCreater.isFalse && applicant.user.id != userId)
+                if (!applicant.isCreater.isTrue && applicant.user.id != userId)
                     userList.add(applicant)
             }
             setList(userList.apply {

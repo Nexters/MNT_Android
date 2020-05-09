@@ -103,8 +103,9 @@ class PreferencesRepository(context: Context) {
     fun getCheckNito() = sf.getBoolean(KEY_CHECK_NITO, DEFAULT_VALUE_BOOLEAN_FALSE)
     fun getCheckNaeto() = sf.getBoolean(KEY_CHECK_NAETO, DEFAULT_VALUE_BOOLEAN_FALSE)
     fun getOnNotification() = sf.getBoolean(KEY_ON_NOTIFICATION, DEFAULT_VALUE_BOOLEAN_TRUE)
-    fun getUserList(): ArrayList<Applicant> {
+    fun getUserList(): ArrayList<Applicant>? {
         val data = sf.getString("${KEY_USER_LIST}${getRoomId()}", DEFAULT_VALUE_STRING)
+        if(data == DEFAULT_VALUE_STRING) return null
         return ArrayList(Gson().fromJson(data, Array<Applicant>::class.java).toList())
     }
 
