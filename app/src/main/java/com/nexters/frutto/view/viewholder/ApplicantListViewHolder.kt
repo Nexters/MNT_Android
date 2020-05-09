@@ -37,7 +37,7 @@ class ApplicantListViewHolder(
                     "취소",
                     "내보내기"
                 ) {
-                    onExitApplicant(applicant.room.id.toLong(), applicant.user.id)
+                    onExitApplicant(applicant.room.id, applicant.user.id)
                 }.show(supportFragmentManager, TAG)
             }
 

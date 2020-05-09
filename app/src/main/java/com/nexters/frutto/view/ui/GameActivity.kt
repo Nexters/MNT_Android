@@ -83,7 +83,7 @@ class GameActivity : BaseActivity<ActivityGameBinding, BaseViewModel>(), View.On
         dashBoardApplicantFragment = DashBoardApplicantFragment()
         dashBoardManagerFragment = DashBoardManagerFragment()
         backPressViewModel = ViewModelProvider(this).get(BackPressViewModel::class.java)
-        gameViewModel.title = "'"+intent.getStringExtra("roomName")+"'" + "\n미션을 등록해주세요."
+        gameViewModel.title = intent.getStringExtra("roomName") ?: ""
         fragmentManager = supportFragmentManager
 
 

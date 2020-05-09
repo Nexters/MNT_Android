@@ -133,7 +133,7 @@ class SplashActivity : AppCompatActivity()
                         }
                         else
                         {
-                            Toast.makeText(this,"참가한 방이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(this,"참가한 방이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                             //참가한 방이 없다
 
 
@@ -161,7 +161,7 @@ class SplashActivity : AppCompatActivity()
         }
         else
         {
-            val kakaoNum = kakao_intent.data.getQueryParameter(KakaoMessageService.ROOM_NUM).toInt()
+            val kakaoNum = kakao_intent.data.getQueryParameter(KakaoMessageService.ROOM_NUM)?.toInt()
             val missionContent = kakao_intent.data.getQueryParameter(KakaoMessageService.MISSION_CONTENT)
             Log.d("wlgusdnzzz","같음")
             Log.d("wlgusdnzzz",kakaoNum.toString())
@@ -379,7 +379,7 @@ class SplashActivity : AppCompatActivity()
                         }
                         else
                         {
-                            Toast.makeText(this,"참가한 방이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(this,"참가한 방이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                             //참가한 방이 없다
 
                             if(str!=null)

@@ -58,14 +58,15 @@ class DashBoardManagerFragment : BaseFragment() {
 
         dev_info_layout.onClick {
             DevMentionDialog("개발자정보",
-                "\uD83D\uDE03You made my day\n" +
-                        "\n\uD83D\uDCADTo infinity...and beyond\uD83E\uDD38\u200D♀️\n" +
-                        "\n\uD83E\uDD70Viva la vida\n" +
-                        "\n\uD83D\uDC31\n" +
-                        "\n\uD83E\uDD7APlease... Don't forget me!!\n" +
-                        "\n\uD83D\uDE4A\n" +
-                        "\n\uD83D\uDE4B\u200D♂️Be my friend\n" +
-                        "\n\uD83D\uDC7BJihye ZZANG","PM 대경\n\nGUI 소영\n\nUI 예희\n\nServer 지혜\n\n" +
+                "\uD83D\uDE03 You made my day\n" +
+                        "\n\uD83D\uDCAD To infinity...and beyond \uD83E\uDD38\u200D♀ \n" +
+                        "\n\uD83E\uDD70 Viva la vida\n" +
+                        "\n\uD83D\uDC31 \n" +
+                        "\n\uD83E\uDD7A Please... Don't forget me!!\n" +
+                        "\n\uD83D\uDE4A \n" +
+                        "\n\uD83D\uDE4B\u200D♂ ️Be my friend\n" +
+                        "\n\uD83D\uDC7B Jihye ZZANG",
+                "PM 대경\n\nGUI 소영\n\nUI 예희\n\nServer 지혜\n\n" +
                         "Android 현우\n\nAndroid 유진\n\nIOS 민섭\n\nIOS 지혜").show(supportFragmentManager,
                 DashBoardManagerFragment.TAG
             )

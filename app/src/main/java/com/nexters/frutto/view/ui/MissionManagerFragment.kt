@@ -18,7 +18,7 @@ class MissionManagerFragment : Fragment()
 {
     lateinit var binding: FragmentMissionManagerBinding
     lateinit var gameViewModel : GameViewModel
-   val  adap : MissionManagerListAdapter = MissionManagerListAdapter()
+    val adap : MissionManagerListAdapter = MissionManagerListAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
