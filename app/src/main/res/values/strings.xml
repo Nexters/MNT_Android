@@ -22,4 +22,8 @@
     <string name="greeting_dashboard_not_done_applicant">니또를 챙겨줄 때입니다.</string>
     <string name="greeting_dashboard_not_done_manager">니또를 잘 보살펴주세요!</string>
     <string name="greeting_dashboard_done">프루또 재밌으셨나요?</string>
+    <string name="empty_time_line_manager">미션을 등록해주세요!\n참여자가 수행한 미션이 모아 볼 수 있습니다 🙂</string>
+    <string name="empty_time_line_applicant">아직 서로에게 전달한 미션이 없어요!\n조금만 기다려주세요 😊</string>
+    <string name="empty_mission_manager">프루또들을 위한\n미션을 등록해주세요!</string>
+    <string name="empty_mission_applicant">아직 등록된 미션이 없어요.\n관리자가 미션을 등록해주겠죠?! 😉</string>
 </resources>

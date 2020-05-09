@@ -103,59 +103,31 @@ class CreateRoomActivity :FragmentActivity()
 
     fun setDate(index : Int)
     {
-        val today = Date()
-        var strdate: String? = null
-
-        var format1 = SimpleDateFormat()
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            format1 = SimpleDateFormat("yyyy-MM-dd")
-            strdate = format1.format(today)
+        val maxDate = Calendar.getInstance().apply {
+            if(index == 1) add(Calendar.WEEK_OF_YEAR, 2)
+            else add(Calendar.MONTH, 2)
         }
 
-        val dialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+        val dialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                val selectDataStr = "$year-${month + 1}-$dayOfMonth"
+                if (index == 1) {
+                    createRoomViewModel.startDay.value = selectDataStr
+                } else {
+                    createRoomViewModel.endDay.value = selectDataStr
+                }
+            },
+            Calendar.getInstance().get(Calendar.YEAR),
+            Calendar.getInstance().get(Calendar.MONTH),
+            Calendar.getInstance().get(Calendar.DATE)
+        )
 
-            if(index==1)
-            {
-                createRoomViewModel.startDay.value="$year-${month+1}-$dayOfMonth"
-            }
-            else
-            {
-                createRoomViewModel.endDay.value= "$year-${month+1}-$dayOfMonth"
-            }
-
-
-        },  strdate!!.split("-")[0].toInt(),strdate!!.split("-")[1].toInt()-1,strdate!!.split("-")[2].toInt())
-
-
-        dialog.show()
-
-
-
-
-    }
-
-    fun sendKakaoLink(roomnum : Long)
-    {
-    var params = TextTemplate
-        .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
-        .addButton(ButtonObject("앱에서 보기",LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
-            .setAndroidExecutionParams("roomnum=$roomnum").setIosExecutionParams("roomnum=$roomnum").build())).build()
-
-    var serverCallbackArgs  = HashMap<String, String>();
-    var aa : Map<Any,Any> = HashMap<Any,Any>()
-
-
-    var aaa  = object : ResponseCallback<KakaoLinkResponse>(){
-        override fun onSuccess(result: KakaoLinkResponse?) {
-
-
+        dialog.run {
+            datePicker.minDate = Calendar.getInstance().time.time
+            datePicker.maxDate = maxDate.time.time
+            show()
         }
-
-        override fun onFailure(errorResult: ErrorResult?) {
-
-        }
-
     }
 
     fun sendKakaoLink(roomNum : Long) = KakaoMessageService.sendRoomNum(baseContext, roomNum)

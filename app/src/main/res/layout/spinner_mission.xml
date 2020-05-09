@@ -5,8 +5,7 @@
     android:id="@+id/spinner_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:gravity="center_horizontal"
-    android:textSize="19sp"
+    android:padding="17dp"
+    android:textSize="14sp"
     android:textColor="@color/colorLightBlueBlack"
-    tools:text="3" />
+    tools:text="미션" />

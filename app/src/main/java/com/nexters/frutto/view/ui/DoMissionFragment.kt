@@ -77,6 +77,19 @@ class DoMissionFragment : Fragment()
 
             }
         })
+        setEventListener()
+    }
 
+    private fun setEventListener(){
+        back_btn.onClick { activity?.finish() }
+        et_content_domission1.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) = Unit
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val length = p0?.length ?: 0
+                text_length_tv.text = length.toString()
+                tv_domission_domission1.isEnabled = length > 0
+            }
+        })
     }
 }
