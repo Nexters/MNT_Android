@@ -158,11 +158,7 @@ class CreateRoomActivity :FragmentActivity()
 
     }
 
-    KakaoLinkService.getInstance().sendDefault( this, params, serverCallbackArgs,aaa)
-
-}
-
-
+    fun sendKakaoLink(roomNum : Long) = KakaoMessageService.sendRoomNum(baseContext, roomNum)
 
     fun setFrag(n : Int)
     {

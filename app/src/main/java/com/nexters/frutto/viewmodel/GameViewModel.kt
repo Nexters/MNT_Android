@@ -13,10 +13,10 @@ import io.reactivex.schedulers.Schedulers
 class GameViewModel(private val repository: DBRepository) : BaseViewModel()
 {
     var title : String=""
-    var doneUserMissions = ArrayList<UserMissionResponse>()
-    var notDoneUserMissions = ArrayList<UserMissionResponse>()
+    var doneUserMissions = MutableLiveData<ArrayList<UserMissionResponse>>()
+    var notDoneUserMissions = MutableLiveData<ArrayList<UserMissionResponse>>()
     var missionResponses = ArrayList<MissionResponse>()
-    var missionManager = ArrayList<Pair<String,String>>()
+    var missionManager = MutableLiveData<ArrayList<Pair<String,String>>>()
     var changeManagerList = MutableLiveData<Boolean>()
     var listIsDone = MutableLiveData<Boolean>(false)
 
@@ -36,15 +36,13 @@ class GameViewModel(private val repository: DBRepository) : BaseViewModel()
                             val notDone = arrayListOf<UserMissionResponse>()
 
                             this.data.forEach { mission ->
-
                                 mission.userMission.userDone?.let { isDone ->
                                     if (isDone.isTrue) done.add(mission)
                                 } ?: { notDone.add(mission) }()
-
-                                doneUserMissions = done
-                                notDoneUserMissions = notDone
                             }
 
+                            doneUserMissions.value = done
+                            notDoneUserMissions.value = notDone
                         }
                         listIsDone.value=true
                     }
@@ -58,12 +56,13 @@ class GameViewModel(private val repository: DBRepository) : BaseViewModel()
     fun groupByMission(roomId : Long)
     {
         changeManagerList.value=false
-        missionManager.clear()
+        missionManager.value?.clear()
         addDisposable(repository.groupByMission(roomId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({t ->
                 missionResponses = ArrayList(t.missionResponses)
+                var missionList = ArrayList<Pair<String,String>>()
                 for(data in missionResponses)
                 {
                     var total = data.userMissions.size
@@ -73,8 +72,9 @@ class GameViewModel(private val repository: DBRepository) : BaseViewModel()
                         if(userData.userMission.userDone==1)
                             done++
                     }
-                    missionManager.add(Pair(data.missionName,"$done/$total"))
+                    missionList.add(Pair(data.missionName,"$done/$total"))
                 }
+                missionManager.value = missionList
                 changeManagerList.value=true
             },
                 {

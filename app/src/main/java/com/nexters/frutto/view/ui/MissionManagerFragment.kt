@@ -50,12 +50,12 @@ class MissionManagerFragment : Fragment()
                 adapter = adap
             }
 
-            gameViewModel.changeManagerList.observe(this, Observer {
-                if(it) {
-                    Log.d("wlgusdnzzz", "missionManager Set")
-                    adap.setList(gameViewModel.missionManager)
-                }
-            })
+//            gameViewModel.changeManagerList.observe(this, Observer {
+//                if(it) {
+//                    Log.d("wlgusdnzzz", "missionManager Set")
+//                    adap.setList(gameViewModel.missionManager.value ?: ArrayList())
+//                }
+//            })
 
         }
 

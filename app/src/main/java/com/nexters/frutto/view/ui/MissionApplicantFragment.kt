@@ -35,9 +35,10 @@ class MissionApplicantFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         activity?.let {
+            viewModel = (activity as GameActivity).gameViewModel
 
             binding.lifecycleOwner = this
-            viewModel = (activity as GameActivity).gameViewModel
+            binding.viewModel = viewModel
 
             rv_mission_not_done.run {
                 layoutManager = LinearLayoutManager(context)
@@ -48,13 +49,13 @@ class MissionApplicantFragment : BaseFragment() {
                 adapter = doneAdapter
             }
 
-            viewModel.listIsDone.observe(this, Observer {
-                if(it)
-                {
-                    notDoneAdapter.setList(viewModel.notDoneUserMissions)
-                    doneAdapter.setList(viewModel.doneUserMissions)
-                }
-            })
+//            viewModel.listIsDone.observe(this, Observer {
+//                if(it)
+//                {
+//                    notDoneAdapter.setList(viewModel.notDoneUserMissions.value
+//                    doneAdapter.setList(viewModel.doneUserMissions.value)
+//                }
+//            })
 
         }
 

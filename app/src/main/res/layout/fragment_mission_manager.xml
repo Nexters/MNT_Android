@@ -110,6 +110,7 @@
                 android:layout_below="@id/create_mission_tv"
                 android:layout_alignParentBottom="true"
                 tools:listitem="@layout/item_mission_manager"
+                app:adapterMissionManagerList="@{gameViewModel.missionManager}"/>
 
         </RelativeLayout>
 
