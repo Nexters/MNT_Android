@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import com.nexters.frutto.R
 import com.nexters.frutto.databinding.FragmentLogin2Binding
 import com.nexters.frutto.viewmodel.LoginViewModel
+import java.io.BufferedReader
+import java.io.InputStreamReader
+
 
 class LoginFragment2 : Fragment()
 {
@@ -31,6 +34,21 @@ class LoginFragment2 : Fragment()
             binding.loginViewModel = (activity as LoginActivity).loginViewModel
             binding.loginActivity=(activity as LoginActivity)
             binding.lifecycleOwner=this
+            binding.tvNameLogin2.text = readText()
         }
+    }
+
+    private fun readText(): String {
+        val reader =
+            BufferedReader(InputStreamReader(requireContext().assets.open("TermsOfService")))
+        val sb = StringBuilder()
+        var line: String? = reader.readLine()
+        while (line != null) {
+            if (line == "") sb.append("\n\n")
+            else sb.append(line)
+            line = reader.readLine()
+        }
+        reader.close()
+        return sb.toString()
     }
 }
