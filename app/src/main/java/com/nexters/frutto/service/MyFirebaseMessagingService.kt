@@ -11,6 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.nexters.frutto.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.nexters.frutto.service.repository.PreferencesRepository
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -21,17 +22,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        createNotificationChannel()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            remoteMessage.notification?.run {
+        if(PreferencesRepository(applicationContext).getOnNotification()) {
+            createNotificationChannel()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                remoteMessage.notification?.run {
 
-                val notificationBuilder = Notification.Builder(applicationContext, CHANNEL_NAME)
-                    .setSmallIcon(R.mipmap.app_icon)
-                    .setContentTitle(getString(R.string.app_name))
-                    .setContentText(body)
+                    val notificationBuilder = Notification.Builder(applicationContext, CHANNEL_NAME)
+                        .setSmallIcon(R.mipmap.app_icon)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(body)
 
-                with(NotificationManagerCompat.from(applicationContext)) {
-                    notify(CHANNEL_ID, notificationBuilder.build())
+                    with(NotificationManagerCompat.from(applicationContext)) {
+                        notify(CHANNEL_ID, notificationBuilder.build())
+                    }
                 }
             }
         }
