@@ -105,6 +105,9 @@ class CreateRoomActivity :FragmentActivity()
 
     fun setDate(index : Int)
     {
+        val minDate = Calendar.getInstance().apply {
+            if (get(Calendar.HOUR_OF_DAY) >= 10) add(Calendar.DATE,1)
+        }
         val maxDate = Calendar.getInstance().apply {
             if(index == 1) add(Calendar.WEEK_OF_YEAR, 2)
             else add(Calendar.MONTH, 2)
@@ -120,13 +123,13 @@ class CreateRoomActivity :FragmentActivity()
                     createRoomViewModel.endDay.value = selectDataStr
                 }
             },
-            Calendar.getInstance().get(Calendar.YEAR),
-            Calendar.getInstance().get(Calendar.MONTH),
-            Calendar.getInstance().get(Calendar.DATE)
+            minDate.get(Calendar.YEAR),
+            minDate.get(Calendar.MONTH),
+            minDate.get(Calendar.DATE)
         )
 
         dialog.run {
-            datePicker.minDate = Calendar.getInstance().time.time
+            datePicker.minDate = minDate.time.time
             datePicker.maxDate = maxDate.time.time
             show()
         }
