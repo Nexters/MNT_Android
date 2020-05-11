@@ -93,6 +93,7 @@ class CreateMissionFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
+                    bu_create_mission_create_mission.isEnabled = position < adapter.count
                     if (position < adapter.count) createMissionViewModel.setMission(position)
                     else createMissionViewModel.des.value = ""
                 }
@@ -121,7 +122,6 @@ class CreateMissionFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val length = p0?.length ?: 0
                 text_length_tv.text = length.toString()
-                bu_create_mission_create_mission.isEnabled = length > 0
             }
         })
     }

@@ -25,14 +25,14 @@ class TimeLineViewModel(
 
     fun setMissionList(success: (ArrayList<MissionVO>) -> Unit) {
         addDisposable(
-            dbRepository.getUserMission(pr.getUserId(), pr.getRoomId())
+            dbRepository.groupByMission(pr.getRoomId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     it.run {
                         val missionList: ArrayList<MissionVO> = arrayListOf()
-                        data.forEach { mission ->
-                            missionList.add(MissionVO(mission.missionId, mission.missionName))
+                        missionResponses.forEach { mission ->
+                            missionList.add(MissionVO(mission.id, mission.missionName))
                         }
                         success(missionList)
                     }
