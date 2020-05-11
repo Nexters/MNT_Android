@@ -72,6 +72,8 @@ class CreateRoomActivity :FragmentActivity()
             createRoomViewModel.fragmentNum=fragNum
             createRoomViewModel.room.value=checkRoom.room
             createRoomViewModel.id=checkRoom.room.id
+            editor.putLong("roomId", checkRoom.room.id)
+            editor.commit()
             setFrag(fragNum)
 
         }
