@@ -8,8 +8,8 @@
     android:gravity="center">
 
     <RelativeLayout
-        android:layout_width="301dp"
-        android:layout_height="400dp"
+        android:layout_width="320dp"
+        android:layout_height="430dp"
         android:background="@drawable/round_layout_white">
 
         <RelativeLayout
@@ -17,13 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="@drawable/textview_top_round"
             android:padding="16dp">
 
             <ImageView
                 android:id="@+id/close_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/close" />
 
             <TextView
@@ -32,45 +31,66 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 tools:text="개발자 정보" />
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal"
-            android:layout_weight="10"
             android:layout_below="@id/top_layout"
-            android:layout_alignParentBottom="true"
-            >
+            android:layout_above="@id/bottom_layout">
 
             <TextView
                 android:id="@+id/dev_mention"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="left"
-                android:text="mention"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/dev_name"
+                android:padding="5dp"
+                android:gravity="center_vertical|start"
                 android:textColor="@color/colorBlack"
                 android:textSize="13sp"
-                android:padding="5dp"
-                android:background="@drawable/textview_bottomleft_round"
-                ></TextView>
+                android:text="mention" />
 
             <TextView
                 android:id="@+id/dev_name"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="name"
-                android:textSize="13sp"
+                android:layout_alignParentEnd="true"
                 android:padding="5dp"
+                android:gravity="center_vertical|end"
+                android:textSize="13sp"
                 android:textColor="@color/colorBlack"
-                android:background="@drawable/textview_bottomright_round"
-                android:gravity="right"></TextView>
+                android:text="name" />
 
+        </RelativeLayout>
 
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="25dp"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/colorLightBlueBlack"
+                android:text="frutto2020@gmail.com"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/colorLightBlueBlack"
+                android:text="Copyright 2020. team MNT all rights reserved."/>
         </LinearLayout>
 
     </RelativeLayout>

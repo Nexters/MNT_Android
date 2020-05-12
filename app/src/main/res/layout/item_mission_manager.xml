@@ -30,14 +30,13 @@
 
     <TextView
         android:id="@+id/tv_mission_done_num_manager"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:text="0/0"
         android:gravity="center"
         android:textSize="15sp"
         android:textColor="#ff5050"
         app:layout_constraintHeight_percent="0.7"
-        app:layout_constraintWidth_percent="0.2"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"

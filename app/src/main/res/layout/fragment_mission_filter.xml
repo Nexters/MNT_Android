@@ -151,7 +151,7 @@
                         android:layout_marginStart="24dp"
                         android:textSize="15sp"
                         android:textColor="@color/colorLightBlueBlack"
-                        android:text="참가자별로 보기"/>
+                        android:text="참여자별 받은 미션 보기"/>
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"

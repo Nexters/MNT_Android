@@ -6,10 +6,10 @@
 <data>
     <variable
         name="createRoomViewModel"
-        type="com.example.mnt_android.viewmodel.CreateRoomViewModel" />
+        type="com.nexters.frutto.viewmodel.CreateRoomViewModel" />
     <variable
         name="createRoomActivity"
-        type="com.example.mnt_android.view.ui.CreateRoomActivity" />
+        type="com.nexters.frutto.view.ui.CreateRoomActivity" />
 </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -93,13 +93,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#b2b2b2"
                     android:textSize="13sp"
-                    android:text="/"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#b2b2b2"
-                    android:textSize="13sp"
-                    android:text="16"/>
+                    android:text="/16"/>
             </LinearLayout>
         </RelativeLayout>
 

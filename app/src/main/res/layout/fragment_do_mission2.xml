@@ -7,10 +7,10 @@
     <data>
         <variable
             name="doMissionViewModel"
-            type="com.example.mnt_android.viewmodel.DoMissionViewModel" />
+            type="com.nexters.frutto.viewmodel.DoMissionViewModel" />
         <variable
             name="doMissionActivity"
-            type="com.example.mnt_android.view.ui.DoMissionActivity" />
+            type="com.nexters.frutto.view.ui.DoMissionActivity" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
@@ -125,7 +125,7 @@
                     android:layout_marginStart="26dp"
                     android:layout_marginEnd="26dp"
                     android:orientation="vertical">
-                    <com.example.mnt_android.view.component.RoundImageView
+                    <com.nexters.frutto.view.component.RoundImageView
                         android:id="@+id/iv_img_mission_do_mission2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 # Frutto
 
-<img src="/app/src/main/res/drawable/app_icon.png" weight="200" height="200" align="center"/>
+<img src="/app/src/main/res/drawable/frutto_icon.png" weight="200" height="200" align="center"/>
 
 - - -
 

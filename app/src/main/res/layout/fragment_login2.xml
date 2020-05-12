@@ -6,10 +6,10 @@
     <data>
         <variable
             name="loginViewModel"
-            type="com.example.mnt_android.viewmodel.LoginViewModel" />
+            type="com.nexters.frutto.viewmodel.LoginViewModel" />
         <variable
             name="loginActivity"
-            type="com.example.mnt_android.view.ui.LoginActivity" />
+            type="com.nexters.frutto.view.ui.LoginActivity" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,38 +29,33 @@
             app:srcCompat="@mipmap/ic_launcher_round"
             android:textColor="#0f1525"/>
 
-        <TextView
-            android:id="@+id/tv_name_login2"
-            android:layout_width="0dp"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="카카오 계정 정보 사용에 관한 안내문입니다.
-카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다.
-            카카오 계정 정보 사용에 관한 안내문입니다."
+            android:layout_margin="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHeight_percent="0.283"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.51"
-            app:layout_constraintWidth_percent="0.85" />
+            app:layout_constraintVertical_bias="0.51" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/tv_name_login2"
+                android:textSize="14sp"
+                android:textColor="#585858"
+                tools:text="카카오 계정 정보 사용에 관한 안내문입니다." />
+        </ScrollView>
 
         <TextView
             android:id="@+id/bu_start_login2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_login"
+            android:background="@drawable/button_hot_pink"
             android:onClick="@{()->loginActivity.setFrag(2)}"
             android:text="@string/bu_start_login2"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:gravity="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

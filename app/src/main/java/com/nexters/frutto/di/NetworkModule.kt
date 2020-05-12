@@ -1,0 +1,107 @@
+package com.nexters.frutto.di
+
+import com.nexters.frutto.service.DBApi
+import com.nexters.frutto.service.repository.DBRepository
+import com.nexters.frutto.service.repository.PreferencesRepository
+import com.nexters.frutto.viewmodel.*
+import com.nexters.frutto.vo.FruttoListVO
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+
+var networkModule = module {
+    single {
+        GsonBuilder()
+            .setLenient()
+            .create()
+    }
+
+    single {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+    }
+
+    single {
+        OkHttpClient.Builder()
+            .build()
+    }
+
+    single {
+        Retrofit.Builder()
+            .baseUrl("http://ec2-15-164-216-156.ap-northeast-2.compute.amazonaws.com:8888") //기본적으로 통신할 API주소
+            .client(get()) //통신을 할 주체?(Ok HTTP)
+            .addConverterFactory(GsonConverterFactory.create(get())) //Json 형식으로 Data를 보내고 이를 파싱가능
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) //받은 응답을 Observable로 반환가능
+            .build()
+    }
+
+    single {
+        get<Retrofit>().create(DBApi::class.java)
+    }
+
+    factory {
+        DBRepository()
+    }
+
+    viewModel {
+        ApplicantListViewModel(get())
+    }
+
+    viewModel {
+        ManitoListViewModel(get(), get())
+    }
+
+    viewModel {
+        ShowManittoViewModel(get(), get())
+    }
+
+    viewModel {
+        TimeLineViewModel(get(), get())
+    }
+
+    viewModel {
+        MissionDetailViewModel(get())
+    }
+
+    viewModel {
+        DashBoardViewModel(get(), get())
+    }
+
+    viewModel {
+        GameViewModel(get())
+    }
+}
+
+var repositoryModule = module {
+    single {
+        PreferencesRepository(androidContext())
+    }
+}
+
+var fileModule = module {
+    single {
+        var source: InputStream? = null
+        val assetManager = androidContext().assets
+
+        try {
+            source = assetManager.open("FruttoData.json")
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        val reader = InputStreamReader(source)
+        Gson().fromJson(reader, FruttoListVO::class.java)
+    }
+}
+
+var moduleList = arrayListOf(networkModule, repositoryModule, fileModule)

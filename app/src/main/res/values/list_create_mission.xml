@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources><string-array name="arr_create_mission">
-    <item>미션 선택하기</item>
     <item>💬 하고 싶은 이야기</item>
     <item>💌 응원의 메시지 보내기</item>
     <item>👏🏻 은근슬쩍 칭찬하기</item>
@@ -19,7 +18,4 @@
     <item>📸 함께 사진찍기</item>
     <item>🎁 선물 인증샷</item>
     <item>✍️ 마음이 따듯해지는 손편지</item>
-    <item>미션1</item>
-
-
 </string-array></resources>

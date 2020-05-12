@@ -6,10 +6,10 @@
     <data>
         <variable
             name="loginViewModel"
-            type="com.example.mnt_android.viewmodel.LoginViewModel" />
+            type="com.nexters.frutto.viewmodel.LoginViewModel" />
         <variable
             name="loginActivity"
-            type="com.example.mnt_android.view.ui.LoginActivity" />
+            type="com.nexters.frutto.view.ui.LoginActivity" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -77,7 +77,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/button_login"
+            android:background="@drawable/button_hot_pink"
             android:gravity="center"
             android:onClick="@{()->loginActivity.createAccount()}"
             android:text="@string/bu_confirm_login3"
