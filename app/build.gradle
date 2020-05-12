@@ -11,8 +11,8 @@ android {
         applicationId "com.nexters.frutto"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 3
-        versionName "0.92"
+        versionCode 4
+        versionName "0.93"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
