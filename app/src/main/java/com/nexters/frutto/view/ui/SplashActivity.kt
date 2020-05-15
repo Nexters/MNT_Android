@@ -161,8 +161,8 @@ class SplashActivity : AppCompatActivity()
         }
         else
         {
-            val kakaoNum = kakao_intent.data.getQueryParameter(KakaoMessageService.ROOM_NUM)?.toInt()
-            val missionContent = kakao_intent.data.getQueryParameter(KakaoMessageService.MISSION_CONTENT)
+            val kakaoNum = kakao_intent.data?.getQueryParameter(KakaoMessageService.ROOM_NUM)?.toInt()
+            val missionContent = kakao_intent.data?.getQueryParameter(KakaoMessageService.MISSION_CONTENT)
             Log.d("wlgusdnzzz","같음")
             Log.d("wlgusdnzzz",kakaoNum.toString())
 
