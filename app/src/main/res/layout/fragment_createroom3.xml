@@ -141,7 +141,7 @@
             android:textColor="#ffffff"
             android:gravity="center"
             android:background="@drawable/button_hot_pink"
-            android:onClick="@{()->createRoomActivity.sendKakaoLink(createRoomViewModel.id)}"
+            android:onClick="@{()->createRoomActivity.sendKakaoLink(createRoomViewModel.room.name, createRoomViewModel.id)}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

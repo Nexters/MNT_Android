@@ -31,7 +31,7 @@ object KakaoMessageService {
         }
     }
 
-    fun sendRoomNum(context: Context, roomNum: Long) {
+    fun sendRoomNum(context: Context, roomNm: String, roomNum: Long) {
         val link = LinkObject.newBuilder()
             .setAndroidExecutionParams("$ROOM_NUM=$roomNum")
             .setIosExecutionParams("$ROOM_NUM=$roomNum")
@@ -42,7 +42,7 @@ object KakaoMessageService {
         val params = FeedTemplate
             .newBuilder(
                 ContentObject.newBuilder(
-                    "마니또를 생성하였습니다.\n초대코드 : $roomNum",
+                    "'${roomNm}'방을 생성하였습니다.\n초대코드 : $roomNum",
                     DEFAULT_IMG_URL,
                     link
                 ).build()

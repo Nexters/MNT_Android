@@ -148,7 +148,7 @@ class JoinRoomActivity : AppCompatActivity()
         }
     }
 
-    fun sendKakaoLink(roomnum : String) = KakaoMessageService.sendRoomNum(baseContext, roomnum.toLong())
+    fun sendKakaoLink(roomNm: String, roomNum : String) = KakaoMessageService.sendRoomNum(baseContext, roomNum, roomNum.toLong())
 
     override fun onBackPressed() {
 
