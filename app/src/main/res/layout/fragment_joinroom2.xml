@@ -84,7 +84,7 @@
             android:textColor="#ffffff"
             android:gravity="center"
             android:text="@string/tv_send_kakaolink"
-            android:onClick="@{()->joinRoomActivity.sendKakaoLink(joinRoomViewModel.roomInfo.name, joinRoomViewModel.roomInfo.num)}"
+            android:onClick="@{()->joinRoomActivity.sendKakaoLink(joinRoomViewModel.checkRoom.room.name, joinRoomViewModel.checkRoom.room.id)}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
