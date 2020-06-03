@@ -14,7 +14,7 @@ class UserMission(
     @SerializedName("missionImg")
     var missionImg : String?,
     @SerializedName("roomId")
-    var roomId : Int,
+    var roomId : Long,
     @SerializedName("userDone")
     var userDone : Int?,
     @SerializedName("userDoneTime")
@@ -28,7 +28,7 @@ class UserMission(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readString(),
-        parcel.readInt(),
+        parcel.readLong(),
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readParcelable(User::class.java.classLoader)
@@ -40,7 +40,7 @@ class UserMission(
         parcel.writeValue(id)
         parcel.writeString(missionId)
         parcel.writeString(missionImg)
-        parcel.writeInt(roomId)
+        parcel.writeLong(roomId)
         parcel.writeValue(userDone)
         parcel.writeString(userDoneTime)
         parcel.writeParcelable(user, flags)

@@ -12,20 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.nexters.frutto.R
 import com.nexters.frutto.databinding.ActivityJoinroomBinding
-import com.nexters.frutto.databinding.ActivityMainBinding
 import com.nexters.frutto.extension.noticeDate
 import com.nexters.frutto.service.model.CheckRoom
 import com.nexters.frutto.service.repository.PreferencesRepository
 import com.nexters.frutto.viewmodel.JoinRoomViewModel
 import com.nexters.frutto.viewmodel.BackPressViewModel
-import com.kakao.kakaolink.v2.KakaoLinkResponse
-import com.kakao.kakaolink.v2.KakaoLinkService
-import com.kakao.message.template.ButtonObject
-import com.kakao.message.template.LinkObject
-import com.kakao.message.template.TextTemplate
-import com.kakao.network.ErrorResult
-import com.kakao.network.callback.ResponseCallback
-import java.util.HashMap
+import com.nexters.frutto.service.KakaoMessageService
 
 class JoinRoomActivity : AppCompatActivity()
 {
@@ -156,28 +148,7 @@ class JoinRoomActivity : AppCompatActivity()
         }
     }
 
-    fun sendKakaoLink(roomnum : String)
-    {
-        var params = TextTemplate
-            .newBuilder("마니또를 생성하였습니다", LinkObject.newBuilder().setAndroidExecutionParams("https://www.naver.com").build())
-            .addButton(
-                ButtonObject("앱에서 보기", LinkObject.newBuilder().setWebUrl("'https://www.naver.com'").setMobileWebUrl("'https://www.naver.com'")
-                    .setAndroidExecutionParams("roomnum=$roomnum").setIosExecutionParams("roomnum=$roomnum").build())
-            ).build()
-
-        var serverCallbackArgs  = HashMap<String, String>()
-        var aaa  = object : ResponseCallback<KakaoLinkResponse>(){
-            override fun onSuccess(result: KakaoLinkResponse?) {
-            }
-
-            override fun onFailure(errorResult: ErrorResult?) {
-            }
-        }
-
-        KakaoLinkService.getInstance().sendDefault( this, params, serverCallbackArgs,aaa)
-
-    }
-
+    fun sendKakaoLink(roomNm: String, roomNum : Long) = KakaoMessageService.sendRoomNum(baseContext, roomNm, roomNum)
 
     override fun onBackPressed() {
 
