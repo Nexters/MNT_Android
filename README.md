@@ -57,7 +57,7 @@ Google Play Store : https://play.google.com/store/apps/details?id=com.nexters.fr
   * DataBinding
   * LiveData
   * Lifecycles
-* ViewModel
+  * ViewModel
   
 * [Retrofit](https://github.com/square/retrofit) : REST API
 * [Gson](https://github.com/google/gson) : Json 데이터 처리
